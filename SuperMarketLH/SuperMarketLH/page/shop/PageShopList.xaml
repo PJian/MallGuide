@@ -1,0 +1,22 @@
+﻿<Page xmlns:usercontrl="clr-namespace:SuperMarketLH.usercontrl"  xmlns:my="http://schemas.microsoft.com/surface/2008"  x:Class="SuperMarketLH.page.shop.PageShopList"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" 
+      d:DesignHeight="505" d:DesignWidth="1660"
+	Title="PageShopList" Loaded="Page_Loaded_1">
+
+    <Grid>
+       
+        <my:SurfaceListBox x:Name="surfaceListBox" Visibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" SelectionChanged="surfaceListBox_SelectionChanged" VerticalAlignment="Top" ItemContainerStyle="{DynamicResource styledListItemShop}">
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel IsItemsHost="True"/>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+        </my:SurfaceListBox>
+        <usercontrl:UserControlShowIMgs7 x:Name="userCtrlImgs"></usercontrl:UserControlShowIMgs7>
+        <!--<usercontrl:UserControlShowImgs x:Name="userCtrlImgs" Visibility="Collapsed"/>-->
+    </Grid>
+</Page>

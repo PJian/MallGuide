@@ -1,0 +1,94 @@
+﻿<Page x:Class="SuperMarketLH.page.floor.PageFloorBaseInfo"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+       xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+      mc:Ignorable="d" 
+      d:DesignHeight="800" d:DesignWidth="1920"
+	Title="PageFloorBaseInfo" Loaded="Page_Loaded_1">
+    <Page.Resources>
+        <DataTemplate x:Key="frameTemplate">
+            <Grid>
+                <Frame Content="{Binding Source}"  NavigationUIVisibility="Hidden" Width="1330" Height="595" />
+            </Grid>
+        </DataTemplate>
+
+    </Page.Resources>
+    <Grid  PreviewKeyDown="Grid_PreviewKeyDown_1" >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="50*"></ColumnDefinition>
+            <ColumnDefinition Width="80*"></ColumnDefinition>
+            <ColumnDefinition Width="30*"></ColumnDefinition>
+            <ColumnDefinition Width="1330*"></ColumnDefinition>
+            <ColumnDefinition Width="40*"></ColumnDefinition>
+            <ColumnDefinition Width="360*"></ColumnDefinition>
+            <ColumnDefinition Width="30*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50*"></RowDefinition>
+            <RowDefinition Height="135*"></RowDefinition>
+            <RowDefinition Height="20*"></RowDefinition>
+            <RowDefinition Height="595*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <!--楼层按钮-->
+        <ListBox x:Name="listbox_allFloors" VerticalAlignment="Top" Grid.Column="1" Grid.Row="1" Grid.RowSpan="3" Background="Transparent" BorderThickness="0"  SelectionChanged="listbox_allFloors_SelectionChanged" ItemContainerStyle="{DynamicResource styledListFloorBtn}">
+        </ListBox>
+
+        <!--楼层图片-->
+        <telerik:RadTransitionControl BorderThickness="2"  x:Name="transitionFloor"  Grid.Column="3" Grid.Row="3" Content="{Binding FrameNavigatePage}" ContentTemplate="{StaticResource frameTemplate}" HorizontalAlignment="Center" VerticalAlignment="Center" Transition="{Binding ItemTransition}"  />
+        <!--楼层商铺-->
+        <Grid x:Name="grid_floorShopInfo" Grid.Row="0" Grid.RowSpan="4" Grid.Column="5">
+            <!--<ListBox x:Name="listBox_shops" DisplayMemberPath="Name" SelectionChanged="listBox_shops_SelectionChanged"></ListBox>-->
+            <DataGrid Name="dataGrid_shops"  AutoGenerateColumns="False" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Grid.Column="5" Grid.Row="0" Grid.RowSpan="4" Background="#947853" IsReadOnly="True" RowHeaderStyle="{DynamicResource DataGridRowHeaderStyle}" VerticalGridLinesBrush="Transparent" HorizontalGridLinesBrush="#b79766" RowStyle="{DynamicResource DataGridRowStyle}" SelectionChanged="dataGrid_shops_SelectionChanged">
+                <DataGrid.Columns >
+                    <DataGridTextColumn Header="品牌名称" Width="260" Binding="{Binding Name}" HeaderStyle="{DynamicResource dataGridColumnHeaderStyle1}" CanUserResize="False" FontSize="15" CellStyle="{DynamicResource DataGridCellStyle}"/>
+                    <DataGridTextColumn Header="店铺号" Width="100" Binding="{Binding Index}" HeaderStyle="{DynamicResource dataGridColumnHeaderStyle2}" CanUserResize="False" FontSize="15" CellStyle="{DynamicResource DataGridCellStyle}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+        <!--设置机器位置按钮-->
+        <StackPanel Grid.Column="3" Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Center" Background="Transparent">
+            <Button Style="{DynamicResource saveMachineBtnStyle}" Content="保存机器位置" Visibility="Collapsed" x:Name="btn_saveMachine" Click="btn_saveMachine_Click"></Button>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" Grid.Column="3" Grid.Row="1" HorizontalAlignment="Right">
+            <Button x:Name="btn_elevator_handle" Style="{DynamicResource floorNavBtnStyle}" Margin="0,0,30,0" MouseDown="btn_elevator_handle_MouseDown" MouseUp="btn_elevator_handle_MouseUp" TouchDown="btn_elevator_handle_TouchDown" TouchUp="btn_elevator_handle_TouchUp" Click="btn_elevator_handle_Click" >
+                <Button.Background>
+                    <ImageBrush ImageSource="/SuperMarketLH;component/images/navBtn/btn15.png"/>
+                </Button.Background>
+            </Button>
+            <Button x:Name="btn_elevator" Style="{DynamicResource floorNavBtnStyle}" Margin="0,0,30,0" TouchDown="btn_elevator_TouchDown" TouchUp="btn_elevator_TouchUp" MouseDown="btn_elevator_MouseDown" MouseUp="btn_elevator_MouseUp" Click="btn_elevator_Click">
+                <Button.Background>
+                    <ImageBrush ImageSource="/SuperMarketLH;component/images/navBtn/btn16.png"/>
+                </Button.Background>
+            </Button>
+            <Button x:Name="btn_service" Style="{DynamicResource floorNavBtnStyle}" Margin="0,0,30,0" MouseDown="btn_service_MouseDown" MouseUp="btn_service_MouseUp" TouchDown="btn_service_TouchDown" TouchUp="btn_service_TouchUp" Click="btn_service_Click">
+                <Button.Background>
+                    <ImageBrush ImageSource="/SuperMarketLH;component/images/navBtn/btn17.png"/>
+                </Button.Background>
+            </Button>
+            <Button x:Name="btn_pay" Style="{DynamicResource floorNavBtnStyle}" Margin="0,0,30,0" MouseDown="btn_pay_MouseDown" MouseUp="btn_pay_MouseUp" TouchDown="btn_pay_TouchDown" TouchUp="btn_pay_TouchUp" Click="btn_pay_Click">
+                <Button.Background>
+                    <ImageBrush ImageSource="/SuperMarketLH;component/images/navBtn/btn18.png"/>
+                </Button.Background>
+            </Button>
+            <Button x:Name="btn_smoke" Style="{DynamicResource floorNavBtnStyle}" Margin="0,0,30,0" MouseDown="btn_smoke_MouseDown" MouseUp="btn_smoke_MouseUp" TouchDown="btn_smoke_TouchDown" TouchUp="btn_smoke_TouchUp" Click="btn_smoke_Click">
+                <Button.Background>
+                    <ImageBrush ImageSource="/SuperMarketLH;component/images/navBtn/btn19.png"/>
+                </Button.Background>
+            </Button>
+            <Button x:Name="btn_baby" Style="{DynamicResource floorNavBtnStyle}" Margin="0,0,30,0" MouseDown="btn_baby_MouseDown" MouseUp="btn_baby_MouseUp" TouchDown="btn_baby_TouchDown" TouchUp="btn_baby_TouchUp" Click="btn_baby_Click">
+                <Button.Background>
+                    <ImageBrush ImageSource="/SuperMarketLH;component/images/navBtn/btn20.png"/>
+                </Button.Background>
+            </Button>
+            <Button x:Name="btn_bathroom" Style="{DynamicResource floorNavBtnStyle}" MouseDown="btn_bathroom_MouseDown" MouseUp="btn_bathroom_MouseUp" TouchDown="btn_bathroom_TouchDown" TouchUp="btn_bathroom_TouchUp" Click="btn_bathroom_Click" >
+                <Button.Background>
+                    <ImageBrush ImageSource="/SuperMarketLH;component/images/navBtn/btn21.png"/>
+                </Button.Background>
+            </Button>
+        </StackPanel>
+        
+    </Grid>
+</Page>

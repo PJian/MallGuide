@@ -1,0 +1,132 @@
+﻿<Window xmlns:usercontrl="clr-namespace:SuperMarketLH.usercontrl"  x:Class="SuperMarketLH.MainWindow"  xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="1080" Width="1920" Loaded="Window_Loaded_1" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowState="Maximized" WindowStyle="None" Closed="Window_Closed_1">
+    <Window.Background>
+        <ImageBrush ImageSource="images/bg.png"/>
+    </Window.Background>
+    <Window.Resources>
+        <Style x:Key="FrameStyle" TargetType="Frame">
+            <Setter Property="BorderBrush" Value="#FFD4D2D2" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="Width" Value="1920" />
+            <Setter Property="Margin" Value="0" />
+            <Setter Property="Height" Value="800" />
+            <Setter Property="SnapsToDevicePixels" Value="True" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Frame">
+                        <Grid Background="{TemplateBinding Background}">
+                            <telerik:RadTransitionControl x:Name="PART_FrameCP" Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}">
+                                <telerik:RadTransitionControl.Transition>
+                                    <telerik:SlideAndZoomTransition LayoutAnimation="Instant" MinAlpha="0.1" MinZoom="0.9" StartSlideAt="0.25" SlideDirection="LeftToRight"/>
+                                </telerik:RadTransitionControl.Transition>
+                            </telerik:RadTransitionControl>
+                            <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Padding="{TemplateBinding Padding}" />
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Viewbox >
+        <!--路径导航效果-->
+        <telerik:RadBusyIndicator x:Name="busyIndicator" Grid.Row="1" BusyContent="数据正在加载..." BorderBrush="Transparent" Background="Transparent">
+            <Grid Height="1080" Width="1920">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="800*"></RowDefinition>
+                    <RowDefinition Height="150*"></RowDefinition>
+                    <RowDefinition Height="50*"></RowDefinition>
+                    <RowDefinition Height="80*"></RowDefinition>
+                </Grid.RowDefinitions>
+               
+                <!--内容导航-->
+                <Frame x:Name="frame"  Grid.Row="0" NavigationUIVisibility="Hidden" Visibility="Collapsed" Style="{StaticResource FrameStyle}"></Frame>
+                <!--首页广告导航-->
+                <Frame x:Name="frameForIndex" Grid.Row="0" Grid.RowSpan="4" NavigationUIVisibility="Hidden" Source="/SuperMarketLH;component/page/PageIndex.xaml" ></Frame>
+                <!--首页按钮-->
+                <Button x:Name="btn_enter" Style="{DynamicResource indexBtnStyle}" Grid.Column="0" Grid.Row="2" Grid.RowSpan="2" Click="btn_enter_Click"></Button>
+                <!--导航按钮-->
+                <Grid Grid.Column="0" Grid.Row="1" Grid.RowSpan="3" x:Name="grid_menu" Visibility="Collapsed">
+                    <Grid.Background>
+                        <ImageBrush ImageSource="images/navBtn/bg.png"/>
+                    </Grid.Background>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="80*"></RowDefinition>
+                        <RowDefinition Height="185*"></RowDefinition>
+                        <RowDefinition Height="15*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="175*"></ColumnDefinition>
+                        <ColumnDefinition Width="655*"></ColumnDefinition>
+                        <ColumnDefinition Width="260*"></ColumnDefinition>
+                        <ColumnDefinition Width="655*"></ColumnDefinition>
+                        <ColumnDefinition Width="175*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Button x:Name="btn_menu" Style="{DynamicResource menuBtnStyle}" Grid.Column="2" Click="btn_menu_Click"></Button>
+                    <StackPanel Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="1" Orientation="Horizontal">
+                        <Button x:Name="btn_mall" Style="{DynamicResource navBtnStyle}" Content="商场简介" Tag="SHOPPING MALLS" Margin="0,0,35,0" Click="btn_mall_Click" MouseLeftButtonDown="btn_mall_MouseLeftButtonDown" MouseLeftButtonUp="btn_mall_MouseLeftButtonUp" TouchDown="btn_mall_TouchDown" TouchUp="btn_mall_TouchUp" MouseDown="btn_mall_MouseDown" MouseUp="btn_mall_MouseUp"  >
+                            <Button.Background>
+                                <ImageBrush ImageSource="images/navBtn/btn1.png"/>
+                            </Button.Background>
+                        </Button>
+                        <Button x:Name="btn_floor" Style="{DynamicResource navBtnStyle}" Content="楼层指引" Tag="FLOOR GUIDE" Margin="0,0,35,0" Click="btn_floor_Click" MouseLeftButtonDown="btn_floor_MouseLeftButtonDown" MouseLeftButtonUp="btn_floor_MouseLeftButtonUp" TouchDown="btn_floor_TouchDown" TouchUp="btn_floor_TouchUp" MouseDown="btn_floor_MouseDown" MouseUp="btn_floor_MouseUp">
+                            <Button.Background>
+                                <ImageBrush ImageSource="images/navBtn/btn2.png"/>
+                            </Button.Background>
+                        </Button>
+                        <Button x:Name="btn_shop" Style="{DynamicResource navBtnStyle}" Content="店铺信息" Tag="SHOP INFORMATION" Margin="0,0,35,0" Click="btn_shop_Click" MouseDown="btn_shop_MouseDown" MouseUp="btn_shop_MouseUp" TouchUp="btn_shop_TouchUp" TouchDown="btn_shop_TouchDown">
+                            <Button.Background>
+                                <ImageBrush ImageSource="images/navBtn/btn3.png"/>
+                            </Button.Background>
+                        </Button>
+                        <Button x:Name="btn_active" Style="{DynamicResource navBtnStyle}" Content="活动信息" Tag="ACTIVITY INFORMATION" Margin="0,0,35,0" Click="btn_active_Click" MouseDown="btn_active_MouseDown" MouseUp="btn_active_MouseUp" TouchDown="btn_active_TouchDown" TouchUp="btn_active_TouchUp">
+                            <Button.Background>
+                                <ImageBrush ImageSource="images/navBtn/btn4.png"/>
+                            </Button.Background>
+                        </Button>
+                        <Button x:Name="btn_question" Style="{DynamicResource navBtnStyle}" Content="问卷调查" Tag="QUESTIONNAIRE" Margin="0,0,35,0" Click="btn_question_Click" MouseDown="btn_question_MouseDown" MouseUp="btn_question_MouseUp" TouchDown="btn_question_TouchDown" TouchUp="btn_question_TouchUp">
+                            <Button.Background>
+                                <ImageBrush ImageSource="images/navBtn/btn5.png"/>
+                            </Button.Background>
+                        </Button>
+                        <Button x:Name="btn_fire_engine" Style="{DynamicResource navBtnStyle}" Content="消防通道" Tag="FIRE EMERGENCE" Margin="0,0,35,0" Click="btn_fire_engine_Click" MouseDown="btn_fire_engine_MouseDown" MouseUp="btn_fire_engine_MouseUp" TouchDown="btn_fire_engine_TouchDown" TouchUp="btn_fire_engine_TouchUp">
+                            <Button.Background>
+                                <ImageBrush ImageSource="images/navBtn/btn6.png"/>
+                            </Button.Background>
+                        </Button>
+                        <Button x:Name="btn_magazine" Style="{DynamicResource navBtnStyle}" Content="电子杂志" Tag="MAGAZINE" Margin="0,0,35,0" Click="btn_magazine_Click" MouseDown="btn_magazine_MouseDown" MouseUp="btn_magazine_MouseUp" TouchDown="btn_magazine_TouchDown" TouchUp="btn_magazine_TouchUp">
+                            <Button.Background>
+                                <ImageBrush ImageSource="images/navBtn/btn7.png"/>
+                            </Button.Background>
+                        </Button>
+                        <Button x:Name="btn_investment_ad" Style="{DynamicResource navBtnStyle}" Content="招商广告" Tag="INVERTMENT ADVERT" Margin="0,0,35,0" Click="btn_investment_ad_Click" MouseDown="btn_investment_ad_MouseDown" MouseUp="btn_investment_ad_MouseUp" TouchDown="btn_investment_ad_TouchDown" TouchUp="btn_investment_ad_TouchUp">
+                            <Button.Background>
+                                <ImageBrush ImageSource="images/navBtn/btn8.png"/>
+                            </Button.Background>
+                        </Button>
+                        <Button x:Name="btn_recruit" Style="{DynamicResource navBtnStyle}" Content="招聘信息" Tag="RECRUIT" Margin="0,0,35,0" Click="btn_recruit_Click" MouseDown="btn_recruit_MouseDown" MouseUp="btn_recruit_MouseUp" TouchDown="btn_recruit_TouchDown" TouchUp="btn_recruit_TouchUp">
+                            <Button.Background>
+                                <ImageBrush ImageSource="images/navBtn/btn9.png"/>
+                            </Button.Background>
+                        </Button>
+                        <Button x:Name="btn_preipheral" Style="{DynamicResource navBtnStyle}" Content="周边信息" Tag="PREIPHERAL" Click="btn_preipheral_Click" MouseDown="btn_preipheral_MouseDown" MouseUp="btn_preipheral_MouseUp" TouchDown="btn_preipheral_TouchDown" TouchUp="btn_preipheral_TouchUp">
+                            <Button.Background>
+                                <ImageBrush ImageSource="images/navBtn/btn10.png"/>
+                            </Button.Background>
+                        </Button>
+                    </StackPanel>
+                </Grid>
+
+                <usercontrl:LoadingWait x:Name="userCtrl_loading" Grid.Column="0"  Grid.Row="0" Grid.RowSpan="4" Visibility="Collapsed"/>
+
+            </Grid>
+        </telerik:RadBusyIndicator>
+
+
+      
+    </Viewbox>
+    
+</Window>

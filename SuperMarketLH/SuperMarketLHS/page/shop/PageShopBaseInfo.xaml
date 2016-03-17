@@ -1,0 +1,97 @@
+﻿<Page xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"  x:Class="SuperMarketLHS.page.shop.PageShopBaseInfo"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:userControl="clr-namespace:SuperMarketLHS.userControl"
+      mc:Ignorable="d" 
+       d:DesignHeight="638" d:DesignWidth="834"
+	Title="PageShopBaseInfo" Loaded="Page_Loaded_1">
+    <Grid x:Name="grid_allInfo">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250*"></ColumnDefinition>
+            <ColumnDefinition Width="100*"></ColumnDefinition>
+            <ColumnDefinition Width="334*"></ColumnDefinition>
+            <ColumnDefinition Width="150*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25*"></RowDefinition>
+            <RowDefinition Height="25*"></RowDefinition>
+            <RowDefinition Height="25*"></RowDefinition>
+            <RowDefinition Height="25*"></RowDefinition>
+            <RowDefinition Height="25*"></RowDefinition>
+            <RowDefinition Height="25*"></RowDefinition>
+            <RowDefinition Height="25*"></RowDefinition>
+            <RowDefinition Height="25*"></RowDefinition>
+            <RowDefinition Height="25*"></RowDefinition>
+            <RowDefinition Height="25*"></RowDefinition>
+            <RowDefinition Height="50*"></RowDefinition>
+            <RowDefinition Height="258*"></RowDefinition>
+            <RowDefinition Height="50*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Grid.Column="0" Grid.Row="0" Grid.RowSpan="12">
+            <GroupBox Header="店铺列表">
+                <ListBox x:Name="list_allshop" DisplayMemberPath="Name" SelectionChanged="list_allshop_SelectionChanged">
+                </ListBox>
+            </GroupBox>
+        </Grid>
+        <Label Grid.Column="1" Grid.Row="0" Content="名字：" HorizontalAlignment="Right" VerticalContentAlignment="Center"></Label>
+        <TextBox Text="{Binding Name}" Grid.Column="2" Grid.Row="0" x:Name="txb_name" HorizontalAlignment="Left" VerticalAlignment="Center" Width="300"></TextBox>
+
+        <Label Grid.Column="1" Grid.Row="1" Content="店铺类型：" HorizontalAlignment="Right" VerticalContentAlignment="Center"></Label>
+        <StackPanel  Grid.Column="2" Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Center">
+            <RadioButton x:Name="radio_Special" Content="主打店铺" Margin="0,0,5,0"></RadioButton>
+            <RadioButton x:Name="radio_normal" Content="普通店铺" IsChecked="True"></RadioButton>
+        </StackPanel>
+            <Label Grid.Column="1" Grid.Row="2" Content="门牌：" HorizontalAlignment="Right" VerticalContentAlignment="Center" ></Label>
+        <StackPanel Grid.Column="2" Grid.Row="2" Orientation="Horizontal" IsEnabled="False">
+            <userControl:UserControlFloorCombox x:Name="combox_floor" VerticalAlignment="Center" HorizontalAlignment="Center" Width="50"/>
+            <Label Content="楼" VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
+            <TextBox Text="{Binding Index}"  HorizontalAlignment="Left" VerticalAlignment="Center" Width="50"></TextBox>
+            <Label Content="室" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
+        </StackPanel>
+        
+         <Label Grid.Column="1" Grid.Row="3" Content="排序字母：" HorizontalAlignment="Right" VerticalContentAlignment="Center"></Label>
+        <userControl:UserControl_SortChar x:Name="combox_sortChar" Grid.Column="2" Grid.Row="3" HorizontalAlignment="Left"  VerticalAlignment="Center"/>
+        
+        <Label Grid.Column="1" Grid.Row="4" Content="分类：" HorizontalAlignment="Right" VerticalContentAlignment="Center"></Label>
+        <StackPanel Grid.Column="2" Grid.Row="4" HorizontalAlignment="Left"  VerticalAlignment="Center" Orientation="Horizontal">
+            <userControl:UserControlCatagory x:Name="combox_Catagory"  Grid.Column="2" Grid.Row="3" HorizontalAlignment="Left"  VerticalAlignment="Center"/>
+            <Label Content="分类颜色："></Label>
+            <telerik:RadColorPicker x:Name="colorPicker_catagoryColor"/>
+        </StackPanel>
+        <Grid Grid.Column="3" Grid.Row="0" Grid.RowSpan="5">
+            <userControl:UserControlLogo  x:Name="userControl_logo" />
+        </Grid>
+        <Label Content="店铺简介:" Grid.Column="1" Grid.Row="10" HorizontalAlignment="Right" VerticalAlignment="Center"></Label>
+        <TextBox Text="{Binding Introduction}" Grid.Column="2" Grid.Row="10" TextWrapping="Wrap" Grid.ColumnSpan="2"></TextBox>
+        
+        <Label Content="店铺标签：" Grid.Column="1" Grid.Row="5" HorizontalAlignment="Right" VerticalAlignment="Center"></Label>
+        <TextBox Text="{Binding Label}" Grid.Column="2" Grid.Row="5" HorizontalAlignment="Left" VerticalAlignment="Center" Width="300"></TextBox>
+        
+        <Label Content="营业时间：" Grid.Column="1" Grid.Row="6"  HorizontalAlignment="Right" VerticalAlignment="Center"></Label>
+        <StackPanel Grid.Column="2" Grid.Row="6" Orientation="Horizontal" VerticalAlignment="Center">
+            <telerik:RadDateTimePicker DateTimeWatermarkContent="开始时间" x:Name="time_start" InputMode="TimePicker" TimeInterval="00:30:00"/>
+            <Label Content="~~"></Label>
+            <telerik:RadDateTimePicker DateTimeWatermarkContent="结束时间" x:Name="time_end" InputMode="TimePicker" TimeInterval="00:30:00"/>
+        </StackPanel>
+        
+        <Label Content="联系方式" Grid.Column="1" Grid.Row="7"  HorizontalAlignment="Right" VerticalAlignment="Center"></Label>
+        <TextBox Text="{Binding Tel}" Grid.Column="2" Grid.Row="7" HorizontalAlignment="Left" VerticalAlignment="Center" Width="300"></TextBox>
+       
+        <Label Content="地址：" Grid.Column="1" Grid.Row="8"  HorizontalAlignment="Right" VerticalAlignment="Center"></Label>
+        <TextBox Text="{Binding Address}" Grid.Column="2" Grid.Row="8" HorizontalAlignment="Left" VerticalAlignment="Center" Width="300"></TextBox>
+       
+        <Label Content="邮编：" Grid.Column="1" Grid.Row="9"  HorizontalAlignment="Right" VerticalAlignment="Center"></Label>
+        <TextBox Text="{Binding ZipCode}" Grid.Column="2" Grid.Row="9" HorizontalAlignment="Left" VerticalAlignment="Center" Width="300"></TextBox>
+        <userControl:UserControlShowImgWithToolBar Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="11" x:Name="userControl_facilities" LabelChooseImgContent="设施介绍"/>
+        <Grid Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="12" Background="White">
+            <StackPanel  VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,20,0" Orientation="Horizontal" >
+                <Button x:Name="btn_create"  Content="新增" Style="{DynamicResource navBtnCommonStyle}" Background="Transparent"  Width="60" Height="30" Margin="0,0,10,0" Click="btn_create_Click"   ></Button>
+                <Button x:Name="btn_update"  Content="更新" Style="{DynamicResource navBtnCommonStyle}" Background="Transparent"  Width="60" Height="30" Margin="0,0,10,0" Click="btn_update_Click"   ></Button>
+                <Button x:Name="btn_save"  Content="保存" Style="{DynamicResource navBtnCommonStyle}" Background="Transparent"  Width="60" Height="30" Margin="0,0,10,0" Click="btn_save_Click" ></Button>
+                <Button x:Name="btn_del"  Content="删除" Style="{DynamicResource navBtnCommonStyle}" Background="Transparent"  Width="60" Height="30" Margin="0,0,10,0" Click="btn_del_Click"  />
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Page>

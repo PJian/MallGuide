@@ -1,0 +1,57 @@
+﻿<Page x:Class="SuperMarketLHS.page.PageBrandBaseInfo"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:userControl="clr-namespace:SuperMarketLHS.userControl"
+      mc:Ignorable="d" 
+      d:DesignHeight="638" d:DesignWidth="834"
+	Title="PageBrandBaseInfo" Loaded="Page_Loaded_1">
+
+    <Grid x:Name="grid_allInfo">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250*"></ColumnDefinition>
+            <ColumnDefinition Width="100*"></ColumnDefinition>
+            <ColumnDefinition Width="334*"></ColumnDefinition>
+            <ColumnDefinition Width="150*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50*"></RowDefinition>
+            <RowDefinition Height="50*"></RowDefinition>
+            <RowDefinition Height="50*"></RowDefinition>
+            <RowDefinition Height="50*"></RowDefinition>
+            <RowDefinition Height="100*"></RowDefinition>
+            <RowDefinition Height="238*"></RowDefinition>
+            <RowDefinition Height="50*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Grid.Column="0" Grid.Row="0" Grid.RowSpan="6">
+            <GroupBox Header="品牌列表">
+                <ListBox x:Name="list_allBrand" DisplayMemberPath="Name" SelectionChanged="list_allBrand_SelectionChanged">
+                </ListBox>
+            </GroupBox>
+        </Grid>
+        <Label Grid.Column="1" Grid.Row="0" Content="名字：" HorizontalAlignment="Right" VerticalContentAlignment="Center"></Label>
+        <TextBox Text="{Binding Name}" Grid.Column="2" Grid.Row="0" x:Name="txb_name" HorizontalAlignment="Left" VerticalAlignment="Center" Width="300"></TextBox>
+        <Label Grid.Column="1" Grid.Row="1" Content="网址：" HorizontalAlignment="Right" VerticalContentAlignment="Center"></Label>
+        <TextBox Text="{Binding Url}" Grid.Column="2" Grid.Row="1" x:Name="txb_url" HorizontalAlignment="Left" VerticalAlignment="Center" Width="300"></TextBox>
+        <Label Grid.Column="1" Grid.Row="2" Content="排序字母：" HorizontalAlignment="Right" VerticalContentAlignment="Center"></Label>
+        <userControl:UserControl_SortChar x:Name="combox_sortChar" Grid.Column="2" Grid.Row="2" HorizontalAlignment="Left"  VerticalAlignment="Center"/>
+        <Label Grid.Column="1" Grid.Row="3" Content="分类：" HorizontalAlignment="Right" VerticalContentAlignment="Center"></Label>
+        <userControl:UserControlCatagory x:Name="combox_Catagory"  Grid.Column="2" Grid.Row="3" HorizontalAlignment="Left"  VerticalAlignment="Center"/>
+        <Grid Grid.Column="3" Grid.Row="0" Grid.RowSpan="3">
+            <userControl:UserControlLogo  x:Name="userControl_logo" />
+        </Grid>
+        <Label Content="品牌简介:" Grid.Column="1" Grid.Row="4" HorizontalAlignment="Right" VerticalAlignment="Center"></Label>
+        <TextBox Text="{Binding Introduction}" Grid.Column="2" Grid.Row="4" TextWrapping="Wrap" Grid.ColumnSpan="2" Margin="10"></TextBox>
+        <!--图片选择-->
+        <userControl:UserControlShowImgWithToolBar x:Name="userControl_imgs" Grid.Column="2"  Grid.ColumnSpan="2" Grid.Row="5" LabelChooseImgContent="宣传图片"/>
+        <Grid Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="6" Background="White">
+            <StackPanel  VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,20,0" Orientation="Horizontal" >
+                <Button x:Name="btn_create"  Content="新增" Style="{DynamicResource navBtnCommonStyle}" Background="Transparent"  Width="60" Height="30" Margin="0,0,10,0" Click="btn_create_Click"   ></Button>
+                <Button x:Name="btn_update"  Content="更新" Style="{DynamicResource navBtnCommonStyle}" Background="Transparent"  Width="60" Height="30" Margin="0,0,10,0" Click="btn_update_Click"  ></Button>
+                <Button x:Name="btn_save"  Content="保存" Style="{DynamicResource navBtnCommonStyle}" Background="Transparent"  Width="60" Height="30" Margin="0,0,10,0" Click="btn_save_Click" ></Button>
+                <Button x:Name="btn_del"  Content="删除" Style="{DynamicResource navBtnCommonStyle}" Background="Transparent"  Width="60" Height="30" Margin="0,0,10,0" Click="btn_del_Click"  />
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Page>

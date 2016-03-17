@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping  xmlns="urn:nhibernate-mapping-2.2" default-lazy="false"  assembly="entity"
+                   namespace="SqLiteTest.entity">
+  <class name="Brand" table="tabbrand">
+    <id name="Id" column="id" >
+      <generator class="native" />
+    </id>
+
+    <property name="Name" >
+      <column name="name" />
+    </property>
+    
+    
+  </class>
+ 
+</hibernate-mapping>

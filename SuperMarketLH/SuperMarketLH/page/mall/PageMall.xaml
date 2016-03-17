@@ -1,0 +1,73 @@
+﻿<Page x:Class="SuperMarketLH.page.mall.PageMall"  xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" 
+      d:DesignHeight="800" d:DesignWidth="1920"
+	Title="PageMall" Loaded="Page_Loaded_1">
+    <Page.Resources>
+        <Style x:Key="FrameStyle" TargetType="Frame">
+            <Setter Property="BorderBrush" Value="#FFD4D2D2" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="Width" Value="1645" />
+            <Setter Property="Margin" Value="0" />
+            <Setter Property="Height" Value="735" />
+            <Setter Property="SnapsToDevicePixels" Value="True" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Frame">
+                        <Grid Background="{TemplateBinding Background}">
+                            <telerik:RadTransitionControl x:Name="PART_FrameCP" Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}">
+                                <telerik:RadTransitionControl.Transition>
+                                        <telerik:SlideAndZoomTransition LayoutAnimation="Instant" MinAlpha="0.1" MinZoom="0.9" StartSlideAt="0.25" SlideDirection="LeftToRight"/>
+                                </telerik:RadTransitionControl.Transition>
+                            </telerik:RadTransitionControl>
+                            <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Padding="{TemplateBinding Padding}" />
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="45*"></RowDefinition>
+            <RowDefinition Height="735*"></RowDefinition>
+            <RowDefinition Height="20*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="30*"></ColumnDefinition>
+            <ColumnDefinition Width="165*"></ColumnDefinition>
+            <ColumnDefinition Width="50*"></ColumnDefinition>
+            <ColumnDefinition Width="1645*"></ColumnDefinition>
+            <ColumnDefinition Width="30*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Frame x:Name="frame" NavigationUIVisibility="Hidden" Grid.Column="3"  Grid.Row="1" Style="{StaticResource FrameStyle}" BorderThickness="0" BorderBrush="Black" VerticalAlignment="Top"></Frame>
+        <StackPanel Orientation="Vertical" Grid.Column="1" Grid.Row="1">
+            <Button x:Name="btn_squre" Style="{DynamicResource navBtnStyle1}" Margin="0,0,0,20" MouseDown="btn_squre_MouseDown" MouseUp="btn_squre_MouseUp" TouchDown="btn_squre_TouchDown" TouchUp="btn_squre_TouchUp" Click="btn_squre_Click">
+                <Button.Background>
+                    <ImageBrush ImageSource="/SuperMarketLH;component/images/navBtn/btn11.png"/>
+                </Button.Background>
+            </Button>
+            <Button x:Name="btn_shoppingCenter" Style="{DynamicResource navBtnStyle1}" Margin="0,0,0,20" MouseDown="btn_shoppingCenter_MouseDown" MouseUp="btn_shoppingCenter_MouseUp" TouchDown="btn_shoppingCenter_TouchDown" TouchUp="btn_shoppingCenter_TouchUp" Click="btn_shoppingCenter_Click">
+                <Button.Background>
+                    <ImageBrush ImageSource="/SuperMarketLH;component/images/navBtn/btn12.png"/>
+                </Button.Background>
+            </Button>
+            <Button x:Name="btn_Hotel" Style="{DynamicResource navBtnStyle1}" Margin="0,0,0,20" MouseDown="btn_Hotel_MouseDown" MouseUp="btn_Hotel_MouseUp" TouchDown="btn_Hotel_TouchDown" TouchUp="btn_Hotel_TouchUp" Click="btn_Hotel_Click">
+                <Button.Background>
+                    <ImageBrush ImageSource="/SuperMarketLH;component/images/navBtn/btn13.png"/>
+                </Button.Background>
+            </Button>
+            <Button x:Name="btn_globalProject" Style="{DynamicResource navBtnStyle1}" Margin="0,0,0,20" MouseDown="btn_globalProject_MouseDown" MouseUp="btn_globalProject_MouseUp" TouchDown="btn_globalProject_TouchDown" TouchUp="btn_globalProject_TouchUp" Click="btn_globalProject_Click">
+                <Button.Background>
+                    <ImageBrush ImageSource="/SuperMarketLH;component/images/navBtn/btn14.png"/>
+                </Button.Background>
+            </Button>
+        </StackPanel>
+    </Grid>
+</Page>
