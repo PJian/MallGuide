@@ -31,6 +31,12 @@ namespace SuperMarketLH.usercontrl
         {
             InitializeComponent();
         }
+        public UserControlShopInfoTips(Shop currentShop)
+        {
+            InitializeComponent();
+            this.CurrentShop = currentShop;
+        }
+
         public Shop CurrentShop{get;set;}
 
         private void btn_nav_Click(object sender, RoutedEventArgs e)
@@ -41,6 +47,11 @@ namespace SuperMarketLH.usercontrl
         private void btn_detail_Click(object sender, RoutedEventArgs e)
         {
             ShowDetailInfo(this.CurrentShop);
+        }
+
+        private void userControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            this.DataContext = this.CurrentShop;
         }
     }
 }
