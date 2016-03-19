@@ -1,0 +1,650 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{6A29A097-7A48-43F2-9227-18E7E5991426}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SuperMarketLH</RootNamespace>
+    <AssemblyName>SuperMarketLH</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="3DTools">
+      <HintPath>..\..\..\dll\3DTools.dll</HintPath>
+    </Reference>
+    <Reference Include="ConTcp">
+      <HintPath>..\..\..\dll\ConTcp.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Surface, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Surface.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="microsoft.surface.presentation, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="PresentationFramework.Aero" />
+    <Reference Include="regwin">
+      <HintPath>..\..\..\dll\regwin.dll</HintPath>
+    </Reference>
+    <Reference Include="SerialNum">
+      <HintPath>..\..\..\dll\SerialNum.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="telerik.windows.controls">
+      <HintPath>d:\program files (x86)\telerik\ui for wpf q1 2015\binaries\wpf40\telerik.windows.controls.dll</HintPath>
+    </Reference>
+    <Reference Include="UIAutomationProvider" />
+    <Reference Include="UIAutomationTypes" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="page\activity\PageMemberShopActivities.xaml.cs">
+      <DependentUpon>PageMemberShopActivities.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="page\activity\PageNormalAcitvities.xaml.cs">
+      <DependentUpon>PageNormalAcitvities.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="page\activity\WindowJoinSalePromotion.xaml.cs">
+      <DependentUpon>WindowJoinSalePromotion.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="page\floor\PageFloorBaseInfo.xaml.cs">
+      <DependentUpon>PageFloorBaseInfo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="page\floor\PageFloorDetailInfo.xaml.cs">
+      <DependentUpon>PageFloorDetailInfo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="page\floor\PageFloorNavTwoFloor.xaml.cs">
+      <DependentUpon>PageFloorNavTwoFloor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="page\mall\PageGlobalProject.xaml.cs">
+      <DependentUpon>PageGlobalProject.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="page\mall\PageHotel.xaml.cs">
+      <DependentUpon>PageHotel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="page\mall\PageIntroduction.xaml.cs">
+      <DependentUpon>PageIntroduction.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="page\mall\PageMall.xaml.cs">
+      <DependentUpon>PageMall.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="page\mall\PageShoppingMall.xaml.cs">
+      <DependentUpon>PageShoppingMall.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="page\other\PageAD.xaml.cs">
+      <DependentUpon>PageAD.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="page\other\PageEmployee.xaml.cs">
+      <DependentUpon>PageEmployee.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="page\other\PageFireEmergency.xaml.cs">
+      <DependentUpon>PageFireEmergency.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="page\other\PageMagzaine.xaml.cs">
+      <DependentUpon>PageMagzaine.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="page\other\PageQuestionnaire.xaml.cs">
+      <DependentUpon>PageQuestionnaire.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="page\other\PageSurroundInfo.xaml.cs">
+      <DependentUpon>PageSurroundInfo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="page\PageIndex.xaml.cs">
+      <DependentUpon>PageIndex.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="page\shop\PageShop.xaml.cs">
+      <DependentUpon>PageShop.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="page\shop\PageShopDetail.xaml.cs">
+      <DependentUpon>PageShopDetail.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="page\shop\PageShopList.xaml.cs">
+      <DependentUpon>PageShopList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="page\shop\PageShopMovie.xaml.cs">
+      <DependentUpon>PageShopMovie.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="reg\WinForReg.xaml.cs">
+      <DependentUpon>WinForReg.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="reg\WinRegist.xaml.cs">
+      <DependentUpon>WinRegist.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="uiEntity\FrameNavigate.cs" />
+    <Compile Include="uiEntity\ImageObject.cs" />
+    <Compile Include="uiEntity\TransitioinUtil.cs" />
+    <Compile Include="uiEntity\TransitionItem.cs" />
+    <Compile Include="usercontrl\LoadingWait.xaml.cs">
+      <DependentUpon>LoadingWait.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="usercontrl\UserControlGps.xaml.cs">
+      <DependentUpon>UserControlGps.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="usercontrl\UserControlImgCtr4.xaml.cs">
+      <DependentUpon>UserControlImgCtr4.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="usercontrl\UserControlImgCtrl2.xaml.cs">
+      <DependentUpon>UserControlImgCtrl2.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="usercontrl\UserControlImgCtrl3.xaml.cs">
+      <DependentUpon>UserControlImgCtrl3.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="usercontrl\UserControlImgCtrl5.xaml.cs">
+      <DependentUpon>UserControlImgCtrl5.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="usercontrl\UserControlImgCtrl6.xaml.cs">
+      <DependentUpon>UserControlImgCtrl6.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="usercontrl\UserControlMapGrid.xaml.cs">
+      <DependentUpon>UserControlMapGrid.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="usercontrl\UserControlMapGridWith3D.xaml.cs">
+      <DependentUpon>UserControlMapGridWith3D.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="usercontrl\UserControlNavMap.xaml.cs">
+      <DependentUpon>UserControlNavMap.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="usercontrl\UserControlShop.xaml.cs">
+      <DependentUpon>UserControlShop.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="usercontrl\UserControlShopInfoTips.xaml.cs">
+      <DependentUpon>UserControlShopInfoTips.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="usercontrl\UserControlShowImgs.xaml.cs">
+      <DependentUpon>UserControlShowImgs.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="usercontrl\UserControlShowIMgs7.xaml.cs">
+      <DependentUpon>UserControlShowIMgs7.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="usercontrl\UserControlShowImgs8.xaml.cs">
+      <DependentUpon>UserControlShowImgs8.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="usercontrl\UserControlShowImgsForIndex.xaml.cs">
+      <DependentUpon>UserControlShowImgsForIndex.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="util\CanvasUtil.cs" />
+    <Compile Include="util\ClosedUtil.cs" />
+    <Compile Include="util\WinUtil.cs" />
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="page\activity\PageMemberShopActivities.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="page\activity\PageNormalAcitvities.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="page\activity\WindowJoinSalePromotion.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="page\floor\PageFloorBaseInfo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="page\floor\PageFloorDetailInfo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="page\floor\PageFloorNavTwoFloor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="page\mall\PageGlobalProject.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="page\mall\PageHotel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="page\mall\PageIntroduction.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="page\mall\PageMall.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="page\mall\PageShoppingMall.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="page\other\PageAD.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="page\other\PageEmployee.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="page\other\PageFireEmergency.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="page\other\PageMagzaine.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="page\other\PageQuestionnaire.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="page\other\PageSurroundInfo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="page\PageIndex.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="page\shop\PageShop.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="page\shop\PageShopDetail.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="page\shop\PageShopList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="page\shop\PageShopMovie.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="reg\WinForReg.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="reg\WinRegist.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="usercontrl\LoadingWait.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="usercontrl\UserControlGps.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="usercontrl\UserControlImgCtr4.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="usercontrl\UserControlImgCtrl2.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="usercontrl\UserControlImgCtrl3.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="usercontrl\UserControlImgCtrl5.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="usercontrl\UserControlImgCtrl6.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="usercontrl\UserControlMapGrid.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="usercontrl\UserControlMapGridWith3D.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="usercontrl\UserControlNavMap.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="usercontrl\UserControlShop.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="usercontrl\UserControlShopInfoTips.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="usercontrl\UserControlShowImgs.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="usercontrl\UserControlShowIMgs7.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="usercontrl\UserControlShowImgs8.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="usercontrl\UserControlShowImgsForIndex.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <Resource Include="font\04b03.TTF" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\EntityManagementService\EntityManagementService.csproj">
+      <Project>{3b606cd9-7eee-4955-9a29-f19d8494867e}</Project>
+      <Name>EntityManagementService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ResourceManagementService\ResourceManagementService.csproj">
+      <Project>{1043b60f-1725-45f6-8fe7-b7a046800eeb}</Project>
+      <Name>ResourceManagementService</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\gps\gps.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\regist\key.png" />
+    <Resource Include="images\regist\star.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\page\next.png" />
+    <Resource Include="images\page\pre.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\arrow\arrow_left.png" />
+    <Resource Include="images\arrow\arrow_right.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\bg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\btn\1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\navBtn\bg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\navBtn\1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\navBtn\btn1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\navBtn\btn1_press.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\navBtn\btn2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\navBtn\btn2_press.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\navBtn\btn3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\navBtn\btn3_press.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\navBtn\btn4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\navBtn\btn4_press.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\navBtn\btn5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\navBtn\btn5_press.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\navBtn\btn6.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\navBtn\btn6_press.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\navBtn\btn7.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\navBtn\btn7_press.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\navBtn\btn8.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\navBtn\btn8_press.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\navBtn\btn9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\navBtn\btn9_press.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\navBtn\btn10.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\navBtn\btn10_press.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\navBtn\btn11.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\navBtn\btn11_press.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\navBtn\btn12.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\navBtn\btn12_press.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\navBtn\btn13.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\navBtn\btn13_press.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\navBtn\btn14.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\navBtn\btn14_press.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\bg2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\arrow\arraw.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\navBtn\btn15.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\navBtn\btn15_press.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\navBtn\btn16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\navBtn\btn16_press.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\navBtn\btn17.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\navBtn\btn17_press.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\navBtn\btn18.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\navBtn\btn18_press.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\navBtn\btn19.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\navBtn\btn19_press.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\navBtn\btn20.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\navBtn\btn20_press.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\navBtn\btn21.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\navBtn\btn21_press.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\gps\flag_gps_location.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\panel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\navBtn\btn22.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\navBtn\btn22_press.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\navBtn\btn23.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\navBtn\btn23_press.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\navBtn\btn24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\navBtn\btn24_press.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\navBtn\btn25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\navBtn\btn25_press.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\shop\ktv.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\shop\gym.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\shop\movie.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\shop\supermarket.png" />
+    <Resource Include="images\shop\dabaijing.png" />
+    <Resource Include="images\shop\suning.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\navBtn\btn26.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\navBtn\btn27.png" />
+    <Resource Include="images\navBtn\btn28.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\navBtn\btn28_press.png" />
+    <Resource Include="images\navBtn\btn27_press.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\telephone.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\ok.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

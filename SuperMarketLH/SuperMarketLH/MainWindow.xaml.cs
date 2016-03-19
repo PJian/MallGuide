@@ -267,8 +267,6 @@ namespace SuperMarketLH
         {
             Page page = null;
            
-             
-           
             switch (index)
             {
                 //  case WinUtil.PAGE_NULL: page = null; break;
