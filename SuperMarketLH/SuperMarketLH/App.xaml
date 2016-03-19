@@ -319,7 +319,32 @@
             </Setter>
         </Style>
 
-
+        <Style x:Key="navBtnBackStyle" TargetType="Button">
+            <Setter Property="Foreground" Value="White"/>
+            <!--修改模板属性-->
+            <Setter Property="Template">
+                <Setter.Value>
+                    <!--控件模板-->
+                    <ControlTemplate TargetType="Button">
+                        <!--背景色-->
+                        <Border x:Name="back" Width="100" Height="100" Background="Transparent">
+                            <!--按钮内容-->
+                            <Grid>
+                                <Grid.Background>
+                                    <ImageBrush ImageSource="images/page/back.png"/>
+                                </Grid.Background>
+                            </Grid>
+                        </Border>
+                        <!--触发器-->
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Opacity" Value="0.5"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
 
         <Style x:Key="navBtnPreStyle" TargetType="Button">
             <Setter Property="Foreground" Value="White"/>
@@ -498,9 +523,9 @@
                     <!--控件模板-->
                     <ControlTemplate TargetType="Button">
                         <!--背景色-->
-                        <Border x:Name="back" Width="125" Height="130" Background="Transparent">
+                        <Border x:Name="back" Width="85" Height="90" Background="Transparent">
                             <!--按钮内容-->
-                            <Grid Width="125" Height="130">
+                            <Grid Width="85" Height="90">
                                 <Grid Grid.Row="0" Grid.Column="0" x:Name="bg" Background="{TemplateBinding Background}"></Grid>
                                 <!--<Label Content="{TemplateBinding Content}" Grid.Column="1" Grid.Row="1" Foreground="#3a3939"  FontSize="22" FontFamily="微软雅黑" HorizontalAlignment="Center"></Label>
                                 <Label Content="{TemplateBinding Tag}" Grid.Column="1" Grid.Row="2" Foreground="#3a3939" FontFamily="微软雅黑" FontSize="7" Margin="0,0,0,0" HorizontalAlignment="Center"></Label>-->

@@ -12,7 +12,7 @@
             <ColumnDefinition Width="180*"></ColumnDefinition>
             <ColumnDefinition Width="1740*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <Button Content="返回" x:Name="btn_rtn" Click="btn_rtn_Click" ></Button>
+        <Button Style="{DynamicResource navBtnBackStyle}"   x:Name="btn_rtn" Click="btn_rtn_Click" HorizontalAlignment="Left" VerticalAlignment="Top" ></Button>
         <usercontrl:UserControlShop x:Name="userCtrlShop" Grid.Column="1"></usercontrl:UserControlShop>
     </Grid>
 </Page>

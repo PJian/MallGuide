@@ -109,7 +109,7 @@ namespace SuperMarketLH
         private void checkRegist()
         {
             //注册检查
-            CodeUtil.checkRegisterSuc(showRegWin, expired, inTrial, regErr);
+            //CodeUtil.checkRegisterSuc(showRegWin, expired, inTrial, regErr);
         }
         private Soft createSoft()
         {

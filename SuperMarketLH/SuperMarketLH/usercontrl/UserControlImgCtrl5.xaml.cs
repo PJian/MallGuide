@@ -73,7 +73,7 @@ namespace SuperMarketLH.usercontrl
             timer = new DispatcherTimer();
             timer.Tick += changeShowImgTimer_Tick;
             //timer.Interval = TimeSpan.FromSeconds(5);
-            timer.Interval = TimeSpan.FromMinutes(5);
+            timer.Interval = TimeSpan.FromSeconds(10);
             timer.IsEnabled = true;
             getTrangsitioniItem();
 
