@@ -27,9 +27,9 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="50*"></RowDefinition>
-            <RowDefinition Height="135*"></RowDefinition>
+            <RowDefinition Height="90*"></RowDefinition>
             <RowDefinition Height="20*"></RowDefinition>
-            <RowDefinition Height="595*"></RowDefinition>
+            <RowDefinition Height="625*"></RowDefinition>
         </Grid.RowDefinitions>
         <!--楼层按钮-->
         <ListBox x:Name="listbox_allFloors" VerticalAlignment="Top" Grid.Column="1" Grid.Row="1" Grid.RowSpan="3" Background="Transparent" BorderThickness="0"  SelectionChanged="listbox_allFloors_SelectionChanged" ItemContainerStyle="{DynamicResource styledListFloorBtn}">
@@ -83,7 +83,7 @@
                     <ImageBrush ImageSource="/SuperMarketLH;component/images/navBtn/btn20.png"/>
                 </Button.Background>
             </Button>
-            <Button x:Name="btn_bathroom" Style="{DynamicResource floorNavBtnStyle}" MouseDown="btn_bathroom_MouseDown" MouseUp="btn_bathroom_MouseUp" TouchDown="btn_bathroom_TouchDown" TouchUp="btn_bathroom_TouchUp" Click="btn_bathroom_Click" >
+            <Button x:Name="btn_bathroom" Style="{DynamicResource floorNavBtnStyle}" Margin="0,0,30,0" MouseDown="btn_bathroom_MouseDown" MouseUp="btn_bathroom_MouseUp" TouchDown="btn_bathroom_TouchDown" TouchUp="btn_bathroom_TouchUp" Click="btn_bathroom_Click" >
                 <Button.Background>
                     <ImageBrush ImageSource="/SuperMarketLH;component/images/navBtn/btn21.png"/>
                 </Button.Background>
