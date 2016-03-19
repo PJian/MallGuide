@@ -27,7 +27,6 @@ namespace SuperMarketLH.usercontrl
         private DispatcherTimer timer;//定时器，每隔一段时间切换图片
         private TransitionItem transitioniItem = null;
         private int currentShowImgIndex = 0;
-
         public int CurrentShowImgIndex
         {
             get { return currentShowImgIndex; }
@@ -148,6 +147,51 @@ namespace SuperMarketLH.usercontrl
                 Height = 20,
                 Margin = new Thickness(2, 0, 2, 0)
             };
+        }
+
+        //初始鼠标位置
+        private double startX = 0;
+        //结尾鼠标位置
+        private double endX = 0;
+        private void compareX(double startX, double endX) {
+            if ((endX - startX) > 200)
+            {
+                getNextItem();
+            }
+            else if ((startX - endX) > 200)
+            {
+                getPreItem();
+            }
+        }
+
+        private void transitionC_img_MouseDown_1(object sender, MouseButtonEventArgs e)
+        {
+            startX = e.GetPosition(transitionC_img).X;
+        }
+
+        private void transitionC_img_MouseMove_1(object sender, MouseEventArgs e)
+        {
+            endX = e.GetPosition(transitionC_img).X;
+        }
+
+        private void transitionC_img_MouseUp_1(object sender, MouseButtonEventArgs e)
+        {
+            compareX(startX, endX);
+        }
+
+        private void transitionC_img_TouchUp_1(object sender, TouchEventArgs e)
+        {
+            compareX(startX, endX);
+        }
+
+        private void transitionC_img_TouchDown_1(object sender, TouchEventArgs e)
+        {
+            startX = e.GetTouchPoint(transitionC_img).Position.X;
+        }
+
+        private void transitionC_img_TouchMove_1(object sender, TouchEventArgs e)
+        {
+            endX = e.GetTouchPoint(transitionC_img).Position.X;
         }
 
     }
