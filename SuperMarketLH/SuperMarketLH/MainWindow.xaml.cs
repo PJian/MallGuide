@@ -67,8 +67,8 @@ namespace SuperMarketLH
             goToIndexTimer.IsEnabled = true;
 
             //回到首页
-            frameForIndex.Navigate(new PageIndex(this));
-
+            //frameForIndex.Navigate(new PageIndex(this));
+            goToEnter();
             Thread t1 = new Thread(new ThreadStart(startUpdateServer));
             t1.IsBackground = true;
             t1.Start();
@@ -631,6 +631,10 @@ namespace SuperMarketLH
 
         private void btn_enter_Click(object sender, RoutedEventArgs e)
         {
+            goToEnter();
+        }
+
+        private void goToEnter() {
             //frame 切换
             frameForIndex.Visibility = Visibility.Collapsed;
             frame.Visibility = Visibility.Visible;
