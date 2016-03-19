@@ -9,6 +9,3 @@ obj/
 安装程序/
 界面/
 *.dll
-*.suo
-*.csproj
-*.sln
