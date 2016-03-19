@@ -20,8 +20,8 @@ namespace SuperMarketLH.util
 
         private static int MACHINE_COL_SPAN = 4;
         private static int MACHINE_ROW_SPAN = 4;
-        private static int SHOP_INFO_TIPS_COL_SPAN = 10;
-        private static int SHOP_INFO_TIPS_ROW_SPAN = 10;
+        private static int SHOP_INFO_TIPS_COL_SPAN = 20;
+        private static int SHOP_INFO_TIPS_ROW_SPAN = 20;
 
         private static int ELLIPSE_ROAD_WIDTH = 2;
         private static int ELLIPSE_ROAD_HEIGHT = 2;

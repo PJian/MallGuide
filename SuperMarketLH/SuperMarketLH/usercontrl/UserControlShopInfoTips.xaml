@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:rsm="clr-namespace:ResourceManagementService.converter;assembly=ResourceManagementService"
              mc:Ignorable="d" 
-             d:DesignHeight="260" d:DesignWidth="260" RenderTransformOrigin="0.5,0.5" Loaded="userControl_Loaded" >
+             d:DesignHeight="260" d:DesignWidth="260" RenderTransformOrigin="0.5,0.5"  >
 	<UserControl.Resources>
 
         <rsm:ImgConverter x:Key="rsmImgConverter"></rsm:ImgConverter>
@@ -34,27 +34,31 @@
 			<BeginStoryboard Storyboard="{StaticResource enterStory}"/>
 		</EventTrigger>
 	</UserControl.Triggers>
-    <Grid >
-    	<Grid.Background>
-    		<ImageBrush ImageSource="/SuperMarketLH;component/images/floor/tips_bg.png"/>
-    	</Grid.Background>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="40*"></RowDefinition>
-            <RowDefinition Height="198*"></RowDefinition>
-            <RowDefinition Height="80*"></RowDefinition>
-            <RowDefinition Height="142*"></RowDefinition>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="120*"></ColumnDefinition>
-            <ColumnDefinition Width="70*"></ColumnDefinition>
-            <ColumnDefinition Width="345*"></ColumnDefinition>
-            <ColumnDefinition Width="50*"></ColumnDefinition>
-        </Grid.ColumnDefinitions>
-        <Image Grid.Column="2" Grid.Row="1" Source="{Binding CurrentShop.Logo,Converter={StaticResource rsmImgConverter}}" VerticalAlignment="Top" HorizontalAlignment="Center"></Image>
-        
-        <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center">
-            <Button x:Name="btn_nav" Content="导航" Click="btn_nav_Click" Style="{DynamicResource tipsBtnStyle}" Background="#08b9fb" Margin="0,0,10,0"/>
-            <Button x:Name="btn_detail" Content="详情" Click="btn_detail_Click" Style="{DynamicResource tipsBtnStyle}" Background="#ffae00"></Button>
-        </StackPanel>
-    </Grid>
+    <Viewbox>
+        <Grid Width="260" Height="260">
+            <Grid.Background>
+                <ImageBrush ImageSource="/SuperMarketLH;component/images/floor/tips_bg.png"/>
+            </Grid.Background>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40*"></RowDefinition>
+                <RowDefinition Height="198*"></RowDefinition>
+                <RowDefinition Height="80*"></RowDefinition>
+                <RowDefinition Height="142*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="120*"></ColumnDefinition>
+                <ColumnDefinition Width="70*"></ColumnDefinition>
+                <ColumnDefinition Width="345*"></ColumnDefinition>
+                <ColumnDefinition Width="50*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Image  Grid.Column="2" Grid.Row="1" Source="{Binding Logo,Converter={StaticResource rsmImgConverter}}" ></Image>
+
+            <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <Button x:Name="btn_nav" Content="导航" Click="btn_nav_Click" Style="{DynamicResource tipsBtnStyle}" Background="#08b9fb" Margin="0,0,10,0"/>
+                <Button x:Name="btn_detail" Content="详情" Click="btn_detail_Click" Style="{DynamicResource tipsBtnStyle}" Background="#ffae00"></Button>
+            </StackPanel>
+        </Grid>
+
+    </Viewbox>
+   
 </UserControl>

@@ -36,8 +36,14 @@ namespace SuperMarketLH.usercontrl
             InitializeComponent();
             this.CurrentShop = currentShop;
         }
+        private Shop _currentShop;
 
-        public Shop CurrentShop{get;set;}
+        public Shop CurrentShop
+        {
+            get { return _currentShop; }
+            set { _currentShop = value; this.DataContext = this.CurrentShop; }
+        }
+       
 
         private void btn_nav_Click(object sender, RoutedEventArgs e)
         {
@@ -49,9 +55,5 @@ namespace SuperMarketLH.usercontrl
             ShowDetailInfo(this.CurrentShop);
         }
 
-        private void userControl_Loaded(object sender, RoutedEventArgs e)
-        {
-            this.DataContext = this.CurrentShop;
-        }
     }
 }
