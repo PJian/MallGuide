@@ -10,15 +10,18 @@
 
         <rsm:ImgConverter x:Key="rsmImgConverter"></rsm:ImgConverter>
         <Storyboard x:Key="enterStory">
-			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="userControl">
-				<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
-				<EasingDoubleKeyFrame KeyTime="0:0:1" Value="1"/>
-			</DoubleAnimationUsingKeyFrames>
-			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="userControl">
-				<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
-				<EasingDoubleKeyFrame KeyTime="0:0:1" Value="1"/>
-			</DoubleAnimationUsingKeyFrames>
-		</Storyboard>
+        	<PointAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransformOrigin)" Storyboard.TargetName="userControl">
+        		<EasingPointKeyFrame KeyTime="0" Value="1,1"/>
+        	</PointAnimationUsingKeyFrames>
+        	<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="userControl">
+        		<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+        		<EasingDoubleKeyFrame KeyTime="0:0:1" Value="1"/>
+        	</DoubleAnimationUsingKeyFrames>
+        	<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="userControl">
+        		<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+        		<EasingDoubleKeyFrame KeyTime="0:0:1" Value="1"/>
+        	</DoubleAnimationUsingKeyFrames>
+        </Storyboard>
 	</UserControl.Resources>
 	
 	<UserControl.RenderTransform>
@@ -37,26 +40,31 @@
     <Viewbox>
         <Grid Width="260" Height="260">
             <Grid.Background>
-                <ImageBrush ImageSource="/SuperMarketLH;component/images/floor/tips_bg.png"/>
+                <ImageBrush ImageSource="/SuperMarketLH;component/images/floor/tipsbg.png"/>
             </Grid.Background>
+
             <Grid.RowDefinitions>
-                <RowDefinition Height="40*"></RowDefinition>
-                <RowDefinition Height="198*"></RowDefinition>
+                <RowDefinition Height="20*"></RowDefinition>
                 <RowDefinition Height="80*"></RowDefinition>
-                <RowDefinition Height="142*"></RowDefinition>
+                <RowDefinition Height="20*"></RowDefinition>
+                <RowDefinition Height="80*"></RowDefinition>
+                <RowDefinition Height="20*"></RowDefinition>
+                <RowDefinition Height="20*"></RowDefinition>
+                <RowDefinition Height="20*"></RowDefinition>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="120*"></ColumnDefinition>
+                <ColumnDefinition Width="10"></ColumnDefinition>
+                <ColumnDefinition Width="60*"></ColumnDefinition>
+                <ColumnDefinition Width="35*"></ColumnDefinition>
+                <ColumnDefinition Width="20*"></ColumnDefinition>
+                <ColumnDefinition Width="35*"></ColumnDefinition>
+                <ColumnDefinition Width="20*"></ColumnDefinition>
                 <ColumnDefinition Width="70*"></ColumnDefinition>
-                <ColumnDefinition Width="345*"></ColumnDefinition>
-                <ColumnDefinition Width="50*"></ColumnDefinition>
+                <ColumnDefinition Width="10*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Image  Grid.Column="2" Grid.Row="1" Source="{Binding Logo,Converter={StaticResource rsmImgConverter}}" ></Image>
-
-            <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center">
-                <Button x:Name="btn_nav" Content="导航" Click="btn_nav_Click" Style="{DynamicResource tipsBtnStyle}" Background="#08b9fb" Margin="0,0,10,0"/>
-                <Button x:Name="btn_detail" Content="详情" Click="btn_detail_Click" Style="{DynamicResource tipsBtnStyle}" Background="#ffae00"></Button>
-            </StackPanel>
+            <Image  Grid.Column="4" Grid.Row="2" Grid.ColumnSpan="3" Grid.RowSpan="3" Margin="22" Source="{Binding Logo,Converter={StaticResource rsmImgConverter}}" ></Image>
+            <Button x:Name="btn_nav" Grid.Column="2" Grid.ColumnSpan="3" Grid.Row="1" Content="导航" Click="btn_nav_Click" Style="{DynamicResource tipsBtnStyle}" Background="Transparent" Margin="0,0,10,0"/>
+            <Button x:Name="btn_detail" Content="详情"  Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="3"   Click="btn_detail_Click" Style="{DynamicResource tipsBtnStyle}" Background="Transparent"></Button>
         </Grid>
 
     </Viewbox>

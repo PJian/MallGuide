@@ -126,8 +126,10 @@ namespace SuperMarketLH.util
             grid.Children.Add(tips);
             int initialCalOfGrid = getColOfGridByPoint(p);
             int initialRowOfGrid = getRowOfGridByPoint(p);
-            Grid.SetColumn(tips, initialCalOfGrid - SHOP_INFO_TIPS_COL_SPAN / 2 <= 0 ? 0 : initialCalOfGrid - SHOP_INFO_TIPS_COL_SPAN / 2);
-            Grid.SetRow(tips, initialRowOfGrid - SHOP_INFO_TIPS_ROW_SPAN / 2 <= 0 ? 0 : initialRowOfGrid - SHOP_INFO_TIPS_ROW_SPAN / 2);
+            //Grid.SetColumn(tips, initialCalOfGrid - SHOP_INFO_TIPS_COL_SPAN / 2 <= 0 ? 0 : initialCalOfGrid - SHOP_INFO_TIPS_COL_SPAN / 2);
+            //Grid.SetRow(tips, initialRowOfGrid - SHOP_INFO_TIPS_ROW_SPAN / 2 <= 0 ? 0 : initialRowOfGrid - SHOP_INFO_TIPS_ROW_SPAN / 2);
+            Grid.SetColumn(tips, initialCalOfGrid - SHOP_INFO_TIPS_COL_SPAN  <= 0 ? 0 : initialCalOfGrid - SHOP_INFO_TIPS_COL_SPAN);
+            Grid.SetRow(tips, initialRowOfGrid - SHOP_INFO_TIPS_ROW_SPAN  <= 0 ? 0 : initialRowOfGrid - SHOP_INFO_TIPS_ROW_SPAN );
             Grid.SetColumnSpan(tips, SHOP_INFO_TIPS_COL_SPAN);
             Grid.SetRowSpan(tips, SHOP_INFO_TIPS_ROW_SPAN);
         }

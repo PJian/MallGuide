@@ -10,17 +10,16 @@
 
 
         <Style x:Key="tipsBtnStyle" TargetType="Button">
-            <Setter Property="Foreground" Value="White"/>
             <!--修改模板属性-->
             <Setter Property="Template">
                 <Setter.Value>
                     <!--控件模板-->
                     <ControlTemplate TargetType="Button">
                         <!--背景色-->
-                        <Border x:Name="back" Width="80" Height="40" Background="{TemplateBinding Background}" CornerRadius="5">
+                        <Border x:Name="back" Width="80" Height="80" Background="{TemplateBinding Background}" CornerRadius="10">
                             <!--按钮内容-->
                             <Grid>
-                                <Label Content="{TemplateBinding Content}" Foreground="White" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
+                                <Label Content="{TemplateBinding Content}" Foreground="Black" FontSize="28" VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
                             </Grid>
                         </Border>
                         <!--触发器-->

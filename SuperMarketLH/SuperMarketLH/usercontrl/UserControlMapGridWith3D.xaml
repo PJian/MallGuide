@@ -6,20 +6,20 @@
              mc:Ignorable="d" 
              xmlns:Inter3D="clr-namespace:_3DTools;assembly=3DTools"
              xmlns:converter="clr-namespace:ResourceManagementService.converter;assembly=ResourceManagementService"
-             d:DesignHeight="250" d:DesignWidth="724" Loaded="UserControl_Loaded_1" >
+             d:DesignHeight="312" d:DesignWidth="724" Loaded="UserControl_Loaded_1" >
     <UserControl.Resources>
         <MeshGeometry3D x:Key="palnMesh" Positions="-2,-1,0 2,-1,0 2,1,0 -2,1,0" TextureCoordinates="0,1 1,1 1,0 0,0" TriangleIndices="0 1 2 0 2 3" />
     </UserControl.Resources>
-    <Viewbox Height="250" Width="724">
+    <Viewbox Height="312" Width="724">
 
-        <my:ScatterView Height="250" Width="724" >
-            <my:ScatterViewItem Height="250" Width="724" Orientation="0" Center="362,125" Style="{DynamicResource ScatterViewItemStyle1}">
-                <Grid Height="250" Width="724" x:Name="grid_mapContioner" >
+        <my:ScatterView Height="312" Width="724" >
+            <my:ScatterViewItem Height="312" Width="724" Orientation="0" Center="362,156" Style="{DynamicResource ScatterViewItemStyle1}">
+                <Grid Height="312" Width="724" x:Name="grid_mapContioner" >
                     <Inter3D:TrackballDecorator x:Name="viewport3D">
                         <Inter3D:Interactive3DDecorator>
                             <Viewport3D>
                                 <Viewport3D.Camera>
-                                    <PerspectiveCamera Position="0,0,7" LookDirection="0,0,-1" ></PerspectiveCamera>
+                                    <PerspectiveCamera Position="0,0,6" LookDirection="0,0,-1" ></PerspectiveCamera>
                                 </Viewport3D.Camera>
                                 <ModelVisual3D>
                                     <ModelVisual3D.Content>

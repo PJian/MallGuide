@@ -13,8 +13,8 @@
     <Grid>
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="313"></RowDefinition>
-                <RowDefinition Height="312"></RowDefinition>
+                <RowDefinition Height="313*"></RowDefinition>
+                <RowDefinition Height="313*"></RowDefinition>
             </Grid.RowDefinitions>
             <usercontrl:UserControlMapGridWith3D x:Name="usctrl_mapGrid_1" />
             <Grid Grid.Row="1">
