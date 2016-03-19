@@ -62,6 +62,11 @@ namespace SuperMarketLH.page.floor
             this.userCtrlMapGrid.saveMachine();
             MessageBox.Show("保存成功！");
         }
+
+        private void Page_Unloaded_1(object sender, RoutedEventArgs e)
+        {
+            CanvasUtil.releaseRoadTimer();
+        }
      
 
        

@@ -266,6 +266,9 @@ namespace SuperMarketLH
         private void frameNavigate(int index)
         {
             Page page = null;
+           
+             
+           
             switch (index)
             {
                 //  case WinUtil.PAGE_NULL: page = null; break;
@@ -286,6 +289,7 @@ namespace SuperMarketLH
                 //case WinUtil.PAGE_FLOOR: page = new PageFloorBaseInfo(); break;
                 case WinUtil.PAGE_QUESTION: page = new PageQuestionnaire(); break;
             }
+           
             if (this.pageIndex != index)
             {
                 this.frame.Navigate(page);
@@ -296,6 +300,9 @@ namespace SuperMarketLH
             {
                 changeWinBG("resource/images/bg/bg2.png");
                 isDefaultBG = false;
+            }
+            if (this.frame.CanGoBack) { 
+                this.frame.RemoveBackEntry();
             }
         }
 

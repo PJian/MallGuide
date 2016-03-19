@@ -6,7 +6,7 @@
        xmlns:Inter3D="clr-namespace:_3DTools;assembly=3DTools"
       mc:Ignorable="d" 
       d:DesignHeight="595" d:DesignWidth="1330"
-	Title="PageFloorNavTwoFloor" Loaded="Page_Loaded_1">
+	Title="PageFloorNavTwoFloor" Loaded="Page_Loaded_1" Unloaded="Page_Unloaded_1" >
     <Page.Resources>
         <MeshGeometry3D x:Key="palnMesh" Positions="-2,-1,0 2,-1,0 2,1,0 -2,1,0" TextureCoordinates="0,1 1,1 1,0 0,0" TriangleIndices="0 1 2 0 2 3" />
     </Page.Resources>

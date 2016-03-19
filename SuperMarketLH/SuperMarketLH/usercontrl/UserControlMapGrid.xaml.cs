@@ -85,9 +85,6 @@ namespace SuperMarketLH.usercontrl
             set { _currentShop = value; }
         }
 
-
-
-
         public UserControlMapGrid()
         {
             InitializeComponent();
@@ -98,6 +95,9 @@ namespace SuperMarketLH.usercontrl
             InitializeComponent();
             this.currentEditFloor = floor;
         }
+
+
+       
         private PageFloorBaseInfo rootPage;
 
         public PageFloorBaseInfo RootPage
@@ -246,7 +246,7 @@ namespace SuperMarketLH.usercontrl
             if (isOneFloor)
             {
                 drawMap();
-                CanvasUtil.drawRoad(this.grid_info, roadNodes);
+                CanvasUtil.drawRoad(new Grid[]{this.grid_info}, new List<Node>[]{roadNodes});
             }
             else
             {
@@ -299,6 +299,8 @@ namespace SuperMarketLH.usercontrl
             }
 
         }
+
+       
 
        
 

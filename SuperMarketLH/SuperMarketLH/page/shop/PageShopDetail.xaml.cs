@@ -23,11 +23,13 @@ namespace SuperMarketLH.page.shop
     {
         private Shop shop;
         private MainWindow rootWin;
+       
         public PageShopDetail(Shop shop,MainWindow rootWin)
         {
             InitializeComponent();
             this.shop = shop;
             this.rootWin = rootWin;
+           
         }
         public void busy()
         {
@@ -46,6 +48,12 @@ namespace SuperMarketLH.page.shop
         private void Page_Loaded_1(object sender, RoutedEventArgs e)
         {
             init();
+        }
+
+      
+        private void btn_rtn_Click(object sender, RoutedEventArgs e)
+        {
+            rootWin.frame.GoBack();
         }
     }
 }

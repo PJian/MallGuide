@@ -46,10 +46,16 @@ namespace SuperMarketLH.usercontrl
             allImages = new List<ImageObject>();
             for (int i = 0; i < this.Imgs.Length; i++)
             {
-                allImages.Add(new ImageObject()
-                {
-                    ImgPath = this.Imgs[i]
-                });
+                //allImages.Add(new Lazy<ImageObject>(
+                //    () => new ImageObject() {
+                //        ImgPath = this.Imgs[i]
+                //    })
+                //);
+                allImages.Add( new ImageObject()
+                    {
+                        ImgPath = this.Imgs[i]
+                    }
+                );
             }
             this.surfaceListBoxContent.ItemsSource = this.allImages;
         }

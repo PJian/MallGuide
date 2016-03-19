@@ -6,7 +6,7 @@
       mc:Ignorable="d" 
        xmlns:usercontrl="clr-namespace:SuperMarketLH.usercontrl" 
       d:DesignHeight="595" d:DesignWidth="1330"
-	Title="PageFloorDetailInfo" Loaded="Page_Loaded_1">
+	Title="PageFloorDetailInfo" Loaded="Page_Loaded_1" Unloaded="Page_Unloaded_1" >
     <Viewbox>
         <Grid>
             <Grid x:Name="grid_floorBG" Grid.Row="0" >

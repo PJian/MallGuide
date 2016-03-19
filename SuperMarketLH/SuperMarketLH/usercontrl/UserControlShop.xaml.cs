@@ -87,6 +87,7 @@ namespace SuperMarketLH.usercontrl
                 this.grid_brandImage.Children.Add(ctrl3);
             }
             //都有活动图片
+
             userCtrlPromotionImg.Imgs = Shop.getShopPromotionImgOfValidate().ToArray();
             userCtrlFacilitiesImg.Imgs = Shop.Facilities;
             if (this.Shop.Type == ConstantData.SHOP_TYPE_NORMAL)
