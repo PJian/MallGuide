@@ -10,6 +10,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace SuperMarketLH.util
 {
@@ -190,28 +191,98 @@ namespace SuperMarketLH.util
         {
             return new Point(getColOfGridByPoint(p), getRowOfGridByPoint(p));
         }
+
+        private static DispatcherTimer drawRoadTimer;
+
+        private static int roadNodeIndex = 0;
+        
+        private static List<Node>[] nodes ;
+        private static List<Node> currentRoadNodes;
+        private static int roadListIndex = 0;
+        private static int roadListCount = 0;
+        private static Grid[] mapGrid;
+        private static Grid curremtMapGrid;
+        private static int mapGridIndex = 0;
         /// <summary>
         /// 绘制路径
         /// </summary>
         /// <param name="grid"></param>
         /// <param name="nodes"></param>
-        public static void drawRoad(Grid grid, List<Node> nodes)
+        public static void drawRoad(Grid[] grid, List<Node>[] node)
         {
-            foreach (Node node in nodes)
+
+            nodes = node;
+
+            if (nodes != null && nodes.Length > 0)
             {
-                Point p = node.P;
+                roadListIndex = 0;
+                currentRoadNodes = nodes[roadListIndex++];
+                roadNodeIndex = currentRoadNodes.Count - 1;
+                roadListCount = nodes.Length;
+                
+            }
+            else {
+                return;
+            }
+
+            mapGrid = grid;
+            if (grid != null && grid.Length > 0 && grid.Length == nodes.Length)
+            {
+                mapGridIndex = 0;
+                curremtMapGrid = mapGrid[mapGridIndex++];
+            }
+            else
+            {
+                return;
+            }
+
+            
+            drawRoadTimer = new DispatcherTimer();
+            drawRoadTimer.Tick += drawRoadTimer_Tick;
+
+            drawRoadTimer.Interval = TimeSpan.FromMilliseconds(50);
+            drawRoadTimer.IsEnabled = true;
+
+        }
+
+
+
+        public static void releaseRoadTimer(){
+            if(drawRoadTimer!=null){
+              drawRoadTimer.IsEnabled = false;
+            }
+           
+        }
+        static void drawRoadTimer_Tick(object sender, EventArgs e)
+        {
+            if (currentRoadNodes == null)
+            {
+               releaseRoadTimer();
+               return ;
+            }
+            if (roadNodeIndex < 0) {
+                if (roadListIndex >= roadListCount) {
+                    releaseRoadTimer();
+                    return;
+                }
+                curremtMapGrid = mapGrid[mapGridIndex++];
+                currentRoadNodes = nodes[roadListIndex++];
+                roadNodeIndex = currentRoadNodes.Count - 1;
+            }
+
+                Point p = currentRoadNodes.ElementAt(roadNodeIndex--).P;
                 Ellipse ellipse = new Ellipse()
                 {
                     Width = ELLIPSE_ROAD_WIDTH,
                     Height = ELLIPSE_ROAD_HEIGHT,
                     Fill = ELLPSE_ROAD_FILL
                 };
-                grid.Children.Add(ellipse);
+                curremtMapGrid.Children.Add(ellipse);
                 Grid.SetRow(ellipse, (int)p.Y);
-                Grid.SetColumn(ellipse,(int)p.X);
+                Grid.SetColumn(ellipse, (int)p.X);
                 Grid.SetColumnSpan(ellipse, ELLPSE_ROAD_COL_SPAN);
                 Grid.SetRowSpan(ellipse, ELLPSE_ROAD_ROW_SPAN);
-            }
+           
         }
 
 

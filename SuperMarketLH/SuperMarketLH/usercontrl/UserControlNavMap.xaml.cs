@@ -103,7 +103,7 @@ namespace SuperMarketLH.usercontrl
             if (machine.FloorIndex == this.currentFloor.Index && this.currentFloor.Index == shop.Floor.Index) { 
                 //都在同一层
                 List<Node> nodes = AStar.findRoadAH(this.mapValue, new Point(machine.X, machine.Y), CanvasUtil.getPointOfGrid(shop.Door));
-                CanvasUtil.drawRoad(this.grid_info, nodes);
+                CanvasUtil.drawRoad(new Grid[]{this.grid_info}, new List<Node>[]{nodes});
             }
         }
         /// <summary>
@@ -119,7 +119,7 @@ namespace SuperMarketLH.usercontrl
                 //如果存在最近的电梯的话
                 if (p.Equals(new Point(0, 0))) {
                     List<Node> nodes = AStar.findRoadAH(this.mapValue, new Point(machine.X, machine.Y), CanvasUtil.getPointOfGrid(p));
-                    CanvasUtil.drawRoad(this.grid_info, nodes);
+                    CanvasUtil.drawRoad(new Grid[] { this.grid_info }, new List<Node>[] { nodes });
                 }
             }
         }
@@ -128,7 +128,7 @@ namespace SuperMarketLH.usercontrl
         /// </summary>
         public void drawRoadFromElevatorToShop(Point elevator,Shop shop) {
             List<Node> nodes = AStar.findRoadAH(this.mapValue, CanvasUtil.getPointOfGrid(elevator), CanvasUtil.getPointOfGrid(shop.Door));
-            CanvasUtil.drawRoad(this.grid_info,nodes);
+            CanvasUtil.drawRoad(new Grid[] { this.grid_info }, new List<Node>[] { nodes });
         }
         /// <summary>
         /// 监听键盘事件，用来设定机器位置

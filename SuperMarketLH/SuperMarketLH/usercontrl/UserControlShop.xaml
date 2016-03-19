@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
               xmlns:rsm="clr-namespace:ResourceManagementService.converter;assembly=ResourceManagementService"
-             d:DesignHeight="800" d:DesignWidth="1920" Loaded="UserControl_Loaded_1">
+             d:DesignHeight="800" d:DesignWidth="1740" Loaded="UserControl_Loaded_1">
     <UserControl.Resources>
         <rsm:ImgConverter x:Key="rsmImgConverter"></rsm:ImgConverter>
     </UserControl.Resources>
@@ -27,7 +27,7 @@
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="60*"></ColumnDefinition>
-                <ColumnDefinition Width="180*"></ColumnDefinition>
+                <ColumnDefinition Width="0*"></ColumnDefinition>
                 <ColumnDefinition Width="230*"></ColumnDefinition>
                 <ColumnDefinition Width="30*"></ColumnDefinition>
                 <ColumnDefinition Width="425*"></ColumnDefinition>

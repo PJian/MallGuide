@@ -67,8 +67,8 @@ namespace SuperMarketLH
             goToIndexTimer.IsEnabled = true;
 
             //回到首页
-            frameForIndex.Navigate(new PageIndex(this));
-
+            //frameForIndex.Navigate(new PageIndex(this));
+            goToEnter();
             Thread t1 = new Thread(new ThreadStart(startUpdateServer));
             t1.IsBackground = true;
             t1.Start();
@@ -266,6 +266,9 @@ namespace SuperMarketLH
         private void frameNavigate(int index)
         {
             Page page = null;
+           
+             
+           
             switch (index)
             {
                 //  case WinUtil.PAGE_NULL: page = null; break;
@@ -286,6 +289,7 @@ namespace SuperMarketLH
                 //case WinUtil.PAGE_FLOOR: page = new PageFloorBaseInfo(); break;
                 case WinUtil.PAGE_QUESTION: page = new PageQuestionnaire(); break;
             }
+           
             if (this.pageIndex != index)
             {
                 this.frame.Navigate(page);
@@ -296,6 +300,9 @@ namespace SuperMarketLH
             {
                 changeWinBG("resource/images/bg/bg2.png");
                 isDefaultBG = false;
+            }
+            if (this.frame.CanGoBack) { 
+                this.frame.RemoveBackEntry();
             }
         }
 
@@ -631,6 +638,10 @@ namespace SuperMarketLH
 
         private void btn_enter_Click(object sender, RoutedEventArgs e)
         {
+            goToEnter();
+        }
+
+        private void goToEnter() {
             //frame 切换
             frameForIndex.Visibility = Visibility.Collapsed;
             frame.Visibility = Visibility.Visible;

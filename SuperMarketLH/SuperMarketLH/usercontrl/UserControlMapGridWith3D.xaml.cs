@@ -249,7 +249,7 @@ namespace SuperMarketLH.usercontrl
             if (isOneFloor)
             {
                 drawMap();
-                CanvasUtil.drawRoad(this.grid_info, roadNodes);
+                CanvasUtil.drawRoad(new Grid[] { this.grid_info }, new List<Node>[]{roadNodes});
             }
             else {
 
