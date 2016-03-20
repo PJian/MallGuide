@@ -6,8 +6,10 @@
       xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation" 
       mc:Ignorable="d" 
       d:DesignHeight="800" d:DesignWidth="1920"
+      xmlns:converter="clr-namespace:ResourceManagementService.converter;assembly=ResourceManagementService"
 	Title="PageQuestionnaire" Loaded="Page_Loaded_1">
     <Page.Resources>
+        <converter:VisibilityConverter x:Key="vConverter"></converter:VisibilityConverter>
         <DataTemplate x:Key="QuestionDataTemplate" >
             <Grid Height="330" Width="1860">
                 <Grid.RowDefinitions>
@@ -21,11 +23,11 @@
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
                     <Label Content="请选择:" FontSize="28" Margin="0,0,20,0" VerticalAlignment="Center"></Label>
-                    <RadioButton x:Name="btn_choiceA" Style="{DynamicResource questionButtonStyle}" Content="{Binding ChoiceA}"  GroupName="question" IsChecked="False" Margin="0,0,20,0" Checked="btn_choiceA_Checked"></RadioButton>
-                    <RadioButton x:Name="btn_choiceB" Style="{DynamicResource questionButtonStyle}" Content="{Binding ChoiceB}"  GroupName="question" IsChecked="False" Margin="0,0,20,0" Checked="btn_choiceB_Checked"></RadioButton>
-                    <RadioButton x:Name="btn_choiceC" Style="{DynamicResource questionButtonStyle}" Content="{Binding ChoiceC}"  GroupName="question" IsChecked="False" Margin="0,0,20,0" Checked="btn_choiceC_Checked"></RadioButton>
-                    <RadioButton x:Name="btn_choiceD" Style="{DynamicResource questionButtonStyle}" Content="{Binding ChoiceD}"  GroupName="question" IsChecked="False" Margin="0,0,20,0" Checked="btn_choiceD_Checked"></RadioButton>
-                    <RadioButton x:Name="btn_choiceE" Style="{DynamicResource questionButtonStyle}" Content="{Binding ChoiceE}"  GroupName="question" IsChecked="False" Margin="0,0,20,0" Checked="btn_choiceE_Checked"></RadioButton>
+                    <RadioButton x:Name="btn_choiceA" Style="{DynamicResource questionButtonStyle}" Content="{Binding ChoiceA}" Visibility="{Binding ChoiceA,Converter={StaticResource vConverter}}"  GroupName="question" IsChecked="False" Margin="0,0,20,0" Checked="btn_choiceA_Checked"></RadioButton>
+                    <RadioButton x:Name="btn_choiceB" Style="{DynamicResource questionButtonStyle}" Content="{Binding ChoiceB}" Visibility="{Binding ChoiceB,Converter={StaticResource vConverter}}" GroupName="question" IsChecked="False" Margin="0,0,20,0" Checked="btn_choiceB_Checked"></RadioButton>
+                    <RadioButton x:Name="btn_choiceC" Style="{DynamicResource questionButtonStyle}" Content="{Binding ChoiceC}" Visibility="{Binding ChoiceC,Converter={StaticResource vConverter}}" GroupName="question" IsChecked="False" Margin="0,0,20,0" Checked="btn_choiceC_Checked"></RadioButton>
+                    <RadioButton x:Name="btn_choiceD" Style="{DynamicResource questionButtonStyle}" Content="{Binding ChoiceD}" Visibility="{Binding ChoiceD,Converter={StaticResource vConverter}}" GroupName="question" IsChecked="False" Margin="0,0,20,0" Checked="btn_choiceD_Checked"></RadioButton>
+                    <RadioButton x:Name="btn_choiceE" Style="{DynamicResource questionButtonStyle}" Content="{Binding ChoiceE}" Visibility="{Binding ChoiceE,Converter={StaticResource vConverter}}" GroupName="question" IsChecked="False" Margin="0,0,20,0" Checked="btn_choiceE_Checked"></RadioButton>
                     <!--<Button  Content="{Binding ChoiceA}" Click="btn_choiceA_Click" ></Button>
                     <Button x:Name="btn_choiceB" Content="{Binding ChoiceB}" Click="btn_choiceB_Click"></Button>
                     <Button x:Name="btn_choiceC" Content="{Binding ChoiceC}" Click="btn_choiceC_Click"></Button>

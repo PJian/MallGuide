@@ -181,6 +181,7 @@ namespace SuperMarketLH.usercontrl
             //清除之前的内容
             //this.grid_info.Children.RemoveRange(2, this.grid_info.Children.Count - 2);
             drawMap();
+            
             CanvasUtil.drawShopTips(this.grid_info, this.CurrentEditMap, shop, navToShop, showShopDetail);
         }
 
@@ -288,13 +289,16 @@ namespace SuperMarketLH.usercontrl
         public void showCommonBuildingTips(string buildingType)
         {
             if (this.CurrentEditMap == null || this.CurrentEditMap.Areas == null || this.CurrentEditMap.Areas.Count <= 0) return;
+            drawMap();
             //判断地图上有没有对应的建筑
             foreach (Obstacle item in this.CurrentEditMap.Areas)
             {
+
                 if (item.Type.Equals(buildingType)) {
-                    drawMap();
-                    CanvasUtil.drawShopTips(this.grid_info, item, navToShop, showShopDetail);
-                    break;
+                  
+                    //CanvasUtil.drawShopTips(this.grid_info, item, navToShop, showShopDetail);
+                    CanvasUtil.drawCommonBuildingTips(this.grid_info, item);
+                    //break;
                 }
             }
 

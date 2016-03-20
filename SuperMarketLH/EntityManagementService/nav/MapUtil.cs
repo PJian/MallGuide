@@ -282,13 +282,13 @@ namespace EntityManagementService.nav
         /// <param name="map"></param>
         /// <param name="num"></param>
         /// <returns></returns>
-        public static Obstacle getElevatorByNum(Map map, int num)
+        public static Obstacle getElevatorByNum(Map map, string num)
         {
             if (map != null)
             {
                 foreach (Obstacle o in map.Areas)
                 {
-                    if (o.Type.Equals(ObstacleType.ELEVATOR) && o.Index == num) {
+                    if (o.Type.Equals(ObstacleType.ELEVATOR) && o.Index.Equals( num)) {
                         return o;
                     }
                 }

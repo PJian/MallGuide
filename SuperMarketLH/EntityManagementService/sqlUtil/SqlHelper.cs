@@ -795,7 +795,7 @@ namespace EntityManageService.sqlUtil
                         Id = id,
                         Name = dt.Rows[0]["name"].ToString(),
                         Floor = getFloorById(dt.Rows[0]["floor"].ToString()),
-                        Index = int.Parse(dt.Rows[0]["positionNum"].ToString()),
+                        Index =dt.Rows[0]["positionNum"].ToString(),
                         Logo = dt.Rows[0]["logo"].ToString(),
                         Label = dt.Rows[0]["label"].ToString(),
                         SortChar = dt.Rows[0]["firstNameChar"].ToString(),
@@ -849,7 +849,7 @@ namespace EntityManageService.sqlUtil
                     Id = int.Parse(dr["id"].ToString()),
                     Name = dr["name"].ToString(),
                     Floor = getFloorById(dr["floor"].ToString()),
-                    Index = int.Parse(dr["positionNum"].ToString()),
+                    Index = dr["positionNum"].ToString(),
                     Logo = dr["logo"].ToString(),
                     Label = dr["label"].ToString(),
                     SortChar = dr["firstNameChar"].ToString(),
@@ -884,7 +884,7 @@ namespace EntityManageService.sqlUtil
                     Id = int.Parse(dr["id"].ToString()),
                     Name = dr["name"].ToString(),
                     Floor = getFloorById(dr["floor"].ToString()),
-                    Index = int.Parse(dr["positionNum"].ToString()),
+                    Index = dr["positionNum"].ToString(),
                     Logo = dr["logo"].ToString(),
                     Label = dr["label"].ToString(),
                     SortChar = dr["firstNameChar"].ToString(),
@@ -900,7 +900,7 @@ namespace EntityManageService.sqlUtil
                     Brand = getBrandRelatiedWithShop(int.Parse(dr["id"].ToString())),
                     SalePromotion = getSalePromotionRelatiedWithShop(int.Parse(dr["id"].ToString())),
                     Facilities = dr["facilities"].ToString().Split(','),
-                    Door = new System.Windows.Point(int.Parse(dt.Rows[0]["x"].ToString()), int.Parse(dt.Rows[0]["y"].ToString()))
+                    Door = new System.Windows.Point(int.Parse(dr["x"].ToString()), int.Parse(dr["y"].ToString()))
                 });
             }
             return shops;
@@ -924,7 +924,7 @@ namespace EntityManageService.sqlUtil
                     Id = int.Parse(dr["id"].ToString()),
                     Name = dr["name"].ToString(),
                     Floor = getFloorById(dr["floor"].ToString()),
-                    Index = int.Parse(dr["positionNum"].ToString()),
+                    Index = dr["positionNum"].ToString(),
                     Logo = dr["logo"].ToString(),
                     Label = dr["label"].ToString(),
                     SortChar = dr["firstNameChar"].ToString(),

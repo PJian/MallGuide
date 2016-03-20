@@ -30,13 +30,22 @@ namespace EntityManagementService.entity
             get { return _floor; }
             set { _floor = value; }
         }
-        private int _index;
 
-        public int Index
+        private string _index;
+
+        public string Index
         {
             get { return _index; }
             set { _index = value; }
         }
+
+        //private int _index;
+
+        //public int Index
+        //{
+        //    get { return _index; }
+        //    set { _index = value; }
+        //}
         /// <summary>
         /// 入驻的品牌
         /// </summary>

@@ -26,7 +26,7 @@ namespace EntityManagementService.entity
            get {
                return new string[]{
                     SHOP,ELEVATOR,ESCALATOR,STAIRS,FIRE_ENGINE_ACCESS,DECORATE,TOLITE,ATM,BABY_ROOM,SMOKING_ROOM,CHECKSTAND,SERVICE,LOST_FOUND,
-                    GOODS_STROAGE,SHOP
+                    GOODS_STROAGE
                 }.ToList();
            }
        }

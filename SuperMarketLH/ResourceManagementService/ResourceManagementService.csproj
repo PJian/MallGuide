@@ -57,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="converter\ImgConverter.cs" />
+    <Compile Include="converter\VisibilityConverter.cs" />
     <Compile Include="helper\FtpHelper.cs" />
     <Compile Include="helper\SocketHelper.cs" />
     <Compile Include="helper\ViedoUtil.cs" />

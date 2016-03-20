@@ -362,11 +362,11 @@ namespace EntityManagementService.nav
         /// <param name="map"></param>
         /// <param name="elevaterNum"></param>
         /// <returns></returns>
-        private static Point getElevaterPoint(Map map, int elevaterNum)
+        private static Point getElevaterPoint(Map map, string elevaterNum)
         {
             foreach(Obstacle o in map.Areas)
             {
-                if (o.Index == elevaterNum)
+                if (o.Index.Equals(elevaterNum))
                 {
                     return o.Door;
                 }

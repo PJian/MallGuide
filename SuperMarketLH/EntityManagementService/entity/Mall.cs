@@ -55,7 +55,7 @@ namespace EntityManagementService.entity
             if (!(obj is Mall))
                 return false;
             Mall m = (Mall)obj;
-            return this.Name.Equals(m.Name) && (
+            return m.Name!=null && this.Name.Equals(m.Name) && (
 
                 (this.MoviePath == null && m.MoviePath == null) ||
                 this.MoviePath.Equals(m.MoviePath)

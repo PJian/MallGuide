@@ -71,7 +71,6 @@ namespace SuperMarketLH.page.floor
 
                 this.allShops = SqlHelper.getAllShopByFloor(this.currentFloor);
                 this.dataGrid_shops.ItemsSource = this.allShops;
-
             }
         }
 
@@ -330,6 +329,7 @@ namespace SuperMarketLH.page.floor
 
         private void btn_bathroom_Click(object sender, RoutedEventArgs e)
         {
+
             this.currentFrameContentPage.userCtrlMapGrid.showCommonBuildingTips(ObstacleType.TOLITE);
         }
 
