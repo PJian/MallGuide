@@ -1,4 +1,5 @@
 ﻿using SerialNum;
+using SuperMarketLH.util;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -48,6 +49,7 @@ namespace SuperMarketLH.reg
                 RegisterTableMsg.registSoft = RegSoft;
                 CodeUtil.regist(code, success, failed);
             }
+
         }
 
         public void success()

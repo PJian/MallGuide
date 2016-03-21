@@ -1,5 +1,6 @@
 ﻿using EntityManagementService.entity;
 using EntityManageService.sqlUtil;
+using SuperMarketLH.util;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -41,11 +42,13 @@ namespace SuperMarketLH.page.activity
             else {
                 MessageBox.Show("请输入正确的手机号！");
             }
+            ClosedUtil.isAnyBodyTouched = true;
         }
 
         private void btn_cancle_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+            ClosedUtil.isAnyBodyTouched = true;
         }
 
     }

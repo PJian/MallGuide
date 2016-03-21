@@ -1,4 +1,5 @@
 ﻿using SuperMarketLH.uiEntity;
+using SuperMarketLH.util;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -72,6 +73,8 @@ namespace SuperMarketLH.usercontrl
                 this.transitionC_img.DataContext = transitioniItem;
                 loadImgCounter(CurrentShowImgIndex);
             }
+            ClosedUtil.isAnyBodyTouched = true;
+
         }
         /// <summary>
         /// 取得上一页
@@ -85,6 +88,7 @@ namespace SuperMarketLH.usercontrl
                 this.transitionC_img.DataContext = transitioniItem;
                 loadImgCounter(CurrentShowImgIndex);
             }
+            ClosedUtil.isAnyBodyTouched = true;
             //init();
         }
         /// <summary>

@@ -1,4 +1,5 @@
 ﻿using EntityManagementService.entity;
+using SuperMarketLH.util;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -48,11 +49,13 @@ namespace SuperMarketLH.usercontrl
         private void btn_nav_Click(object sender, RoutedEventArgs e)
         {
             Nav(this.CurrentShop);
+            ClosedUtil.isAnyBodyTouched = true;
         }
 
         private void btn_detail_Click(object sender, RoutedEventArgs e)
         {
             ShowDetailInfo(this.CurrentShop);
+            ClosedUtil.isAnyBodyTouched = true;
         }
 
     }

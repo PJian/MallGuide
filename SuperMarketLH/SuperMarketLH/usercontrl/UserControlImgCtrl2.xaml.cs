@@ -1,4 +1,5 @@
 ﻿using SuperMarketLH.uiEntity;
+using SuperMarketLH.util;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,6 +35,7 @@ namespace SuperMarketLH.usercontrl
         private void btn_pre_Click(object sender, RoutedEventArgs e)
         {
             this.surfaceListBoxContent.ScrollIntoView(getPre());
+            ClosedUtil.isAnyBodyTouched = true;
         }
         
         void init() {
@@ -61,6 +63,7 @@ namespace SuperMarketLH.usercontrl
         private void btn_next_Click(object sender, RoutedEventArgs e)
         {
             this.surfaceListBoxContent.ScrollIntoView(getNext());
+            ClosedUtil.isAnyBodyTouched = true;
         }
 
         private void surfaceListBoxContent_SelectionChanged(object sender, SelectionChangedEventArgs e)

@@ -1,5 +1,6 @@
 ﻿using EntityManagementService.entity;
 using EntityManageService.sqlUtil;
+using SuperMarketLH.util;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -54,6 +55,8 @@ namespace SuperMarketLH.page.activity
             if (this.currentSalePromotion != null) {
                 new WindowJoinSalePromotion(this.currentSalePromotion).ShowDialog();
             }
+
+            ClosedUtil.isAnyBodyTouched = true;
         }
 
         private void Page_Loaded_1(object sender, RoutedEventArgs e)
