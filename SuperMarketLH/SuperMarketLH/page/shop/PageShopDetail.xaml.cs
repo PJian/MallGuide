@@ -1,5 +1,6 @@
 ﻿using EntityManagementService.entity;
 using SuperMarketLH.usercontrl;
+using SuperMarketLH.util;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -54,6 +55,7 @@ namespace SuperMarketLH.page.shop
         private void btn_rtn_Click(object sender, RoutedEventArgs e)
         {
             rootWin.frame.GoBack();
+            ClosedUtil.isAnyBodyTouched = true;
         }
     }
 }

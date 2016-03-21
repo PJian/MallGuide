@@ -73,6 +73,7 @@ namespace SuperMarketLH.page.activity
             setCurrentSalePromotionByImgIndex();
             this.grid_jion.Visibility = Visibility.Visible;
 
+            ClosedUtil.isAnyBodyTouched = true;
 
             //if (this.currentSalePromotion != null)
             //{
@@ -150,6 +151,8 @@ namespace SuperMarketLH.page.activity
         {
             salePromotion = SqlHelper.getNormalSalePromotion();
             showActivityImgs();
+
+            ClosedUtil.isAnyBodyTouched = true;
         }
 
         /// <summary>
@@ -176,6 +179,8 @@ namespace SuperMarketLH.page.activity
         {
             salePromotion = SqlHelper.getMemberShipSalePromotion();
             showActivityImgs();
+
+            ClosedUtil.isAnyBodyTouched = true;
         }
 
         /// <summary>
@@ -196,6 +201,9 @@ namespace SuperMarketLH.page.activity
             {
                 MessageBox.Show("请输入正确的手机号！");
             }
+
+            ClosedUtil.isAnyBodyTouched = true;
+
         }
         public bool validateMobileNum()
         {
@@ -206,6 +214,9 @@ namespace SuperMarketLH.page.activity
         {
             endTabTip();
             this.grid_jion.Visibility = Visibility.Collapsed;
+
+            ClosedUtil.isAnyBodyTouched = true;
+
         }
 
         private void text_phoneNumber_GotFocus(object sender, RoutedEventArgs e)

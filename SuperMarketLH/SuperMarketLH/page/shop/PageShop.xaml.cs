@@ -40,6 +40,7 @@ namespace SuperMarketLH.page.shop
         private void btn_movieCity_Click(object sender, RoutedEventArgs e)
         {
             navigateTo(WinUtil.FRAME_SHOP_MOVIE);
+            ClosedUtil.isAnyBodyTouched = true;
 
         }
         private void init() {
@@ -77,6 +78,8 @@ namespace SuperMarketLH.page.shop
                 Source = page
             };
             this.transitionShop.DataContext = transitioniItem;
+
+            ClosedUtil.isAnyBodyTouched = true;
         }
 
         private void btn_canyin_Click(object sender, RoutedEventArgs e)

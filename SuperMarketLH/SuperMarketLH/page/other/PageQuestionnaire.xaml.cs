@@ -1,6 +1,7 @@
 ﻿using EntityManagementService.entity;
 using EntityManageService.sqlUtil;
 using SuperMarketLH.uiEntity;
+using SuperMarketLH.util;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -98,11 +99,13 @@ namespace SuperMarketLH.page.other
         private void btn_next_Click(object sender, RoutedEventArgs e)
         {
             nextQuestion();
+            ClosedUtil.isAnyBodyTouched = true;
         }
 
         private void btn_done_Click(object sender, RoutedEventArgs e)
         {
             saveAnswer();
+            ClosedUtil.isAnyBodyTouched = true;
         }
 
         private void saveAnswer() {
@@ -136,26 +139,31 @@ namespace SuperMarketLH.page.other
         private void btn_choiceA_Checked(object sender, RoutedEventArgs e)
         {
             answerIndex = 1;
+            ClosedUtil.isAnyBodyTouched = true;
         }
 
         private void btn_choiceB_Checked(object sender, RoutedEventArgs e)
         {
             answerIndex = 2;
+            ClosedUtil.isAnyBodyTouched = true;
         }
 
         private void btn_choiceC_Checked(object sender, RoutedEventArgs e)
         {
             answerIndex = 3;
+            ClosedUtil.isAnyBodyTouched = true;
         }
 
         private void btn_choiceD_Checked(object sender, RoutedEventArgs e)
         {
             answerIndex = 4;
+            ClosedUtil.isAnyBodyTouched = true;
         }
 
         private void btn_choiceE_Checked(object sender, RoutedEventArgs e)
         {
             answerIndex = 5;
+            ClosedUtil.isAnyBodyTouched = true;
         }
     }
 }

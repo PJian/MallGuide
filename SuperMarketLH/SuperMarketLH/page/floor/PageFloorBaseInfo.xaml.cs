@@ -2,6 +2,7 @@
 using EntityManageService.sqlUtil;
 using SuperMarketLH.page.shop;
 using SuperMarketLH.uiEntity;
+using SuperMarketLH.util;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -126,7 +127,8 @@ namespace SuperMarketLH.page.floor
                 this.currentFrameContentPage.drawMachineDone();
                 this.btn_saveMachine.Visibility = Visibility.Collapsed;
             }
-          
+
+            ClosedUtil.isAnyBodyTouched = true;
         }
 
         private void dataGrid_shops_SelectionChanged(object sender, SelectionChangedEventArgs e)
