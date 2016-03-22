@@ -301,38 +301,64 @@ namespace SuperMarketLH.page.floor
 
         private void btn_elevator_handle_Click(object sender, RoutedEventArgs e)
         {
-            this.currentFrameContentPage.userCtrlMapGrid.showCommonBuildingTips(ObstacleType.ESCALATOR);
+            if (this.currentFrameContentPage != null) {
+                this.currentFrameContentPage.userCtrlMapGrid.showCommonBuildingTips(ObstacleType.ESCALATOR);
+            }
+            
         }
 
         private void btn_elevator_Click(object sender, RoutedEventArgs e)
         {
-            this.currentFrameContentPage.userCtrlMapGrid.showCommonBuildingTips(ObstacleType.ELEVATOR);
+            if (this.currentFrameContentPage != null)
+            {
+                this.currentFrameContentPage.userCtrlMapGrid.showCommonBuildingTips(ObstacleType.ELEVATOR);
+            }
+            
         }
 
         private void btn_service_Click(object sender, RoutedEventArgs e)
         {
-            this.currentFrameContentPage.userCtrlMapGrid.showCommonBuildingTips(ObstacleType.SERVICE);
+            if (this.currentFrameContentPage != null)
+            {
+                this.currentFrameContentPage.userCtrlMapGrid.showCommonBuildingTips(ObstacleType.SERVICE);
+            }
+            
         }
 
         private void btn_pay_Click(object sender, RoutedEventArgs e)
         {
-            this.currentFrameContentPage.userCtrlMapGrid.showCommonBuildingTips(ObstacleType.CHECKSTAND);
+            if (this.currentFrameContentPage != null)
+            {
+                this.currentFrameContentPage.userCtrlMapGrid.showCommonBuildingTips(ObstacleType.CHECKSTAND);
+            }
+           
         }
 
         private void btn_smoke_Click(object sender, RoutedEventArgs e)
         {
-            this.currentFrameContentPage.userCtrlMapGrid.showCommonBuildingTips(ObstacleType.SMOKING_ROOM);
+            if (this.currentFrameContentPage != null)
+            {
+                this.currentFrameContentPage.userCtrlMapGrid.showCommonBuildingTips(ObstacleType.SMOKING_ROOM);
+            }
+           
         }
 
         private void btn_baby_Click(object sender, RoutedEventArgs e)
         {
-            this.currentFrameContentPage.userCtrlMapGrid.showCommonBuildingTips(ObstacleType.BABY_ROOM);
+            if (this.currentFrameContentPage != null)
+            {
+                this.currentFrameContentPage.userCtrlMapGrid.showCommonBuildingTips(ObstacleType.BABY_ROOM);
+            }
+            
         }
 
         private void btn_bathroom_Click(object sender, RoutedEventArgs e)
         {
-
-            this.currentFrameContentPage.userCtrlMapGrid.showCommonBuildingTips(ObstacleType.TOLITE);
+            if (this.currentFrameContentPage != null)
+            {
+                this.currentFrameContentPage.userCtrlMapGrid.showCommonBuildingTips(ObstacleType.TOLITE);
+            }
+           
         }
 
     }
