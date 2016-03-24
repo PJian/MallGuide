@@ -16,6 +16,8 @@ namespace SuperMarketLH.util
 {
     public class CanvasUtil
     {
+
+        public static Boolean isShowTwoFloors = false;//表示是否显示了两成地图
         public static int MAP_CANVAS_GRID_PIX_DIF = 4;
 
         private static int MACHINE_COL_SPAN = 4;

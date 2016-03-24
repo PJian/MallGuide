@@ -46,6 +46,7 @@ namespace SuperMarketLH.page.shop
         private void init() {
             transitioniItem = new TransitionItem();
             transitioniItem.ItemTransition = TransitioinUtil.getFadeTransition();
+            navigateTo(WinUtil.FRAME_SHOP_ALL);
            
         }
 
@@ -63,6 +64,7 @@ namespace SuperMarketLH.page.shop
             transitioniItem.ItemTransition = TransitioinUtil.getFadeTransition();
             Page page = null;
             switch (index) {
+                case WinUtil.FRAME_SHOP_ALL: page = new PageShopList(this); break;
                 case WinUtil.FRAME_SHOP_MOVIE: page = new PageShopMovie(); break;
                 case WinUtil.FRAME_SHOP_CAN_YIN: page = new PageShopList(SqlHelper.getCatagoryByName("餐饮"),this); break;
                 case WinUtil.FRAME_SHOP_SHOPPING: page = new PageShopList(SqlHelper.getCatagoryByName("购物"), this); break;

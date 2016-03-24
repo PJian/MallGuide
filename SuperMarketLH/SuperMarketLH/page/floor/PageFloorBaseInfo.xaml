@@ -10,7 +10,7 @@
     <Page.Resources>
         <DataTemplate x:Key="frameTemplate">
             <Grid>
-                <Frame Content="{Binding Source}"  NavigationUIVisibility="Hidden" Width="1330" Height="595" />
+                <Frame Content="{Binding Source}"  NavigationUIVisibility="Hidden" Width="1330" Height="595" ContentRendered="Frame_ContentRendered" />
             </Grid>
         </DataTemplate>
 
@@ -32,9 +32,10 @@
             <RowDefinition Height="625*"></RowDefinition>
         </Grid.RowDefinitions>
         <!--楼层按钮-->
-        <ListBox x:Name="listbox_allFloors" VerticalAlignment="Top" Grid.Column="1" Grid.Row="1" Grid.RowSpan="3" Background="Transparent" BorderThickness="0"  SelectionChanged="listbox_allFloors_SelectionChanged" ItemContainerStyle="{DynamicResource styledListFloorBtn}">
+        <ListBox x:Name="listbox_allFloors" VerticalAlignment="Top" Grid.Column="1" Grid.Row="1" Grid.RowSpan="3" Background="Transparent" BorderThickness="0"  ItemContainerStyle="{DynamicResource styledListFloorBtn}">
         </ListBox>
-
+        <ListBox x:Name="listbox_allFloors1" VerticalAlignment="Top" Grid.Column="1" Grid.Row="1" Grid.RowSpan="3" Background="Transparent" BorderThickness="0" SelectionChanged="listbox_allFloors1_SelectionChanged" ItemContainerStyle="{DynamicResource styledListFloorBtn1}" >
+        </ListBox>
         <!--楼层图片-->
         <telerik:RadTransitionControl BorderThickness="2"  x:Name="transitionFloor"  Grid.Column="3" Grid.Row="3" Content="{Binding FrameNavigatePage}" ContentTemplate="{StaticResource frameTemplate}" HorizontalAlignment="Center" VerticalAlignment="Center" Transition="{Binding ItemTransition}"  />
         <!--楼层商铺-->

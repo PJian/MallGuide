@@ -24,6 +24,16 @@ namespace SuperMarketLH.page.shop
         private List<Shop> allShops;
         private Catagory currentCatagory;
         private PageShop parent;
+
+
+        public PageShopList(PageShop parent)
+        {
+            InitializeComponent();
+            this.currentCatagory = null;
+            this.parent = parent;
+        }
+
+
         public PageShopList(Catagory currentCatagory, PageShop parent)
         {
             InitializeComponent();
@@ -32,7 +42,14 @@ namespace SuperMarketLH.page.shop
         }
         private void init()
         {
-            allShops = SqlHelper.getShopByCatagory(this.currentCatagory);
+            if (this.currentCatagory != null)
+            {
+                allShops = SqlHelper.getShopByCatagory(this.currentCatagory);
+            }
+            else {
+                allShops = SqlHelper.getAllShop();
+            }
+          
             //如果店铺只有一个并且该店铺类型还是主推店铺，则显示店铺广告图片
             if (allShops.Count == 1 && allShops.ElementAt(0).Type == ConstantData.SHOP_TYPE_SPECIAL)
             {

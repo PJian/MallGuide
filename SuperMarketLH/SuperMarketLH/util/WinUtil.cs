@@ -61,7 +61,7 @@ namespace SuperMarketLH.util
         public const int FRAME_SHOP_KTV = 6;
         public const int FRAME_SHOP_JIANSHENG = 7;
         public const int FRAME_SHOP_MOVIE = 8;
-
+        public const int FRAME_SHOP_ALL = -1;//显示全部的商铺
 
 
 

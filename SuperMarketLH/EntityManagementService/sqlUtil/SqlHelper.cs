@@ -293,7 +293,6 @@ namespace EntityManageService.sqlUtil
                 };
             }
             return null;
-
         }
 
         /// <summary>
@@ -406,7 +405,8 @@ namespace EntityManageService.sqlUtil
                     Name = dt.Rows[0]["name"].ToString(),
                     Index = int.Parse(dt.Rows[0]["indexFloor"].ToString()),
                     Label = dt.Rows[0]["label"].ToString(),
-                    Map = dt.Rows[0]["map"].ToString()
+                    Map = dt.Rows[0]["map"].ToString(),
+                    Img = dt.Rows[0]["bg"].ToString()
                 };
             }
 

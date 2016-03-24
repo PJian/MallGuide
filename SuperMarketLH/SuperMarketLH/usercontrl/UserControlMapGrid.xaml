@@ -16,7 +16,7 @@
             <my:ScatterView Height="364"  Width="724"  Background="Transparent" >
                 <my:ScatterViewItem Height="364" Width="724" Orientation="0" Center="362,182" Background="Transparent" Style="{DynamicResource ScatterViewItemStyle1}">
                     <Border Grid.Column="0" Grid.Row="0" BorderBrush="White" BorderThickness="0" Height="364"  Width="724">
-                        <Grid Margin="2" MouseLeftButtonDown="Grid_MouseLeftButtonDown_1" x:Name="grid_info"  >
+                        <Grid Margin="2" MouseLeftButtonDown="Grid_MouseLeftButtonDown_1"  x:Name="grid_info" TouchDown="grid_info_TouchDown"  >
                             <!--180 列-->
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="1*"></ColumnDefinition>

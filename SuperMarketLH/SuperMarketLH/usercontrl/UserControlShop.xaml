@@ -37,25 +37,25 @@
 
             <Image Source="{Binding Logo,Converter={StaticResource rsmImgConverter}}" Grid.Column="2" Grid.Row="1" Grid.RowSpan="4"></Image>
             <StackPanel Grid.Column="4" Grid.Row="1" Orientation="Horizontal">
-                <Label Content="店铺名称：" FontSize="20" Foreground="White" VerticalAlignment="Center"></Label>
-                <Label Content="{Binding Name}" FontSize="20" Foreground="White" VerticalAlignment="Center"></Label>
+                <Label Content="店铺名称：" FontSize="20"  Foreground="#6d6565"  VerticalAlignment="Center"></Label>
+                <Label Content="{Binding Name}" FontSize="20"  Foreground="#6d6565"  VerticalAlignment="Center"></Label>
             </StackPanel>
             <StackPanel Grid.Column="4" Grid.Row="2" Orientation="Horizontal">
-                <Label Content="店铺位置：" FontSize="20" Foreground="White" VerticalAlignment="Center"></Label>
-                <Label Content="{Binding Floor.Name}" FontSize="20" Foreground="White" VerticalAlignment="Center"></Label>
-                <Label Content="-" FontSize="20" Foreground="White" VerticalAlignment="Center"></Label>
-                <Label Content="{Binding Index}" FontSize="20" Foreground="White" VerticalAlignment="Center"></Label>
+                <Label Content="店铺位置：" FontSize="20"  Foreground="#6d6565"  VerticalAlignment="Center"></Label>
+                <Label Content="{Binding Floor.Name}" FontSize="20"  Foreground="#6d6565"  VerticalAlignment="Center"></Label>
+                <Label Content="-" FontSize="20"  Foreground="#6d6565"  VerticalAlignment="Center"></Label>
+                <Label Content="{Binding Index}" FontSize="20"  Foreground="#6d6565"  VerticalAlignment="Center"></Label>
             </StackPanel>
             <StackPanel Grid.Column="4" Grid.Row="3" Orientation="Horizontal">
-                <Label Content="类别：" FontSize="20" Foreground="White" VerticalAlignment="Center"></Label>
-                <Label Content="{Binding CatagoryName.Name}" FontSize="20" Foreground="White" VerticalAlignment="Center"></Label>
+                <Label Content="类别：" FontSize="20"  Foreground="#6d6565"  VerticalAlignment="Center"></Label>
+                <Label Content="{Binding CatagoryName.Name}" FontSize="20"  Foreground="#6d6565"  VerticalAlignment="Center"></Label>
             </StackPanel>
             <StackPanel Grid.Column="4" Grid.Row="4" Orientation="Horizontal">
-                <Label Content="联系电话：" FontSize="20" Foreground="White" VerticalAlignment="Center"></Label>
-                <Label Content="{Binding Tel}" FontSize="20" Foreground="White" VerticalAlignment="Center"></Label>
+                <Label Content="联系电话：" FontSize="20"  Foreground="#6d6565"  VerticalAlignment="Center"></Label>
+                <Label Content="{Binding Tel}" FontSize="20"  Foreground="#6d6565"  VerticalAlignment="Center"></Label>
             </StackPanel>
             <!--<TextBlock Text="{Binding Introduction}" Grid.Column="2" Grid.Row="6" Grid.ColumnSpan="3"></TextBlock>-->
-            <my:SurfaceTextBox  Text="{Binding Introduction}" Grid.Column="2" Grid.Row="6" Grid.ColumnSpan="3" Background="Transparent" BorderThickness="0" IsReadOnly="True" TextWrapping="WrapWithOverflow"/>
+            <my:SurfaceTextBox  Text="{Binding Introduction}" Foreground="#6d6565" Grid.Column="2" Grid.Row="6" Grid.ColumnSpan="3" Background="Transparent" BorderThickness="0" IsReadOnly="True" TextWrapping="WrapWithOverflow"/>
             <Grid x:Name="grid_brandImage" Grid.Column="5"  Grid.Row="1" Grid.RowSpan="8">
                
             </Grid>
