@@ -1,4 +1,5 @@
 ﻿using EntityManagementService.entity;
+using EntityManagementService.sqlUtil;
 using EntityManageService.sqlUtil;
 using SuperMarketLH.uiEntity;
 using SuperMarketLH.util;
@@ -109,7 +110,6 @@ namespace SuperMarketLH.page.other
         }
 
         private void saveAnswer() {
-
             if (this.answerIndex <= 0)
             {
                 MessageBox.Show("请选择您的答案！");
@@ -117,8 +117,8 @@ namespace SuperMarketLH.page.other
             }
             if (this.currentIndex < this.allQuestion.Count - 1)
             {
-               
                 //提前交卷的
+                MessageBox.Show("您还有题目未完成！");
             }
             if (this.answerIndex != 0)
             {
@@ -127,6 +127,8 @@ namespace SuperMarketLH.page.other
             foreach (Question q in this.allQuestion)
             {
                 SqlHelper.setQuestionCount(q);
+                //将答案提交到数据库
+                SqlHelperDB.setQuestionCount(q);
             }
             questionGrid.Visibility = Visibility.Collapsed;
             questionDone.Visibility = Visibility.Visible;
