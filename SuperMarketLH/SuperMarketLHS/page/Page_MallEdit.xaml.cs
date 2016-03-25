@@ -37,7 +37,7 @@ namespace SuperMarketLHS.page
         private void showBaseInfo() {
             frame.Navigate(new PageBaseInfo(parent));
             label_location.Content = "商场简介 > 基本信息";
-            WinUtil.chengToSelectBtn(this.btn_editBaseInfo, FindResource("leftNavBtnSelectStyle") as Style, new Button[] { this.btn_editHotelInfo, this.btn_editShopMallInfo }.ToList(), FindResource("leftNavBtnStyle") as Style);
+            WinUtil.chengToSelectBtn(this.btn_editBaseInfo, FindResource("leftNavBtnSelectStyle") as Style, new Button[] { this.btn_editHotelInfo, this.btn_editShopMallInfo, btn_editGlobalProjectInfo }.ToList(), FindResource("leftNavBtnStyle") as Style);
    
         }
 
@@ -50,7 +50,7 @@ namespace SuperMarketLHS.page
         {
             frame.Navigate(new PageHotelEdit(parent));
             label_location.Content = "商场简介 > 酒店信息";
-            WinUtil.chengToSelectBtn(this.btn_editHotelInfo, FindResource("leftNavBtnSelectStyle") as Style, new Button[] { this.btn_editBaseInfo, this.btn_editShopMallInfo }.ToList(), FindResource("leftNavBtnStyle") as Style);
+            WinUtil.chengToSelectBtn(this.btn_editHotelInfo, FindResource("leftNavBtnSelectStyle") as Style, new Button[] { this.btn_editBaseInfo, this.btn_editShopMallInfo, btn_editGlobalProjectInfo }.ToList(), FindResource("leftNavBtnStyle") as Style);
    
         }
 
@@ -58,7 +58,15 @@ namespace SuperMarketLHS.page
         {
             frame.Navigate(new PageShopMall(parent));
             label_location.Content = "商场简介 > 购物中心信息";
-            WinUtil.chengToSelectBtn(this.btn_editShopMallInfo, FindResource("leftNavBtnSelectStyle") as Style, new Button[] { this.btn_editBaseInfo, this.btn_editHotelInfo }.ToList(), FindResource("leftNavBtnStyle") as Style);
+            WinUtil.chengToSelectBtn(this.btn_editShopMallInfo, FindResource("leftNavBtnSelectStyle") as Style, new Button[] { this.btn_editBaseInfo, this.btn_editHotelInfo, btn_editGlobalProjectInfo }.ToList(), FindResource("leftNavBtnStyle") as Style);
+        }
+
+        private void btn_editGlobalProjectInfo_Click(object sender, RoutedEventArgs e)
+        {
+            frame.Navigate(new PageGlobalProjectInfo(parent));
+            label_location.Content = "商场简介 > 全国项目简介";
+            WinUtil.chengToSelectBtn(this.btn_editGlobalProjectInfo, FindResource("leftNavBtnSelectStyle") as Style, new Button[] { this.btn_editBaseInfo, this.btn_editHotelInfo, btn_editShopMallInfo }.ToList(), FindResource("leftNavBtnStyle") as Style);
+     
         }
 
     }

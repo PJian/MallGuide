@@ -35,7 +35,10 @@ namespace SuperMarketLH.page.other
         private void init()
         {
             this.imageAdResource = SqlHelper.getImageAdResourceByType(ConstantData.IMAGE_AD_RESOURCE_TYPE_FIRE_EMERGENCE);
-            this.userContrl_imgs.Imgs = imageAdResource.Imgs;
+            if (this.imageAdResource != null) {
+                this.userContrl_imgs.Imgs = imageAdResource.Imgs;
+            }
+            
         }
         private void Page_Loaded_1(object sender, RoutedEventArgs e)
         {

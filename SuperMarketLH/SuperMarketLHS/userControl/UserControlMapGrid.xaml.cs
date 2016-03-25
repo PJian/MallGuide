@@ -284,7 +284,7 @@ namespace SuperMarketLHS.userControl
                     }
                     o.Shop.Door = new Point(0,0);
                     o.Shop.Floor = null;
-                    o.Shop.Index = -1;
+                    o.Shop.Index = "";
                     SqlHelper.updateShop(o.Shop);//更新原有的商铺
                     o.Shop = this.CurrentShop;
                     this.CurrentShop.Index = o.Index;
@@ -500,14 +500,14 @@ namespace SuperMarketLHS.userControl
 
         /// <summary>
         /// 验证楼层编号
+        /// 每层中每个区域的编号必须唯一
         /// </summary>
         /// <returns></returns>
         private bool setAndValidateObstacleIndex(string str)
         {
-            if ((this.CurrentEditObstacle.Type.Equals(ObstacleType.ELEVATOR) && this.CurrentEditObstacle.Index <= 0) ||
-                (this.CurrentEditObstacle.Type.Equals(ObstacleType.ESCALATOR) && this.CurrentEditObstacle.Index <= 0) ||
-                (this.CurrentEditObstacle.Type.Equals(ObstacleType.STAIRS) && this.CurrentEditObstacle.Index <= 0)
-                )
+            if (( this.CurrentEditObstacle.Index==null || "".Equals(this.CurrentEditObstacle.Index) )&&(this.CurrentEditObstacle.Type.Equals(ObstacleType.ELEVATOR) ||
+                this.CurrentEditObstacle.Type.Equals(ObstacleType.ESCALATOR) ||
+                this.CurrentEditObstacle.Type.Equals(ObstacleType.STAIRS) ))
             {
                 if (str != null)
                 {
@@ -521,9 +521,13 @@ namespace SuperMarketLHS.userControl
                         }
                         else
                         {
-                            this.currentEditObstacle.Index = rtn;//设置编号
+                            this.currentEditObstacle.Index = str;//设置编号
                             return true;
                         }
+                    }
+                    else {
+                        MessageBox.Show("电梯编号应该为数字！");
+                        return false;
                     }
 
                 }
@@ -534,20 +538,21 @@ namespace SuperMarketLHS.userControl
                 if (str != null)
                 {
                     int rtn = 0;
-                    if (int.TryParse(str, out rtn))
-                    {
-                        if (rtn <= 0)
+                    //查看编号是否已经存在，当前楼层
+                    if (this.CurrentEditMap.Areas != null) {
+                        List<Obstacle> os = this.CurrentEditMap.Areas;
+                        foreach (Obstacle o in os)
                         {
-                            MessageBox.Show("编号必须大于0！");
-                            return false;
-                        }
-                        else
-                        {
-                            this.currentEditObstacle.Index = rtn;//设置编号
-                            return true;
+                            if (o.Index != null && o.Index.Equals(str))
+                            {
+                                MessageBox.Show("编号已经存在，请重新输入！");
+                                return false;
+                            }
                         }
                     }
-
+                   
+                    this.currentEditObstacle.Index = str;//设置编号
+                    return true;
                 }
                 MessageBox.Show("请填区域编号");
                 return false;
@@ -805,6 +810,7 @@ namespace SuperMarketLHS.userControl
         public void delObstacle(Obstacle o)
         {
             if (o == null) return;
+           
             //绘画列表中删去
             removeObstacle(o, this.CurrentEditMap.Areas);
             removeObstacle(o, this.allEditTempObstacle);
@@ -816,6 +822,15 @@ namespace SuperMarketLHS.userControl
             //地图中删去
            // fillMapState(this.mapValue, o, -1);
             drawCanvas();
+            //更新关联的商铺
+            if (o.Shop != null)
+            {
+                o.Shop.Door = new Point(0, 0);
+                o.Shop.Floor = null;
+                o.Shop.Index = "";
+                SqlHelper.updateShop(o.Shop);//更新原有的商铺
+            }
+
           //  draw_state = CavasUtil.DRAW_STATE_DRAWING_AREA;
         }
         /// <summary>

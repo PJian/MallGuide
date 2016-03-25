@@ -8,6 +8,8 @@ namespace EntityManagementService.entity
 {
    public class Question 
     {
+
+       
        public int Id { get; set; }
        public String Content { get; set; }//题干
        public String ChoiceA { get; set; }//只有五个选项

@@ -63,8 +63,8 @@ namespace SuperMarketLH.usercontrl
             }
             timer = new DispatcherTimer();
             timer.Tick += changeShowImgTimer_Tick;
-            //timer.Interval = TimeSpan.FromSeconds(5);
-            timer.Interval = TimeSpan.FromMinutes(5);
+            timer.Interval = TimeSpan.FromSeconds(30);
+            // timer.Interval = TimeSpan.FromMinutes(5);
             timer.IsEnabled = true;
             getTrangsitioniItem();
 
@@ -81,7 +81,8 @@ namespace SuperMarketLH.usercontrl
             {
                 currentSelectIndex = ++currentSelectIndex % this.imgPathes.Length;
                 transitioniItem.Img = new ImageObject() { ImgPath = imgPathes[this.currentSelectIndex] };
-                transitioniItem.ItemTransition = TransitioinUtil.getNewTransition();
+                /// transitioniItem.ItemTransition = TransitioinUtil.getNewTransition();
+                transitioniItem.ItemTransition = TransitioinUtil.getFadeTransition();
                 this.transitionC_img.DataContext = transitioniItem;
                // loadImgCounter(currentSelectIndex);
             }

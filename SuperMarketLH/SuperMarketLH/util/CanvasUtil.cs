@@ -16,12 +16,17 @@ namespace SuperMarketLH.util
 {
     public class CanvasUtil
     {
+
+        public static Boolean isShowTwoFloors = false;//表示是否显示了两成地图
         public static int MAP_CANVAS_GRID_PIX_DIF = 4;
 
         private static int MACHINE_COL_SPAN = 4;
         private static int MACHINE_ROW_SPAN = 4;
         private static int SHOP_INFO_TIPS_COL_SPAN = 20;
         private static int SHOP_INFO_TIPS_ROW_SPAN = 20;
+
+        private static int COMMON_INFO_TIPS_COL_SPAN = 8;
+        private static int COMMON_INFO_TIPS_ROW_SPAN = 8;
 
         private static int ELLIPSE_ROAD_WIDTH = 2;
         private static int ELLIPSE_ROAD_HEIGHT = 2;
@@ -169,6 +174,25 @@ namespace SuperMarketLH.util
                 }
             }
         }
+        /// <summary>
+        /// 绘制出公共建筑
+        /// </summary>
+        /// <param name="g"></param>
+        /// <param name="o"></param>
+        public static void drawCommonBuildingTips(Grid g,Obstacle o) {
+          
+            UserControlForCommonBuildings tips = new UserControlForCommonBuildings();
+            g.Children.Add(tips);
+            Point p = getMiddlePointOfArea(o);
+            int initialCalOfGrid = getColOfGridByPoint(p);
+            int initialRowOfGrid = getRowOfGridByPoint(p);
+
+            Grid.SetColumn(tips, initialCalOfGrid - COMMON_INFO_TIPS_COL_SPAN / 2 <= 0 ? 0 : initialCalOfGrid - COMMON_INFO_TIPS_COL_SPAN / 2);
+            Grid.SetRow(tips, initialRowOfGrid - COMMON_INFO_TIPS_ROW_SPAN / 2 <= 0 ? 0 : initialRowOfGrid - COMMON_INFO_TIPS_ROW_SPAN / 2);
+            Grid.SetColumnSpan(tips, COMMON_INFO_TIPS_COL_SPAN);
+            Grid.SetRowSpan(tips, COMMON_INFO_TIPS_ROW_SPAN);
+        }
+
 
         /// <summary>
         /// 取得一块区域的中心点

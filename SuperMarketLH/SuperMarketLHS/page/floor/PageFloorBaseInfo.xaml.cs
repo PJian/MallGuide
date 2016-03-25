@@ -46,6 +46,7 @@ namespace SuperMarketLHS.page.floor
         }
         private void showFloorInfo()
         {
+            this.grid_allInfo.DataContext = null;
             this.grid_allInfo.DataContext = this.currentEditFloor;
             //显示图片
             if (this.currentEditFloor.Img != null && !this.currentEditFloor.Img.Equals(""))

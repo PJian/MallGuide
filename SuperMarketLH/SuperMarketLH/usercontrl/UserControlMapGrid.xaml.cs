@@ -142,34 +142,8 @@ namespace SuperMarketLH.usercontrl
 
         private void Grid_MouseLeftButtonDown_1(object sender, MouseButtonEventArgs e)
         {
-            if (this.isDrawMahine)
-            {
-                Point p = e.GetPosition(this.grid_info);
-                Point gridLocation = new Point(CanvasUtil.getColOfGridByPoint(p), CanvasUtil.getRowOfGridByPoint(p));
-                if (MapUtil.getClickArea(p, this.CurrentEditMap.Areas) == null && MapUtil.getClickArea(gridLocation, this.CurrentEditMap.Areas) == null)
-                {
-                    drawMap();
-                    this.MachineLoaction = gridLocation;
-                    CanvasUtil.drawMachine(this.grid_info, (int)this.machineLoaction.Y, (int)this.machineLoaction.X);
-                }
-                else
-                {
-                    MessageBox.Show("不能放在物体上！请重画");
-                    return;
-                }
-
-            }
-            else
-            {
-                if (this.CurrentEditMap == null) return;
-                Obstacle clickObstacle = MapUtil.getClickArea(e.GetPosition(this.grid_info), this.CurrentEditMap.Areas);
-                if (clickObstacle != null)
-                {
-                    drawMap();
-                    CanvasUtil.drawShopTips(this.grid_info, clickObstacle, navToShop, showShopDetail);
-                }
-
-            }
+            Point p = e.GetPosition(this.grid_info);
+            mapClick(p);
         }
 
 
@@ -181,6 +155,7 @@ namespace SuperMarketLH.usercontrl
             //清除之前的内容
             //this.grid_info.Children.RemoveRange(2, this.grid_info.Children.Count - 2);
             drawMap();
+            
             CanvasUtil.drawShopTips(this.grid_info, this.CurrentEditMap, shop, navToShop, showShopDetail);
         }
 
@@ -247,10 +222,11 @@ namespace SuperMarketLH.usercontrl
             {
                 drawMap();
                 CanvasUtil.drawRoad(new Grid[]{this.grid_info}, new List<Node>[]{roadNodes});
+                CanvasUtil.isShowTwoFloors = false;
             }
             else
             {
-
+                CanvasUtil.isShowTwoFloors = true;
                 RootPage.navigateTo(new PageFloorNavTwoFloor(RootPage)
                 {
                     CurrentMachine = this.CurrentMachine,
@@ -288,19 +264,58 @@ namespace SuperMarketLH.usercontrl
         public void showCommonBuildingTips(string buildingType)
         {
             if (this.CurrentEditMap == null || this.CurrentEditMap.Areas == null || this.CurrentEditMap.Areas.Count <= 0) return;
+            drawMap();
             //判断地图上有没有对应的建筑
             foreach (Obstacle item in this.CurrentEditMap.Areas)
             {
+
                 if (item.Type.Equals(buildingType)) {
-                    drawMap();
-                    CanvasUtil.drawShopTips(this.grid_info, item, navToShop, showShopDetail);
-                    break;
+                  
+                    //CanvasUtil.drawShopTips(this.grid_info, item, navToShop, showShopDetail);
+                    CanvasUtil.drawCommonBuildingTips(this.grid_info, item);
+                    //break;
                 }
             }
 
         }
 
-       
+        private void grid_info_TouchDown(object sender, TouchEventArgs e)
+        {
+            Point p = e.GetTouchPoint(this.grid_info).Position;
+            mapClick(p);
+        }
+
+
+        private void mapClick(Point p) {
+            if (this.isDrawMahine)
+            {
+                //Point p = e.GetPosition(this.grid_info);
+                Point gridLocation = new Point(CanvasUtil.getColOfGridByPoint(p), CanvasUtil.getRowOfGridByPoint(p));
+                if (MapUtil.getClickArea(p, this.CurrentEditMap.Areas) == null && MapUtil.getClickArea(gridLocation, this.CurrentEditMap.Areas) == null)
+                {
+                    drawMap();
+                    this.MachineLoaction = gridLocation;
+                    CanvasUtil.drawMachine(this.grid_info, (int)this.machineLoaction.Y, (int)this.machineLoaction.X);
+                }
+                else
+                {
+                    MessageBox.Show("不能放在物体上！请重画");
+                    return;
+                }
+
+            }
+            else
+            {
+                if (this.CurrentEditMap == null) return;
+                Obstacle clickObstacle = MapUtil.getClickArea(p, this.CurrentEditMap.Areas);
+                if (clickObstacle != null)
+                {
+                    drawMap();
+                    CanvasUtil.drawShopTips(this.grid_info, clickObstacle, navToShop, showShopDetail);
+                }
+
+            }
+        }
 
        
 

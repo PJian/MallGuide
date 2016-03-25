@@ -159,6 +159,9 @@
     <Compile Include="usercontrl\LoadingWait.xaml.cs">
       <DependentUpon>LoadingWait.xaml</DependentUpon>
     </Compile>
+    <Compile Include="usercontrl\UserControlForCommonBuildings.xaml.cs">
+      <DependentUpon>UserControlForCommonBuildings.xaml</DependentUpon>
+    </Compile>
     <Compile Include="usercontrl\UserControlGps.xaml.cs">
       <DependentUpon>UserControlGps.xaml</DependentUpon>
     </Compile>
@@ -316,6 +319,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="usercontrl\LoadingWait.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="usercontrl\UserControlForCommonBuildings.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

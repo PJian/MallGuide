@@ -139,15 +139,11 @@ namespace SuperMarketLH.usercontrl
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-
-
-
-
-        private void Grid_MouseLeftButtonDown_1(object sender, MouseButtonEventArgs e)
+        private void mapClick(Point p)
         {
             if (this.isDrawMahine)
             {
-                Point p = e.GetPosition(this.grid_info);
+                //Point p = e.GetPosition(this.grid_info);
                 Point gridLocation = new Point(CanvasUtil.getColOfGridByPoint(p), CanvasUtil.getRowOfGridByPoint(p));
                 if (MapUtil.getClickArea(p, this.CurrentEditMap.Areas) == null && MapUtil.getClickArea(gridLocation, this.CurrentEditMap.Areas) == null)
                 {
@@ -161,12 +157,11 @@ namespace SuperMarketLH.usercontrl
                     return;
                 }
 
-
             }
             else
             {
                 if (this.CurrentEditMap == null) return;
-                Obstacle clickObstacle = MapUtil.getClickArea(e.GetPosition(this.grid_info), this.CurrentEditMap.Areas);
+                Obstacle clickObstacle = MapUtil.getClickArea(p, this.CurrentEditMap.Areas);
                 if (clickObstacle != null)
                 {
                     drawMap();
@@ -174,6 +169,14 @@ namespace SuperMarketLH.usercontrl
                 }
 
             }
+        }
+
+
+
+        private void Grid_MouseLeftButtonDown_1(object sender, MouseButtonEventArgs e)
+        {
+            Point p = e.GetPosition(this.grid_info);
+            mapClick(p);
         }
 
 
@@ -300,6 +303,12 @@ namespace SuperMarketLH.usercontrl
                 }
             }
 
+        }
+
+        private void grid_info_TouchDown(object sender, TouchEventArgs e)
+        {
+            Point p = e.GetTouchPoint(this.grid_info).Position;
+            mapClick(p);
         }
 
       

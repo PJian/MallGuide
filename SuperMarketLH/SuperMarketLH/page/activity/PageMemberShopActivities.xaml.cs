@@ -65,12 +65,17 @@ namespace SuperMarketLH.page.activity
                 }
                 salPromotionIndex++;
             }
-            currentSalePromotion = salePromotion.ElementAt(salPromotionIndex);
+            if (salePromotion.Count > 0 && salePromotion.Count > salPromotionIndex)
+            {
+                currentSalePromotion = salePromotion.ElementAt(salPromotionIndex);
+            }
+           
         }
       
 
         private void btn_join_Click(object sender, RoutedEventArgs e)
         {
+            if (this.salePromotion.Count <= 0) return; 
             setCurrentSalePromotionByImgIndex();
             this.grid_jion.Visibility = Visibility.Visible;
 

@@ -36,7 +36,8 @@ namespace SuperMarketLH.page.other
 
         private int answerIndex = 0;
 
-        private void init() {
+        private void init()
+        {
             this.allQuestion = SqlHelper.getAllQuestion();
             if (this.allQuestion.Count > 0)
             {
@@ -44,15 +45,25 @@ namespace SuperMarketLH.page.other
                 noQuestion.Visibility = Visibility.Collapsed;
                 this.currentIndex = 0;
                 selectQuestion(0);
-                this.btn_next.Visibility = Visibility.Hidden;
+                if (this.allQuestion.Count == 1)
+                {
+                    this.btn_next.Visibility = Visibility.Hidden;
+                }
+                else
+                {
+                    this.btn_next.Visibility = Visibility.Visible;
+                }
+
             }
-            else {
+            else
+            {
                 questionGrid.Visibility = Visibility.Collapsed;
                 noQuestion.Visibility = Visibility.Visible;
             }
-           
+
         }
-        private void setCount(Question question) {
+        private void setCount(Question question)
+        {
             switch (this.answerIndex)
             {
                 case 1: question.ChoiceACount++; break;
@@ -67,8 +78,10 @@ namespace SuperMarketLH.page.other
         /// 从题库中选择出题目
         /// </summary>
         /// <param name="index"></param>
-        private void selectQuestion(int index) {
-            if (this.allQuestion.Count > index) {
+        private void selectQuestion(int index)
+        {
+            if (this.allQuestion.Count > index)
+            {
                 if (currentQuestion != null)
                 {
                     setCount(this.currentQuestion);
@@ -85,14 +98,21 @@ namespace SuperMarketLH.page.other
             }
         }
 
-        private void nextQuestion() {
+        private void hiddenNullContentButton()
+        {
+            
+
+        }
+        private void nextQuestion()
+        {
             if (this.answerIndex <= 0)
             {
                 MessageBox.Show("请选择您的答案！");
                 return;
             }
             selectQuestion(++this.currentIndex);
-            if (this.currentIndex >= this.allQuestion.Count-1) {
+            if (this.currentIndex >= this.allQuestion.Count - 1)
+            {
                 this.btn_next.Visibility = Visibility.Collapsed;
             }
         }
@@ -109,7 +129,13 @@ namespace SuperMarketLH.page.other
             ClosedUtil.isAnyBodyTouched = true;
         }
 
+<<<<<<< HEAD
         private void saveAnswer() {
+=======
+        private void saveAnswer()
+        {
+
+>>>>>>> 53cef5d99d237524c19718c82674aa1cdcece79b
             if (this.answerIndex <= 0)
             {
                 MessageBox.Show("请选择您的答案！");
@@ -117,6 +143,10 @@ namespace SuperMarketLH.page.other
             }
             if (this.currentIndex < this.allQuestion.Count - 1)
             {
+<<<<<<< HEAD
+=======
+
+>>>>>>> 53cef5d99d237524c19718c82674aa1cdcece79b
                 //提前交卷的
                 MessageBox.Show("您还有题目未完成！");
             }

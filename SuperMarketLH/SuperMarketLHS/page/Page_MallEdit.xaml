@@ -24,12 +24,12 @@
                         <ImageBrush ImageSource="/SuperMarketLHS;component/img/mall/hotel.png"/>
                     </Button.Background>
                 </Button>
-                <Button x:Name="btn_editShopMallInfo" Style="{DynamicResource leftNavBtnStyle}" Tag="购物中心信息"  BorderThickness="0,2" Click="btn_editShopMallInfo_Click">
+                <Button x:Name="btn_editShopMallInfo" Style="{DynamicResource leftNavBtnStyle}" Tag="购物中心信息"  BorderThickness="0,2,0,0" Click="btn_editShopMallInfo_Click">
                     <Button.Background>
                         <ImageBrush ImageSource="/SuperMarketLHS;component/img/mall/shopMall.png"/>
                     </Button.Background>
                 </Button>
-                <Button x:Name="btn_editGlobalProjectInfo" Style="{DynamicResource leftNavBtnStyle}" Tag="全国项目简介"  BorderThickness="0,2">
+                <Button x:Name="btn_editGlobalProjectInfo" Style="{DynamicResource leftNavBtnStyle}" Tag="全国项目简介"  BorderThickness="0,2" Click="btn_editGlobalProjectInfo_Click">
                     <Button.Background>
                         <ImageBrush ImageSource="/SuperMarketLHS;component/img/mall/Project.png"/>
                     </Button.Background>

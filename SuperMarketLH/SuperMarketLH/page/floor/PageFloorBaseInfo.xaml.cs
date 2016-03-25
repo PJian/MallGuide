@@ -45,8 +45,9 @@ namespace SuperMarketLH.page.floor
         {
             this.allFloors = SqlHelper.getAllFloor();
             this.listbox_allFloors.ItemsSource = this.allFloors;
+            this.listbox_allFloors1.ItemsSource = this.allFloors;
             if (this.allFloors != null && this.allFloors.Count > 0) {
-                this.listbox_allFloors.SelectedIndex = 0;
+                this.listbox_allFloors1.SelectedIndex = 0;
             }
         }
 
@@ -54,27 +55,8 @@ namespace SuperMarketLH.page.floor
         {
             loadFloor();
         }
-
-        private void listbox_allFloors_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (this.listbox_allFloors.SelectedItem != null)
-            {
-                currentFloor = this.listbox_allFloors.SelectedItem as Floor;
-                //加载楼层
-                transitioniItem = new TransitionItem();
-                transitioniItem.ItemTransition = TransitioinUtil.getFadeTransition();
-                currentFrameContentPage = new PageFloorDetailInfo(currentFloor, this);
-                transitioniItem.FrameNavigatePage = new FrameNavigate()
-                {
-                    Source = currentFrameContentPage
-                };
-                this.transitionFloor.DataContext = transitioniItem;
-
-                this.allShops = SqlHelper.getAllShopByFloor(this.currentFloor);
-                this.dataGrid_shops.ItemsSource = this.allShops;
-
-            }
-        }
+       
+      
 
        
 
@@ -131,12 +113,27 @@ namespace SuperMarketLH.page.floor
             ClosedUtil.isAnyBodyTouched = true;
         }
 
+        private Shop currentSelectShop;
         private void dataGrid_shops_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (this.dataGrid_shops.SelectedItem != null)
             {
-                this.currentFrameContentPage.userCtrlMapGrid.drawShopTips(this.dataGrid_shops.SelectedItem as Shop);
+                Shop shop = this.dataGrid_shops.SelectedItem as Shop;
+                currentSelectShop = shop;
+                if (CanvasUtil.isShowTwoFloors)
+                {
+                    //先到商铺所在楼层
+                   this.listbox_allFloors1.SelectedItem = shop.Floor;
+                }
+                else
+                {
+                    this.currentFrameContentPage.userCtrlMapGrid.drawShopTips(currentSelectShop);
+                    currentSelectShop = null;
+                }
+               // this.currentFrameContentPage.userCtrlMapGrid.drawShopTips(currentSelectShop);
             }
+            this.dataGrid_shops.SelectedIndex = -1;
+            
         }
 
         /// <summary>
@@ -302,38 +299,106 @@ namespace SuperMarketLH.page.floor
 
         private void btn_elevator_handle_Click(object sender, RoutedEventArgs e)
         {
-            this.currentFrameContentPage.userCtrlMapGrid.showCommonBuildingTips(ObstacleType.ESCALATOR);
+            if (this.currentFrameContentPage != null) {
+                this.currentFrameContentPage.userCtrlMapGrid.showCommonBuildingTips(ObstacleType.ESCALATOR);
+            }
+            
         }
 
         private void btn_elevator_Click(object sender, RoutedEventArgs e)
         {
-            this.currentFrameContentPage.userCtrlMapGrid.showCommonBuildingTips(ObstacleType.ELEVATOR);
+            if (this.currentFrameContentPage != null)
+            {
+                this.currentFrameContentPage.userCtrlMapGrid.showCommonBuildingTips(ObstacleType.ELEVATOR);
+            }
+            
         }
 
         private void btn_service_Click(object sender, RoutedEventArgs e)
         {
-            this.currentFrameContentPage.userCtrlMapGrid.showCommonBuildingTips(ObstacleType.SERVICE);
+            if (this.currentFrameContentPage != null)
+            {
+                this.currentFrameContentPage.userCtrlMapGrid.showCommonBuildingTips(ObstacleType.SERVICE);
+            }
+            
         }
 
         private void btn_pay_Click(object sender, RoutedEventArgs e)
         {
-            this.currentFrameContentPage.userCtrlMapGrid.showCommonBuildingTips(ObstacleType.CHECKSTAND);
+            if (this.currentFrameContentPage != null)
+            {
+                this.currentFrameContentPage.userCtrlMapGrid.showCommonBuildingTips(ObstacleType.CHECKSTAND);
+            }
+           
         }
 
         private void btn_smoke_Click(object sender, RoutedEventArgs e)
         {
-            this.currentFrameContentPage.userCtrlMapGrid.showCommonBuildingTips(ObstacleType.SMOKING_ROOM);
+            if (this.currentFrameContentPage != null)
+            {
+                this.currentFrameContentPage.userCtrlMapGrid.showCommonBuildingTips(ObstacleType.SMOKING_ROOM);
+            }
+           
         }
 
         private void btn_baby_Click(object sender, RoutedEventArgs e)
         {
-            this.currentFrameContentPage.userCtrlMapGrid.showCommonBuildingTips(ObstacleType.BABY_ROOM);
+            if (this.currentFrameContentPage != null)
+            {
+                this.currentFrameContentPage.userCtrlMapGrid.showCommonBuildingTips(ObstacleType.BABY_ROOM);
+            }
+            
         }
 
         private void btn_bathroom_Click(object sender, RoutedEventArgs e)
         {
-            this.currentFrameContentPage.userCtrlMapGrid.showCommonBuildingTips(ObstacleType.TOLITE);
+            if (this.currentFrameContentPage != null)
+            {
+                this.currentFrameContentPage.userCtrlMapGrid.showCommonBuildingTips(ObstacleType.TOLITE);
+            }
+           
         }
+        /// <summary>
+        ///  使用两个list,其中一个显示样式效果,另外一个进行数据加载，这是为了还可以重复点击当前页面
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void listbox_allFloors1_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (this.listbox_allFloors1.SelectedItem != null)
+            {
+                currentFloor = this.listbox_allFloors1.SelectedItem as Floor;
+                //加载楼层
+                transitioniItem = new TransitionItem();
+                transitioniItem.ItemTransition = TransitioinUtil.getFadeTransition();
+                currentFrameContentPage = new PageFloorDetailInfo(currentFloor, this);
+                transitioniItem.FrameNavigatePage = new FrameNavigate()
+                {
+                    Source = currentFrameContentPage
+                };
+                this.transitionFloor.DataContext = transitioniItem;
+                this.allShops = SqlHelper.getAllShopByFloor(this.currentFloor);
+                this.dataGrid_shops.ItemsSource = this.allShops;
+                this.listbox_allFloors.SelectedItem = this.listbox_allFloors1.SelectedItem;
+            }
+            this.listbox_allFloors1.SelectedItem = null;
+        }
+
+        private void transitionFloor_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+
+        }
+
+        private void Frame_ContentRendered(object sender, EventArgs e)
+        {
+            if (currentSelectShop != null)
+            {
+                this.currentFrameContentPage.userCtrlMapGrid.drawShopTips(currentSelectShop);
+                currentSelectShop = null;
+            }
+        }
+
+        
 
     }
 }

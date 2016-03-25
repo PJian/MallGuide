@@ -61,6 +61,7 @@ namespace SuperMarketLHS.page.floor
                 MessageBox.Show("商铺不能为空！");
                 return;
             }
+
             if (this.currentFloor != null && this.currentShop != null) {
                 this.userCtrl_map.saveMap(this.currentFloor, this.currentShop);
             }
@@ -79,7 +80,7 @@ namespace SuperMarketLHS.page.floor
             if (this.combox_allShops.SelectedItem != null) {
                 this.currentShop = this.combox_allShops.SelectedItem as Shop;
                 this.userCtrl_map.CurrentShop = this.currentShop;
-                if (this.currentShop.Floor != null && this.currentShop.Index > 0)
+                if (this.currentShop.Floor != null && this.currentShop.Index !=null && !this.currentShop.Index.Equals(""))
                 {
                     this.label_shopIndex.Content = "已入驻" + this.currentShop.Floor.Name + " " + this.currentShop.Index;
                 }

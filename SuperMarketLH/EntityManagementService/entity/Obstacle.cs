@@ -28,13 +28,22 @@ namespace EntityManagementService.entity
             set { _shop = value; }
         }
 
-        private int _index;//编号
 
-        public int Index
+        private string _index;
+
+        public string Index
         {
             get { return _index; }
             set { _index = value; }
         }
+
+        //private int _index;//编号
+
+        //public int Index
+        //{
+        //    get { return _index; }
+        //    set { _index = value; }
+        //}
         private string _type;//类型，商铺与公共设施，公共设施中还有电梯啊
 
         public string Type
