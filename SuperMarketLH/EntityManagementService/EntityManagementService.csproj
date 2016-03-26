@@ -79,6 +79,7 @@
     <Compile Include="nav\Node.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="sqlUtil\SqlHelper.cs" />
+    <Compile Include="sqlUtil\SqlHelperDB.cs" />
     <Compile Include="util\SerialUtil.cs" />
   </ItemGroup>
   <ItemGroup>

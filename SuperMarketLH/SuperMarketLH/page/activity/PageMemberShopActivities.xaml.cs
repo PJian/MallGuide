@@ -1,4 +1,5 @@
 ﻿using EntityManagementService.entity;
+using EntityManagementService.sqlUtil;
 using EntityManageService.sqlUtil;
 using SuperMarketLH.util;
 using System;
@@ -198,6 +199,11 @@ namespace SuperMarketLH.page.activity
             if (validateMobileNum())
             {
                 SqlHelper.saveAssignActivitiesInfo(this.text_phoneNumber.Text, this.currentSalePromotion);
+                
+                //更新数据库中活动报名人数
+                //SqlHelperDB.insertActivity(this.currentSalePromotion.Id);
+                SqlHelperDB.updateActivity(this.currentSalePromotion.Id);
+                
                 MessageBox.Show("报名成功！");
                 this.grid_jion.Visibility = Visibility.Collapsed;
                 endTabTip();

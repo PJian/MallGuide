@@ -1,4 +1,5 @@
 ﻿using EntityManagementService.entity;
+using EntityManagementService.sqlUtil;
 using EntityManageService.sqlUtil;
 using SuperMarketLHS.uientity;
 using System;
@@ -87,9 +88,13 @@ namespace SuperMarketLHS.page.other
                 return;
             }
             int id = SqlHelper.saveQuestion(this.currentQuestion);
+
+            //保存问题ID到数据库中
+            SqlHelperDB.insertQuestion(id);
+
             init();
-           // this.currentQuestion.Id = id;
-           // this.listBox_allQuestion.SelectedItem = this.currentQuestion;
+            // this.currentQuestion.Id = id;
+            // this.listBox_allQuestion.SelectedItem = this.currentQuestion;
             this.currentQuestion = new Question();
             grid_question.DataContext = this.currentQuestion;
             MessageBox.Show("保存成功！");
@@ -104,11 +109,11 @@ namespace SuperMarketLHS.page.other
         {
             if (this.currentQuestion != null ) {
                 SqlHelper.removeQuestion(this.currentQuestion);
+                //删除数据库中问题数据
+                SqlHelperDB.deleteQuestion(this.currentQuestion.Id);
             }
-
             this.currentQuestion = new Question();
             grid_question.DataContext = this.currentQuestion;
-
             init();
             MessageBox.Show("删除成功");
         }
@@ -117,6 +122,7 @@ namespace SuperMarketLHS.page.other
         {
             update();
         }
+
         private void update() {
             if (this.currentQuestion == null) return;
             if (this.currentQuestion.Id > 0)
