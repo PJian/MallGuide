@@ -37,8 +37,9 @@ namespace ResourceManagementService.converter
                 }catch(Exception e){
                     Console.WriteLine(e);
                 }
-                return bitmap;
                 System.GC.Collect();
+                return bitmap;
+                
             }
             return null;
         }

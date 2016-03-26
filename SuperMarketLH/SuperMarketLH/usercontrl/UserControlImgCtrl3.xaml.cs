@@ -42,6 +42,7 @@ namespace SuperMarketLH.usercontrl
         void init()
         {
             allImages = new List<ImageObject>();
+            if (this.imgPathes == null) return;
             for (int i = 0; i < this.imgPathes.Length; i++)
             {
                 allImages.Add(new ImageObject()

@@ -63,8 +63,8 @@
                 <ColumnDefinition Width="10*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Image  Grid.Column="4" Grid.Row="2" Grid.ColumnSpan="3" Grid.RowSpan="3" Margin="22" Source="{Binding Logo,Converter={StaticResource rsmImgConverter}}" ></Image>
-            <Button x:Name="btn_nav" Grid.Column="2" Grid.ColumnSpan="3" Grid.Row="1" Content="导航" Click="btn_nav_Click" Style="{DynamicResource tipsBtnStyle}" Background="Transparent" Margin="0,0,10,0"/>
-            <Button x:Name="btn_detail" Content="详情"  Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="3"   Click="btn_detail_Click" Style="{DynamicResource tipsBtnStyle}" Background="Transparent"></Button>
+            <Button x:Name="btn_nav" Grid.Column="2" Grid.ColumnSpan="3" Grid.Row="1" Content="导航"  Style="{DynamicResource tipsBtnStyle}" Background="Transparent" Margin="0,0,10,0" TouchDown="btn_nav_TouchDown" Click="btn_nav_Click_1"/>
+            <Button x:Name="btn_detail" Content="详情"  Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="3"  Style="{DynamicResource tipsBtnStyle}" Background="Transparent" TouchDown="btn_detail_TouchDown" Click="btn_detail_Click_1" />
         </Grid>
 
     </Viewbox>

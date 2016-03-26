@@ -140,11 +140,6 @@ namespace SuperMarketLH.usercontrl
 
 
 
-        private void Grid_MouseLeftButtonDown_1(object sender, MouseButtonEventArgs e)
-        {
-            Point p = e.GetPosition(this.grid_info);
-            mapClick(p);
-        }
 
 
         /// <summary>
@@ -189,6 +184,7 @@ namespace SuperMarketLH.usercontrl
             if (this.grid_info.Children.Count >= 3)
             {
                 this.grid_info.Children.RemoveRange(2, this.grid_info.Children.Count - 2);
+                this.map_continer.Children.Clear();
             }
 
             if (this.CurrentMachine != null && this.CurrentMachine.FloorIndex == this.CurrentEditFloor.Index)
@@ -221,7 +217,8 @@ namespace SuperMarketLH.usercontrl
             if (isOneFloor)
             {
                 drawMap();
-                CanvasUtil.drawRoad(new Grid[]{this.grid_info}, new List<Node>[]{roadNodes});
+              //  CanvasUtil.drawRoad(new Grid[]{this.grid_info}, new List<Node>[]{roadNodes});
+                CanvasUtil.drawRoad(new Canvas[]{this.map_continer},new Grid[]{this.grid_info} ,new List<Node>[] { roadNodes });
                 CanvasUtil.isShowTwoFloors = false;
             }
             else
@@ -279,11 +276,7 @@ namespace SuperMarketLH.usercontrl
 
         }
 
-        private void grid_info_TouchDown(object sender, TouchEventArgs e)
-        {
-            Point p = e.GetTouchPoint(this.grid_info).Position;
-            mapClick(p);
-        }
+      
 
 
         private void mapClick(Point p) {
@@ -308,7 +301,7 @@ namespace SuperMarketLH.usercontrl
             {
                 if (this.CurrentEditMap == null) return;
                 Obstacle clickObstacle = MapUtil.getClickArea(p, this.CurrentEditMap.Areas);
-                if (clickObstacle != null)
+                if (clickObstacle != null && clickObstacle.Type == ObstacleType.SHOP && clickObstacle.Shop != null && clickObstacle.Shop.Id > 0 && SqlHelper.getShopById(clickObstacle.Shop.Id) != null)
                 {
                     drawMap();
                     CanvasUtil.drawShopTips(this.grid_info, clickObstacle, navToShop, showShopDetail);
@@ -316,6 +309,20 @@ namespace SuperMarketLH.usercontrl
 
             }
         }
+
+        private void grid_info_PreviewTouchDown(object sender, TouchEventArgs e)
+        {
+            Point p = e.GetTouchPoint(this.grid_info).Position;
+            mapClick(p);
+        }
+
+        private void grid_info_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            Point p = e.GetPosition(this.grid_info);
+            mapClick(p);
+        }
+
+      
 
        
 

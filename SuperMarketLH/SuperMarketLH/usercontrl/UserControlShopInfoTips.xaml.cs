@@ -48,15 +48,42 @@ namespace SuperMarketLH.usercontrl
 
         private void btn_nav_Click(object sender, RoutedEventArgs e)
         {
-            Nav(this.CurrentShop);
-            ClosedUtil.isAnyBodyTouched = true;
+          
         }
 
         private void btn_detail_Click(object sender, RoutedEventArgs e)
         {
+            
+        }
+
+        private void btn_nav_TouchDown(object sender, TouchEventArgs e)
+        {
+            Nav(this.CurrentShop);
+            ClosedUtil.isAnyBodyTouched = true;
+        }
+
+        private void btn_detail_TouchDown(object sender, TouchEventArgs e)
+        {
             ShowDetailInfo(this.CurrentShop);
             ClosedUtil.isAnyBodyTouched = true;
         }
+
+       
+        private void btn_detail_Click_1(object sender, RoutedEventArgs e)
+        {
+
+            ShowDetailInfo(this.CurrentShop);
+            ClosedUtil.isAnyBodyTouched = true;
+        }
+
+        private void btn_nav_Click_1(object sender, RoutedEventArgs e)
+        {
+            Nav(this.CurrentShop);
+            ClosedUtil.isAnyBodyTouched = true;
+        }
+
+          
+      
 
     }
 }

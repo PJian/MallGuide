@@ -786,7 +786,7 @@ namespace EntityManageService.sqlUtil
         {
             if (id > 0)
             {
-                string sql = "select name,floor,positionNum,logo,label,firstNameChar,catagoryColor,startTime,endTime,introduction,tel,address,zipCode,type,catagoryId,x,y from tabshop where id=" + id;
+                string sql = "select facilities,name,floor,positionNum,logo,label,firstNameChar,catagoryColor,startTime,endTime,introduction,tel,address,zipCode,type,catagoryId,x,y from tabshop where id=" + id;
                 DataTable dt = executeQueryDataTable(sql);
                 if (dt.Rows.Count > 0)
                 {
@@ -807,7 +807,10 @@ namespace EntityManageService.sqlUtil
                         Address = dt.Rows[0]["address"].ToString(),
                         ZipCode = dt.Rows[0]["zipCode"].ToString(),
                         Type = int.Parse(dt.Rows[0]["type"].ToString()),
+                        Brand = getBrandRelatiedWithShop(id),
                         CatagoryName = getCatagoryById(dt.Rows[0]["catagoryId"].ToString()),
+                        SalePromotion = getSalePromotionRelatiedWithShop(id),
+                        Facilities = dt.Rows[0]["facilities"].ToString().Split(','),
                         Door = new System.Windows.Point(int.Parse(dt.Rows[0]["x"].ToString()), int.Parse(dt.Rows[0]["y"].ToString()))
                     };
                 }

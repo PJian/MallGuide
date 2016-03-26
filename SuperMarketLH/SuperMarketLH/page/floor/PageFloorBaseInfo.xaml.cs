@@ -31,6 +31,8 @@ namespace SuperMarketLH.page.floor
         private PageFloorDetailInfo currentFrameContentPage;
         private List<Shop> allShops;
         public Floor currentFloor { get; set; }
+       
+
         public PageFloorBaseInfo()
         {
             InitializeComponent();
@@ -76,7 +78,6 @@ namespace SuperMarketLH.page.floor
         public void showShopDetailInfo(Shop shop) {
 
             parent.frame.Navigate(new PageShopDetail(shop,this.parent));
-        
         }
 
         public void busy() {
@@ -114,6 +115,12 @@ namespace SuperMarketLH.page.floor
         }
 
         private Shop currentSelectShop;
+
+        public Shop CurrentSelectShop
+        {
+            get { return currentSelectShop; }
+            set { currentSelectShop = value; }
+        }
         private void dataGrid_shops_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (this.dataGrid_shops.SelectedItem != null)
@@ -384,11 +391,7 @@ namespace SuperMarketLH.page.floor
             this.listbox_allFloors1.SelectedItem = null;
         }
 
-        private void transitionFloor_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
-        {
-
-        }
-
+       
         private void Frame_ContentRendered(object sender, EventArgs e)
         {
             if (currentSelectShop != null)
@@ -396,6 +399,8 @@ namespace SuperMarketLH.page.floor
                 this.currentFrameContentPage.userCtrlMapGrid.drawShopTips(currentSelectShop);
                 currentSelectShop = null;
             }
+            
+
         }
 
         

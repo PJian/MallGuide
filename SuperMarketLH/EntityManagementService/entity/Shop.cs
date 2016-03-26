@@ -203,6 +203,7 @@ namespace EntityManagementService.entity
         public List<string> getShopPromotionImgOfValidate()
         {
             List<string> pathes = new List<string>();
+            if (this.SalePromotion == null) return pathes;
             foreach (SalePromotion salePromotion in this.SalePromotion)
             {
                 if (DateTime.Parse(salePromotion.EndTime) >= DateTime.Now)

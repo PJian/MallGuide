@@ -37,8 +37,7 @@ namespace SuperMarketLH.usercontrl
         private bool isDrawMahine = false;
 
         private Point machineLoaction;
-        private double StartPositionX = 0;
-        private double StartPositionY = 0;
+       
         public Point MachineLoaction
         {
             get { return machineLoaction; }
@@ -162,11 +161,29 @@ namespace SuperMarketLH.usercontrl
             {
                 if (this.CurrentEditMap == null) return;
                 Obstacle clickObstacle = MapUtil.getClickArea(p, this.CurrentEditMap.Areas);
-                if (clickObstacle != null)
+
+                if (clickObstacle != null && clickObstacle.Type == ObstacleType.SHOP && clickObstacle.Shop != null && clickObstacle.Shop.Id > 0 && SqlHelper.getShopById(clickObstacle.Shop.Id) != null)
                 {
-                    drawMap();
-                    CanvasUtil.drawShopTips(this.grid_info, clickObstacle, navToShop, showShopDetail);
+
+                    if (!isOneFloor)
+                    {
+                        //如果是双层显示，则应该回到单层界面
+                        Shop s = SqlHelper.getShopById(clickObstacle.Shop.Id);
+                        RootPage.CurrentSelectShop = s;
+                        rootPage.listbox_allFloors1.SelectedItem = CurrentEditFloor;
+                    }
+                    else
+                    {
+                        drawMap();
+                        CanvasUtil.drawShopTips(this.grid_info, clickObstacle, navToShop, showShopDetail);
+                    }
+
+
+                   
                 }
+
+              
+                
 
             }
         }
@@ -220,6 +237,7 @@ namespace SuperMarketLH.usercontrl
             if (this.grid_info.Children.Count >= 3)
             {
                 this.grid_info.Children.RemoveRange(2, this.grid_info.Children.Count - 2);
+                this.map_continer.Children.Clear();
             }
 
             if (this.CurrentMachine != null && this.CurrentMachine.FloorIndex == this.CurrentEditFloor.Index)
@@ -252,7 +270,8 @@ namespace SuperMarketLH.usercontrl
             if (isOneFloor)
             {
                 drawMap();
-                CanvasUtil.drawRoad(new Grid[] { this.grid_info }, new List<Node>[]{roadNodes});
+                //CanvasUtil.drawRoad(new Grid[] { this.grid_info }, new List<Node>[]{roadNodes});
+                CanvasUtil.drawRoad(new Canvas[] { this.map_continer }, new Grid[] { this.grid_info }, new List<Node>[] { roadNodes });
             }
             else {
 
@@ -305,7 +324,9 @@ namespace SuperMarketLH.usercontrl
 
         }
 
-        private void grid_info_TouchDown(object sender, TouchEventArgs e)
+      
+
+        private void grid_info_PreviewTouchDown(object sender, TouchEventArgs e)
         {
             Point p = e.GetTouchPoint(this.grid_info).Position;
             mapClick(p);

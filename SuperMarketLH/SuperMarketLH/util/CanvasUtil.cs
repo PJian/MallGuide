@@ -9,6 +9,7 @@ using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 
@@ -19,6 +20,14 @@ namespace SuperMarketLH.util
 
         public static Boolean isShowTwoFloors = false;//表示是否显示了两成地图
         public static int MAP_CANVAS_GRID_PIX_DIF = 4;
+        public static int lINE_ADJUST_PIX = 2;//路线微调
+        private static int LINE_STROKE = 4;
+        private static Brush LINE_BRUSH = Brushes.LawnGreen;
+
+        private static int USER_HEIGHT = 20;
+        private static int USER_WIDHT = 10;
+        private static int USER_COL_SPAN = 3;
+        private static int USER_ROW_SPAN = 5;
 
         private static int MACHINE_COL_SPAN = 4;
         private static int MACHINE_ROW_SPAN = 4;
@@ -28,10 +37,10 @@ namespace SuperMarketLH.util
         private static int COMMON_INFO_TIPS_COL_SPAN = 8;
         private static int COMMON_INFO_TIPS_ROW_SPAN = 8;
 
-        private static int ELLIPSE_ROAD_WIDTH = 2;
-        private static int ELLIPSE_ROAD_HEIGHT = 2;
-        private static int ELLPSE_ROAD_COL_SPAN = 1;
-        private static int ELLPSE_ROAD_ROW_SPAN = 1;
+        private static int ELLIPSE_ROAD_WIDTH = 6;
+        private static int ELLIPSE_ROAD_HEIGHT = 6;
+        private static int ELLPSE_ROAD_COL_SPAN = 2;
+        private static int ELLPSE_ROAD_ROW_SPAN = 2;
         private static Brush ELLPSE_ROAD_FILL = Brushes.Red;
         /// <summary>
         /// 在指定的位置显示机器标志
@@ -164,7 +173,7 @@ namespace SuperMarketLH.util
         /// <param name="o"></param>
         /// <param name="shop"></param>
         public static void drawShopTips(Grid g,Obstacle o,NavToShop nav,ShowDetailInfo showDetailInfo) {
-            
+            releaseRoadTimer();//停止已经存在的计时器
             if (o.Type == ObstacleType.SHOP && o.Shop!=null && o.Shop.Id > 0 && SqlHelper.getShopById(o.Shop.Id) !=null)
             {
                 Shop s = SqlHelper.getShopById(o.Shop.Id);
@@ -228,7 +237,12 @@ namespace SuperMarketLH.util
         private static int roadListCount = 0;
         private static Grid[] mapGrid;
         private static Grid curremtMapGrid;
+        private static Canvas[] mapCanvas;
+        private static Canvas currentMapCanvas;
         private static int mapGridIndex = 0;
+        private static int mapCanvasIndex = 0;
+        //判断是双层导航还是单层导航
+       static  bool isOneFloor = true;//默认是单层导航
         /// <summary>
         /// 绘制路径
         /// </summary>
@@ -271,7 +285,54 @@ namespace SuperMarketLH.util
 
         }
 
+        public static void drawRoad(Canvas[] canvas, Grid[] grid, List<Node>[] node)
+        {
 
+            if (grid.Length >= 1) {
+                isOneFloor = false;
+            }
+            nodes = node;
+
+            if (nodes != null && nodes.Length > 0)
+            {
+                roadListIndex = 0;
+                currentRoadNodes = nodes[roadListIndex++];
+                roadNodeIndex = currentRoadNodes.Count - 1;
+                roadListCount = nodes.Length;
+
+            }
+            else
+            {
+                return;
+            }
+
+            mapCanvas = canvas;
+            mapGrid = grid;
+            if (grid != null && grid.Length > 0 && grid.Length == nodes.Length)
+            {
+                mapGridIndex = 0;
+                curremtMapGrid = mapGrid[mapGridIndex++];
+            }
+            else
+            {
+                return;
+            }
+
+            if (canvas != null && canvas.Length > 0 && canvas.Length == nodes.Length)
+            {
+                mapCanvasIndex = 0;
+                currentMapCanvas = mapCanvas[mapCanvasIndex++];
+            }
+            else
+            {
+                return;
+            }
+            drawRoadOfLine();
+            drawRoadTimer = new DispatcherTimer();
+            drawRoadTimer.Tick += drawRoadTimer_Tick;
+            drawRoadTimer.Interval = TimeSpan.FromMilliseconds(90);
+            drawRoadTimer.IsEnabled = true;
+        }
 
         public static void releaseRoadTimer(){
             if(drawRoadTimer!=null){
@@ -279,15 +340,20 @@ namespace SuperMarketLH.util
             }
            
         }
-        static void drawRoadTimer_Tick(object sender, EventArgs e)
-        {
+        /// <summary>
+        /// 把路径使用圆圈画出来
+        /// <param name="isClearPrevious">true 清除上一个点</param>
+        /// </summary>
+        private static void drawRoadOfEllipse(bool isClearPrevious,string tipType) {
             if (currentRoadNodes == null)
             {
-               releaseRoadTimer();
-               return ;
+                releaseRoadTimer();
+                return;
             }
-            if (roadNodeIndex < 0) {
-                if (roadListIndex >= roadListCount) {
+            if (roadNodeIndex < 0)
+            {
+                if (roadListIndex >= roadListCount)
+                {
                     releaseRoadTimer();
                     return;
                 }
@@ -295,8 +361,31 @@ namespace SuperMarketLH.util
                 currentRoadNodes = nodes[roadListIndex++];
                 roadNodeIndex = currentRoadNodes.Count - 1;
             }
+           
 
-                Point p = currentRoadNodes.ElementAt(roadNodeIndex--).P;
+
+            if (isClearPrevious)
+            {
+                if (isOneFloor)
+                {
+                    curremtMapGrid.Children.RemoveRange(3, curremtMapGrid.Children.Count - 1);
+                }
+                else {
+                    if (roadListIndex > 1)
+                    {
+                        //清除上一层的东西
+                        mapGrid[roadListIndex - 2].Children.RemoveRange(3, mapGrid[roadListIndex - 2].Children.Count - 1);
+                        curremtMapGrid.Children.RemoveRange(2, curremtMapGrid.Children.Count - 1);//总是从机器位置开始导航，所以当不是导航第一层的时候，地图上没有有机器位置的标志了
+                    }
+                    else {
+                        curremtMapGrid.Children.RemoveRange(3, curremtMapGrid.Children.Count - 1);//原有机器位置，地图背景，画布三个东西
+                    }
+                }
+               
+            }
+            Point p = currentRoadNodes.ElementAt(roadNodeIndex--).P;
+           // roadNodeIndex--;//跳跃
+            if (tipType.Equals("ellipse")) {
                 Ellipse ellipse = new Ellipse()
                 {
                     Width = ELLIPSE_ROAD_WIDTH,
@@ -308,7 +397,87 @@ namespace SuperMarketLH.util
                 Grid.SetColumn(ellipse, (int)p.X);
                 Grid.SetColumnSpan(ellipse, ELLPSE_ROAD_COL_SPAN);
                 Grid.SetRowSpan(ellipse, ELLPSE_ROAD_ROW_SPAN);
+            }
+            else if (tipType.Equals("triangle")) {
+
+                PathGeometry myPathGeometry = new PathGeometry();
+                PathFigure pathFigure1 = new PathFigure();
+
+
+
+                myPathGeometry.Figures.Add(pathFigure1);
+                Path myPath = new Path();
+                myPath.Stroke = LINE_BRUSH;
+                myPath.StrokeThickness = LINE_STROKE;
+                myPath.Data = myPathGeometry;
+                currentMapCanvas.Children.Add(myPath);
+            }
+            else if (tipType.Equals("user"))
+            {
+                BitmapImage bitmap = new BitmapImage(new Uri(System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory,"resource/images/people.png")));
+             
+                Image image = new Image();
+                image.Width = USER_WIDHT;
+                image.Height = USER_HEIGHT;
+                image.Source = bitmap;
+                curremtMapGrid.Children.Add(image);
+                Grid.SetRow(image, (int)p.Y - USER_ROW_SPAN+1);
+                Grid.SetColumn(image, (int)p.X - USER_COL_SPAN/2);
+                Grid.SetColumnSpan(image, USER_COL_SPAN);
+                Grid.SetRowSpan(image, USER_ROW_SPAN);
+            }
+          
+        }
+        /// <summary>
+        /// 把路径使用线画出来
+        /// </summary>
+        private static void drawRoadOfLine()
+        {
+            if (nodes == null || nodes.Length<=0)
+            {
+                return;
+            }
+
+
+            for (int i = 0; i < nodes.Length; i++)
+            {
+                currentMapCanvas = mapCanvas[i];
+                Point startP = new Point(0, 0);
+                Point endP = new Point(0, 0);
+                Node startNode = null;
+                PathGeometry myPathGeometry = new PathGeometry();
+                PathFigure pathFigure1 = new PathFigure();
+              
+                foreach (Node item in nodes[i])
+                {
+                    if (startNode == null)
+                    {
+                        startNode = item;
+                        startP = item.P;
+                        pathFigure1.StartPoint = new Point(startP.X * MAP_CANVAS_GRID_PIX_DIF + lINE_ADJUST_PIX, startP.Y * MAP_CANVAS_GRID_PIX_DIF + lINE_ADJUST_PIX);
+                        continue;
+                    }
+                    endP = item.P;
+                    LineSegment ls = new LineSegment(
+                   new Point(endP.X * MAP_CANVAS_GRID_PIX_DIF + lINE_ADJUST_PIX, endP.Y * MAP_CANVAS_GRID_PIX_DIF + lINE_ADJUST_PIX),
+                   true /* IsStroked */ );
+                    ls.IsSmoothJoin = true;
+                    pathFigure1.Segments.Add(ls);
+                }
+
+                myPathGeometry.Figures.Add(pathFigure1);
+                Path myPath = new Path();
+                myPath.Stroke = LINE_BRUSH;
+                myPath.StrokeThickness = LINE_STROKE;
+                myPath.Data = myPathGeometry;
+                currentMapCanvas.Children.Add(myPath);
+            }
            
+        }
+
+        static void drawRoadTimer_Tick(object sender, EventArgs e)
+        {
+            drawRoadOfEllipse(true, "user");
         }
 
 

@@ -66,7 +66,8 @@ namespace SuperMarketLH.page.floor
                 this.usctrl_mapGrid_1.CurrentEditFloor = MachineFloor;
                 CanvasUtil.drawMachine(this.usctrl_mapGrid_1.grid_info, this.CurrentMachine);
                // CanvasUtil.drawRoad(this.usctrl_mapGrid_2.grid_info, toShop);
-                CanvasUtil.drawRoad(new Grid[] { this.usctrl_mapGrid_1.grid_info, this.usctrl_mapGrid_2.grid_info}, new List<Node>[] { toElevator, toShop });
+              //  CanvasUtil.drawRoad(new Grid[] { this.usctrl_mapGrid_1.grid_info, this.usctrl_mapGrid_2.grid_info}, new List<Node>[] { toElevator, toShop });
+                CanvasUtil.drawRoad(new Canvas[]{this.usctrl_mapGrid_1.map_continer,this.usctrl_mapGrid_2.map_continer},new Grid[] { this.usctrl_mapGrid_1.grid_info, this.usctrl_mapGrid_2.grid_info }, new List<Node>[] { toElevator, toShop });
 
             }
             else
@@ -75,7 +76,7 @@ namespace SuperMarketLH.page.floor
                 this.usctrl_mapGrid_1.CurrentEditFloor = MachineFloor;
 
                 CanvasUtil.drawMachine(this.usctrl_mapGrid_1.grid_info, this.CurrentMachine);
-                CanvasUtil.drawRoad(new Grid[] {this.usctrl_mapGrid_1.grid_info,this.usctrl_mapGrid_2.grid_info}, new List<Node>[] { toElevator, toShop });
+                CanvasUtil.drawRoad(new Canvas[] { this.usctrl_mapGrid_1.map_continer, this.usctrl_mapGrid_2.map_continer }, new Grid[] { this.usctrl_mapGrid_1.grid_info, this.usctrl_mapGrid_2.grid_info }, new List<Node>[] { toElevator, toShop });
               //  CanvasUtil.drawRoad(this.usctrl_mapGrid_2.grid_info, toShop);
 
             }

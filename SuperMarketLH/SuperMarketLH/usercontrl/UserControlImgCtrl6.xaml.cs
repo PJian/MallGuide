@@ -44,6 +44,7 @@ namespace SuperMarketLH.usercontrl
         void init()
         {
             allImages = new List<ImageObject>();
+            if (this.Imgs == null) return;
             for (int i = 0; i < this.Imgs.Length; i++)
             {
                 //allImages.Add(new Lazy<ImageObject>(
