@@ -1,6 +1,7 @@
 ﻿using EntityManagementService.entity;
 using EntityManagementService.sqlUtil;
 using EntityManageService.sqlUtil;
+using SuperMarketLHS.comm;
 using SuperMarketLHS.uientity;
 using System;
 using System.Collections.Generic;
@@ -26,6 +27,7 @@ namespace SuperMarketLHS.page.other
         private MainWindow rootWin;
         private Question currentQuestion;
         private List<Question> allQuestions;
+        private Boolean isRemoteDBUsed = false;
         public PageQuestionnaire()
         {
             InitializeComponent();
@@ -37,7 +39,20 @@ namespace SuperMarketLHS.page.other
         }
         private void init()
         {
-            this.allQuestions = SqlHelper.getAllQuestion();
+            //显示初始化数据库按钮
+            DBServer server = SqlHelper.getDBServer();
+            if (server == null || !server.Used)
+            {
+                this.allQuestions = SqlHelper.getAllQuestion();
+                isRemoteDBUsed = false;
+            }
+            else
+            {
+                this.allQuestions = SqlHelperDB.getAllQuestions();
+                isRemoteDBUsed = true;
+            }
+
+
             this.listBox_allQuestion.ItemsSource = this.allQuestions;
             this.currentQuestion = new Question();
             this.grid_question.DataContext = this.currentQuestion;
@@ -50,7 +65,8 @@ namespace SuperMarketLHS.page.other
 
         private void listBox_allQuestion_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (this.listBox_allQuestion.SelectedItem != null) {
+            if (this.listBox_allQuestion.SelectedItem != null)
+            {
                 this.currentQuestion = this.listBox_allQuestion.SelectedItem as Question;
                 grid_question.DataContext = this.currentQuestion;
                 this.listBox_allQuestion.SelectedIndex = -1;
@@ -62,7 +78,8 @@ namespace SuperMarketLHS.page.other
         }
 
 
-        private IEnumerable<PerformanceData> getPerformanceDataByQuestionCount(Question question) {
+        private IEnumerable<PerformanceData> getPerformanceDataByQuestionCount(Question question)
+        {
             IEnumerable<PerformanceData> datas = new List<PerformanceData>() {
                         new PerformanceData(question.ChoiceA, question.ChoiceA, question.ChoiceACount),
                         new PerformanceData(question.ChoiceB, question.ChoiceB, question.ChoiceBCount),
@@ -78,19 +95,30 @@ namespace SuperMarketLHS.page.other
             grid_question.DataContext = this.currentQuestion;
         }
 
-        private void saveQuestion() {
+        private void saveQuestion()
+        {
             if (this.currentQuestion == null)
             {
                 return;
             }
-            if (this.currentQuestion.Id > 0) {
+            if (this.currentQuestion.Id > 0)
+            {
                 update();
                 return;
             }
-            int id = SqlHelper.saveQuestion(this.currentQuestion);
+            // int id = SqlHelper.saveQuestion(this.currentQuestion);
 
             //保存问题ID到数据库中
-            SqlHelperDB.insertQuestion(id);
+            if (this.isRemoteDBUsed)
+            {
+                SqlHelperDB.createQuestion(this.currentQuestion);
+            }
+            else
+            {
+                SqlHelper.saveQuestion(this.currentQuestion);
+            }
+
+            //SqlHelperDB.insertQuestion(id);
 
             init();
             // this.currentQuestion.Id = id;
@@ -107,10 +135,18 @@ namespace SuperMarketLHS.page.other
 
         private void btn_del_Click(object sender, RoutedEventArgs e)
         {
-            if (this.currentQuestion != null ) {
-                SqlHelper.removeQuestion(this.currentQuestion);
-                //删除数据库中问题数据
-                SqlHelperDB.deleteQuestion(this.currentQuestion.Id);
+            if (this.currentQuestion != null)
+            {
+                if (this.isRemoteDBUsed)
+                {
+                    //删除数据库中问题数据
+                    SqlHelperDB.deleteQuestion(this.currentQuestion.Id);
+                }
+                else
+                {
+                    SqlHelper.removeQuestion(this.currentQuestion);
+                }
+
             }
             this.currentQuestion = new Question();
             grid_question.DataContext = this.currentQuestion;
@@ -123,17 +159,27 @@ namespace SuperMarketLHS.page.other
             update();
         }
 
-        private void update() {
+        private void update()
+        {
             if (this.currentQuestion == null) return;
             if (this.currentQuestion.Id > 0)
             {
-                SqlHelper.updateQuestion(this.currentQuestion);
+                if (this.isRemoteDBUsed)
+                {
+                    SqlHelperDB.updateQuestionContent(this.currentQuestion);
+                }
+                else
+                {
+                    SqlHelper.updateQuestion(this.currentQuestion);
+                }
+                // 
+
                 MessageBox.Show("更新成功!");
             }
             else
             {
                 saveQuestion();
-                return ;
+                return;
             }
         }
 
@@ -141,6 +187,8 @@ namespace SuperMarketLHS.page.other
         {
             init();
         }
+
+
 
     }
 }

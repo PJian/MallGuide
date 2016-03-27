@@ -1731,6 +1731,32 @@ namespace EntityManageService.sqlUtil
             string sql = "update tabclient set updateTime='" + client.UpdateDate + "' and username='" + client.UserName + "' and appdir='"+client.AppDir+"'  where ip='" + client.IP + "'";
             executeSql(sql);
         }
+
+        public static void saveServer(DBServer server) {
+            string sql = "insert into tabDBserver(ip,username,password,used) values('"+server.Ip+"','"+server.UserName+"','"+server.Password+"','"+server.Used+"')";
+            executeSql(sql); 
+        }
+
+        public static void updateServer(DBServer server) {
+            string sql = "update tabDBserver set ip='" + server.Ip + "',username='" + server.UserName + "',password='" + server.Password + "',used='" + server.Used + "'";
+            executeSql(sql); 
+        }
+
+        public static DBServer getDBServer() {
+            DataTable dt = executeQueryDataTable("select id,ip,username,password,used from tabDBserver");
+            if (dt.Rows != null && dt.Rows.Count > 0) {
+                return new DBServer()
+                {
+                    Id = int.Parse(dt.Rows[0]["id"].ToString()),
+                    Ip = dt.Rows[0]["ip"].ToString(),
+                    Used = bool.Parse(dt.Rows[0]["used"].ToString()),
+                    UserName = dt.Rows[0]["username"].ToString(),
+                    Password = dt.Rows[0]["password"].ToString()
+                };
+            }
+            return null;
+        }
+
         public static List<ClientComputer> getAllClients() {
             DataTable dt = executeQueryDataTable("select ip,username,updateTime,appdir from tabclient");
             List<ClientComputer> rtn = new List<ClientComputer>();

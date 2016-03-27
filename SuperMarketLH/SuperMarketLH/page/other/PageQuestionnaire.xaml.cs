@@ -35,10 +35,22 @@ namespace SuperMarketLH.page.other
         private Question currentQuestion;
 
         private int answerIndex = 0;
-
+        private Boolean isRemoteDBUsed = false;
         private void init()
         {
-            this.allQuestion = SqlHelper.getAllQuestion();
+            DBServer server = SqlHelper.getDBServer();
+            if (server == null || !server.Used)
+            {
+                this.isRemoteDBUsed = false;
+                this.allQuestion = SqlHelper.getAllQuestion();
+            }
+            else
+            {
+                this.allQuestion = SqlHelperDB.getAllQuestions();
+                this.isRemoteDBUsed = true;
+            }
+
+
             if (this.allQuestion.Count > 0)
             {
                 questionGrid.Visibility = Visibility.Visible;
@@ -100,7 +112,7 @@ namespace SuperMarketLH.page.other
 
         private void hiddenNullContentButton()
         {
-            
+
 
         }
         private void nextQuestion()
@@ -129,13 +141,9 @@ namespace SuperMarketLH.page.other
             ClosedUtil.isAnyBodyTouched = true;
         }
 
-<<<<<<< HEAD
-        private void saveAnswer() {
-=======
         private void saveAnswer()
         {
 
->>>>>>> 53cef5d99d237524c19718c82674aa1cdcece79b
             if (this.answerIndex <= 0)
             {
                 MessageBox.Show("请选择您的答案！");
@@ -143,10 +151,7 @@ namespace SuperMarketLH.page.other
             }
             if (this.currentIndex < this.allQuestion.Count - 1)
             {
-<<<<<<< HEAD
-=======
 
->>>>>>> 53cef5d99d237524c19718c82674aa1cdcece79b
                 //提前交卷的
                 MessageBox.Show("您还有题目未完成！");
             }
@@ -154,11 +159,19 @@ namespace SuperMarketLH.page.other
             {
                 setCount(this.allQuestion.ElementAt(this.currentIndex));
             }
+            //将答案提交到数据库
             foreach (Question q in this.allQuestion)
             {
-                SqlHelper.setQuestionCount(q);
-                //将答案提交到数据库
-                SqlHelperDB.setQuestionCount(q);
+                if (this.isRemoteDBUsed)
+                {
+                    SqlHelperDB.updateQuestionCount(q);
+                }
+                else
+                {
+                    SqlHelper.setQuestionCount(q);
+                }
+                
+                
             }
             questionGrid.Visibility = Visibility.Collapsed;
             questionDone.Visibility = Visibility.Visible;
@@ -196,6 +209,15 @@ namespace SuperMarketLH.page.other
         {
             answerIndex = 5;
             ClosedUtil.isAnyBodyTouched = true;
+        }
+
+        private void transitionQuestion_TransitionStatusChanged(object sender, Telerik.Windows.Controls.TransitionControl.TransitionStatusChangedEventArgs e)
+        {
+            if (e.Status.Equals(Telerik.Windows.Controls.TransitionControl.TransitionStatusChangedEventArgs.Completed.Status))
+            {
+                
+              
+            }
         }
     }
 }

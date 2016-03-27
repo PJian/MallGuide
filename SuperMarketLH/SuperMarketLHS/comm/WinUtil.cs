@@ -14,6 +14,7 @@ namespace SuperMarketLHS.comm
    
     public class WinUtil
     {
+        public static bool isDataBaseInitiallized = false;
 
         public static void chengToSelectBtn(Button btn,Style selectStyle,List<Button> others,Style unSelectStyle) {
             btn.Style = selectStyle;

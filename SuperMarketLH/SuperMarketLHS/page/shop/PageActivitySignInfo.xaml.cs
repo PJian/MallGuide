@@ -1,4 +1,5 @@
 ﻿using EntityManagementService.entity;
+using EntityManagementService.sqlUtil;
 using EntityManageService.sqlUtil;
 using System;
 using System.Collections.Generic;
@@ -24,6 +25,7 @@ namespace SuperMarketLHS.page.shop
         private SalePromotion currentSalePromotion;
         private List<SalePromotion> allSalePromotion;
         private MainWindow root;
+        private Boolean isRemoteDBUsed = false;
         public PageActivitySignInfo()
         {
             InitializeComponent();
@@ -33,7 +35,17 @@ namespace SuperMarketLHS.page.shop
             InitializeComponent();
             this.root = root;
         }
-        private void init() {
+        private void init()
+        {
+            DBServer server = SqlHelper.getDBServer();
+            if (server == null || !server.Used)
+            {
+                this.isRemoteDBUsed = false;
+            }
+            else
+            {
+                this.isRemoteDBUsed = true;
+            }
             this.allSalePromotion = SqlHelper.getAllSalePromotions();
             this.list_allSalePromotions.ItemsSource = this.allSalePromotion;
         }
@@ -45,9 +57,18 @@ namespace SuperMarketLHS.page.shop
 
         private void list_allSalePromotions_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (this.list_allSalePromotions.SelectedItem != null) {
+            if (this.list_allSalePromotions.SelectedItem != null)
+            {
                 currentSalePromotion = this.list_allSalePromotions.SelectedItem as SalePromotion;
-                this.label_acctivityCount.Content = SqlHelper.getSignerNumOfActivity(currentSalePromotion);
+                if (this.isRemoteDBUsed)
+                {
+                    this.label_acctivityCount.Content = SqlHelperDB.getSignerNumOfActivity(currentSalePromotion);
+                }
+                else
+                {
+                    this.label_acctivityCount.Content = SqlHelper.getSignerNumOfActivity(currentSalePromotion);
+                }
+             
             }
         }
 

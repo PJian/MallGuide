@@ -118,6 +118,9 @@
     <Compile Include="page\other\PageQuestionnaire.xaml.cs">
       <DependentUpon>PageQuestionnaire.xaml</DependentUpon>
     </Compile>
+    <Compile Include="page\other\PageRemoteDataSetting.xaml.cs">
+      <DependentUpon>PageRemoteDataSetting.xaml</DependentUpon>
+    </Compile>
     <Compile Include="page\other\PageScreenProtectAD.xaml.cs">
       <DependentUpon>PageScreenProtectAD.xaml</DependentUpon>
     </Compile>
@@ -245,6 +248,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="page\other\PageQuestionnaire.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="page\other\PageRemoteDataSetting.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -465,6 +472,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="img\mall\Project.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\other\database.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

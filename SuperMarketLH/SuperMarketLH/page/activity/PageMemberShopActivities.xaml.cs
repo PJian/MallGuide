@@ -30,7 +30,7 @@ namespace SuperMarketLH.page.activity
         private MainWindow parent;
         private SalePromotion currentSalePromotion;
         private DispatcherTimer startTabTipsTimer;
-
+        private Boolean isRemoteDBUsed = false;
         public PageMemberShopActivities()
         {
             InitializeComponent();
@@ -40,7 +40,19 @@ namespace SuperMarketLH.page.activity
             InitializeComponent();
             this.parent = parent;
         }
-        private void init() {
+        private void init()
+        {
+
+            DBServer server = SqlHelper.getDBServer();
+            if (server == null || !server.Used)
+            {
+                this.isRemoteDBUsed = false;
+            }
+            else
+            {
+                this.isRemoteDBUsed = true;
+            }
+
             salePromotion = SqlHelper.getNormalSalePromotion();
             showActivityImgs();
 
@@ -52,7 +64,8 @@ namespace SuperMarketLH.page.activity
             //}
         }
 
-        private void setCurrentSalePromotionByImgIndex() {
+        private void setCurrentSalePromotionByImgIndex()
+        {
             int index = this.userContrl_imgs.CurrentShowImgIndex;
             int salPromotionIndex = 0;
             int totalPreImgCount = 0;
@@ -69,15 +82,18 @@ namespace SuperMarketLH.page.activity
             {
                 currentSalePromotion = salePromotion.ElementAt(salPromotionIndex);
             }
-           
+
         }
-      
+
 
         private void btn_join_Click(object sender, RoutedEventArgs e)
         {
-            if (this.salePromotion.Count <= 0) return; 
+            if (this.salePromotion.Count <= 0) return;
             setCurrentSalePromotionByImgIndex();
+
+
             this.grid_jion.Visibility = Visibility.Visible;
+
 
             ClosedUtil.isAnyBodyTouched = true;
 
@@ -166,7 +182,7 @@ namespace SuperMarketLH.page.activity
         /// </summary>
         private void showActivityImgs()
         {
-            
+
             List<string> imgs = new List<string>();
             DateTime now = DateTime.Now;
             for (int i = 0; i < salePromotion.Count; i++)
@@ -198,12 +214,20 @@ namespace SuperMarketLH.page.activity
         {
             if (validateMobileNum())
             {
-                SqlHelper.saveAssignActivitiesInfo(this.text_phoneNumber.Text, this.currentSalePromotion);
-                
+                if (this.isRemoteDBUsed)
+                {
+                    SqlHelperDB.saveAssignActivitiesInfo(this.text_phoneNumber.Text, this.currentSalePromotion);
+                }
+                else
+                {
+                    //更新报名信息
+                    SqlHelper.saveAssignActivitiesInfo(this.text_phoneNumber.Text, this.currentSalePromotion);
+                }
+
                 //更新数据库中活动报名人数
                 //SqlHelperDB.insertActivity(this.currentSalePromotion.Id);
-                SqlHelperDB.updateActivity(this.currentSalePromotion.Id);
-                
+                // SqlHelperDB.updateActivity(this.currentSalePromotion.Id);
+
                 MessageBox.Show("报名成功！");
                 this.grid_jion.Visibility = Visibility.Collapsed;
                 endTabTip();
@@ -244,8 +268,10 @@ namespace SuperMarketLH.page.activity
             WinUtil.startTabTip();
         }
 
-        private void endTabTip() {
-            if (this.startTabTipsTimer != null) {
+        private void endTabTip()
+        {
+            if (this.startTabTipsTimer != null)
+            {
                 this.startTabTipsTimer.IsEnabled = false;
                 this.startTabTipsTimer.Stop();
             }
@@ -256,7 +282,7 @@ namespace SuperMarketLH.page.activity
         //    WinUtil.killTabTip();
         //}
 
-        
+
 
     }
 }

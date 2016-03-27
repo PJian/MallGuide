@@ -54,6 +54,11 @@
                         <ImageBrush ImageSource="/SuperMarketLHS;component/img/other/update.png"/>
                     </Button.Background>
                 </Button>
+                <Button x:Name="btn_remoteDBSet" Style="{DynamicResource leftNavBtnStyle}" Tag="数据库设置" BorderThickness="0,0,0,1" Click="btn_remoteDBSet_Click"  >
+                    <Button.Background>
+                        <ImageBrush ImageSource="/SuperMarketLHS;component/img/other/database.png"/>
+                    </Button.Background>
+                </Button>
             </StackPanel>
         </Grid>
         <Grid Grid.Column="1" Background="#f1f1f1">

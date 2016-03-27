@@ -87,7 +87,7 @@
                 <Button x:Name="btn_update"  Content="更新问题" Style="{DynamicResource navBtnCommonStyle}" Background="Transparent"  Width="60" Height="30" Margin="0,0,10,0" Click="btn_update_Click"  ></Button>
                 <Button x:Name="btn_save"  Content="加入题库" Style="{DynamicResource navBtnCommonStyle}" Background="Transparent"  Width="60" Height="30" Margin="0,0,10,0" Click="btn_save_Click"  ></Button>
                 <Button x:Name="btn_del"  Content="删除" Style="{DynamicResource navBtnCommonStyle}" Background="Transparent"  Width="60" Height="30" Margin="0,0,10,0" Click="btn_del_Click"  ></Button>
-
+    
             </StackPanel>
         </Grid>
     </Grid>
