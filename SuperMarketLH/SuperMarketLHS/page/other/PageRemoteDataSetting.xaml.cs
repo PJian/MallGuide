@@ -62,7 +62,15 @@ namespace SuperMarketLHS.page.other
                 MessageBox.Show("IP地址、用户名、密码不能为空！");
                 return;
             }
-            SqlHelper.saveServer(server);
+            if (server.Id > 0)
+            {
+                SqlHelper.updateServer(server);
+            }
+            else {
+                SqlHelper.saveServer(server);
+               
+            }
+          
             MessageBox.Show("配置成功！");
             this.server = SqlHelper.getDBServer();
             this.grid_allInfo.DataContext = this.server;
@@ -76,7 +84,17 @@ namespace SuperMarketLHS.page.other
                 MessageBox.Show("IP地址、用户名、密码不能为空！");
                 return;
             }
-            SqlHelper.updateServer(server);
+
+            if (server.Id > 0)
+            {
+                SqlHelper.updateServer(server);
+            }
+            else
+            {
+                SqlHelper.saveServer(server);
+
+            }
+            
             MessageBox.Show("配置更新成功！");
             this.server = SqlHelper.getDBServer();
             this.grid_allInfo.DataContext = this.server;
