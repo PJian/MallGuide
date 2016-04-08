@@ -159,6 +159,9 @@
     <Compile Include="userControl\LoadingWait.xaml.cs">
       <DependentUpon>LoadingWait.xaml</DependentUpon>
     </Compile>
+    <Compile Include="userControl\UserControlBrand.xaml.cs">
+      <DependentUpon>UserControlBrand.xaml</DependentUpon>
+    </Compile>
     <Compile Include="userControl\UserControlCatagory.xaml.cs">
       <DependentUpon>UserControlCatagory.xaml</DependentUpon>
     </Compile>
@@ -304,6 +307,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="userControl\LoadingWait.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="userControl\UserControlBrand.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

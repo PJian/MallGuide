@@ -11,14 +11,14 @@ namespace SuperMarketLH.uiEntity
     {
         private static TransitionProvider[] TRANSITION_DATA_BASE = { //预定义各种切换特效
                                                                        new FadeTransition(),
-                                                                       new WaveTransition(), 
-                                                                       new FlipWarpTransition(), 
-                                                                       new LayoutClipTransition(),
-                                                                       new LinearFadeTransition(), 
-                                                                       new PerspectiveRotationTransition(),
-                                                                       new PixelateTransition(),
-                                                                       new RollTransition(), 
-                                                                       new MotionBlurredZoomTransition() 
+                                                                       //new WaveTransition(), 
+                                                                       //new FlipWarpTransition(), 
+                                                                       //new LayoutClipTransition(),
+                                                                       //new LinearFadeTransition(), 
+                                                                       //new PerspectiveRotationTransition(),
+                                                                       //new PixelateTransition(),
+                                                                       //new RollTransition(), 
+                                                                       //new MotionBlurredZoomTransition() 
                                                                    };
         
         

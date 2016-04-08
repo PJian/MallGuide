@@ -88,12 +88,12 @@
                                 <ImageBrush ImageSource="images/navBtn/btn4.png"/>
                             </Button.Background>
                         </Button>
-                        <Button x:Name="btn_question" Style="{DynamicResource navBtnStyle}" Content="问卷调查" Tag="QUESTIONNAIRE" Margin="0,0,35,0" Click="btn_question_Click" MouseDown="btn_question_MouseDown" MouseUp="btn_question_MouseUp" TouchDown="btn_question_TouchDown" TouchUp="btn_question_TouchUp">
+                        <Button x:Name="btn_investment_ad" Style="{DynamicResource navBtnStyle}" Content="招商广告" Tag="INVERTMENT ADVERT" Margin="0,0,35,0" Click="btn_investment_ad_Click" MouseDown="btn_investment_ad_MouseDown" MouseUp="btn_investment_ad_MouseUp" TouchDown="btn_investment_ad_TouchDown" TouchUp="btn_investment_ad_TouchUp">
                             <Button.Background>
-                                <ImageBrush ImageSource="images/navBtn/btn5.png"/>
+                                <ImageBrush ImageSource="images/navBtn/btn8.png"/>
                             </Button.Background>
                         </Button>
-                        <Button x:Name="btn_fire_engine" Style="{DynamicResource navBtnStyle}" Content="消防通道" Tag="FIRE EMERGENCE" Margin="0,0,35,0" Click="btn_fire_engine_Click" MouseDown="btn_fire_engine_MouseDown" MouseUp="btn_fire_engine_MouseUp" TouchDown="btn_fire_engine_TouchDown" TouchUp="btn_fire_engine_TouchUp">
+                        <Button x:Name="btn_fire_engine" Style="{DynamicResource navBtnStyle}" Content="紧急疏散" Tag="FIRE EMERGENCE" Margin="0,0,35,0" Click="btn_fire_engine_Click" MouseDown="btn_fire_engine_MouseDown" MouseUp="btn_fire_engine_MouseUp" TouchDown="btn_fire_engine_TouchDown" TouchUp="btn_fire_engine_TouchUp">
                             <Button.Background>
                                 <ImageBrush ImageSource="images/navBtn/btn6.png"/>
                             </Button.Background>
@@ -103,9 +103,9 @@
                                 <ImageBrush ImageSource="images/navBtn/btn7.png"/>
                             </Button.Background>
                         </Button>
-                        <Button x:Name="btn_investment_ad" Style="{DynamicResource navBtnStyle}" Content="招商广告" Tag="INVERTMENT ADVERT" Margin="0,0,35,0" Click="btn_investment_ad_Click" MouseDown="btn_investment_ad_MouseDown" MouseUp="btn_investment_ad_MouseUp" TouchDown="btn_investment_ad_TouchDown" TouchUp="btn_investment_ad_TouchUp">
+                        <Button x:Name="btn_question" Style="{DynamicResource navBtnStyle}" Content="问卷调查" Tag="QUESTIONNAIRE" Margin="0,0,35,0" Click="btn_question_Click" MouseDown="btn_question_MouseDown" MouseUp="btn_question_MouseUp" TouchDown="btn_question_TouchDown" TouchUp="btn_question_TouchUp">
                             <Button.Background>
-                                <ImageBrush ImageSource="images/navBtn/btn8.png"/>
+                                <ImageBrush ImageSource="images/navBtn/btn5.png"/>
                             </Button.Background>
                         </Button>
                         <Button x:Name="btn_recruit" Style="{DynamicResource navBtnStyle}" Content="招聘信息" Tag="RECRUIT" Margin="0,0,35,0" Click="btn_recruit_Click" MouseDown="btn_recruit_MouseDown" MouseUp="btn_recruit_MouseUp" TouchDown="btn_recruit_TouchDown" TouchUp="btn_recruit_TouchUp">

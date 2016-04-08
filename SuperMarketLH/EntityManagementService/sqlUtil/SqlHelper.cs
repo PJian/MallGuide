@@ -708,7 +708,6 @@ namespace EntityManageService.sqlUtil
                 (shop.Floor == null ? "" : shop.Floor.Id + "") + "','" + shop.Index + "','" + shop.Logo + "','" + shop.Label + "','" + shop.SortChar + "','" + shop.CatagoryColor + "','" + shop.StartTime + "','" + shop.EndTime + "','" + shop.Introduction + "','" + shop.Tel + "','" + shop.Address + "','" +
                 shop.ZipCode + "','" + shop.Type;
             sql += "','";
-
             if (shop.CatagoryName != null)
             {
                 sql += shop.CatagoryName.Id + "','";

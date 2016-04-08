@@ -25,11 +25,11 @@
                         <ImageBrush ImageSource="img/mall.png"/>
                     </Button.Background>
                 </Button>
-                <Button x:Name="btn_brandInfo" Style="{DynamicResource navBtnStyle}" Tag="品牌信息"  BorderThickness="2,0,0,0" Click="btn_brandInfo_Click">
+                <!--<Button x:Name="btn_brandInfo" Style="{DynamicResource navBtnStyle}" Tag="品牌信息"  BorderThickness="2,0,0,0" Click="btn_brandInfo_Click">
                     <Button.Background>
                         <ImageBrush ImageSource="img/brand/brand.png"/>
                     </Button.Background>
-                </Button>
+                </Button>-->
                 <Button x:Name="btn_shopInfo" Style="{DynamicResource navBtnStyle}" Tag="店铺信息"  BorderThickness="2,0,0,0" Click="btn_shopInfo_Click" >
                     <Button.Background>
                         <ImageBrush ImageSource="img/shop/shop.png"/>
