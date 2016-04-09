@@ -303,7 +303,7 @@
                                     <ColumnDefinition Width="30"></ColumnDefinition>
                                     <ColumnDefinition Width="90"></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
-                                <Image Grid.Column="0" Source="images/gps/flag_gps_location.png"></Image>
+                                <Image Source="images/gps/gps.png"></Image>
                                 <Label Grid.Column="1" Content="保存机器位置" Foreground="White" VerticalAlignment="Center" FontSize="12"></Label>
                             </Grid>
                         </Border>
