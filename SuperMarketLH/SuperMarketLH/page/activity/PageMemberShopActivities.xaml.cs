@@ -214,23 +214,34 @@ namespace SuperMarketLH.page.activity
         {
             if (validateMobileNum())
             {
-                if (this.isRemoteDBUsed)
+                try
                 {
-                    SqlHelperDB.saveAssignActivitiesInfo(this.text_phoneNumber.Text, this.currentSalePromotion);
+                    if (this.isRemoteDBUsed)
+                    {
+                        SqlHelperDB.saveAssignActivitiesInfo(this.text_phoneNumber.Text, this.currentSalePromotion);
+                    }
+                    else
+                    {
+                        //更新报名信息
+                        SqlHelper.saveAssignActivitiesInfo(this.text_phoneNumber.Text, this.currentSalePromotion);
+                    }
+
+                    //更新数据库中活动报名人数
+                    //SqlHelperDB.insertActivity(this.currentSalePromotion.Id);
+                    // SqlHelperDB.updateActivity(this.currentSalePromotion.Id);
+
+                    MessageBox.Show("报名成功！");
+
                 }
-                else
+                catch (Exception ex)
                 {
-                    //更新报名信息
-                    SqlHelper.saveAssignActivitiesInfo(this.text_phoneNumber.Text, this.currentSalePromotion);
+                    MessageBox.Show("报名失败！" + ex.Message);
                 }
-
-                //更新数据库中活动报名人数
-                //SqlHelperDB.insertActivity(this.currentSalePromotion.Id);
-                // SqlHelperDB.updateActivity(this.currentSalePromotion.Id);
-
-                MessageBox.Show("报名成功！");
-                this.grid_jion.Visibility = Visibility.Collapsed;
-                endTabTip();
+                finally {
+                    this.grid_jion.Visibility = Visibility.Collapsed;
+                    endTabTip();
+                }
+                
             }
             else
             {

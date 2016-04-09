@@ -19,7 +19,7 @@
                         <Border x:Name="back" Width="80" Height="80" Background="{TemplateBinding Background}" CornerRadius="10">
                             <!--按钮内容-->
                             <Grid>
-                                <Label Content="{TemplateBinding Content}" Foreground="Black" FontSize="28" VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
+                                <Label Content="{TemplateBinding Content}" Foreground="White" FontSize="28" VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
                             </Grid>
                         </Border>
                         <!--触发器-->
@@ -332,7 +332,7 @@
                                     <ColumnDefinition Width="30"></ColumnDefinition>
                                     <ColumnDefinition Width="90"></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
-                                <Image Grid.Column="0" Source="images/gps/flag_gps_location.png"></Image>
+                                <Image Source="images/gps/gps.png"></Image>
                                 <Label Grid.Column="1" Content="保存机器位置" Foreground="White" VerticalAlignment="Center" FontSize="12"></Label>
                             </Grid>
                         </Border>
@@ -937,15 +937,15 @@
                               Width="Auto">
                             <Grid >
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition  />
                                 </Grid.ColumnDefinitions>
-                                <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Left" Margin="30,0,0,0"/>
+                                <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Left" Margin="12,0,0,0"/>
                             </Grid>
                         </Border>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
-            <Setter Property="Height" Value="25"/>
+            <Setter Property="Height" Value="40"/>
         </Style>
         <Style x:Key="dataGridColumnHeaderStyle2" TargetType="DataGridColumnHeader">
             <Setter Property="SnapsToDevicePixels" Value="True" />
@@ -970,7 +970,7 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
-            <Setter Property="Height" Value="25"/>
+            <Setter Property="Height" Value="40"/>
         </Style>
 
         <!--行表头-->
@@ -980,7 +980,7 @@
             <Setter Property="Background" Value="#947853">
 
             </Setter>
-
+            <Setter Property="Height" Value="40"/>
         </Style>
 
         <Style  x:Key="DataGridRowStyle" TargetType="DataGridRow">
@@ -1013,7 +1013,7 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="DataGridCell">
-                        <TextBlock TextAlignment="Left" VerticalAlignment="Center" FontSize="18" Margin="30,0,0,0">
+                        <TextBlock VerticalAlignment="Center" FontSize="18" Margin="12,0,0,0">
                            <ContentPresenter />
                         </TextBlock>
                     </ControlTemplate>
@@ -1025,6 +1025,44 @@
                 </Trigger>
             </Style.Triggers>-->
         </Style>
+
+
+     
+
+        <Style x:Key="styledListShopInfoHeader" TargetType="{x:Type ListBoxItem}">
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Background" Value="Transparent"></Setter>
+            <Setter Property="Grid.IsSharedSizeScope" Value="True" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                        <Viewbox>
+                            <Border Height="40" Width="360"  BorderThickness="0,0,0,3" 
+                             BorderBrush="#b79766"  Background="Transparent" >
+                                <Grid Background="Transparent" >
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition  Height="40*" />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="230*"/>
+                                        <ColumnDefinition  Width="114*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Label Content="{Binding Name}"  VerticalAlignment="Center" FontSize="18" Foreground="White" Margin="30,0,0,0"></Label>
+                                    <Label Content="{Binding Index}"  VerticalAlignment="Center" FontSize="18" Foreground="White" Grid.Column="1"></Label>
+                                </Grid>
+                            </Border>
+
+                        </Viewbox>
+
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+          
+
+
+        </Style>
+
+
 
 
         <!--tabItem 样式-->
