@@ -56,8 +56,18 @@ namespace SuperMarketLH.page.floor
         private void Page_Loaded_1(object sender, RoutedEventArgs e)
         {
             loadFloor();
+           // init();
         }
-       
+        //加载店铺列表表头
+        //private void init() {
+        //    List<Shop> headers = new List<Shop>();
+        //    headers.Add(new Shop() { 
+        //        Name = "品牌名称",
+        //        Index = "店铺号"
+        //    });
+            
+        //  //  dataGrid_shops_header.ItemsSource = headers;
+        //}
       
 
        
@@ -385,6 +395,7 @@ namespace SuperMarketLH.page.floor
                 };
                 this.transitionFloor.DataContext = transitioniItem;
                 this.allShops = SqlHelper.getAllShopByFloor(this.currentFloor);
+               
                 this.dataGrid_shops.ItemsSource = this.allShops;
                 this.listbox_allFloors.SelectedItem = this.listbox_allFloors1.SelectedItem;
             }

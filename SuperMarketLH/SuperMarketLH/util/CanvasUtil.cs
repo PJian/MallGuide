@@ -140,10 +140,10 @@ namespace SuperMarketLH.util
             grid.Children.Add(tips);
             int initialCalOfGrid = getColOfGridByPoint(p);
             int initialRowOfGrid = getRowOfGridByPoint(p);
-            //Grid.SetColumn(tips, initialCalOfGrid - SHOP_INFO_TIPS_COL_SPAN / 2 <= 0 ? 0 : initialCalOfGrid - SHOP_INFO_TIPS_COL_SPAN / 2);
-            //Grid.SetRow(tips, initialRowOfGrid - SHOP_INFO_TIPS_ROW_SPAN / 2 <= 0 ? 0 : initialRowOfGrid - SHOP_INFO_TIPS_ROW_SPAN / 2);
-            Grid.SetColumn(tips, initialCalOfGrid - SHOP_INFO_TIPS_COL_SPAN  <= 0 ? 0 : initialCalOfGrid - SHOP_INFO_TIPS_COL_SPAN);
-            Grid.SetRow(tips, initialRowOfGrid - SHOP_INFO_TIPS_ROW_SPAN  <= 0 ? 0 : initialRowOfGrid - SHOP_INFO_TIPS_ROW_SPAN );
+            Grid.SetColumn(tips, initialCalOfGrid - SHOP_INFO_TIPS_COL_SPAN / 2<= 0 ? 0 : initialCalOfGrid - SHOP_INFO_TIPS_COL_SPAN / 2);
+            Grid.SetRow(tips, initialRowOfGrid - SHOP_INFO_TIPS_ROW_SPAN +2 <= 0 ? 0 : initialRowOfGrid - SHOP_INFO_TIPS_ROW_SPAN+2 );
+            //Grid.SetColumn(tips, initialCalOfGrid - SHOP_INFO_TIPS_COL_SPAN  <= 0 ? 0 : initialCalOfGrid - SHOP_INFO_TIPS_COL_SPAN);
+            //Grid.SetRow(tips, initialRowOfGrid - SHOP_INFO_TIPS_ROW_SPAN  <= 0 ? 0 : initialRowOfGrid - SHOP_INFO_TIPS_ROW_SPAN );
             Grid.SetColumnSpan(tips, SHOP_INFO_TIPS_COL_SPAN);
             Grid.SetRowSpan(tips, SHOP_INFO_TIPS_ROW_SPAN);
         }
@@ -208,6 +208,46 @@ namespace SuperMarketLH.util
         /// </summary>
         /// <returns></returns>
         private static Point getMiddlePointOfArea(Obstacle area)
+        {
+            //double sumX = 0;
+            //double sumY = 0;
+            //for (int i = 0; i < area.Boundary.Count; i++)
+            //{
+            //    sumX += area.Boundary.ElementAt(i).X;
+            //    sumY += area.Boundary.ElementAt(i).Y;
+            //}
+            //return new Point(sumX / area.Boundary.Count, sumY / area.Boundary.Count);
+            double areaM = 0;
+            Point center = new Point(0,0);
+
+
+            for (int i = 0; i < area.Boundary.Count - 1; i++)
+            {
+                Point p = area.Boundary.ElementAt(i);
+                Point p1 = area.Boundary.ElementAt(i + 1);
+                areaM += (p.X * p1.Y - p1.X * p.Y) / 2;
+                center.X += (p.X * p1.Y - p1.X * p.Y) * (p.X + p1.X);
+                center.Y += (p.X * p1.Y - p1.X * p.Y) * (p.Y + p1.Y);
+            }
+            Point p0 = area.Boundary.ElementAt(0);
+            Point pn = area.Boundary.ElementAt(area.Boundary.Count-1);
+            areaM += (area.Boundary.ElementAt(area.Boundary.Count - 1).X * area.Boundary.ElementAt(0).Y - area.Boundary.ElementAt(0).X * area.Boundary.ElementAt(area.Boundary.Count - 1).Y) / 2;
+            center.X += (pn.X * p0.Y - p0.X * pn.Y) * (pn.X + p0.X);
+            center.Y += (pn.X * p0.Y - p0.X * pn.Y) * (pn.Y + p0.Y);
+
+            center.X /= 6 * areaM;
+            center.Y /= 6 * areaM;
+
+            return center;
+
+        }
+
+
+        /// <summary>
+        /// 取得一块区域的中心点
+        /// </summary>
+        /// <returns></returns>
+        private static Point getMiddlePointOfAreaByMMXY(Obstacle area)
         {
             if (area.MaxX == 0 && area.MaxY == 0 && area.MinX == 0 && area.MinY == 0)
             {

@@ -587,7 +587,7 @@
     <Resource Include="images\navBtn\btn21_press.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="images\gps\flag_gps_location.png" />
+    <Resource Include="images\gps\flag_gps_location1.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\panel.png" />
@@ -655,6 +655,16 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\floor\people.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\gps\detail.png" />
+    <Resource Include="images\gps\nav.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\gps\gps1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\gps\flag_gps_location.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

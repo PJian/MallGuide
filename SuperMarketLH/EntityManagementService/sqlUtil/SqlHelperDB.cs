@@ -20,11 +20,11 @@ namespace EntityManagementService.sqlUtil
 
         public static DBServer server = SqlHelper.getDBServer();
 
-        public static string CONNECTION_STRING = server==null || !server.Used ? "" :("server=" + server.Ip + ";database=" + databaseName + ";user id=" + server.UserName + ";pwd=" + server.Password + "; pooling=false");
+        public static string CONNECTION_STRING = server == null || !server.Used ? "" : (string.Format("server={0};database={1};user id={2};pwd={3}; pooling=false", server.Ip, databaseName, server.UserName, server.Password));
 
         public static void openConnection()
         {
-            string connStr = "server=" + serverName + ";database=" + databaseName + ";uid=" + userName + ";pwd=" + password;
+            string connStr = string.Format("server={0};database={1};uid={2};pwd={3}", serverName, databaseName, userName, password);
             conn = new SqlConnection(connStr);
             conn.Open();
         }
@@ -35,17 +35,25 @@ namespace EntityManagementService.sqlUtil
         {
             if (CONNECTION_STRING == null) return;
 
-            createDataBase(databaseName);
+            try {
+                createDataBase(databaseName);
 
-            MySqlHelper.ExecuteNonQuery(CONNECTION_STRING, "drop table if exists tabassignactivity ");
-            MySqlHelper.ExecuteNonQuery(CONNECTION_STRING, "drop table if exists tabquestion ");
+                MySqlHelper.ExecuteNonQuery(CONNECTION_STRING, "drop table if exists tabassignactivity ");
+                MySqlHelper.ExecuteNonQuery(CONNECTION_STRING, "drop table if exists tabquestion ");
 
-            string sql = "CREATE TABLE tabassignactivity(id  int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,mobileNum varchar(30),activityName varchar(100),activityId int(11)) DEFAULT CHARSET=utf8;";
-            MySqlHelper.ExecuteNonQuery(CONNECTION_STRING, sql);
+                string sql = "CREATE TABLE tabassignactivity(id  int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,mobileNum varchar(30),activityName varchar(100),activityId int(11)) DEFAULT CHARSET=utf8;";
+                MySqlHelper.ExecuteNonQuery(CONNECTION_STRING, sql);
 
-            sql = " CREATE TABLE tabquestion (id int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,content VARCHAR(200),a VARCHAR(200), b VARCHAR(200), c VARCHAR(200),d VARCHAR(200),e VARCHAR(200),aNum int(11) default 0,bNum int(11) default 0,cNum int(11) default 0,dNum int(11) default 0,eNum int(11)  default 0) DEFAULT CHARSET=utf8;";
+                sql = " CREATE TABLE tabquestion (id int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,content VARCHAR(200),a VARCHAR(200), b VARCHAR(200), c VARCHAR(200),d VARCHAR(200),e VARCHAR(200),aNum int(11) default 0,bNum int(11) default 0,cNum int(11) default 0,dNum int(11) default 0,eNum int(11)  default 0) DEFAULT CHARSET=utf8;";
 
-            MySqlHelper.ExecuteNonQuery(CONNECTION_STRING, sql);
+                MySqlHelper.ExecuteNonQuery(CONNECTION_STRING, sql);
+            }
+            catch(Exception e){
+                
+                Console.WriteLine(e.Message);
+                throw e;
+            }
+           
 
         }
 
@@ -55,13 +63,19 @@ namespace EntityManagementService.sqlUtil
         /// 在数据库中新建数据库
         /// </summary>
         /// <param name="dataBaseName"></param>
-        private static void createDataBase(string dataBaseName)
+        private static void createDataBase(string dataBaseName) 
         {
-            if (CONNECTION_STRING == null) return;
-            string connStr = String.Format("server={0};user id={1}; password={2}; pooling=false",
-                server.Ip, server.UserName, server.Password);
-            MySqlHelper.ExecuteNonQuery(connStr, "drop database if exists " + databaseName);
-            MySqlHelper.ExecuteNonQuery(connStr, "create database " + databaseName);
+            try {
+                if (CONNECTION_STRING == null) return;
+                string connStr = String.Format("server={0};user id={1}; password={2}; pooling=false",
+                    server.Ip, server.UserName, server.Password);
+                MySqlHelper.ExecuteNonQuery(connStr, "drop database if exists " + databaseName);
+                MySqlHelper.ExecuteNonQuery(connStr, "create database " + databaseName);
+            }catch(Exception e){
+                Console.WriteLine(e.Message);
+                throw e;
+            }
+           
         }
 
         public static void createQuestion(Question question)

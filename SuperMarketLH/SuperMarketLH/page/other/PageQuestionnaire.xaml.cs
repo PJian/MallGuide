@@ -38,40 +38,47 @@ namespace SuperMarketLH.page.other
         private Boolean isRemoteDBUsed = false;
         private void init()
         {
-            DBServer server = SqlHelper.getDBServer();
-            if (server == null || !server.Used)
+            try
             {
-                this.isRemoteDBUsed = false;
-                this.allQuestion = SqlHelper.getAllQuestion();
-            }
-            else
-            {
-                this.allQuestion = SqlHelperDB.getAllQuestions();
-                this.isRemoteDBUsed = true;
-            }
-
-
-            if (this.allQuestion.Count > 0)
-            {
-                questionGrid.Visibility = Visibility.Visible;
-                noQuestion.Visibility = Visibility.Collapsed;
-                this.currentIndex = 0;
-                selectQuestion(0);
-                if (this.allQuestion.Count == 1)
+                DBServer server = SqlHelper.getDBServer();
+                if (server == null || !server.Used)
                 {
-                    this.btn_next.Visibility = Visibility.Hidden;
+                    this.isRemoteDBUsed = false;
+                    this.allQuestion = SqlHelper.getAllQuestion();
                 }
                 else
                 {
-                    this.btn_next.Visibility = Visibility.Visible;
+                    this.allQuestion = SqlHelperDB.getAllQuestions();
+                    this.isRemoteDBUsed = true;
                 }
+                if (this.allQuestion.Count > 0)
+                {
+                    questionGrid.Visibility = Visibility.Visible;
+                    noQuestion.Visibility = Visibility.Collapsed;
+                    this.currentIndex = 0;
+                    selectQuestion(0);
+                    if (this.allQuestion.Count == 1)
+                    {
+                        this.btn_next.Visibility = Visibility.Hidden;
+                    }
+                    else
+                    {
+                        this.btn_next.Visibility = Visibility.Visible;
+                    }
 
+                }
+                else
+                {
+                    questionGrid.Visibility = Visibility.Collapsed;
+                    noQuestion.Visibility = Visibility.Visible;
+                }
             }
-            else
-            {
-                questionGrid.Visibility = Visibility.Collapsed;
-                noQuestion.Visibility = Visibility.Visible;
+            catch (Exception e) {
+                MessageBox.Show("问卷提取失败!"+e.Message);
             }
+          
+
+            
 
         }
         private void setCount(Question question)
@@ -110,11 +117,6 @@ namespace SuperMarketLH.page.other
             }
         }
 
-        private void hiddenNullContentButton()
-        {
-
-
-        }
         private void nextQuestion()
         {
             if (this.answerIndex <= 0)
@@ -159,22 +161,34 @@ namespace SuperMarketLH.page.other
             {
                 setCount(this.allQuestion.ElementAt(this.currentIndex));
             }
-            //将答案提交到数据库
-            foreach (Question q in this.allQuestion)
+            try
             {
-                if (this.isRemoteDBUsed)
+                //将答案提交到数据库
+                foreach (Question q in this.allQuestion)
                 {
-                    SqlHelperDB.updateQuestionCount(q);
+                    if (this.isRemoteDBUsed)
+                    {
+                        SqlHelperDB.updateQuestionCount(q);
+                    }
+                    else
+                    {
+                        SqlHelper.setQuestionCount(q);
+                    }
+
+
                 }
-                else
-                {
-                    SqlHelper.setQuestionCount(q);
-                }
-                
-                
             }
-            questionGrid.Visibility = Visibility.Collapsed;
-            questionDone.Visibility = Visibility.Visible;
+            catch (Exception ex)
+            {
+                MessageBox.Show("提交失败！"+ex.Message);
+            }
+            finally {
+                questionGrid.Visibility = Visibility.Collapsed;
+                questionDone.Visibility = Visibility.Visible;
+            }
+
+         
+            
         }
         private void Page_Loaded_1(object sender, RoutedEventArgs e)
         {

@@ -129,7 +129,13 @@ namespace SuperMarketLHS.page.other
 
         void bw_DoWork(object sender, DoWorkEventArgs e)
         {
-            SqlHelperDB.initDataBase();
+            try {
+                SqlHelperDB.initDataBase();
+            }
+            catch (Exception ex) {
+                MessageBox.Show(ex.Message);
+            }
+            
         }
     }
 }
