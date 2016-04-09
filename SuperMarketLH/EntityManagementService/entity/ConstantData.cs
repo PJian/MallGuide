@@ -45,6 +45,10 @@ namespace EntityManagementService.entity
         {
             return @"data\shop\" + id + @"\facilities";
         }
+        public static string getShopBrandImgsDataFolder(int id)
+        {
+            return @"data\shop\" + id + @"\brandImgs";
+        }
 
         public const int SHOP_TYPE_NORMAL = 1;
         public const int SHOP_TYPE_SPECIAL = 2;

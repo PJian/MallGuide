@@ -186,6 +186,23 @@ namespace EntityManagementService.entity
             get { return _facilities; }
             set { _facilities = value; }
         }
+
+        /// <summary>
+        /// 店铺配套的设施
+        /// </summary>
+        private string[] _brandImgs;
+
+        public string[] BrandImgs
+        {
+            get { return _brandImgs; }
+            set { _brandImgs = value; }
+        }
+
+       
+
+      
+
+
         //是地图上的格子，不是真实的点，用来寻路的点
         private Point _door;
 
@@ -213,6 +230,7 @@ namespace EntityManagementService.entity
             }
             return pathes;
         }
+
 
 
     }

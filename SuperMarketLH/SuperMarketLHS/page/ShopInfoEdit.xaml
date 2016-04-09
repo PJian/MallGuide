@@ -29,7 +29,7 @@
                         <ImageBrush ImageSource="/SuperMarketLHS;component/img/shop/sign.png"/>
                     </Button.Background>
                 </Button>
-                <Button x:Name="btn_inBrand" Style="{DynamicResource leftNavBtnStyle}" Tag="品牌、活动关联" BorderThickness="0,0,0,1" Click="btn_inBrand_Click" >
+                <Button x:Name="btn_inBrand" Style="{DynamicResource leftNavBtnStyle}" Tag="添加活动" BorderThickness="0,0,0,1" Click="btn_inBrand_Click" >
                     <Button.Background>
                         <ImageBrush ImageSource="/SuperMarketLHS;component/img/shop/link.png"/>
                     </Button.Background>

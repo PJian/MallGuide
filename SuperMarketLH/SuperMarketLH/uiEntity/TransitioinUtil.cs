@@ -10,7 +10,7 @@ namespace SuperMarketLH.uiEntity
     class TransitioinUtil
     {
         private static TransitionProvider[] TRANSITION_DATA_BASE = { //预定义各种切换特效
-                                                                       new FadeTransition(),
+                                                                       //new FadeTransition(),
                                                                        //new WaveTransition(), 
                                                                        //new FlipWarpTransition(), 
                                                                        //new LayoutClipTransition(),
@@ -31,8 +31,10 @@ namespace SuperMarketLH.uiEntity
         public static TransitionProvider getNewTransition()
         {
             Random ran = new Random();
-            int RandKey = ran.Next(0, TRANSITION_DATA_BASE.Length - 1);
-            return TRANSITION_DATA_BASE[RandKey];
+            //int RandKey = ran.Next(0, TRANSITION_DATA_BASE.Length - 1);
+            //return TRANSITION_DATA_BASE[RandKey];
+            return null;
+     
         }
 
         /// <summary>
@@ -41,7 +43,8 @@ namespace SuperMarketLH.uiEntity
         /// <returns></returns>
         public static TransitionProvider getFlipTransition()
         {
-            return TRANSITION_DATA_BASE[3];
+            //return TRANSITION_DATA_BASE[3];
+            return null;
         }
 
         /// <summary>
@@ -50,7 +53,8 @@ namespace SuperMarketLH.uiEntity
         /// <returns></returns>
         public static TransitionProvider getFadeTransition()
         {
-            return TRANSITION_DATA_BASE[0];
+            //return TRANSITION_DATA_BASE[0];
+            return null;
         }
 
     }

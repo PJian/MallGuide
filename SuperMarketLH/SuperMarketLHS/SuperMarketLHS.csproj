@@ -139,6 +139,7 @@
     <Compile Include="page\PageOtherSetting.xaml.cs">
       <DependentUpon>PageOtherSetting.xaml</DependentUpon>
     </Compile>
+    <Compile Include="page\PageShopActivity.cs" />
     <Compile Include="page\ShopInfoEdit.xaml.cs">
       <DependentUpon>ShopInfoEdit.xaml</DependentUpon>
     </Compile>
@@ -158,9 +159,6 @@
     <Compile Include="uientity\PerformanceViewModel.cs" />
     <Compile Include="userControl\LoadingWait.xaml.cs">
       <DependentUpon>LoadingWait.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="userControl\UserControlBrand.xaml.cs">
-      <DependentUpon>UserControlBrand.xaml</DependentUpon>
     </Compile>
     <Compile Include="userControl\UserControlCatagory.xaml.cs">
       <DependentUpon>UserControlCatagory.xaml</DependentUpon>
@@ -307,10 +305,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="userControl\LoadingWait.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="userControl\UserControlBrand.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

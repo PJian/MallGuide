@@ -55,7 +55,7 @@ namespace SuperMarketLHS.page
         private void btn_inBrand_Click(object sender, RoutedEventArgs e)
         {
             WinUtil.chengToSelectBtn(this.btn_inBrand, FindResource("leftNavBtnSelectStyle") as Style, new Button[] { btn_editBaseInfo,btn_activityCountInfo, btn_salePromotion }.ToList(), FindResource("leftNavBtnStyle") as Style);
-            label_location.Content = "店铺信息 > 品牌、活动关联";
+            label_location.Content = "店铺信息 > 添加活动";
             this.frame.Navigate(new PageShopBrandSalePromotions(this.parent));
         }
 

@@ -36,8 +36,7 @@
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="58*"></RowDefinition>
-                <RowDefinition Height="250*"></RowDefinition>
-                <RowDefinition Height="250*"></RowDefinition>
+                <RowDefinition Height="500*"></RowDefinition>
             </Grid.RowDefinitions>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="stackPanel_currentShop">
                 <Label  Content="当前店铺：" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center"></Label>
@@ -46,13 +45,13 @@
                     <Label Content="促销活动列表"></Label>
                     <ComboBox x:Name="combox_currentShopSalePromotions" Width="100" HorizontalAlignment="Center" VerticalAlignment="Center" ItemsSource="{Binding SalePromotion}" DisplayMemberPath="Name" SelectionChanged="combox_currentShopSalePromotions_SelectionChanged"></ComboBox>
                 </StackPanel>
-                <StackPanel Orientation="Horizontal">
+                <!--<StackPanel Orientation="Horizontal">
                     <Label Content="入驻品牌："></Label>
                     <Label Content="{Binding Brand.Name}"></Label>
-                    </StackPanel>
+                    </StackPanel>-->
             </StackPanel>
 
-            <GroupBox Grid.Row="1" Header="品牌入驻">
+            <!--<GroupBox Grid.Row="1" Header="品牌入驻">
                 <Grid Grid.Column="4" Grid.Row="0" Grid.RowSpan="11">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="300*"></ColumnDefinition>
@@ -68,9 +67,9 @@
                         </ListBox>
                     </GroupBox>
                 </Grid>
-            </GroupBox>
+            </GroupBox>-->
 
-            <GroupBox Grid.Row="2" Header="添加促销活动">
+            <GroupBox Grid.Row="1" Header="添加促销活动">
                 <Grid Grid.Column="2" Grid.Row="0" Grid.RowSpan="11">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="300*"></ColumnDefinition>
@@ -91,8 +90,8 @@
         
         <Grid Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="1" Background="White">
             <StackPanel  VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,20,0" Orientation="Horizontal" >
-                <Button x:Name="btn_saveBrandIn"  Content="入驻品牌" Style="{DynamicResource navBtnCommonStyle}" Background="Transparent"  Width="60" Height="30" Margin="0,0,10,0" Click="btn_saveBrandIn_Click" ></Button>
-                <Button x:Name="btn_delBrandIn"  Content="撤销品牌" Style="{DynamicResource navBtnCommonStyle}" Background="Transparent"  Width="60" Height="30" Margin="0,0,10,0" Click="btn_delBrandIn_Click"  />
+                <!--<Button x:Name="btn_saveBrandIn"  Content="入驻品牌" Style="{DynamicResource navBtnCommonStyle}" Background="Transparent"  Width="60" Height="30" Margin="0,0,10,0" Click="btn_saveBrandIn_Click" ></Button>
+                <Button x:Name="btn_delBrandIn"  Content="撤销品牌" Style="{DynamicResource navBtnCommonStyle}" Background="Transparent"  Width="60" Height="30" Margin="0,0,10,0" Click="btn_delBrandIn_Click"  />-->
                 <Button x:Name="btn_saveSalePromotionIn"  Content="入驻活动" Style="{DynamicResource navBtnCommonStyle}" Background="Transparent"  Width="60" Height="30" Margin="0,0,10,0" Click="btn_saveSalePromotionIn_Click" ></Button>
                 <Button x:Name="btn_delSalePromotionIn"  Content="撤销活动" Style="{DynamicResource navBtnCommonStyle}" Background="Transparent"  Width="60" Height="30" Margin="0,0,10,0" Click="btn_delSalePromotionIn_Click"  />
             </StackPanel>

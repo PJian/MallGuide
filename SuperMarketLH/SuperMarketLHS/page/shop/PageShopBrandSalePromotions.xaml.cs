@@ -45,7 +45,7 @@ namespace SuperMarketLHS.page.shop
             allSalePromotion = SqlHelper.getAllSalePromotions();
             allBrand = SqlHelper.getAllBrands();
             this.list_allSalePromotions.ItemsSource = allSalePromotion;
-            this.list_allBrands.ItemsSource = allBrand;
+            //this.list_allBrands.ItemsSource = allBrand;
             reloadShops();
             if (this.list_allShops.Items.Count > 0) {
                 this.list_allShops.SelectedIndex = 0;
@@ -68,10 +68,10 @@ namespace SuperMarketLHS.page.shop
 
         private void list_allBrands_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (this.list_allBrands.SelectedItem != null) {
-                this.currentSelectBrand = this.list_allBrands.SelectedItem as Brand;
-                this.list_allShopsBrandin.ItemsSource = SqlHelper.getAllShopBrandIn(this.currentSelectBrand);
-            }
+            //if (this.list_allBrands.SelectedItem != null) {
+            //    this.currentSelectBrand = this.list_allBrands.SelectedItem as Brand;
+            //    this.list_allShopsBrandin.ItemsSource = SqlHelper.getAllShopBrandIn(this.currentSelectBrand);
+            //}
         }
 
         private void list_allSalePromotions_SelectionChanged(object sender, SelectionChangedEventArgs e)

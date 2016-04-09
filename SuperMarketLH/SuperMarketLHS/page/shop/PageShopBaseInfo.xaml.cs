@@ -27,6 +27,7 @@ namespace SuperMarketLHS.page.shop
         private ObservableCollection<Shop> allShops;
         private Shop currentEditShop;
         private MainWindow rootWin;
+      //  private Brand currentEditBrand;
 
         public PageShopBaseInfo(MainWindow rootWin)
         {
@@ -50,6 +51,7 @@ namespace SuperMarketLHS.page.shop
             if (this.currentEditShop != null)
             {
                 userControl_logo.ImgPath = this.currentEditShop.Logo;
+                //设施图片
                 if (this.currentEditShop.Facilities != null)
                 {
                     userControl_facilities.changeImgs(this.currentEditShop.Facilities.ToList());
@@ -57,8 +59,17 @@ namespace SuperMarketLHS.page.shop
                 else {
                     userControl_facilities.changeImgs(new string[0].ToList());
                 }
+                //品牌图片
+                if (this.currentEditShop.BrandImgs != null)
+                {
+                    this.userControl_brandImgs.changeImgs(this.currentEditShop.BrandImgs.ToList());
+                }
+                else
+                {
+                    userControl_brandImgs.changeImgs(new string[0].ToList());
+                }
+
             }
-            //设施图片的显示
             
 
             //下拉框的显示
@@ -90,6 +101,10 @@ namespace SuperMarketLHS.page.shop
             else {
                 this.time_start.SelectedTime = null;
             }
+
+            //品牌图片的显示
+
+
         }
         private void Page_Loaded_1(object sender, RoutedEventArgs e)
         {
@@ -118,11 +133,14 @@ namespace SuperMarketLHS.page.shop
             this.currentEditShop.Logo = WinUtil.copyOne(userControl_logo.ImgPath, ConstantData.getShopLogoDataFolder(id));
             //设施图片
             this.currentEditShop.Facilities = WinUtil.copyImg(userControl_facilities.ImgPathes, ConstantData.getBrandFacilitiesDataFolder(id)).ToArray();
+            //品牌图片
+            this.currentEditShop.BrandImgs = WinUtil.copyImg(this.userControl_brandImgs.ImgPathes, ConstantData.getShopBrandImgsDataFolder(id)).ToArray();
         }
         private void handleImgDel(int id)
         {
             WinUtil.delFile(ConstantData.getBrandLogoDataFolder(id), new String[] { this.currentEditShop.Logo }.ToList());
             WinUtil.delFile(ConstantData.getBrandFacilitiesDataFolder(id), currentEditShop.Facilities.ToList());
+            WinUtil.delFile(ConstantData.getShopBrandImgsDataFolder(id), currentEditShop.BrandImgs.ToList());
         }
 
         /// <summary>
@@ -242,5 +260,9 @@ namespace SuperMarketLHS.page.shop
             }
             
         }
+
+      
+
+
     }
 }

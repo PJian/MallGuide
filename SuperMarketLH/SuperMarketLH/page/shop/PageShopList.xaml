@@ -7,16 +7,33 @@
       d:DesignHeight="505" d:DesignWidth="1660"
 	Title="PageShopList" Loaded="Page_Loaded_1">
 
-    <Grid>
-       
-        <my:SurfaceListBox x:Name="surfaceListBox" Visibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" SelectionChanged="surfaceListBox_SelectionChanged" VerticalAlignment="Top" ItemContainerStyle="{DynamicResource styledListItemShop}">
-            <ListBox.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <WrapPanel IsItemsHost="True"/>
-                </ItemsPanelTemplate>
-            </ListBox.ItemsPanel>
-        </my:SurfaceListBox>
-        <usercontrl:UserControlShowIMgs7 x:Name="userCtrlImgs"></usercontrl:UserControlShowIMgs7>
+    <Grid Height="505" Width="1660">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1660*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="460*"></RowDefinition>
+            <RowDefinition Height="45*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Grid.Column="0" Grid.Row="0">
+            <my:SurfaceListBox x:Name="surfaceListBox" Visibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" SelectionChanged="surfaceListBox_SelectionChanged" VerticalAlignment="Top" ItemContainerStyle="{DynamicResource styledListItemShop}">
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel IsItemsHost="True"/>
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel> 
+            </my:SurfaceListBox>
+          
+        </Grid>
+        <Grid Grid.Column="0" Grid.Row="1" x:Name="grid_page">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button Width="80" Height="35" Content="上一页" x:Name="btn_prePage" Click="btn_prePage_Click" IsEnabled="False" Style="{DynamicResource pageBtnShopStyle1}" Background="#FCBC27"></Button>
+                <Button Width="35" Height="35" Content="{Binding PageCurrent}" Click="btn_prePage_Click" IsEnabled="False" Style="{DynamicResource pageBtnShopStyle1}" Background="#44DAFB" Margin="10,0"></Button>
+                <Button Width="80" Height="35" Content="下一页" x:Name="btn_nextPage" Click="btn_nextPage_Click" Style="{DynamicResource pageBtnShopStyle1}" Background="#FCBC27"></Button>
+            </StackPanel>
+           
+        </Grid>
+        <usercontrl:UserControlShowIMgs7 x:Name="userCtrlImgs" Grid.ColumnSpan="1" Grid.RowSpan="2" Visibility="Collapsed"></usercontrl:UserControlShowIMgs7>
         <!--<usercontrl:UserControlShowImgs x:Name="userCtrlImgs" Visibility="Collapsed"/>-->
     </Grid>
 </Page>

@@ -29,7 +29,7 @@
                         <ImageBrush ImageSource="/SuperMarketLHS;component/img/mall/shopMall.png"/>
                     </Button.Background>
                 </Button>
-                <Button x:Name="btn_editGlobalProjectInfo" Style="{DynamicResource leftNavBtnStyle}" Tag="全国项目简介"  BorderThickness="0,2" Click="btn_editGlobalProjectInfo_Click">
+                <Button x:Name="btn_editGlobalProjectInfo" Style="{DynamicResource leftNavBtnStyle}" Tag="集团简介"  BorderThickness="0,2" Click="btn_editGlobalProjectInfo_Click">
                     <Button.Background>
                         <ImageBrush ImageSource="/SuperMarketLHS;component/img/mall/Project.png"/>
                     </Button.Background>

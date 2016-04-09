@@ -94,6 +94,7 @@
     <Compile Include="entity\Question.cs" />
     <Compile Include="entity\SalePromotion.cs" />
     <Compile Include="entity\Shop.cs" />
+    <Compile Include="entity\SplitPage.cs" />
     <Compile Include="nav\AStar.cs" />
     <Compile Include="nav\BinaryHeap.cs" />
     <Compile Include="nav\MapUtil.cs" />

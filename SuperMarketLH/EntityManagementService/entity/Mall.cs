@@ -10,7 +10,8 @@ namespace EntityManagementService.entity
     /// </summary>
     public class Mall
     {
-        public Mall() {
+        public Mall()
+        {
             this.ImgPath = new List<string>();
         }
 
@@ -42,7 +43,7 @@ namespace EntityManagementService.entity
             get { return _moviePath; }
             set { _moviePath = value; }
         }
-        private List<string> _imgPath ;
+        private List<string> _imgPath;
 
         public List<string> ImgPath
         {
@@ -52,10 +53,11 @@ namespace EntityManagementService.entity
 
         public override bool Equals(object obj)
         {
+            if (obj == null) return false;
             if (!(obj is Mall))
                 return false;
             Mall m = (Mall)obj;
-            return m.Name!=null && this.Name.Equals(m.Name) && (
+            return m.Name != null && this.Name.Equals(m.Name) && (
 
                 (this.MoviePath == null && m.MoviePath == null) ||
                 this.MoviePath.Equals(m.MoviePath)
@@ -77,7 +79,7 @@ namespace EntityManagementService.entity
 
         public override int GetHashCode()
         {
-            return this.Id.GetHashCode() ;
+            return this.Id.GetHashCode();
         }
     }
 }

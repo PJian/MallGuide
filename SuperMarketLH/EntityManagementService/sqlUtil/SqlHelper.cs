@@ -703,10 +703,10 @@ namespace EntityManageService.sqlUtil
         /// <param name="shop"></param>
         public static int saveShop(Shop shop)
         {
-            string sql = "insert into  tabshop(name,floor,positionNum,logo,label,firstNameChar,catagoryColor,startTime,endTime,introduction,tel,address,zipCode,type,catagoryId,facilities,x,y) values(";
+            string sql = "insert into  tabshop(name,floor,positionNum,logo,label,firstNameChar,catagoryColor,startTime,endTime,introduction,tel,address,zipCode,type,brandImg,catagoryId,facilities,x,y) values(";
             sql += "'" + shop.Name + "','" +
                 (shop.Floor == null ? "" : shop.Floor.Id + "") + "','" + shop.Index + "','" + shop.Logo + "','" + shop.Label + "','" + shop.SortChar + "','" + shop.CatagoryColor + "','" + shop.StartTime + "','" + shop.EndTime + "','" + shop.Introduction + "','" + shop.Tel + "','" + shop.Address + "','" +
-                shop.ZipCode + "','" + shop.Type;
+                shop.ZipCode + "','" + shop.Type + "','" + getImgPaths(shop.BrandImgs);
             sql += "','";
             if (shop.CatagoryName != null)
             {
@@ -772,7 +772,8 @@ namespace EntityManageService.sqlUtil
                 (shop.CatagoryName == null ? "" : "" + shop.CatagoryName.Id) + "',type='" +
                 shop.Type + "',endTime='" +
                 shop.EndTime + "',startTime='" +
-                shop.StartTime + "',facilities='" +
+                shop.StartTime + "',brandImg='"+
+                getImgPaths(shop.BrandImgs) + "',facilities='" +
                 getImgPaths(shop.Facilities) + "',x='" +
                 shop.Door.X + "',y='" +
                 shop.Door.Y + "' where id=" + shop.Id;
@@ -873,6 +874,42 @@ namespace EntityManageService.sqlUtil
             return shops;
         }
 
+        public static List<Shop> getShopByCatagory(Catagory catagory,SplitPage sp)
+        {
+
+            List<Shop> shops = new List<Shop>();
+            if (catagory == null) return shops;
+            string sql = "select id,name,floor,positionNum,logo,label,firstNameChar,catagoryColor,startTime,endTime,introduction,tel,address,zipCode,type,catagoryId,facilities,x,y from tabshop where catagoryId=" + catagory.Id + " limit " + sp.PageSize + " offset " + (sp.PageCurrent - 1) * sp.PageSize;
+            DataTable dt = executeQueryDataTable(sql);
+            foreach (DataRow dr in dt.Rows)
+            {
+                shops.Add(new Shop()
+                {
+                    Id = int.Parse(dr["id"].ToString()),
+                    Name = dr["name"].ToString(),
+                    Floor = getFloorById(dr["floor"].ToString()),
+                    Index = dr["positionNum"].ToString(),
+                    Logo = dr["logo"].ToString(),
+                    Label = dr["label"].ToString(),
+                    SortChar = dr["firstNameChar"].ToString(),
+                    CatagoryColor = dr["catagoryColor"].ToString(),
+                    StartTime = dr["startTime"].ToString(),
+                    EndTime = dr["endTime"].ToString(),
+                    Introduction = dr["introduction"].ToString(),
+                    Tel = dr["tel"].ToString(),
+                    Address = dr["address"].ToString(),
+                    ZipCode = dr["zipCode"].ToString(),
+                    Type = int.Parse(dr["type"].ToString()),
+                    CatagoryName = getCatagoryById(dr["catagoryId"].ToString()),
+                    Brand = getBrandRelatiedWithShop(int.Parse(dr["id"].ToString())),
+                    SalePromotion = getSalePromotionRelatiedWithShop(int.Parse(dr["id"].ToString())),
+                    Facilities = dr["facilities"].ToString().Split(','),
+                    Door = new System.Windows.Point(int.Parse(dt.Rows[0]["x"].ToString()), int.Parse(dt.Rows[0]["y"].ToString()))
+                });
+            }
+            return shops;
+        }
+
         public static List<Shop> getAllShopByFloor(Floor floor)
         {
 
@@ -917,7 +954,7 @@ namespace EntityManageService.sqlUtil
         public static List<Shop> getAllShop()
         {
             List<Shop> shops = new List<Shop>();
-            string sql = "select id,name,floor,positionNum,logo,label,firstNameChar,catagoryColor,startTime,endTime,introduction,tel,address,zipCode,type,catagoryId,facilities,x,y from tabshop";
+            string sql = "select id,name,floor,positionNum,logo,label,firstNameChar,catagoryColor,startTime,endTime,introduction,tel,address,zipCode,type,catagoryId,facilities,x,y,brandImg from tabshop";
             DataTable dt = executeQueryDataTable(sql);
             foreach (DataRow dr in dt.Rows)
             {
@@ -942,11 +979,73 @@ namespace EntityManageService.sqlUtil
                     Brand = getBrandRelatiedWithShop(int.Parse(dr["id"].ToString())),
                     SalePromotion = getSalePromotionRelatiedWithShop(int.Parse(dr["id"].ToString())),
                     Facilities = dr["facilities"].ToString().Split(','),
-                    Door = new System.Windows.Point(int.Parse(dt.Rows[0]["x"].ToString()), int.Parse(dt.Rows[0]["y"].ToString()))
+                    BrandImgs = dr["brandImg"].ToString().Split(','),
+                    Door = new System.Windows.Point(int.Parse(dr["x"].ToString()), int.Parse(dr["y"].ToString()))
                 });
             }
             return shops;
         }
+
+        public static List<Shop> getAllShop(SplitPage sp)
+        {
+            List<Shop> shops = new List<Shop>();
+            string sql = "select id,name,floor,positionNum,logo,label,firstNameChar,catagoryColor,startTime,endTime,introduction,tel,address,zipCode,type,catagoryId,facilities,x,y,brandImg from tabshop limit " + sp.PageSize + " offset " + (sp.PageCurrent - 1) * sp.PageSize;
+            DataTable dt = executeQueryDataTable(sql);
+            foreach (DataRow dr in dt.Rows)
+            {
+                shops.Add(new Shop()
+                {
+                    Id = int.Parse(dr["id"].ToString()),
+                    Name = dr["name"].ToString(),
+                    Floor = getFloorById(dr["floor"].ToString()),
+                    Index = dr["positionNum"].ToString(),
+                    Logo = dr["logo"].ToString(),
+                    Label = dr["label"].ToString(),
+                    SortChar = dr["firstNameChar"].ToString(),
+                    CatagoryColor = dr["catagoryColor"].ToString(),
+                    StartTime = dr["startTime"].ToString(),
+                    EndTime = dr["endTime"].ToString(),
+                    Introduction = dr["introduction"].ToString(),
+                    Tel = dr["tel"].ToString(),
+                    Address = dr["address"].ToString(),
+                    ZipCode = dr["zipCode"].ToString(),
+                    Type = int.Parse(dr["type"].ToString()),
+                    CatagoryName = getCatagoryById(dr["catagoryId"].ToString()),
+                    Brand = getBrandRelatiedWithShop(int.Parse(dr["id"].ToString())),
+                    SalePromotion = getSalePromotionRelatiedWithShop(int.Parse(dr["id"].ToString())),
+                    Facilities = dr["facilities"].ToString().Split(','),
+                    BrandImgs = dr["brandImg"].ToString().Split(','),
+                    Door = new System.Windows.Point(int.Parse(dr["x"].ToString()), int.Parse(dr["y"].ToString()))
+                });
+            }
+            return shops;
+        }
+
+        /// <summary>
+        /// 分页店铺总数
+        /// </summary>
+        /// <returns></returns>
+        public static int selectShopCount(Catagory catagory){
+            int shopCount;
+            string sql = "select count(id) from tabshop where catagoryId=" + catagory.Id;
+            DataTable dt = executeQueryDataTable(sql);
+            shopCount = int.Parse(dt.Rows[0][0].ToString());
+            return shopCount;
+        }
+
+        /// <summary>
+        /// 分页店铺总数
+        /// </summary>
+        /// <returns></returns>
+        public static int selectShopCount()
+        {
+            int shopCount;
+            string sql = "select count(id) from tabshop";
+            DataTable dt = executeQueryDataTable(sql);
+            shopCount = int.Parse(dt.Rows[0][0].ToString());
+            return shopCount;
+        }
+
         /// <summary>
         /// 为商铺和品牌建立关联
         /// </summary>

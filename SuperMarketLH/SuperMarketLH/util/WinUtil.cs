@@ -9,6 +9,10 @@ namespace SuperMarketLH.util
 {
     public class WinUtil
     {
+
+
+
+        public const int PAGE_SIZE = 21;   //每页店铺展示数目
         /// <summary>
         /// 要跳转的页面索引
         /// </summary>
