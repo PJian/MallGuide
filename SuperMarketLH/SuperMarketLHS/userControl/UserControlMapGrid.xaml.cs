@@ -3,6 +3,7 @@ using EntityManagementService.nav;
 using EntityManagementService.util;
 using EntityManageService.sqlUtil;
 using SuperMarketLHS.comm;
+using SuperMarketLHS.uientity;
 using SuperMarketLHS.win;
 using System;
 using System.Collections.Generic;
@@ -173,16 +174,17 @@ namespace SuperMarketLHS.userControl
             draw_state = CavasUtil.DRAW_STATE_DRAWING_AREA;//此时可以画圈圈
             drawCanvas();
         }
-        private void UserControl_Loaded_1(object sender, RoutedEventArgs e)
-        {
-            // init();
-        }
+        //private void UserControl_Loaded_1(object sender, RoutedEventArgs e)
+        //{
+        //    // init();
+        //}
 
         public event PropertyChangedEventHandler PropertyChanged;
 
 
 
-        private void drawArea(Point temp) {
+        private void drawArea(Point temp)
+        {
             if (draw_state == CavasUtil.DRAW_STATE_DRAWING_AREA)
             {
                 //画区域阶段
@@ -211,62 +213,102 @@ namespace SuperMarketLHS.userControl
             }
         }
 
+        /// <summary>
+        /// 删除指定的区域
+        /// </summary>
+        /// <param name="o1"> 当前正在编辑的缓存 </param>
+        /// <param name="o2">已经保存的数据</param>
+        private void delObstacle(Obstacle o1, Obstacle o2)
+        {
+            if (MessageBox.Show("当前区域已经有内容！不可进行编辑，是否删除原有区域！", "区域删除？", MessageBoxButton.YesNo) ==
+                      MessageBoxResult.Yes)
+            {
+                if (o1 != null)
+                {
+                    delObstacle(o1);
+                    if (this.CurrentEditMap.Areas.Count <= 0)
+                    {
+                        this.currentEditFloor.Map = "";
+                        SqlHelper.updateFloor(this.currentEditFloor);
+                    }
+                    else
+                    {
+                        SerialUtil.writeMap(this.currentEditFloor, this.CurrentEditMap);
+                    }
+                }
+                else if (o2 != null)
+                {
+                    delObstacle(o2);
+                }
+                //初始化
+                // init();
+                MessageBox.Show("删除成功！");
+            }
+        }
+
         private void Grid_MouseLeftButtonDown_1(object sender, MouseButtonEventArgs e)
         {
             Point temp = e.GetPosition(this.grid_info);
-            Obstacle o1= MapUtil.getClickArea(temp, this.CurrentEditMap.Areas) ;
+            Obstacle o1 = MapUtil.getClickArea(temp, this.CurrentEditMap.Areas);
             Obstacle o2 = MapUtil.getClickArea(temp, this.allEditTempObstacle);
-            if (o1== null && o2 == null )
+            if (o1 == null && o2 == null)
             {
                 if (this.EditState == CavasUtil.DRAW_STATE)
                     drawArea(temp);
-               
+
             }
             else
             {
                 if (this.EditState == CavasUtil.DRAW_STATE)
                 {
-                    if (MessageBox.Show("当前区域已经有内容！不可进行编辑，是否删除原有区域！", "区域删除？", MessageBoxButton.YesNo) ==
-                       MessageBoxResult.Yes)
-                    {
-                        if (o1 != null)
-                        {
-                            delObstacle(o1);
-                            if (this.CurrentEditMap.Areas.Count <= 0)
-                            {
-                                this.currentEditFloor.Map = "";
-                                SqlHelper.updateFloor(this.currentEditFloor);
-                            }
-                            else
-                            {
-                                SerialUtil.writeMap(this.currentEditFloor, this.CurrentEditMap);
-                            }
-                        }
-                        else if (o2 != null)
-                        {
-                            delObstacle(o2);
-                        }
-                        //初始化
-                        // init();
-                        MessageBox.Show("删除成功！");
-                    }
+                    delObstacle(o1, o2);
                 }
                 else if (this.EditState == CavasUtil.SHOP_IN_STATE)
                 {
                     //商铺入驻
                     //o1 被商铺入驻
-                    shopIn(o1);
+                    //  shopIn(o1);
                 }
             }
 
+        }
 
+        /// <summary>
+        /// 商铺撤销
+        /// </summary>
+        /// <param name="o"></param>
+        private void shopOut(Obstacle o)
+        {
+            if (!o.Type.Equals(ObstacleType.SHOP))
+            {
+                MessageBox.Show("当前区域类型不可撤销商铺！");
+                return;
+            }
+
+            if (o.Shop != null)
+            {
+                if (MessageBox.Show("确认撤销商铺？", "商铺撤销", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                {
+
+                    o.Shop.Door = new Point(0, 0);
+                    o.Shop.Floor = null;
+                    o.Shop.Index = "";
+                    SqlHelper.updateShop(o.Shop);//更新原有的商铺
+                    o.Shop = null;
+                    saveMap(this.CurrentEditFloor, this.CurrentShop);
+                    MessageBox.Show("撤销成功！");
+                }
+            }
 
         }
+
+
         /// <summary>
         /// 商铺入驻
         /// </summary>
         /// <param name="o"></param>
-        private void shopIn(Obstacle o) {
+        private void shopIn(Obstacle o)
+        {
             if (!o.Type.Equals(ObstacleType.SHOP))
             {
                 MessageBox.Show("当前区域类型不可入驻商铺！");
@@ -276,11 +318,12 @@ namespace SuperMarketLHS.userControl
             {
                 if (MessageBox.Show("该区域已经有商铺入驻，是否替换？", "商铺入驻", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                 {
-                    if (this.CurrentShop == null) {
+                    if (this.CurrentShop == null)
+                    {
                         MessageBox.Show("请选入驻商铺！");
                         return;
                     }
-                    o.Shop.Door = new Point(0,0);
+                    o.Shop.Door = new Point(0, 0);
                     o.Shop.Floor = null;
                     o.Shop.Index = "";
                     SqlHelper.updateShop(o.Shop);//更新原有的商铺
@@ -293,8 +336,10 @@ namespace SuperMarketLHS.userControl
                     MessageBox.Show("替换成功！");
                 }
             }
-            else {
-                if (this.CurrentShop == null) {
+            else
+            {
+                if (this.CurrentShop == null)
+                {
                     MessageBox.Show("商铺不能为空！");
                     return;
                 }
@@ -305,17 +350,11 @@ namespace SuperMarketLHS.userControl
                 this.CurrentShop.Index = o.Index;
                 o.Shop = this.CurrentShop;
                 SqlHelper.updateShop(this.CurrentShop);
-                saveMap(this.CurrentEditFloor,this.CurrentShop);
+                saveMap(this.CurrentEditFloor, this.CurrentShop);
                 MessageBox.Show("已入驻！");
             }
         }
-        /// <summary>
-        /// 判断商铺是否已经入驻了
-        /// </summary>
-        /// <param name="shop"></param>
-        private void judgeShopHasIn(Shop shop) { 
-            
-        }
+
 
         /// <summary>
         /// 画门
@@ -323,12 +362,13 @@ namespace SuperMarketLHS.userControl
         private void drawDoor(Point temp)
         {
             //画门的阶段
-            int [,] tempMapState = new int[MapUtil.MAP_HEIGHT,MapUtil.MAP_WIDHT];
-            MapUtil.fillMapState(tempMapState,this.CurrentEditObstacle,1);
-            if (tempMapState[(int)temp.Y / 4, (int)temp.X / 4] == 1) {
+            int[,] tempMapState = new int[MapUtil.MAP_HEIGHT, MapUtil.MAP_WIDHT];
+            MapUtil.fillMapState(tempMapState, this.CurrentEditObstacle, 1);
+            if (tempMapState[(int)temp.Y / 4, (int)temp.X / 4] == 1)
+            {
                 MessageBox.Show("门的位置太近了，请稍远些！");
-                return ;
-            }    
+                return;
+            }
             CavasUtil.drawEllipseDoor(this.grid_info, (int)temp.Y / 4, (int)temp.X / 4);
             CurrentEditObstacle.Door = temp;
             draw_state = CavasUtil.DRAW_STATE_DRAWING_DONE;
@@ -345,23 +385,107 @@ namespace SuperMarketLHS.userControl
             drawDoor(temp);
         }
 
+        private ContextMenu getGridContextMenu()
+        {
+            return FindResource("grid_contextMenu") as ContextMenu;
+        }
+
+        /// <summary>
+        /// 显示右键菜单
+        /// </summary>
+        private void showContextMenu(Point p)
+        {
+            Obstacle o1 = MapUtil.getClickArea(p, this.CurrentEditMap.Areas);
+            if (o1 != null)
+            {
+                // this.btn_areaInfo.Header = string.Format("区域编号：{0}",o1.Index);
+                this.CurrentEditObstacle = o1;
+                this.grid_info.ContextMenu = getGridContextMenu();
+                Visibility delArea = System.Windows.Visibility.Collapsed;//店铺入驻阶段是不能删除区域的
+                if (this.EditState == CavasUtil.DRAW_STATE)
+                {
+                    delArea = System.Windows.Visibility.Visible;
+                }
+                else if (this.EditState == CavasUtil.SHOP_IN_STATE)
+                {
+                    delArea = System.Windows.Visibility.Collapsed;
+                }
+
+                if (this.CurrentEditObstacle.Type.Equals(ObstacleType.SHOP))
+                {
+                    //可以入驻
+                    Visibility shopInVisibility = Visibility.Visible;
+                    Visibility ShopOutVisibility = Visibility.Collapsed;
+                    if (this.CurrentEditObstacle.Shop == null)
+                    {
+                        shopInVisibility = System.Windows.Visibility.Visible;
+                        ShopOutVisibility = System.Windows.Visibility.Collapsed;
+                    }
+                    else
+                    {
+                        shopInVisibility = System.Windows.Visibility.Collapsed;
+                        ShopOutVisibility = System.Windows.Visibility.Visible;
+                    }
+
+                    this.grid_info.ContextMenu.DataContext = new MapGridContextMenuUiEntity()
+                    {
+                        CurrentObstacleIndex = "区域编号:" + this.CurrentEditObstacle.Index,
+                        ShowMenuItemOfAddShop = shopInVisibility,
+                        ShowMenuItemOfShopIn = shopInVisibility,
+                        ShowMenuItemOfShopOut = ShopOutVisibility,
+                        DelArea = delArea
+                    };
+                }
+                else
+                {
+                    this.grid_info.ContextMenu.DataContext = new MapGridContextMenuUiEntity()
+                    {
+                        CurrentObstacleIndex = "区域编号:" + this.CurrentEditObstacle.Index,
+                        ShowMenuItemOfAddShop = Visibility.Collapsed,
+                        ShowMenuItemOfShopIn = Visibility.Collapsed,
+                        ShowMenuItemOfShopOut = Visibility.Collapsed,
+                        DelArea = delArea
+                    };
+
+                }
+            }
+            else
+            {
+                this.grid_info.ContextMenu = null;
+            }
+        }
+
+
         private void grid_info_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
-            if (this.currentEditArea == null || this.currentEditArea.Count <= 2) {
-                return;
+
+            if (this.EditState == CavasUtil.SHOP_IN_STATE)
+            {
+                //商铺入驻阶段
+                Point temp = e.GetPosition(this.grid_info);
+                showContextMenu(temp);
             }
-            //闭合曲线
-            CavasUtil.drawPolygon(this.map_continer, this.currentEditArea);
-            startPoint = new Point(0, 0);
-            endPoint = startPoint;
-            CurrentEditObstacle.Boundary = this.currentEditArea;
-            this.allEditTempObstacle.Add(this.CurrentEditObstacle);
-            //计算闭合区域中的数组元素的状态
-             fillMapState(new int[,]{{}}, this.CurrentEditObstacle, 1);
-            //清除
-            currentEditArea = new List<Point>();
-            //状态变更
-            draw_state = CavasUtil.DRAW_STATE_DRAWING_DOOR;//开始画们
+            else
+            {
+                if (this.currentEditArea == null || this.currentEditArea.Count <= 2)
+                {
+                    return;
+                }
+                //闭合曲线
+                CavasUtil.drawPolygon(this.map_continer, this.currentEditArea);
+                startPoint = new Point(0, 0);
+                endPoint = startPoint;
+                CurrentEditObstacle.Boundary = this.currentEditArea;
+                this.allEditTempObstacle.Add(this.CurrentEditObstacle);
+                //计算闭合区域中的数组元素的状态
+                fillMapState(new int[,] { { } }, this.CurrentEditObstacle, 1);
+                //清除
+                currentEditArea = new List<Point>();
+                //状态变更
+                draw_state = CavasUtil.DRAW_STATE_DRAWING_DOOR;//开始画门
+            }
+
+
         }
         /// <summary>
         /// 填充临时地图的状态
@@ -377,18 +501,6 @@ namespace SuperMarketLHS.userControl
             obstacle.MaxX = maxX;
             obstacle.MinY = minY;
             obstacle.MaxY = maxY;
-
-
-            //for (int i = minX; i <= maxX; i++)
-            //{
-            //    for (int j = minY; j <= maxY; j++)
-            //    {
-            //        if (MapUtil.pnpoly(new Point(i, j), obstacle.Boundary))
-            //        {
-            //            maps[j / CavasUtil.GRID_PIX_HEIGHT, i / CavasUtil.GRID_PIX_WIDTH] = value;
-            //        }
-            //    }
-            //}
         }
 
         /// <summary>
@@ -402,7 +514,7 @@ namespace SuperMarketLHS.userControl
                 MessageBox.Show("请选择区域类型！");
                 return false;
             }
-           
+
             return setAndValidateObstacleIndex(obstacleIndex);
         }
 
@@ -439,6 +551,19 @@ namespace SuperMarketLHS.userControl
         //    }
 
         //}
+
+        /// <summary>
+        /// 保存当前编辑的地图
+        /// </summary>
+        private void saveMap()
+        {
+            if (this.CurrentEditFloor != null || this.CurrentEditMap != null)
+            {
+                SerialUtil.writeMap(currentEditFloor, this.CurrentEditMap);
+                this.currentEditFloor.Map = ConstantData.getMapDataFileName(this.currentEditFloor);
+                SqlHelper.updateFloor(this.currentEditFloor);
+            }
+        }
 
         /// <summary>
         /// 保存地图
@@ -480,11 +605,12 @@ namespace SuperMarketLHS.userControl
                     }
                 }
             }
-            else if (EditState == CavasUtil.SHOP_IN_STATE) { 
+            else if (EditState == CavasUtil.SHOP_IN_STATE)
+            {
                 //商铺入驻阶段保存
                 SerialUtil.writeMap(floor, this.CurrentEditMap);
             }
-           
+
 
         }
 
@@ -492,7 +618,6 @@ namespace SuperMarketLHS.userControl
         public void saveMap(Floor floor, Shop shop)
         {
             SerialUtil.writeMap(floor, this.CurrentEditMap);
-
         }
 
 
@@ -503,9 +628,9 @@ namespace SuperMarketLHS.userControl
         /// <returns></returns>
         private bool setAndValidateObstacleIndex(string str)
         {
-            if (( this.CurrentEditObstacle.Index==null || "".Equals(this.CurrentEditObstacle.Index) )&&(this.CurrentEditObstacle.Type.Equals(ObstacleType.ELEVATOR) ||
+            if ((this.CurrentEditObstacle.Index == null || "".Equals(this.CurrentEditObstacle.Index)) && (this.CurrentEditObstacle.Type.Equals(ObstacleType.ELEVATOR) ||
                 this.CurrentEditObstacle.Type.Equals(ObstacleType.ESCALATOR) ||
-                this.CurrentEditObstacle.Type.Equals(ObstacleType.STAIRS) ))
+                this.CurrentEditObstacle.Type.Equals(ObstacleType.STAIRS)))
             {
                 if (str != null)
                 {
@@ -523,7 +648,8 @@ namespace SuperMarketLHS.userControl
                             return true;
                         }
                     }
-                    else {
+                    else
+                    {
                         MessageBox.Show("电梯编号应该为数字！");
                         return false;
                     }
@@ -532,12 +658,14 @@ namespace SuperMarketLHS.userControl
                 MessageBox.Show("请填写电梯,扶梯或者楼梯编号！（上下层之间编号需要一致）");
                 return false;
             }
-            else if(this.CurrentEditObstacle.Type.Equals(ObstacleType.SHOP)){
+            else if (this.CurrentEditObstacle.Type.Equals(ObstacleType.SHOP))
+            {
                 if (str != null)
                 {
                     int rtn = 0;
                     //查看编号是否已经存在，当前楼层
-                    if (this.CurrentEditMap.Areas != null) {
+                    if (this.CurrentEditMap.Areas != null)
+                    {
                         List<Obstacle> os = this.CurrentEditMap.Areas;
                         foreach (Obstacle o in os)
                         {
@@ -548,7 +676,7 @@ namespace SuperMarketLHS.userControl
                             }
                         }
                     }
-                   
+
                     this.currentEditObstacle.Index = str;//设置编号
                     return true;
                 }
@@ -589,7 +717,8 @@ namespace SuperMarketLHS.userControl
         /// </summary>
         public void avoidLastStep()
         {
-            if ((this.allEditTempObstacle == null || this.allEditTempObstacle.Count == 0 )&&( this.currentEditArea == null || this.currentEditArea.Count == 0)) {
+            if ((this.allEditTempObstacle == null || this.allEditTempObstacle.Count == 0) && (this.currentEditArea == null || this.currentEditArea.Count == 0))
+            {
                 return;
             }
             if (draw_state == CavasUtil.DRAW_STATE_DRAWING_DOOR)
@@ -729,7 +858,7 @@ namespace SuperMarketLHS.userControl
             this.currentEditArea = new List<Point>();
             drawCanvas();
             draw_state = CavasUtil.DRAW_STATE_DRAWING_AREA;
-            startPoint = new Point(0,0);
+            startPoint = new Point(0, 0);
         }
         /// <summary>
         /// 全部删除
@@ -740,7 +869,7 @@ namespace SuperMarketLHS.userControl
             this.CurrentEditFloor.Map = "";
             //数据库保存
             SqlHelper.updateFloor(this.CurrentEditFloor);
-           // drawCanvas();
+            // drawCanvas();
             //draw_state = CavasUtil.DRAW_STATE_DRAWING_AREA;
             init();
         }
@@ -788,10 +917,10 @@ namespace SuperMarketLHS.userControl
         /// <param name="obstacles"></param>
         private void removeObstacle(Obstacle o, List<Obstacle> obstacles)
         {
-            if (obstacles == null) return ;
+            if (obstacles == null) return;
             foreach (Obstacle obstacle in obstacles)
             {
-                bool flag = judgeObstacleEqualse(o,obstacle);
+                bool flag = judgeObstacleEqualse(o, obstacle);
                 if (flag)
                 {
                     obstacles.Remove(obstacle);
@@ -801,6 +930,9 @@ namespace SuperMarketLHS.userControl
             }
         }
 
+
+
+
         /// <summary>
         /// 删除某区域
         /// </summary>
@@ -808,17 +940,18 @@ namespace SuperMarketLHS.userControl
         public void delObstacle(Obstacle o)
         {
             if (o == null) return;
-           
+
             //绘画列表中删去
             removeObstacle(o, this.CurrentEditMap.Areas);
             removeObstacle(o, this.allEditTempObstacle);
-            if (judgeObstacleEqualse(o, this.CurrentEditObstacle)) {
+            if (judgeObstacleEqualse(o, this.CurrentEditObstacle))
+            {
                 this.CurrentEditObstacle = new Obstacle();
                 this.currentEditArea = new List<Point>();
             }
-            removeObstacle(o, new Obstacle[]{this.CurrentEditObstacle}.ToList());
+            removeObstacle(o, new Obstacle[] { this.CurrentEditObstacle }.ToList());
             //地图中删去
-           // fillMapState(this.mapValue, o, -1);
+            // fillMapState(this.mapValue, o, -1);
             drawCanvas();
             //更新关联的商铺
             if (o.Shop != null)
@@ -829,7 +962,7 @@ namespace SuperMarketLHS.userControl
                 SqlHelper.updateShop(o.Shop);//更新原有的商铺
             }
 
-          //  draw_state = CavasUtil.DRAW_STATE_DRAWING_AREA;
+            //  draw_state = CavasUtil.DRAW_STATE_DRAWING_AREA;
         }
         /// <summary>
         /// 删除当前正在编辑的区域
@@ -847,24 +980,37 @@ namespace SuperMarketLHS.userControl
             this.CurrentEditObstacle.Type = type;
         }
 
-        private void grid_info_ContextMenuOpening(object sender, ContextMenuEventArgs e)
-        {
 
-        }
 
         private void btn_new_shop_Click(object sender, RoutedEventArgs e)
         {
-            if(this.currentEditObstacle!=null)
+            if (this.currentEditObstacle != null)
                 new NewShopWin(this.currentEditObstacle).ShowDialog();
         }
 
         private void btn_shopIn_Click(object sender, RoutedEventArgs e)
         {
-            if (this.currentEditObstacle != null) {
+            if (this.currentEditObstacle != null)
+            {
                 new ShopInWin(this.currentEditObstacle).ShowDialog();
             }
         }
 
-      
+        private void btn_delArea_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.CurrentEditObstacle != null && MessageBox.Show("确认删除当前区域？", "区域删除？", MessageBoxButton.YesNo) ==
+                      MessageBoxResult.Yes)
+            {
+                delObstacle(this.CurrentEditObstacle);
+                saveMap();//
+            }
+
+        }
+
+        private void btn_shopOut_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.CurrentEditObstacle != null)
+                shopOut(this.CurrentEditObstacle);
+        }
     }
 }
