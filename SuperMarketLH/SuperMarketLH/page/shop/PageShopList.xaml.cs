@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace SuperMarketLH.page.shop
 {
@@ -27,7 +28,7 @@ namespace SuperMarketLH.page.shop
         private PageShop parent;
         private SplitPage sp;
         private int shopCount;
-
+        private DispatcherTimer goToNextPageTimer;
         public PageShopList(PageShop parent)
         {
             InitializeComponent();
@@ -98,11 +99,34 @@ namespace SuperMarketLH.page.shop
             loadImgCounter(sp.PageCurrent);
             
         }
-      
+        private void releaseTimer() {
+            if (this.goToNextPageTimer != null) {
+                this.goToNextPageTimer.IsEnabled = false;
+                this.goToNextPageTimer = null;
+            }
+        }
+
+        /// <summary>
+        /// 加载定时器，自动翻页
+        /// </summary>
+        private void loadPageTimer() {
+            this.goToNextPageTimer = new DispatcherTimer();
+            this.goToNextPageTimer.Tick += goToNextPageTimer_Tick;
+            this.goToNextPageTimer.Interval = TimeSpan.FromSeconds(10);
+            this.goToNextPageTimer.IsEnabled = true;
+        }
+
+        void goToNextPageTimer_Tick(object sender, EventArgs e)
+        {
+            getNextItem();
+        }
+
         private void Page_Loaded_1(object sender, RoutedEventArgs e)
         {
             calculatePageCount();
             init();
+            loadPageTimer();
+
         }
 
         private void surfaceListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -120,7 +144,7 @@ namespace SuperMarketLH.page.shop
             }
             else
             {
-                sp.PageCurrent = 0;
+                sp.PageCurrent = 1;
                 init();
             }
         }
@@ -194,36 +218,7 @@ namespace SuperMarketLH.page.shop
             }
         }
 
-        private void Grid_MouseDown_1(object sender, MouseButtonEventArgs e)
-        {
-            startX = e.GetPosition(shopListGrid).X;
-        }
-
-        private void Grid_MouseMove_1(object sender, MouseEventArgs e)
-        {
-            endX = e.GetPosition(shopListGrid).X;
-        }
-
-        private void Grid_MouseUp_1(object sender, MouseButtonEventArgs e)
-        {
-            compareX(startX, endX);
-        }
-
-        private void Grid_TouchDown_1(object sender, TouchEventArgs e)
-        {
-            startX = e.GetTouchPoint(shopListGrid).Position.X;
-        }
-
-        private void Grid_TouchMove_1(object sender, TouchEventArgs e)
-        {
-            endX = e.GetTouchPoint(shopListGrid).Position.X;
-        }
-
-        private void Grid_TouchUp_1(object sender, TouchEventArgs e)
-        {
-            compareX(startX, endX);
-        }
-
+       
         private void shopListGrid_PreviewMouseDown_1(object sender, MouseButtonEventArgs e)
         {
             startX = e.GetPosition(shopListGrid).X;
@@ -252,6 +247,11 @@ namespace SuperMarketLH.page.shop
         private void shopListGrid_PreviewTouchUp_1(object sender, TouchEventArgs e)
         {
             compareX(startX, endX);
+        }
+
+        private void Page_Unloaded(object sender, RoutedEventArgs e)
+        {
+            releaseTimer();
         }
 
 

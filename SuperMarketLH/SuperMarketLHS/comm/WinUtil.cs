@@ -37,6 +37,22 @@ namespace SuperMarketLHS.comm
             return null;
         }
         /// <summary>
+        /// 选择多张图片
+        /// </summary>
+        /// <returns></returns>
+        public static string chooseMultiImg()
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "全部|*.*|JPEG|*.JPEG|PNG|*.PNG|JPG|*.JPG";
+            ofd.Title = "请选择图片";
+            if ((bool)ofd.ShowDialog())
+            {
+                return ofd.FileName;
+            }
+            return null;
+        }
+
+        /// <summary>
         /// 选择影片
         /// </summary>
         /// <returns></returns>

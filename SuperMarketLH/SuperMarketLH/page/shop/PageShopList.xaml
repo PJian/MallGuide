@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       mc:Ignorable="d" 
       d:DesignHeight="505" d:DesignWidth="1660"
-	Title="PageShopList" Loaded="Page_Loaded_1">
+	Title="PageShopList" Loaded="Page_Loaded_1" Unloaded="Page_Unloaded">
 
     <Grid Height="505" Width="1660">
         <Grid.ColumnDefinitions>
@@ -15,10 +15,10 @@
             <RowDefinition Height="460*"></RowDefinition>
             <RowDefinition Height="45*"></RowDefinition>
         </Grid.RowDefinitions>
-        <Grid x:Name="shopListGrid" Grid.Column="0" Grid.RowSpan="2"  PreviewMouseDown="shopListGrid_PreviewMouseDown_1" PreviewMouseMove="shopListGrid_PreviewMouseMove_1" PreviewMouseUp="shopListGrid_PreviewMouseUp_1" 
+        <Grid x:Name="shopListGrid" Grid.RowSpan="2"  PreviewMouseDown="shopListGrid_PreviewMouseDown_1" PreviewMouseMove="shopListGrid_PreviewMouseMove_1" PreviewMouseUp="shopListGrid_PreviewMouseUp_1" 
               PreviewTouchDown="shopListGrid_PreviewTouchDown_1" PreviewTouchMove="shopListGrid_PreviewTouchMove_1" PreviewTouchUp="shopListGrid_PreviewTouchUp_1"
-              MouseDown="Grid_MouseDown_1" MouseMove="Grid_MouseMove_1" MouseUp="Grid_MouseUp_1" TouchDown="Grid_TouchDown_1" TouchMove="Grid_TouchMove_1" TouchUp="Grid_TouchUp_1" Background="Transparent">
-            <my:SurfaceListBox x:Name="surfaceListBox"  ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" SelectionChanged="surfaceListBox_SelectionChanged" VerticalAlignment="Top" ItemContainerStyle="{DynamicResource styledListItemShop}">
+              Background="Transparent">
+            <my:SurfaceListBox x:Name="surfaceListBox" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" SelectionChanged="surfaceListBox_SelectionChanged" VerticalAlignment="Top" ItemContainerStyle="{DynamicResource styledListItemShop}">
                 <ListBox.ItemsPanel>
                     <ItemsPanelTemplate>
                         <WrapPanel IsItemsHost="True"/>
@@ -26,7 +26,7 @@
                 </ListBox.ItemsPanel> 
             </my:SurfaceListBox>
         </Grid>
-        <Grid Grid.Column="0" Grid.Row="1" x:Name="grid_page">
+        <Grid Grid.Row="1" x:Name="grid_page">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" x:Name="pageCountStackPanel">
                 <!--<Button Width="80" Height="35" Content="上一页" x:Name="btn_prePage" Click="btn_prePage_Click" IsEnabled="False" Style="{DynamicResource pageBtnShopStyle1}" Background="#FCBC27"></Button>
                 <Button Width="35" Height="35" Content="{Binding PageCurrent}" Click="btn_prePage_Click" IsEnabled="False" Style="{DynamicResource pageBtnShopStyle1}" Background="#44DAFB" Margin="10,0"></Button>
