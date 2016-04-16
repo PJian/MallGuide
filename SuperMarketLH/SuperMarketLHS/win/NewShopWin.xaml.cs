@@ -28,10 +28,10 @@ namespace SuperMarketLHS.win
         private UserControlMapGrid parent;
         private Shop currentEditShop;
 
-        public NewShopWin(Obstacle relativeObstacle, UserControlMapGrid parent)
+        public NewShopWin( UserControlMapGrid parent)
         {
             InitializeComponent();
-            this.relativeObstacle = relativeObstacle;
+            this.relativeObstacle = parent.CurrentEditObstacle;
             this.parent = parent;
         }
         private void init()

@@ -985,14 +985,14 @@ namespace SuperMarketLHS.userControl
         private void btn_new_shop_Click(object sender, RoutedEventArgs e)
         {
             if (this.currentEditObstacle != null)
-                new NewShopWin(this.currentEditObstacle,this).ShowDialog();
+                new NewShopWin(this).ShowDialog();
         }
 
         private void btn_shopIn_Click(object sender, RoutedEventArgs e)
         {
             if (this.currentEditObstacle != null)
             {
-                new ShopInWin(this.currentEditObstacle).ShowDialog();
+                new ShopInWin(this).ShowDialog();
             }
         }
 
