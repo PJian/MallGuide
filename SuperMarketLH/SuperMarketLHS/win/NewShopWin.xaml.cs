@@ -27,5 +27,10 @@ namespace SuperMarketLHS.win
             this.relativeObstacle = relativeObstacle;
         }
 
+        private void btn_save_Click_1(object sender, RoutedEventArgs e)
+        {
+
+        }
+
     }
 }

@@ -27,7 +27,6 @@ namespace SuperMarketLHS.page.shop
         private ObservableCollection<Shop> allShops;
         private Shop currentEditShop;
         private MainWindow rootWin;
-      //  private Brand currentEditBrand;
 
         public PageShopBaseInfo(MainWindow rootWin)
         {
