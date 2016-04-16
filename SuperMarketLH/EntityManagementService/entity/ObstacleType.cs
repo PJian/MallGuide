@@ -12,7 +12,7 @@ namespace EntityManagementService.entity
        public const string STAIRS = "楼梯";
        public const string FIRE_ENGINE_ACCESS = "消防通道";
        public const string DECORATE = "楼层装饰";
-       public const string TOLITE = "厕所";
+       public const string TOLITE = "卫生间";
        public const string ATM = "ATM";
        public const string BABY_ROOM = "母婴室";
        public const string SMOKING_ROOM = "吸烟室";
@@ -21,12 +21,12 @@ namespace EntityManagementService.entity
        public const string LOST_FOUND = "失物招领";
        public const string GOODS_STROAGE = "物品寄存";
        public const string SHOP = "商铺";
+       public const string VIP = "会员中心";
        public static List<string> Type
        {
            get {
                return new string[]{
-                    SHOP,ELEVATOR,ESCALATOR,STAIRS,FIRE_ENGINE_ACCESS,DECORATE,TOLITE,ATM,BABY_ROOM,SMOKING_ROOM,CHECKSTAND,SERVICE,LOST_FOUND,
-                    GOODS_STROAGE
+                    SHOP,DECORATE,ELEVATOR,ESCALATOR,TOLITE,BABY_ROOM,SMOKING_ROOM,SERVICE,VIP
                 }.ToList();
            }
        }

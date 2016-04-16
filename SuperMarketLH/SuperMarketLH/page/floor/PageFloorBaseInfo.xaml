@@ -875,16 +875,17 @@
 					<ImageBrush ImageSource="/SuperMarketLH;component/images/navBtn/btn16.png"/>
 				</Button.Background>
 			</Button>
-			<Button x:Name="btn_service" Style="{DynamicResource floorNavBtnStyle}" Margin="0,0,30,0" MouseDown="btn_service_MouseDown" MouseUp="btn_service_MouseUp" TouchDown="btn_service_TouchDown" TouchUp="btn_service_TouchUp" Click="btn_service_Click">
-				<Button.Background>
-					<ImageBrush ImageSource="/SuperMarketLH;component/images/navBtn/btn17.png"/>
-				</Button.Background>
-			</Button>
-			<Button x:Name="btn_pay" Style="{DynamicResource floorNavBtnStyle}" Margin="0,0,30,0" MouseDown="btn_pay_MouseDown" MouseUp="btn_pay_MouseUp" TouchDown="btn_pay_TouchDown" TouchUp="btn_pay_TouchUp" Click="btn_pay_Click">
+            <Button x:Name="btn_vip" Style="{DynamicResource floorNavBtnStyle}" Margin="0,0,30,0" MouseDown="btn_vip_MouseDown" MouseUp="btn_vip_MouseUp" TouchDown="btn_vip_TouchDown" TouchUp="btn_vip_TouchUp" Click="btn_vip_Click">
+                <Button.Background>
+                    <ImageBrush ImageSource="/SuperMarketLH;component/images/navBtn/btn17.png"/>
+                </Button.Background>
+            </Button>
+            <Button x:Name="btn_service" Style="{DynamicResource floorNavBtnStyle}" Margin="0,0,30,0" MouseDown="btn_service_MouseDown" MouseUp="btn_service_MouseUp" TouchDown="btn_service_TouchDown" TouchUp="btn_service_TouchUp" Click="btn_service_Click">
 				<Button.Background>
 					<ImageBrush ImageSource="/SuperMarketLH;component/images/navBtn/btn18.png"/>
 				</Button.Background>
 			</Button>
+			
 			<Button x:Name="btn_smoke" Style="{DynamicResource floorNavBtnStyle}" Margin="0,0,30,0" MouseDown="btn_smoke_MouseDown" MouseUp="btn_smoke_MouseUp" TouchDown="btn_smoke_TouchDown" TouchUp="btn_smoke_TouchUp" Click="btn_smoke_Click">
 				<Button.Background>
 					<ImageBrush ImageSource="/SuperMarketLH;component/images/navBtn/btn19.png"/>

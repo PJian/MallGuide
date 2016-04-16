@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:userControl="clr-namespace:SuperMarketLHS.userControl"
         xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
-        Title="添加店铺"  Height="668" Width="1024" Loaded="Window_Loaded" Background="#f6f6f6" Icon="../img/new.ico">
+        Title="添加店铺"  Height="668" Width="1024" Loaded="Window_Loaded" Background="#f6f6f6" Icon="../img/new.ico" WindowStartupLocation="CenterScreen">
     <Grid x:Name="grid_shopInfo">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="100*"></ColumnDefinition>

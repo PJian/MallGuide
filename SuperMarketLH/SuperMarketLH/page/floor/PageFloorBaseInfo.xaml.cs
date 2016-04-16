@@ -216,42 +216,42 @@ namespace SuperMarketLH.page.floor
 
         private void btn_service_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            changeBtnBG("btn_service", "resource/images/navBtn/btn17_press.png");
+            changeBtnBG("btn_service", "resource/images/navBtn/btn18_press.png");
         }
 
         private void btn_service_MouseUp(object sender, MouseButtonEventArgs e)
         {
-            changeBtnBG("btn_service", "resource/images/navBtn/btn17.png");
+            changeBtnBG("btn_service", "resource/images/navBtn/btn18.png");
         }
 
         private void btn_service_TouchDown(object sender, TouchEventArgs e)
         {
-            changeBtnBG("btn_service", "resource/images/navBtn/btn17_press.png");
+            changeBtnBG("btn_service", "resource/images/navBtn/btn18_press.png");
         }
 
         private void btn_service_TouchUp(object sender, TouchEventArgs e)
         {
-            changeBtnBG("btn_service", "resource/images/navBtn/btn17.png");
+            changeBtnBG("btn_service", "resource/images/navBtn/btn18.png");
         }
 
-        private void btn_pay_MouseDown(object sender, MouseButtonEventArgs e)
+        private void btn_vip_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            changeBtnBG("btn_pay", "resource/images/navBtn/btn18_press.png");
+            changeBtnBG("btn_vip", "resource/images/navBtn/btn17_press.png");
         }
 
-        private void btn_pay_MouseUp(object sender, MouseButtonEventArgs e)
+        private void btn_vip_MouseUp(object sender, MouseButtonEventArgs e)
         {
-            changeBtnBG("btn_pay", "resource/images/navBtn/btn18.png");
+            changeBtnBG("btn_vip", "resource/images/navBtn/btn17.png");
         }
 
-        private void btn_pay_TouchDown(object sender, TouchEventArgs e)
+        private void btn_vip_TouchDown(object sender, TouchEventArgs e)
         {
-            changeBtnBG("btn_pay", "resource/images/navBtn/btn18_press.png");
+            changeBtnBG("btn_vip", "resource/images/navBtn/btn17_press.png");
         }
 
-        private void btn_pay_TouchUp(object sender, TouchEventArgs e)
+        private void btn_vip_TouchUp(object sender, TouchEventArgs e)
         {
-            changeBtnBG("btn_pay", "resource/images/navBtn/btn18.png");
+            changeBtnBG("btn_vip", "resource/images/navBtn/btn17.png");
         }
 
         private void btn_smoke_MouseDown(object sender, MouseButtonEventArgs e)
@@ -341,11 +341,11 @@ namespace SuperMarketLH.page.floor
             
         }
 
-        private void btn_pay_Click(object sender, RoutedEventArgs e)
+        private void btn_vip_Click(object sender, RoutedEventArgs e)
         {
             if (this.currentFrameContentPage != null)
             {
-                this.currentFrameContentPage.userCtrlMapGrid.showCommonBuildingTips(ObstacleType.CHECKSTAND);
+                this.currentFrameContentPage.userCtrlMapGrid.showCommonBuildingTips(ObstacleType.VIP);
             }
            
         }

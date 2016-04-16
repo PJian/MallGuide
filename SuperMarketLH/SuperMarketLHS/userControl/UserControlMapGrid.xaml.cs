@@ -458,13 +458,13 @@ namespace SuperMarketLHS.userControl
 
         private void grid_info_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
-
+            Point temp = e.GetPosition(this.grid_info);
             if (this.EditState == CavasUtil.SHOP_IN_STATE)
             {
                 //商铺入驻阶段
-                Point temp = e.GetPosition(this.grid_info);
+               
                 showContextMenu(temp);
-            }
+            } 
             else
             {
                 if (this.currentEditArea == null || this.currentEditArea.Count <= 2)
@@ -662,7 +662,7 @@ namespace SuperMarketLHS.userControl
             {
                 if (str != null)
                 {
-                    int rtn = 0;
+                  //  int rtn = 0;
                     //查看编号是否已经存在，当前楼层
                     if (this.CurrentEditMap.Areas != null)
                     {
@@ -689,23 +689,23 @@ namespace SuperMarketLHS.userControl
         /// <summary>
         /// 复制临时地图
         /// </summary>
-        public void copyMapValue()
-        {
-            //for (int i = 0; i < mapValue.GetLength(0); i++)
-            //{
-            //    for (int j = 0; j < mapValue.GetLength(1); j++)
-            //    {
-            //        if (this.mapValue[i, j] == 1)
-            //        {
-            //            this.CurrentEditMap.Obstacles[i, j] = 1;
-            //        }
-            //        else if (this.mapValue[i, j] == -1)
-            //        {//删除区域
-            //            this.CurrentEditMap.Obstacles[i, j] = 0;
-            //        }
-            //    }
-            //}
-        }
+        //public void copyMapValue()
+        //{
+        //    //for (int i = 0; i < mapValue.GetLength(0); i++)
+        //    //{
+        //    //    for (int j = 0; j < mapValue.GetLength(1); j++)
+        //    //    {
+        //    //        if (this.mapValue[i, j] == 1)
+        //    //        {
+        //    //            this.CurrentEditMap.Obstacles[i, j] = 1;
+        //    //        }
+        //    //        else if (this.mapValue[i, j] == -1)
+        //    //        {//删除区域
+        //    //            this.CurrentEditMap.Obstacles[i, j] = 0;
+        //    //        }
+        //    //    }
+        //    //}
+        //}
 
         public void draw_stateGotBack()
         {
@@ -808,17 +808,24 @@ namespace SuperMarketLHS.userControl
                 }
             }
         }
+        
 
         public void drawObstacle(Obstacle obstacle)
         {
+            Style s = FindResource("ToolTipStyle") as Style;
+            ToolTip tip = new ToolTip();
+            tip.Style = s;
+            tip.Content = obstacle;
             if (obstacle == null) return;
             if (obstacle.Boundary == null || obstacle.Boundary.Count <= 0) return;
             foreach (Point p in obstacle.Boundary)
             {
+
                 CavasUtil.drawEllipse(this.grid_info, (int)p.Y / 4, (int)p.X / 4);
             }
+
             //闭合区域
-            CavasUtil.drawPolygon(this.map_continer, obstacle.Boundary);
+            CavasUtil.drawPolygon(this.map_continer, obstacle.Boundary, tip);
             //画门
             if (!obstacle.Door.Equals(new Point(0, 0)))
             {
@@ -1011,6 +1018,44 @@ namespace SuperMarketLHS.userControl
         {
             if (this.CurrentEditObstacle != null)
                 shopOut(this.CurrentEditObstacle);
+        }
+
+       
+
+      
+
+        private void btn_areaNumChang_Click(object sender, RoutedEventArgs e)
+        {
+           // MessageBox.Show();
+        //    if (this.CurrentEditObstacle != null)
+            if (this.CurrentEditObstacle != null) {
+                this.text_areaNumber.Text = this.CurrentEditObstacle.Index;
+                grid_areaNum.DataContext = this.CurrentEditObstacle;
+                grid_areaNum.Visibility = Visibility.Visible;
+            }
+           
+        }
+
+        private void btn_cancle_Click(object sender, RoutedEventArgs e)
+        {
+            grid_areaNum.Visibility = Visibility.Collapsed;
+        }
+
+        private void btn_save_Click(object sender, RoutedEventArgs e)
+        {
+            //保存地图
+            if (!validateObstacle(text_areaNumber.Text))
+            {
+                return;
+            }
+            saveMap();
+            //更新商铺
+            if (this.CurrentEditObstacle.Shop != null) {
+                this.CurrentEditObstacle.Shop.Index = this.CurrentEditObstacle.Index;
+                SqlHelper.updateShop(this.CurrentEditObstacle.Shop);
+            }
+            grid_areaNum.Visibility = Visibility.Collapsed;
+            drawCanvas();
         }
     }
 }

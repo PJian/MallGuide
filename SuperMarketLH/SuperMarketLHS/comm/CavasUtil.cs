@@ -82,6 +82,31 @@ namespace SuperMarketLHS.comm
         /// <param name="g"></param>
         /// <param name="row"></param>
         /// <param name="col"></param>
+        /// <param name="tooltip"></param>
+        public static void drawEllipse(Grid g, int row, int col,ToolTip tooltip)
+        {
+            Ellipse ellipse = new Ellipse()
+            {
+                Width = ELLIPSE_WIDTH,
+                Height = ELLIPSE_HEIGHT,
+                Fill = ELLPSE_FILL,
+                HorizontalAlignment = HorizontalAlignment.Center,
+                VerticalAlignment = VerticalAlignment.Center,
+                ToolTip = tooltip
+            };
+            Grid.SetColumn(ellipse, col);
+            Grid.SetColumnSpan(ellipse, 2);
+            Grid.SetRow(ellipse, row);
+            Grid.SetRowSpan(ellipse, 2);
+            g.Children.Add(ellipse);
+        }
+
+        /// <summary>
+        /// 往grid中添加圆
+        /// </summary>
+        /// <param name="g"></param>
+        /// <param name="row"></param>
+        /// <param name="col"></param>
         public static void drawEllipseTest(Grid g, int row, int col)
         {
             Ellipse ellipse = new Ellipse()
@@ -154,7 +179,25 @@ namespace SuperMarketLHS.comm
             polygon.Points = pointCollection; //设置Polygon属性Points的点集合
             c.Children.Add(polygon);
         }
+        public static void drawPolygon(Canvas c, List<Point> points,ToolTip tooltip)
+        {
+            Polygon polygon = new Polygon();//定义封闭多边形对象
+            //属性设置，边颜色、填充颜色、边粗细等
+            polygon.Stroke = LINE_STROKE;
+            //填充，浅海蓝色
+            polygon.Fill = POLYGON_FILL;
+            polygon.StrokeThickness = LINE_STROKETICKNESS;
 
+            //定义点集合对象
+            PointCollection pointCollection = new PointCollection();
+            foreach (Point p in points)
+            {
+                pointCollection.Add(p); //将顶点添加到点集合对象
+            }
+            polygon.Points = pointCollection; //设置Polygon属性Points的点集合
+            polygon.ToolTip = tooltip;
+            c.Children.Add(polygon);
+        }
 
         public static double getMinX(List<Point> ps) {
             if (ps.Count <= 0) return 0;

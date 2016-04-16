@@ -27,20 +27,20 @@
             <RowDefinition Height="238*"></RowDefinition>
             <RowDefinition Height="50*"></RowDefinition>
         </Grid.RowDefinitions>
-        <StackPanel Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="4" Orientation="Horizontal">
+        <StackPanel Grid.ColumnSpan="4" Orientation="Horizontal">
             <Label Content="楼层列表" VerticalAlignment="Center"></Label>
             <ComboBox x:Name="combox_allFloors" VerticalAlignment="Center" Width="80" DisplayMemberPath="Name" SelectionChanged="combox_allFloors_SelectionChanged"></ComboBox>
             <Label  Content="编辑说明：使用鼠标左键在地图上圈出范围，最后使用鼠标右键结束。之后再用鼠标左键点出门的位置即可。" VerticalAlignment="Center"></Label>
 
         </StackPanel>
-         <Grid Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="4">
+         <Grid Grid.Row="1" Grid.ColumnSpan="4">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="250*"></ColumnDefinition>
                 <ColumnDefinition Width="100*"></ColumnDefinition>
                 <ColumnDefinition Width="334*"></ColumnDefinition>
                 <ColumnDefinition Width="150*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <StackPanel Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" Orientation="Horizontal">
+            <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
                 <Label Content="设置区域编号："></Label>
                 <TextBox x:Name="txb_ObstacleIndex" Width="100"  ></TextBox>
             </StackPanel>
@@ -50,10 +50,10 @@
             </StackPanel>
         </Grid>
        
-        <Grid Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="2" Grid.RowSpan="4">
+        <Grid Grid.ColumnSpan="4" Grid.Row="2" Grid.RowSpan="4">
             <userControl:UserControlMapGrid x:Name="userCtrl_map"  />
         </Grid>
-       <Grid Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="6" Background="White">
+       <Grid Grid.ColumnSpan="4" Grid.Row="6" Background="White">
             <StackPanel  VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,20,0" Orientation="Horizontal" >
               
                 <Button x:Name="btn_clear"  Content="清空数据" Style="{DynamicResource navBtnCommonStyle}" Background="Transparent"  Width="60" Height="30" Margin="0,0,10,0" Click="btn_clear_Click"   ></Button>
