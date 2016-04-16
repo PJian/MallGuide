@@ -27,7 +27,7 @@ namespace SuperMarketLHS.page.mall
        
 
         private Mall currentMall;
-        private  List<string> tempImgPaths;
+        private List<string> tempImgPaths;
         private string currentTempImgPath;
         private string currentTempMoviePath;
         private MainWindow rootWin;

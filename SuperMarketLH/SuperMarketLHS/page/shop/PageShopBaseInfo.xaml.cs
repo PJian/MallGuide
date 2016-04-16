@@ -189,6 +189,13 @@ namespace SuperMarketLHS.page.shop
             //init();
             MessageBox.Show("添加成功");
 
+            allShops = new ObservableCollection<Shop>(SqlHelper.getAllShop());
+            this.list_allshop.ItemsSource = allShops;
+            this.list_allshop.SelectedItem = this.currentEditShop;
+            this.currentEditShop = this.list_allshop.SelectedItem as Shop;
+            this.grid_allInfo.DataContext = this.currentEditShop;
+            showShopInfo();
+
         }
         private void updateShop(bool isShowMsg)
         {
@@ -211,10 +218,18 @@ namespace SuperMarketLHS.page.shop
             handleImg(this.currentEditShop.Id);
             SqlHelper.updateShop(this.currentEditShop);
             handleImgDel(currentEditShop.Id);
-            init();
+            //init();
             if (isShowMsg) {
                 MessageBox.Show("更新成功");
             }
+
+            allShops = new ObservableCollection<Shop>(SqlHelper.getAllShop());
+            this.list_allshop.ItemsSource = allShops;
+            this.list_allshop.SelectedItem = this.currentEditShop;
+            this.currentEditShop = this.list_allshop.SelectedItem as Shop;
+            this.grid_allInfo.DataContext = this.currentEditShop;
+            showShopInfo();
+
         }
         private void delShop() {
             if (this.currentEditShop != null) {

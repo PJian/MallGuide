@@ -109,12 +109,13 @@
                         </ControlTemplate>
                     </TabControl.Template>
 
-                    <TabItem Header="商铺活动" HorizontalAlignment="Center" x:Name="tab_promotion" Style="{DynamicResource tabItemStyle}" FontSize="24" Visibility="Visible" >
+                    <TabItem Header="商铺活动" HorizontalAlignment="Center" x:Name="tab_promotion" Style="{DynamicResource tabItemStyle}" FontSize="20" Visibility="Visible">
                         <usercontrl:UserControlImgCtrl7 x:Name="userCtrlImg_activities"></usercontrl:UserControlImgCtrl7>
                     </TabItem>
-                    <TabItem Header="设施情况"   HorizontalAlignment="Center" x:Name="tab_Facilities" Style="{DynamicResource tabItemStyle1}" FontSize="24" Visibility="Collapsed">
+                    <TabItem Header="设施情况"   HorizontalAlignment="Center" x:Name="tab_Facilities" Style="{DynamicResource tabItemStyle1}" FontSize="20" Visibility="Collapsed">
                         <usercontrl:UserControlImgCtrl7 x:Name="userCtrlImg_facilities"></usercontrl:UserControlImgCtrl7>
                     </TabItem>
+                    
                 </TabControl>
             </Grid>
 

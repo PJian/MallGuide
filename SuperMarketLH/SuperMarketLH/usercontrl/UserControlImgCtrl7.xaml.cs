@@ -85,6 +85,7 @@ namespace SuperMarketLH.usercontrl
         {
             getTrangsitioniItem();
         }
+
         private void getTrangsitioniItem()
         {
             if (this.ImgPathes != null && this.ImgPathes.Length > 0)
@@ -94,7 +95,7 @@ namespace SuperMarketLH.usercontrl
                 /// transitioniItem.ItemTransition = TransitioinUtil.getNewTransition();
                 transitioniItem.ItemTransition = TransitioinUtil.getFadeTransition();
                 this.transitionC_img.DataContext = transitioniItem;
-               // loadImgCounter(currentSelectIndex);
+                loadImgCounter(currentSelectIndex);
             }
         }
 
@@ -106,7 +107,7 @@ namespace SuperMarketLH.usercontrl
                 transitioniItem.Img = new ImageObject() { ImgPath = ImgPathes[index] };
                 transitioniItem.ItemTransition = TransitioinUtil.getNewTransition();
                 this.transitionC_img.DataContext = transitioniItem;
-                // loadImgCounter(currentSelectIndex);
+                loadImgCounter(currentSelectIndex);
             }
         }
 
@@ -120,14 +121,122 @@ namespace SuperMarketLH.usercontrl
             return this.allImages.ElementAt((--this.currentSelectIndex + this.allImages.Count) % this.allImages.Count);
         }
 
-       
-        
-
-      
-
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
           //  init();
+        }
+
+        /// <summary>
+        /// 构造选中的圆圈效果
+        /// </summary>
+        /// <returns></returns>
+        private Ellipse getUnSelectEllipse()
+        {
+            return new Ellipse()
+            {
+                Fill = Brushes.White,
+                Width = 20,
+                Height = 20,
+                Margin = new Thickness(2, 0, 2, 0)
+            };
+        }
+        /// <summary>
+        /// 构造未选中的圆圈效果
+        /// </summary>
+        /// <returns></returns>
+        private Ellipse getSelectEllipse()
+        {
+            return new Ellipse()
+            {
+                Fill = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#0099ff")),
+                Width = 20,
+                Height = 20,
+                Margin = new Thickness(2, 0, 2, 0)
+            };
+        }
+
+        /// <summary>
+        /// 加载图片计数
+        /// </summary>
+        private void loadImgCounter(int selectIndex)
+        {
+            stackPanel_imgCounter.Children.Clear();
+            for (int i = 0; i < this.ImgPathes.Length; i++)
+            {
+                stackPanel_imgCounter.Children.Add(i == selectIndex ? getSelectEllipse() : getUnSelectEllipse());
+            }
+        }
+
+        /// <summary>
+        /// 取得上一页
+        /// </summary>
+        private void getPreItem()
+        {
+            if (this.ImgPathes != null && this.ImgPathes.Length > 0)
+            {
+                currentSelectIndex = (--currentSelectIndex + this.ImgPathes.Length) % this.ImgPathes.Length;
+                transitioniItem.Img = new ImageObject() { ImgPath = ImgPathes[this.currentSelectIndex] };
+                transitioniItem.ItemTransition = TransitioinUtil.getNewTransition();
+                this.transitionC_img.DataContext = transitioniItem;
+                loadImgCounter(currentSelectIndex);
+            }
+            ClosedUtil.isAnyBodyTouched = true;
+            //init();
+        }
+
+        /// <summary>
+        /// 取得下一页
+        /// </summary>
+        private void getNextItem()
+        {
+            getTrangsitioniItem();
+            // init();
+        }
+
+        //初始鼠标位置
+        private double startX = 0;
+        //结尾鼠标位置
+        private double endX = 0;
+        private void compareX(double startX, double endX)
+        {
+            if ((endX - startX) > 200)
+            {
+                getNextItem();
+            }
+            else if ((startX - endX) > 200)
+            {
+                getPreItem();
+            }
+        }
+
+        private void transitionC_img_MouseMove_1(object sender, MouseEventArgs e)
+        {
+            endX = e.GetPosition(transitionC_img).X;
+        }
+
+        private void transitionC_img_MouseUp_1(object sender, MouseButtonEventArgs e)
+        {
+            compareX(startX, endX);
+        }
+
+        private void transitionC_img_MouseDown_1(object sender, MouseButtonEventArgs e)
+        {
+            startX = e.GetPosition(transitionC_img).X;
+        }
+
+        private void transitionC_img_TouchMove_1(object sender, TouchEventArgs e)
+        {
+            endX = e.GetTouchPoint(transitionC_img).Position.X;
+        }
+
+        private void transitionC_img_TouchUp_1(object sender, TouchEventArgs e)
+        {
+            compareX(startX, endX);
+        }
+
+        private void transitionC_img_TouchDown_1(object sender, TouchEventArgs e)
+        {
+            startX = e.GetTouchPoint(transitionC_img).Position.X;
         }
     }
 }

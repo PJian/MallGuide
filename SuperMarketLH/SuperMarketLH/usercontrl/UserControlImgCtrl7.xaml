@@ -16,12 +16,21 @@
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="490*"></RowDefinition>
+            <RowDefinition Height="460*"></RowDefinition>
+            <RowDefinition Height="30*"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="915*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <telerik:RadTransitionControl x:Name="transitionC_img"  Content="{Binding Img}" ContentTemplate="{StaticResource AdDataTemplate}" HorizontalAlignment="Center" VerticalAlignment="Center" Transition="{Binding ItemTransition}"/>
-       
+        <telerik:RadTransitionControl x:Name="transitionC_img"  Content="{Binding Img}" ContentTemplate="{StaticResource AdDataTemplate}" HorizontalAlignment="Center" VerticalAlignment="Center" Transition="{Binding ItemTransition}" MouseMove="transitionC_img_MouseMove_1" MouseUp="transitionC_img_MouseUp_1" MouseDown="transitionC_img_MouseDown_1" TouchMove="transitionC_img_TouchMove_1" TouchUp="transitionC_img_TouchUp_1" TouchDown="transitionC_img_TouchDown_1"/>
+        
+        <Grid x:Name="grid_imgCounter" Grid.Column="1" Grid.Row="2" Visibility="Hidden">
+            <StackPanel x:Name="stackPanel_imgCounter" VerticalAlignment="Center" Orientation="Horizontal" HorizontalAlignment="Center">
+                <Ellipse Fill="#0099ff" Width="20" Height="20" Margin="2,0" />
+                <Ellipse Fill="White" Width="20" Height="20" Margin="2,0" />
+                <Ellipse Fill="White" Width="20" Height="20" Margin="2,0" />
+            </StackPanel>
+        </Grid>
+        
     </Grid>
 </UserControl>

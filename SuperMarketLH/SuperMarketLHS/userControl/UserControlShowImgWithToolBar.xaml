@@ -6,6 +6,7 @@
              xmlns:userControl="clr-namespace:SuperMarketLHS.userControl"
              mc:Ignorable="d" 
              d:DesignHeight="488" d:DesignWidth="734" Loaded="UserControl_Loaded_1">
+   
         <Grid x:Name="grid_content" >
             <Grid.RowDefinitions>
                 <RowDefinition Height="50*"></RowDefinition>
@@ -17,10 +18,11 @@
                 <Button x:Name="btn_chooseImg" Content="选择图片" Margin="0,0,5,0" Style="{DynamicResource navBtnCommonStyle}" Background="Transparent" Width="60" Height="30"  Click="btn_chooseImg_Click"></Button>
                 <Button x:Name="btn_addImg" Content="加入列表" Margin="0,0,5,0" Style="{DynamicResource navBtnCommonStyle}" Background="Transparent" Width="60" Height="30" Click="btn_addImg_Click"></Button>
                 <Button x:Name="btn_delImg" Content="删除图片" Style="{DynamicResource navBtnCommonStyle}" Background="Transparent" Width="60" Height="30" Click="btn_delImg_Click"></Button>
-            <Label x:Name="label_size" Content="{Binding LabelImgSize}" VerticalAlignment="Center"></Label>
-        </StackPanel>
+                <Label Content="建议图片像素：1620*280" VerticalAlignment="Center"></Label>
+            </StackPanel>
             <userControl:UserControlShowIMg Grid.Row="1" x:Name="userCtrl_imgShow" HorizontalAlignment="Left" VerticalAlignment="Top"/>
         </Grid>
+   
 
    
 </UserControl>

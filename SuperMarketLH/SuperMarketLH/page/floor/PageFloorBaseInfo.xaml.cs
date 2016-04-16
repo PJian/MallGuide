@@ -314,6 +314,7 @@ namespace SuperMarketLH.page.floor
             changeBtnBG("btn_bathroom", "resource/images/navBtn/btn21.png");
         }
 
+
         private void btn_elevator_handle_Click(object sender, RoutedEventArgs e)
         {
             if (this.currentFrameContentPage != null) {
@@ -375,6 +376,7 @@ namespace SuperMarketLH.page.floor
             }
            
         }
+
         /// <summary>
         ///  使用两个list,其中一个显示样式效果,另外一个进行数据加载，这是为了还可以重复点击当前页面
         /// </summary>

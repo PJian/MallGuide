@@ -1073,7 +1073,7 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type TabItem}">
                             <Grid>
-                                <Border  Name="Border"   BorderBrush="#b3925d"  Background="#b3925d"  BorderThickness="2"  CornerRadius="20,0,0,20"  Width="165" Height="60" >
+                                <Border  Name="Border"   BorderBrush="#b3925d"  Background="#b3925d"  BorderThickness="2"  CornerRadius="20,0,0,20"  Width="135" Height="40" >
                                     <ContentPresenter x:Name="ContentSite"   VerticalAlignment="Center"   HorizontalAlignment="Center"  ContentSource="Header"   RecognizesAccessKey="True" >
 
                                     </ContentPresenter>
@@ -1100,6 +1100,7 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        
         <Style TargetType="{x:Type TabItem}" x:Key="tabItemStyle1">
 
             <Setter Property="Foreground" Value="White"></Setter>
@@ -1107,7 +1108,7 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type TabItem}">
                         <Grid>
-                            <Border  Name="Border"   BorderBrush="#b3925d"  Background="#b3925d"  BorderThickness="2"  CornerRadius="0,20,20,0"  Width="165" Height="60" >
+                            <Border  Name="Border"   BorderBrush="#b3925d"  Background="#b3925d"  BorderThickness="2"  CornerRadius="0,20,20,0"  Width="135" Height="40" >
                                 <ContentPresenter x:Name="ContentSite"   VerticalAlignment="Center"   HorizontalAlignment="Center"  ContentSource="Header"    RecognizesAccessKey="True" >
 
                                 </ContentPresenter>
