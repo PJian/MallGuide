@@ -44,8 +44,7 @@ namespace SuperMarketLH.page.shop
 
         }
         private void init() {
-            transitioniItem = new TransitionItem();
-            transitioniItem.ItemTransition = TransitioinUtil.getFadeTransition();
+            transitioniItem = new TransitionItem() { ItemTransition = TransitioinUtil.getFadeTransition() };
             navigateTo(WinUtil.FRAME_SHOP_ALL);
            
         }
@@ -60,28 +59,40 @@ namespace SuperMarketLH.page.shop
         /// </summary>
         /// <param name="catagory"></param>
         private void navigateTo(int index) {
-            transitioniItem = new TransitionItem();
-            transitioniItem.ItemTransition = TransitioinUtil.getFadeTransition();
-            Page page = null;
-            switch (index) {
-                case WinUtil.FRAME_SHOP_ALL: page = new PageShopList(this); break;
-                case WinUtil.FRAME_SHOP_MOVIE: page = new PageShopMovie(); break;
-                case WinUtil.FRAME_SHOP_CAN_YIN: page = new PageShopList(SqlHelper.getCatagoryByName("餐饮"),this); break;
-                case WinUtil.FRAME_SHOP_SHOPPING: page = new PageShopList(SqlHelper.getCatagoryByName("购物"), this); break;
-                case WinUtil.FRAME_SHOP_CHILDREN: page = new PageShopList(SqlHelper.getCatagoryByName("儿童娱乐"), this); break;
-                case WinUtil.FRAME_SHOP_KTV: page = new PageShopList(SqlHelper.getCatagoryByName("KTV"), this); break;
-                case WinUtil.FRAME_SHOP_SUPER_MARKET_DARUNFA: page = new PageShopList(SqlHelper.getCatagoryByName("大润发"), this); break;
-                case WinUtil.FRAME_SHOP_SUNINGYIGOU: page = new PageShopList(SqlHelper.getCatagoryByName("苏宁易购"), this); break;
-                case WinUtil.FRAME_SHOP_JIANSHENG: page = new PageShopList(SqlHelper.getCatagoryByName("健身"), this); break;
-                case WinUtil.FRAME_SHOP_DABAIJINGSHIJIEERTONGLEYUAN: page = new PageShopList(SqlHelper.getCatagoryByName("大白鲸世界儿童乐园"), this); break;
-            }
-            transitioniItem.FrameNavigatePage = new FrameNavigate()
+            try
             {
-                Source = page
-            };
-            this.transitionShop.DataContext = transitioniItem;
+                transitioniItem = new TransitionItem() { ItemTransition = TransitioinUtil.getFadeTransition() };
+                Page page = null;
+                switch (index)
+                {
+                    case WinUtil.FRAME_SHOP_ALL: page = new PageShopList(this); break;
+                    case WinUtil.FRAME_SHOP_MOVIE: page = new PageShopMovie(); break;
+                    case WinUtil.FRAME_SHOP_CAN_YIN: page = new PageShopList(SqlHelper.getCatagoryByName("餐饮"), this); break;
+                    case WinUtil.FRAME_SHOP_SHOPPING: page = new PageShopList(SqlHelper.getCatagoryByName("购物"), this); break;
+                    case WinUtil.FRAME_SHOP_CHILDREN: page = new PageShopList(SqlHelper.getCatagoryByName("儿童娱乐"), this); break;
+                    case WinUtil.FRAME_SHOP_KTV: page = new PageShopList(SqlHelper.getCatagoryByName("KTV"), this); break;
+                    case WinUtil.FRAME_SHOP_SUPER_MARKET_DARUNFA: page = new PageShopList(SqlHelper.getCatagoryByName("大润发"), this); break;
+                    case WinUtil.FRAME_SHOP_SUNINGYIGOU: page = new PageShopList(SqlHelper.getCatagoryByName("苏宁易购"), this); break;
+                    case WinUtil.FRAME_SHOP_JIANSHENG: page = new PageShopList(SqlHelper.getCatagoryByName("健身"), this); break;
+                    case WinUtil.FRAME_SHOP_DABAIJINGSHIJIEERTONGLEYUAN: page = new PageShopList(SqlHelper.getCatagoryByName("大白鲸世界儿童乐园"), this); break;
+                }
+                transitioniItem.FrameNavigatePage = new FrameNavigate()
+                {
+                    Source = page
+                };
+                this.transitionShop.DataContext = transitioniItem;
 
-            ClosedUtil.isAnyBodyTouched = true;
+               
+            }
+            catch(Exception e)
+            {
+                MessageBox.Show("系统错误！"+e.Message);
+            }
+            finally {
+                ClosedUtil.isAnyBodyTouched = true;
+            }
+
+           
         }
 
         private void btn_canyin_Click(object sender, RoutedEventArgs e)

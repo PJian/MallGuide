@@ -16,7 +16,6 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="490*"></RowDefinition>
-           
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="700*"></ColumnDefinition>
@@ -24,7 +23,6 @@
             <ColumnDefinition Width="220"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <telerik:RadTransitionControl x:Name="transitionC_img" Grid.Column="0" Grid.Row="0" Content="{Binding Img}" ContentTemplate="{StaticResource AdDataTemplate}" HorizontalAlignment="Center" VerticalAlignment="Center" Transition="{Binding ItemTransition}"/>
-
         <my:SurfaceListBox x:Name="surfaceListBoxContent"   Grid.Row="0" Grid.Column="2" ScrollViewer.HorizontalScrollBarVisibility="Disabled"  SelectionChanged="surfaceListBoxContent_SelectionChanged" VerticalAlignment="Top" ItemContainerStyle="{DynamicResource styledList3}">
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>

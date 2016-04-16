@@ -14,7 +14,7 @@
             <RowDefinition Height="50*"></RowDefinition>
         </Grid.RowDefinitions>
         <!--图片选择-->
-        <userControl:UserControlShowImgWithToolBar x:Name="userCtrol_image" LabelChooseImgContent="消防通道" />
+        <userControl:UserControlShowImgWithToolBar x:Name="userCtrol_image" LabelChooseImgContent="消防通道"  LabelImgSize="像素：1920*800"/>
         <Grid Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="3" Background="White">
             <StackPanel  VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,20,0" Orientation="Horizontal" >
                <Button x:Name="btn_save"  Content="保存" Style="{DynamicResource navBtnCommonStyle}" Background="Transparent"  Width="60" Height="30" Margin="0,0,10,0" Click="btn_save_Click"  ></Button>

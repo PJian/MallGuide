@@ -47,7 +47,7 @@
         <TextBox Text="{Binding Introduction}" Grid.Column="2" Grid.Row="3" Grid.RowSpan="4" TextWrapping="Wrap" Grid.ColumnSpan="2"></TextBox>
         
         <Grid Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="7" Grid.RowSpan="4" VerticalAlignment="Center" HorizontalAlignment="Center">
-            <userControl:UserControlShowImgWithToolBar LabelChooseImgContent="活动图片:" x:Name="userControl_imgs"/>
+            <userControl:UserControlShowImgWithToolBar LabelChooseImgContent="活动图片:" LabelImgSize="建议图片像素：360*220" x:Name="userControl_imgs" />
         </Grid>
         
         <Label Content="举办时间：" Grid.Column="1" Grid.Row="2"  HorizontalAlignment="Right" VerticalAlignment="Center"></Label>

@@ -93,20 +93,21 @@ namespace SuperMarketLH.page.shop
             //如果店铺只有一个并且该店铺类型还是主推店铺，则显示店铺广告图片
             if (allShops.Count == 1 && allShops.ElementAt(0).Type == ConstantData.SHOP_TYPE_SPECIAL)
             {
-                userCtrlImgs.Visibility = Visibility.Visible;
+                userCtrlMainShop.Visibility = Visibility.Visible;
                 this.surfaceListBox.Visibility = Visibility.Collapsed;
                 this.grid_page.Visibility = Visibility.Collapsed;
-                Brand brand = allShops.ElementAt(0).Brand;
-                if (brand!=null )
-                 this.userCtrlImgs.Imgs = allShops.ElementAt(0).Brand.ImgPaths;
-               // this.userCtrlImgs.Imgs = getShopPromotionImgOfValidate();
+                userCtrlMainShop.Shop = allShops.ElementAt(0);
+               // Brand brand = allShops.ElementAt(0).Brand;
+              
+                // this.userCtrlImgs.Imgs = getShopPromotionImgOfValidate();
             }
             else
             {
-                userCtrlImgs.Visibility = Visibility.Collapsed;
+                userCtrlMainShop.Visibility = Visibility.Collapsed;
                 this.surfaceListBox.Visibility = Visibility.Visible;
                 this.grid_page.Visibility = Visibility.Visible;
                 this.surfaceListBox.ItemsSource = allShops;
+
             }
             
         }

@@ -22,6 +22,19 @@ namespace SuperMarketLHS.userControl
     /// </summary>
     public partial class UserControlShowImgWithToolBar : UserControl ,INotifyPropertyChanged
     {
+        private string _labelImgSize;
+
+        public string LabelImgSize
+        {
+            get { return _labelImgSize; }
+            set { _labelImgSize = value;
+            if (this.PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs("LabelImgSize"));
+            }
+            }
+        }
+
         private string _labelChooseImgContent;
         public string LabelChooseImgContent
         {

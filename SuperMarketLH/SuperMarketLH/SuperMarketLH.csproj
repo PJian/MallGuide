@@ -180,6 +180,12 @@
     <Compile Include="usercontrl\UserControlImgCtrl6.xaml.cs">
       <DependentUpon>UserControlImgCtrl6.xaml</DependentUpon>
     </Compile>
+    <Compile Include="usercontrl\UserControlImgCtrl7.xaml.cs">
+      <DependentUpon>UserControlImgCtrl7.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="usercontrl\UserControlMainShop.xaml.cs">
+      <DependentUpon>UserControlMainShop.xaml</DependentUpon>
+    </Compile>
     <Compile Include="usercontrl\UserControlMapGrid.xaml.cs">
       <DependentUpon>UserControlMapGrid.xaml</DependentUpon>
     </Compile>
@@ -347,6 +353,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="usercontrl\UserControlImgCtrl6.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="usercontrl\UserControlImgCtrl7.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="usercontrl\UserControlMainShop.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -113,6 +113,7 @@ namespace SuperMarketLHS.page.mall
 
         private void btn_delImg_Click(object sender, RoutedEventArgs e)
         {
+            if (currentMall.ImgPath.Count<=0) return;
             currentMall.ImgPath.RemoveAt(this.userCtrl_imgShow.CurrentSelectIndex);
             tempImgPaths.Remove(this.userCtrl_imgShow.CurrentSelectItem);
             this.userCtrl_imgShow.removeImg(this.userCtrl_imgShow.CurrentSelectIndex);

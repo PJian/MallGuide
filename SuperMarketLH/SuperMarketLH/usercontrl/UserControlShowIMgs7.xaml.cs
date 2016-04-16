@@ -77,6 +77,10 @@ namespace SuperMarketLH.usercontrl
                 this.transitionC_img.DataContext = transitioniItem;
                 loadImgCounter(CurrentShowImgIndex);
             }
+            else {
+                 //删除图片计数
+                stackPanel_imgCounter.Visibility = System.Windows.Visibility.Collapsed;
+            }
             ClosedUtil.isAnyBodyTouched = true;
         }
         /// <summary>

@@ -14,5 +14,6 @@
         </Grid.ColumnDefinitions>
         <Button Style="{DynamicResource navBtnBackStyle}"   x:Name="btn_rtn" Click="btn_rtn_Click" HorizontalAlignment="Left" VerticalAlignment="Top" ></Button>
         <usercontrl:UserControlShop x:Name="userCtrlShop" Grid.Column="1"></usercontrl:UserControlShop>
+       
     </Grid>
 </Page>

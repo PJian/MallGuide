@@ -64,7 +64,7 @@
                 <Label Grid.Column="0" Grid.Row="0" Content="名字：" HorizontalAlignment="Right" VerticalContentAlignment="Center"></Label>
                 <TextBox Text="{Binding Name}" Grid.Column="1" Grid.Row="0" x:Name="txb_name" HorizontalAlignment="Left" VerticalAlignment="Center" Width="300"></TextBox>
                 
-                <GroupBox FontSize="10" Header="建议图片像素：230*240" Grid.Column="2" Grid.Row="0" Grid.RowSpan="5">
+                <GroupBox FontSize="10" Header="建议图片像素：150*150" Grid.Column="2" Grid.Row="0" Grid.RowSpan="5">
                     <userControl:UserControlLogo  x:Name="userControl_logo" />
                 </GroupBox>                  
 
@@ -114,9 +114,9 @@
                 <Label Content="店铺简介:" Grid.Column="0" Grid.Row="10" HorizontalAlignment="Right" VerticalAlignment="Center"></Label>
                 <TextBox Text="{Binding Introduction}" Grid.Column="1" Grid.Row="10" ScrollViewer.VerticalScrollBarVisibility="Auto" AcceptsReturn="True" TextWrapping="Wrap" Grid.ColumnSpan="2"></TextBox>
 
-                <userControl:UserControlShowImgWithToolBar Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="11" x:Name="userControl_facilities" LabelChooseImgContent="设施介绍" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                <userControl:UserControlShowImgWithToolBar Grid.Column="0"  LabelImgSize="建议图片像素：360*220" Grid.ColumnSpan="3" Grid.Row="11" x:Name="userControl_facilities" LabelChooseImgContent="设施介绍" VerticalAlignment="Center" HorizontalAlignment="Center"/>
 
-                <userControl:UserControlShowImgWithToolBar Grid.Column="0"  Grid.ColumnSpan="3" Grid.Row="12" x:Name="userControl_brandImgs" LabelChooseImgContent="品牌图片" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                <userControl:UserControlShowImgWithToolBar Grid.Column="0"  LabelImgSize="建议图片像素：700*490" Grid.ColumnSpan="3" Grid.Row="12" x:Name="userControl_brandImgs" LabelChooseImgContent="品牌图片" VerticalAlignment="Center" HorizontalAlignment="Center"/>
 
             </Grid>
         </ScrollViewer>

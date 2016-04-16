@@ -15,8 +15,8 @@
             <RowDefinition Height="460*"></RowDefinition>
             <RowDefinition Height="45*"></RowDefinition>
         </Grid.RowDefinitions>
-        <Grid Grid.Column="0" Grid.Row="0">
-            <my:SurfaceListBox x:Name="surfaceListBox" Visibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" SelectionChanged="surfaceListBox_SelectionChanged" VerticalAlignment="Top" ItemContainerStyle="{DynamicResource styledListItemShop}">
+        <Grid >
+            <my:SurfaceListBox x:Name="surfaceListBox"  ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" SelectionChanged="surfaceListBox_SelectionChanged" VerticalAlignment="Top" ItemContainerStyle="{DynamicResource styledListItemShop}">
                 <ListBox.ItemsPanel>
                     <ItemsPanelTemplate>
                         <WrapPanel IsItemsHost="True"/>
@@ -33,7 +33,8 @@
             </StackPanel>
            
         </Grid>
-        <usercontrl:UserControlShowIMgs7 x:Name="userCtrlImgs" Grid.ColumnSpan="1" Grid.RowSpan="2" Visibility="Collapsed"></usercontrl:UserControlShowIMgs7>
+        <usercontrl:UserControlMainShop x:Name="userCtrlMainShop" Grid.Column="1" Visibility="Collapsed"></usercontrl:UserControlMainShop>
+        <!--<usercontrl:UserControlShowIMgs7 x:Name="userCtrlImgs" Grid.RowSpan="2" Visibility="Collapsed"></usercontrl:UserControlShowIMgs7>-->
         <!--<usercontrl:UserControlShowImgs x:Name="userCtrlImgs" Visibility="Collapsed"/>-->
     </Grid>
 </Page>

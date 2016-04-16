@@ -45,6 +45,19 @@ namespace SuperMarketLH.page.shop
         private void init() {
             userCtrlShop.Shop = this.shop;
             userCtrlShop.ParentPage = this;
+            //if (this.shop.Type.Equals(ConstantData.SHOP_TYPE_NORMAL))
+            //{
+                
+            //    userCtrlShop.Visibility = Visibility.Visible;
+            //    userCtrlMainShop.Visibility = Visibility.Collapsed;
+            //}
+            //else {
+               
+            //    userCtrlMainShop.ParentPage = this;
+            //    userCtrlMainShop.Visibility = Visibility.Visible;
+            //    userCtrlShop.Visibility = Visibility.Collapsed;
+            //}
+           
         }
         private void Page_Loaded_1(object sender, RoutedEventArgs e)
         {

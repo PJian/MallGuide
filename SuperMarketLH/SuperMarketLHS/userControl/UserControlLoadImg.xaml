@@ -18,8 +18,11 @@
             <Border Grid.Column="0" Grid.Row="0" BorderBrush="White" BorderThickness="2">
                 <Image Source="{Binding ImgPath,Converter={StaticResource imgConverter}}" Margin="2"></Image>
             </Border>
-            <Button x:Name="btn_addImg" Grid.Column="0" Grid.Row="1" Style="{DynamicResource navBtnCommonStyle}" Content="选择平面图"  Background="Transparent" Width="70" Height="30" Click="btn_addImg_Click" ></Button>
-        </Grid>
+            <StackPanel Orientation="Horizontal"  Grid.Row="1" HorizontalAlignment="Center">
+                <Button x:Name="btn_addImg" Style="{DynamicResource navBtnCommonStyle}" Content="选择平面图"  Background="Transparent" Width="70" Height="30" Click="btn_addImg_Click" ></Button>
+                <Label Content="像素大小:724*364" VerticalAlignment="Center" ></Label>
+            </StackPanel>
+         </Grid>
     </Viewbox>
   
 </UserControl>
