@@ -46,7 +46,6 @@ namespace EntityManageService.sqlUtil
             using (SQLiteCommand cmd = new SQLiteCommand(sql, sqLiteConnection))
             {
                 cmd.ExecuteNonQuery();
-
             }
             if (getNewId)
             {

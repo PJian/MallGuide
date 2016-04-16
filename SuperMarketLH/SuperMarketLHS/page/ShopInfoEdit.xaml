@@ -12,7 +12,7 @@
             <ColumnDefinition Width="190*"></ColumnDefinition>
             <ColumnDefinition Width="834*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <Grid x:Name="grid_leftMenu" Grid.Column="0" Background="#32323a">
+        <Grid x:Name="grid_leftMenu" Background="#32323a">
             <StackPanel >
                 <Button x:Name="btn_editBaseInfo" Style="{DynamicResource leftNavBtnStyle}" Tag="基本信息" BorderThickness="0,1" Click="btn_editBaseInfo_Click" >
                     <Button.Background>
@@ -43,7 +43,7 @@
                 <RowDefinition Height="638*"></RowDefinition>
                 <RowDefinition Height="0*"></RowDefinition>
             </Grid.RowDefinitions>
-            <Grid Grid.Row="0" Background="#f6f6f6">
+            <Grid Background="#f6f6f6">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="10,0,0,0" >
                     <Label x:Name="label_welcome" Content="您当前的位置:" VerticalAlignment="Center"></Label>
                     <Label x:Name="label_location" Content="店铺信息 > 基本信息" VerticalAlignment="Center"></Label>

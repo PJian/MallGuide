@@ -555,7 +555,7 @@ namespace SuperMarketLHS.userControl
         /// <summary>
         /// 保存当前编辑的地图
         /// </summary>
-        private void saveMap()
+        public void saveMap()
         {
             if (this.CurrentEditFloor != null || this.CurrentEditMap != null)
             {
@@ -985,7 +985,7 @@ namespace SuperMarketLHS.userControl
         private void btn_new_shop_Click(object sender, RoutedEventArgs e)
         {
             if (this.currentEditObstacle != null)
-                new NewShopWin(this.currentEditObstacle).ShowDialog();
+                new NewShopWin(this.currentEditObstacle,this).ShowDialog();
         }
 
         private void btn_shopIn_Click(object sender, RoutedEventArgs e)

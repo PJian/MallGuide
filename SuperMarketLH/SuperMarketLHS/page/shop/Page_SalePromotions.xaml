@@ -29,14 +29,14 @@
             <RowDefinition Height="258*"></RowDefinition>
             <RowDefinition Height="50*"></RowDefinition>
         </Grid.RowDefinitions>
-        <Grid Grid.Column="0" Grid.Row="0" Grid.RowSpan="11">
+        <Grid Grid.RowSpan="11">
             <GroupBox Header="活动列表">
                 <ListBox x:Name="list_allSalePromotions" DisplayMemberPath="Name" SelectionChanged="list_allSalePromotions_SelectionChanged" >
                 </ListBox>
             </GroupBox>
         </Grid>
-        <Label Grid.Column="1" Grid.Row="0" Content="名字：" HorizontalAlignment="Right" VerticalContentAlignment="Center"></Label>
-        <TextBox Text="{Binding Name}" Grid.Column="2" Grid.Row="0" x:Name="txb_name" HorizontalAlignment="Left" VerticalAlignment="Center" Width="300"></TextBox>
+        <Label Grid.Column="1" Content="名字：" HorizontalAlignment="Right" VerticalContentAlignment="Center"></Label>
+        <TextBox Text="{Binding Name}" Grid.Column="2" x:Name="txb_name" HorizontalAlignment="Left" VerticalAlignment="Center" Width="300"></TextBox>
 
         <Label Grid.Column="1" Grid.Row="1" Content="促销范围：" HorizontalAlignment="Right" VerticalContentAlignment="Center"></Label>
         <StackPanel  Grid.Column="2" Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Center">
@@ -58,7 +58,7 @@
         </StackPanel>
 
 
-        <Grid Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="11" Background="White">
+        <Grid Grid.ColumnSpan="4" Grid.Row="11" Background="White">
             <StackPanel  VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,20,0" Orientation="Horizontal" >
                 <Button x:Name="btn_create"  Content="新增" Style="{DynamicResource navBtnCommonStyle}" Background="Transparent"  Width="60" Height="30" Margin="0,0,10,0" Click="btn_create_Click"  ></Button>
                 <Button x:Name="btn_update"  Content="更新" Style="{DynamicResource navBtnCommonStyle}" Background="Transparent"  Width="60" Height="30" Margin="0,0,10,0" Click="btn_update_Click"   ></Button>

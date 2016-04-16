@@ -18,7 +18,7 @@
     </UserControl.Resources>
     <Viewbox>
         <Grid Height="364" Width="724" >
-            <Border Grid.Column="0" Grid.Row="0" BorderBrush="White" BorderThickness="2">
+            <Border BorderBrush="White" BorderThickness="2">
                 <Grid Margin="2" MouseLeftButtonDown="Grid_MouseLeftButtonDown_1" x:Name="grid_info" MouseRightButtonDown="grid_info_MouseRightButtonDown" >
                     <!--180 列-->
                     <Grid.ColumnDefinitions>
@@ -321,8 +321,8 @@
                         <RowDefinition Height="1*"></RowDefinition>
                         <RowDefinition Height="1*"></RowDefinition>
                     </Grid.RowDefinitions>
-                    <Image Source="{Binding CurrentEditFloor.Img,Converter={StaticResource ImgConverter}}" Grid.Column="0" Grid.ColumnSpan="190" Grid.Row="0" Grid.RowSpan="90"></Image>
-                    <Canvas x:Name="map_continer" Grid.Column="0" Grid.ColumnSpan="190" Grid.Row="0" Grid.RowSpan="90"></Canvas>
+                    <Image Source="{Binding CurrentEditFloor.Img,Converter={StaticResource ImgConverter}}" Grid.ColumnSpan="190" Grid.RowSpan="90"></Image>
+                    <Canvas x:Name="map_continer" Grid.ColumnSpan="190" Grid.RowSpan="90"></Canvas>
                     <!--右键菜单-->
                     
                 </Grid>
