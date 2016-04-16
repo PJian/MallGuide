@@ -5,14 +5,21 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              xmlns:converter="clr-namespace:ResourceManagementService.converter;assembly=ResourceManagementService"
-             d:DesignHeight="364" d:DesignWidth="724" Loaded="UserControl_Loaded_1" >
+             d:DesignHeight="364" d:DesignWidth="724"  >
     <UserControl.Resources>
         <converter:ImgConverter x:Key="ImgConverter"></converter:ImgConverter>
+        <ContextMenu x:Key="grid_contextMenu">
+            <MenuItem Header="{Binding CurrentObstacleIndex}" x:Name="btn_areaInfo"></MenuItem>
+            <MenuItem Header="新建店铺" x:Name="btn_new_shop" Click="btn_new_shop_Click" Visibility="{Binding ShowMenuItemOfAddShop}" />
+            <MenuItem Header="入驻店铺" x:Name="btn_shopIn" Click="btn_shopIn_Click" Visibility="{Binding ShowMenuItemOfShopIn}"></MenuItem>
+            <MenuItem Header="撤销入驻" x:Name="btn_shopOut" Visibility="{Binding ShowMenuItemOfShopOut}" Click="btn_shopOut_Click"></MenuItem>
+            <MenuItem Header="删除区域" x:Name="btn_delArea" Click="btn_delArea_Click" Visibility="{Binding DelArea}"></MenuItem>
+        </ContextMenu>
     </UserControl.Resources>
     <Viewbox>
         <Grid Height="364" Width="724" >
             <Border Grid.Column="0" Grid.Row="0" BorderBrush="White" BorderThickness="2">
-                <Grid Margin="2" MouseLeftButtonDown="Grid_MouseLeftButtonDown_1" x:Name="grid_info" MouseRightButtonDown="grid_info_MouseRightButtonDown" ContextMenuOpening="grid_info_ContextMenuOpening">
+                <Grid Margin="2" MouseLeftButtonDown="Grid_MouseLeftButtonDown_1" x:Name="grid_info" MouseRightButtonDown="grid_info_MouseRightButtonDown" >
                     <!--180 列-->
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1*"></ColumnDefinition>
@@ -317,14 +324,7 @@
                     <Image Source="{Binding CurrentEditFloor.Img,Converter={StaticResource ImgConverter}}" Grid.Column="0" Grid.ColumnSpan="190" Grid.Row="0" Grid.RowSpan="90"></Image>
                     <Canvas x:Name="map_continer" Grid.Column="0" Grid.ColumnSpan="190" Grid.Row="0" Grid.RowSpan="90"></Canvas>
                     <!--右键菜单-->
-                    <Grid.ContextMenu>
-                        <ContextMenu>
-                            <MenuItem Header="" x:Name="btn_areaInfo"></MenuItem>
-                            <MenuItem Header="新建店铺" x:Name="btn_new_shop" Click="btn_new_shop_Click"  />
-                            <MenuItem Header="入驻店铺" x:Name="btn_shopIn" Click="btn_shopIn_Click" ></MenuItem>
-                            <MenuItem Header="删除区域" x:Name="btn_delArea"></MenuItem>
-                        </ContextMenu>
-                    </Grid.ContextMenu>
+                    
                 </Grid>
 
             </Border>
