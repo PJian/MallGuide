@@ -8,12 +8,32 @@
              d:DesignHeight="364" d:DesignWidth="724"  >
     <UserControl.Resources>
         <converter:ImgConverter x:Key="ImgConverter"></converter:ImgConverter>
-        <ContextMenu x:Key="grid_contextMenu">
-            <MenuItem Header="编号更改" x:Name="btn_areaNumChang" Click="btn_areaNumChang_Click" ></MenuItem>
-            <MenuItem Header="新建店铺" x:Name="btn_new_shop" Click="btn_new_shop_Click" Visibility="{Binding ShowMenuItemOfAddShop}" />
-            <MenuItem Header="入驻店铺" x:Name="btn_shopIn" Click="btn_shopIn_Click" Visibility="{Binding ShowMenuItemOfShopIn}"></MenuItem>
-            <MenuItem Header="撤销入驻" x:Name="btn_shopOut" Visibility="{Binding ShowMenuItemOfShopOut}" Click="btn_shopOut_Click"></MenuItem>
-            <MenuItem Header="删除区域" x:Name="btn_delArea" Click="btn_delArea_Click" Visibility="{Binding DelArea}"></MenuItem>
+        <ContextMenu x:Key="grid_contextMenu" Width="110" >
+            <MenuItem Header="编号更改" x:Name="btn_areaNumChang" Click="btn_areaNumChang_Click"  >
+                <MenuItem.Icon>
+                    <Image Source="/SuperMarketLHS;component/img/shop/edit.ico"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="新建店铺" x:Name="btn_new_shop" Click="btn_new_shop_Click" Visibility="{Binding ShowMenuItemOfAddShop}" >
+                <MenuItem.Icon>
+                    <Image Source="/SuperMarketLHS;component/img/shop/add.ico"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="入驻店铺" x:Name="btn_shopIn" Click="btn_shopIn_Click" Visibility="{Binding ShowMenuItemOfShopIn}">
+                <MenuItem.Icon>
+                    <Image Source="/SuperMarketLHS;component/img/shop/link.ico"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="撤销入驻" x:Name="btn_shopOut" Visibility="{Binding ShowMenuItemOfShopOut}" Click="btn_shopOut_Click">
+                <MenuItem.Icon>
+                    <Image Source="/SuperMarketLHS;component/img/shop/sign_delete.ico"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="删除区域" x:Name="btn_delArea" Click="btn_delArea_Click" Visibility="{Binding DelArea}">
+                <MenuItem.Icon>
+                    <Image Source="/SuperMarketLHS;component/img/shop/delete.ico"/>
+                </MenuItem.Icon>
+            </MenuItem>
         </ContextMenu>
        
         

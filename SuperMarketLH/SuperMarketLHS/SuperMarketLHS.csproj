@@ -496,6 +496,15 @@
     <Resource Include="img\enter.ico" />
     <Resource Include="img\new.ico" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\shop\add.ico" />
+    <Resource Include="img\shop\delete.ico" />
+    <Resource Include="img\shop\edit.ico" />
+    <Resource Include="img\shop\sign_delete.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\shop\link.ico" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
