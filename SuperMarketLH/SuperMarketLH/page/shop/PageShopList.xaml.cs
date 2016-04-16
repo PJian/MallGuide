@@ -64,23 +64,12 @@ namespace SuperMarketLH.page.shop
                     PageCount = shopCount % WinUtil.PAGE_SIZE == 0 ? shopCount / WinUtil.PAGE_SIZE : (shopCount / WinUtil.PAGE_SIZE + 1),
                     PageCurrent = 1
                 };
-                if (sp.PageCount > 1)
-                {
-                    this.btn_nextPage.IsEnabled = true;
-                }
-                else
-                {
-                    this.btn_nextPage.IsEnabled = false;
-                }
-                this.btn_prePage.IsEnabled = false;
                 grid_page.DataContext = sp;
             }
         }
 
         private void init()
         {
-
-
             if (this.currentCatagory != null)
             {
                 allShops = SqlHelper.getShopByCatagory(this.currentCatagory,sp);
@@ -88,8 +77,6 @@ namespace SuperMarketLH.page.shop
             else {
                 allShops = SqlHelper.getAllShop(sp);
             }
-
-
             //如果店铺只有一个并且该店铺类型还是主推店铺，则显示店铺广告图片
             if (allShops.Count == 1 && allShops.ElementAt(0).Type == ConstantData.SHOP_TYPE_SPECIAL)
             {
@@ -97,9 +84,8 @@ namespace SuperMarketLH.page.shop
                 this.surfaceListBox.Visibility = Visibility.Collapsed;
                 this.grid_page.Visibility = Visibility.Collapsed;
                 userCtrlMainShop.Shop = allShops.ElementAt(0);
-               // Brand brand = allShops.ElementAt(0).Brand;
-              
-                // this.userCtrlImgs.Imgs = getShopPromotionImgOfValidate();
+                //Brand brand = allShops.ElementAt(0).Brand;
+                //this.userCtrlImgs.Imgs = getShopPromotionImgOfValidate();
             }
             else
             {
@@ -109,6 +95,7 @@ namespace SuperMarketLH.page.shop
                 this.surfaceListBox.ItemsSource = allShops;
 
             }
+            loadImgCounter(sp.PageCurrent);
             
         }
       
@@ -116,8 +103,6 @@ namespace SuperMarketLH.page.shop
         {
             calculatePageCount();
             init();
-           
-            
         }
 
         private void surfaceListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -127,35 +112,146 @@ namespace SuperMarketLH.page.shop
             }
         }
 
-        private void btn_nextPage_Click(object sender, RoutedEventArgs e)
+        private void getNextItem()
         {
-            if (sp != null) {
+            if (sp != null&&sp.PageCurrent<sp.PageCount) {
                 sp.PageCurrent++;
-                if (sp.PageCurrent >= sp.PageCount) {
-                    this.btn_nextPage.IsEnabled = false;
-           
-                }
-                if (sp.PageCurrent >1) {
-                    this.btn_prePage.IsEnabled = true;
-                }
                 init();
             }
-            
+            else
+            {
+                sp.PageCurrent = 0;
+                init();
+            }
         }
 
-        private void btn_prePage_Click(object sender, RoutedEventArgs e)
+        private void getPreItem()
         {
-            if (sp != null) {
+            if (sp != null && sp.PageCurrent > 1)
+            {
                 sp.PageCurrent--;
-                if (sp.PageCurrent <= 1) {
-                    this.btn_prePage.IsEnabled = false;
-                }
-                if (sp.PageCurrent < sp.PageCount)
-                {
-                    this.btn_nextPage.IsEnabled = true;
-                }
                 init();
             }
+            else {
+                sp.PageCurrent = sp.PageCount;
+                init();
+            }
+        }
+
+        /// <summary>
+        /// 加载图片计数
+        /// </summary>
+        private void loadImgCounter(int selectIndex)
+        {
+            pageCountStackPanel.Children.Clear();
+            for (int i = 1; i <= sp.PageCount; i++)
+            {
+                pageCountStackPanel.Children.Add(i == selectIndex ? getSelectEllipse() : getUnSelectEllipse());
+            }
+        }
+        /// <summary>
+        /// 构造选中的圆圈效果
+        /// </summary>
+        /// <returns></returns>
+        private Ellipse getUnSelectEllipse()
+        {
+            return new Ellipse()
+            {
+                Fill = Brushes.White,
+                Width = 20,
+                Height = 20,
+                Margin = new Thickness(2, 0, 2, 0)
+            };
+        }
+        /// <summary>
+        /// 构造未选中的圆圈效果
+        /// </summary>
+        /// <returns></returns>
+        private Ellipse getSelectEllipse()
+        {
+            return new Ellipse()
+            {
+                Fill = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#0099ff")),
+                Width = 20,
+                Height = 20,
+                Margin = new Thickness(2, 0, 2, 0)
+            };
+        }
+
+        //初始鼠标位置
+        private double startX = 0;
+        //结尾鼠标位置
+        private double endX = 0;
+        private void compareX(double startX, double endX)
+        {
+            if ((endX - startX) > 200)
+            {
+                getNextItem();
+            }
+            else if ((startX - endX) > 200)
+            {
+                getPreItem();
+            }
+        }
+
+        private void Grid_MouseDown_1(object sender, MouseButtonEventArgs e)
+        {
+            startX = e.GetPosition(shopListGrid).X;
+        }
+
+        private void Grid_MouseMove_1(object sender, MouseEventArgs e)
+        {
+            endX = e.GetPosition(shopListGrid).X;
+        }
+
+        private void Grid_MouseUp_1(object sender, MouseButtonEventArgs e)
+        {
+            compareX(startX, endX);
+        }
+
+        private void Grid_TouchDown_1(object sender, TouchEventArgs e)
+        {
+            startX = e.GetTouchPoint(shopListGrid).Position.X;
+        }
+
+        private void Grid_TouchMove_1(object sender, TouchEventArgs e)
+        {
+            endX = e.GetTouchPoint(shopListGrid).Position.X;
+        }
+
+        private void Grid_TouchUp_1(object sender, TouchEventArgs e)
+        {
+            compareX(startX, endX);
+        }
+
+        private void shopListGrid_PreviewMouseDown_1(object sender, MouseButtonEventArgs e)
+        {
+            startX = e.GetPosition(shopListGrid).X;
+        }
+
+        private void shopListGrid_PreviewMouseMove_1(object sender, MouseEventArgs e)
+        {
+            endX = e.GetPosition(shopListGrid).X;
+        }
+
+        private void shopListGrid_PreviewMouseUp_1(object sender, MouseButtonEventArgs e)
+        {
+            compareX(startX, endX);
+        }
+
+        private void shopListGrid_PreviewTouchDown_1(object sender, TouchEventArgs e)
+        {
+            startX = e.GetTouchPoint(shopListGrid).Position.X;
+        }
+
+        private void shopListGrid_PreviewTouchMove_1(object sender, TouchEventArgs e)
+        {
+            endX = e.GetTouchPoint(shopListGrid).Position.X;
+        }
+
+        private void shopListGrid_PreviewTouchUp_1(object sender, TouchEventArgs e)
+        {
+            compareX(startX, endX);
         }
 
 
