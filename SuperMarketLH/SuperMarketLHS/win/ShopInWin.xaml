@@ -1,8 +1,46 @@
 ﻿<Window x:Class="SuperMarketLHS.win.ShopInWin"
+        xmlns:my="http://schemas.microsoft.com/surface/2008"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="商铺入驻" Height="300" Width="300" WindowStartupLocation="CenterOwner" >
+        Title="商铺入驻" Height="500" Width="400" WindowStartupLocation="CenterOwner" Background="#F1F1F1">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="150*"></ColumnDefinition>
+            <ColumnDefinition Width="250*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30*"></RowDefinition>
+            <RowDefinition Height="240*"></RowDefinition>
+            <RowDefinition Height="30*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Label Grid.Column="0" Grid.Row="0" Content="区域信息：" HorizontalAlignment="Right" VerticalContentAlignment="Center" ></Label>
+        <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Horizontal" IsEnabled="False">
+            <TextBox x:Name="floor" VerticalAlignment="Center" HorizontalAlignment="Center" Width="50"></TextBox>
+            <Label Content="楼" VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
+            <TextBox x:Name="room"  HorizontalAlignment="Left" VerticalAlignment="Center" Width="50"></TextBox>
+            <Label Content="室" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
+        </StackPanel>
+
+        <!--<DataGrid Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" x:Name="dataGrid_shops" Background="Transparent" BorderThickness="0"  AutoGenerateColumns="False" IsReadOnly="True" VerticalGridLinesBrush="Transparent" HorizontalGridLinesBrush="#b79766">
+            <DataGrid.Columns >
+                <DataGridTextColumn Header="商铺名称" Width="200" Binding="{Binding Name}"  CanUserResize="False" FontSize="15"/>
+                <DataGridTextColumn Header="楼层" Width="80" Binding="{Binding Floor}"  CanUserResize="False" FontSize="15"/>
+                <DataGridTextColumn Header="编号" Width="120" Binding="{Binding Room}"  CanUserResize="False" FontSize="15"/>
+            </DataGrid.Columns>
+        </DataGrid>-->
+
+        <ListView Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" x:Name="shopsListView" Background="Transparent">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="商铺名称" Width="200"></GridViewColumn>
+                    <GridViewColumn Header="楼层" Width="80"></GridViewColumn>
+                    <GridViewColumn Header="编号" Width="100"></GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <Button x:Name="btn_enter" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" Width="60" Height="30" Content="入驻" Style="{DynamicResource navBtnCommonStyle}" Background="Transparent" Click="btn_enter_Click_1"></Button>
+
     </Grid>
 </Window>

@@ -28,5 +28,10 @@ namespace SuperMarketLHS.win
           
             this.relativeObstacle = relativeObstacle;
         }
+
+        private void btn_enter_Click_1(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
