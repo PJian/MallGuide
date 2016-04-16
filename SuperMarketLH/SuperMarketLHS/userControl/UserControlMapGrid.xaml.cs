@@ -3,6 +3,7 @@ using EntityManagementService.nav;
 using EntityManagementService.util;
 using EntityManageService.sqlUtil;
 using SuperMarketLHS.comm;
+using SuperMarketLHS.win;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -219,10 +220,7 @@ namespace SuperMarketLHS.userControl
             {
                 if (this.EditState == CavasUtil.DRAW_STATE)
                     drawArea(temp);
-                //else if (this.draw_state == CavasUtil.SHOP_IN_STATE) 
-                //{
-                //        //商铺入驻阶段
-                //}
+               
             }
             else
             {
@@ -848,5 +846,25 @@ namespace SuperMarketLHS.userControl
         {
             this.CurrentEditObstacle.Type = type;
         }
+
+        private void grid_info_ContextMenuOpening(object sender, ContextMenuEventArgs e)
+        {
+
+        }
+
+        private void btn_new_shop_Click(object sender, RoutedEventArgs e)
+        {
+            if(this.currentEditObstacle!=null)
+                new NewShopWin(this.currentEditObstacle).ShowDialog();
+        }
+
+        private void btn_shopIn_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.currentEditObstacle != null) {
+                new ShopInWin(this.currentEditObstacle).ShowDialog();
+            }
+        }
+
+      
     }
 }

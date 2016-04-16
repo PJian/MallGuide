@@ -184,6 +184,12 @@
     <Compile Include="userControl\UserControl_SortChar.xaml.cs">
       <DependentUpon>UserControl_SortChar.xaml</DependentUpon>
     </Compile>
+    <Compile Include="win\NewShopWin.xaml.cs">
+      <DependentUpon>NewShopWin.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="win\ShopInWin.xaml.cs">
+      <DependentUpon>ShopInWin.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -337,6 +343,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="userControl\UserControl_SortChar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="win\NewShopWin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="win\ShopInWin.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
