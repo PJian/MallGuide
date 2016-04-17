@@ -1,0 +1,44 @@
+﻿<Window x:Class="SuperMarketLHS.win.ShopInWin"
+        xmlns:my="http://schemas.microsoft.com/surface/2008"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="商铺入驻" Height="500" Width="400" WindowStartupLocation="CenterScreen" Background="#F1F1F1"  Icon="../img/enter.ico" Loaded="Window_Loaded">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="150*"></ColumnDefinition>
+            <ColumnDefinition Width="250*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30*"></RowDefinition>
+            <RowDefinition Height="240*"></RowDefinition>
+            <RowDefinition Height="30*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Label Content="区域信息：" HorizontalAlignment="Right" VerticalContentAlignment="Center" ></Label>
+        <StackPanel Grid.Column="1" Orientation="Horizontal" IsEnabled="False">
+            <Label x:Name="floor" VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
+            <Label x:Name="room"  HorizontalAlignment="Left" VerticalAlignment="Center" ></Label>
+        </StackPanel>
+
+        <!--<DataGrid Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" x:Name="dataGrid_shops" Background="Transparent" BorderThickness="0"  AutoGenerateColumns="False" IsReadOnly="True" VerticalGridLinesBrush="Transparent" HorizontalGridLinesBrush="#b79766">
+            <DataGrid.Columns >
+                <DataGridTextColumn Header="商铺名称" Width="200" Binding="{Binding Name}"  CanUserResize="False" FontSize="15"/>
+                <DataGridTextColumn Header="楼层" Width="80" Binding="{Binding Floor}"  CanUserResize="False" FontSize="15"/>
+                <DataGridTextColumn Header="编号" Width="120" Binding="{Binding Room}"  CanUserResize="False" FontSize="15"/>
+            </DataGrid.Columns>
+        </DataGrid>-->
+
+        <ListView  Grid.Row="1" Grid.ColumnSpan="2" x:Name="shopsListView" Background="Transparent" SelectionChanged="shopsListView_SelectionChanged">
+
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="商铺名称" Width="200"  DisplayMemberBinding="{Binding Name}" ></GridViewColumn>
+                    <GridViewColumn Header="楼层" Width="80" DisplayMemberBinding="{Binding Floor.Index}" ></GridViewColumn>
+                    <GridViewColumn Header="编号" Width="80" DisplayMemberBinding="{Binding Index}"></GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <Button x:Name="btn_enter" Grid.Row="2" Grid.ColumnSpan="2" Width="60" Height="30" Content="入驻" Style="{DynamicResource navBtnCommonStyle}" Background="Transparent" Click="btn_enter_Click"></Button>
+
+    </Grid>
+</Window>

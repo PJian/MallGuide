@@ -1,0 +1,13 @@
+﻿<Page xmlns:usercontrl="clr-namespace:SuperMarketLH.usercontrl"  x:Class="SuperMarketLH.page.PageIndex"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" 
+      d:DesignHeight="1080" d:DesignWidth="1920"
+	Title="PageIndex" Loaded="Page_Loaded_1">
+
+    <Grid>
+        <usercontrl:UserControlShowImgsForIndex x:Name="userContrl_imgs"/>
+    </Grid>
+</Page>
