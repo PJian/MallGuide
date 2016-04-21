@@ -37,12 +37,17 @@
                     <RowDefinition Height="20*"></RowDefinition>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="630*"></ColumnDefinition>
-                    <ColumnDefinition Width="1290*"></ColumnDefinition>
+                    <ColumnDefinition Width="830*"></ColumnDefinition>
+                    <ColumnDefinition Width="1090*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Image Grid.Column="0" Grid.Row="1" Grid.RowSpan="2" Source="/SuperMarketLH;component/images/panel.png"></Image>
                 <!--分类-->
                 <StackPanel Orientation="Horizontal" Grid.RowSpan="3" Grid.Row="0" Grid.Column="0" Margin="70,-20,0,0" >
+                    <Button x:Name="btn_all" Style="{DynamicResource navBtnShopTypeStyle}"  Margin="0,0,40,0" Click="btn_all_Click"  >
+                        <Button.Background>
+                            <ImageBrush ImageSource="/SuperMarketLH;component/images/navBtn/btn22.png"/>
+                        </Button.Background>
+                    </Button>
                     <Button x:Name="btn_food" Style="{DynamicResource navBtnShopTypeStyle}"  Margin="0,0,40,0" Click="btn_food_Click" >
                         <Button.Background>
                             <ImageBrush ImageSource="/SuperMarketLH;component/images/navBtn/btn22.png"/>
@@ -58,11 +63,11 @@
                             <ImageBrush ImageSource="/SuperMarketLH;component/images/navBtn/btn24.png"/>
                         </Button.Background>
                     </Button>
-                    <!--<Button x:Name="btn_highQuality" Style="{DynamicResource navBtnShopTypeStyle}"  Margin="0,0,20,0">
+                 <Button x:Name="btn_fun" Style="{DynamicResource navBtnShopTypeStyle}"  Margin="0,0,20,0" Click="btn_fun_Click">
                     <Button.Background>
-                        <ImageBrush ImageSource="/SuperMarketLH;component/images/navBtn/btn25.png"/>
+                        <ImageBrush ImageSource="/SuperMarketLH;component/images/navBtn/btn29.png"/>
                     </Button.Background>
-                </Button>-->
+                </Button>
                 </StackPanel>
             </Grid>
             <!--显示的内容-->

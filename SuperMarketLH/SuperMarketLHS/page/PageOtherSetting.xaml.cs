@@ -110,7 +110,7 @@ namespace SuperMarketLHS.page
         private void btn_remoteDBSet_Click(object sender, RoutedEventArgs e)
         {
             WinUtil.chengToSelectBtn(this.btn_remoteDBSet, FindResource("leftNavBtnSelectStyle") as Style, new Button[] { btn_questionnaireInfo, btn_defaultAD, btn_surroundInfo, btn_employee, btn_JoinUs, btn_magazine, btn_fireEscape, btn_updateInfo }.ToList(), FindResource("leftNavBtnStyle") as Style);
-            this.label_location.Content = "其他 > 数据酷设置";
+            this.label_location.Content = "其他 > 数据库设置";
             this.frame.Navigate(new PageRemoteDataSetting(this.parent));
         }
     }

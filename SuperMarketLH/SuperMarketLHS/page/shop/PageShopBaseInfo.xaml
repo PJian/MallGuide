@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:userControl="clr-namespace:SuperMarketLHS.userControl"
       mc:Ignorable="d" 
-       d:DesignHeight="638" d:DesignWidth="834"
+       d:DesignHeight="738" d:DesignWidth="834"
 	Title="PageShopBaseInfo" Loaded="Page_Loaded_1">
     <Grid x:Name="grid_allInfo">
         <Grid.ColumnDefinitions>
@@ -25,7 +25,7 @@
             <RowDefinition Height="25*"></RowDefinition>
             <RowDefinition Height="25*"></RowDefinition>
             <RowDefinition Height="25*"></RowDefinition>
-            <RowDefinition Height="50*"></RowDefinition>
+            <RowDefinition Height="150*"></RowDefinition>
             <RowDefinition Height="258*"></RowDefinition>
             <RowDefinition Height="50*"></RowDefinition>
         </Grid.RowDefinitions>
@@ -37,8 +37,7 @@
             </GroupBox>
         </Grid>
 
-        <ScrollViewer Grid.Column="1" Grid.RowSpan="13" Grid.ColumnSpan="3">      
-            <Grid>
+            <Grid Grid.Column="1" Grid.RowSpan="13" Grid.ColumnSpan="3">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="100*"></ColumnDefinition>
                     <ColumnDefinition Width="334*"></ColumnDefinition>
@@ -55,7 +54,11 @@
                     <RowDefinition Height="25*"></RowDefinition>
                     <RowDefinition Height="25*"></RowDefinition>
                     <RowDefinition Height="25*"></RowDefinition>
-                    <RowDefinition Height="50*"></RowDefinition>
+                    <RowDefinition Height="25*"></RowDefinition>
+                    <RowDefinition Height="25*"></RowDefinition>
+                    
+                    <RowDefinition Height="25*"></RowDefinition>
+                    <RowDefinition Height="25*"></RowDefinition>
                     <RowDefinition Height="258*"></RowDefinition>
                 </Grid.RowDefinitions>
                 
@@ -110,14 +113,14 @@
                 <TextBox Text="{Binding ZipCode}" Grid.Column="1" Grid.Row="9" HorizontalAlignment="Left" VerticalAlignment="Center" Width="300"></TextBox>
 
                 <Label Content="店铺简介：" Grid.Row="10" HorizontalAlignment="Right" VerticalAlignment="Center"></Label>
-                <TextBox Text="{Binding Introduction}" Grid.Column="1" Grid.Row="10" ScrollViewer.VerticalScrollBarVisibility="Auto" AcceptsReturn="True" TextWrapping="Wrap" Grid.ColumnSpan="2"></TextBox>
+                <TextBox Text="{Binding Introduction}" Grid.Column="1" Grid.Row="10" Grid.RowSpan="4" ScrollViewer.VerticalScrollBarVisibility="Auto" AcceptsReturn="True" TextWrapping="Wrap" Grid.ColumnSpan="2"></TextBox>
 
-                <userControl:UserControlShowImgWithToolBar  LabelImgSize="大小:915*455,数量:4" Grid.ColumnSpan="3" Grid.Row="11" x:Name="userControl_facilities" Visibility="Collapsed" LabelChooseImgContent="设施介绍" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                <userControl:UserControlShowImgWithToolBar  LabelImgSize="大小:915*455,数量:4" Grid.ColumnSpan="3" Grid.Row="14" x:Name="userControl_facilities" Visibility="Collapsed" LabelChooseImgContent="设施介绍" VerticalAlignment="Center" HorizontalAlignment="Center"/>
 
-                <userControl:UserControlShowImgWithToolBar  LabelImgSize="大小:700*490,数量:4" Grid.ColumnSpan="3" Grid.Row="11" x:Name="userControl_brandImgs" LabelChooseImgContent="品牌图片" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                <userControl:UserControlShowImgWithToolBar  LabelImgSize="大小:700*490,数量:4" Grid.ColumnSpan="3" Grid.Row="14" x:Name="userControl_brandImgs" LabelChooseImgContent="品牌图片" VerticalAlignment="Center" HorizontalAlignment="Center"/>
 
             </Grid>
-        </ScrollViewer>
+      
      
         <Grid Grid.ColumnSpan="4" Grid.Row="13" Background="White">
             <StackPanel  VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,20,0" Orientation="Horizontal" >

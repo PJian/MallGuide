@@ -69,12 +69,13 @@ namespace SuperMarketLH.page.shop
                     case WinUtil.FRAME_SHOP_MOVIE: page = new PageShopMovie(); break;
                     case WinUtil.FRAME_SHOP_CAN_YIN: page = new PageShopList(SqlHelper.getCatagoryByName("餐饮"), this); break;
                     case WinUtil.FRAME_SHOP_SHOPPING: page = new PageShopList(SqlHelper.getCatagoryByName("购物"), this); break;
-                    case WinUtil.FRAME_SHOP_CHILDREN: page = new PageShopList(SqlHelper.getCatagoryByName("儿童娱乐"), this); break;
+                    case WinUtil.FRAME_SHOP_CHILDREN: page = new PageShopList(SqlHelper.getCatagoryByName("儿童"), this); break;
                     case WinUtil.FRAME_SHOP_KTV: page = new PageShopList(SqlHelper.getCatagoryByName("KTV"), this); break;
-                    case WinUtil.FRAME_SHOP_SUPER_MARKET_DARUNFA: page = new PageShopList(SqlHelper.getCatagoryByName("大润发"), this); break;
+                    case WinUtil.FRAME_SHOP_SUPER_MARKET_DARUNFA: page = new PageShopList(SqlHelper.getCatagoryByName("大润发超市"), this); break;
                     case WinUtil.FRAME_SHOP_SUNINGYIGOU: page = new PageShopList(SqlHelper.getCatagoryByName("苏宁易购"), this); break;
                     case WinUtil.FRAME_SHOP_JIANSHENG: page = new PageShopList(SqlHelper.getCatagoryByName("健身"), this); break;
                     case WinUtil.FRAME_SHOP_DABAIJINGSHIJIEERTONGLEYUAN: page = new PageShopList(SqlHelper.getCatagoryByName("大白鲸世界儿童乐园"), this); break;
+                    case WinUtil.FRAME_SHOP_FUN:page = new PageShopList(SqlHelper.getCatagoryByName("娱乐"),this);break;
                 }
                 transitioniItem.FrameNavigatePage = new FrameNavigate()
                 {
@@ -183,8 +184,14 @@ namespace SuperMarketLH.page.shop
             navigateTo(WinUtil.FRAME_SHOP_CHILDREN);
         }
 
-        
+        private void btn_fun_Click(object sender, RoutedEventArgs e)
+        {
+            navigateTo(WinUtil.FRAME_SHOP_FUN);
+        }
 
-       
+        private void btn_all_Click(object sender, RoutedEventArgs e)
+        {
+            navigateTo(WinUtil.FRAME_SHOP_ALL);
+        }
     }
 }

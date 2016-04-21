@@ -31,6 +31,25 @@ CREATE TABLE "TABCatagory" (
     "sortChar" TEXT,
     "logo" TEXT
 )
+--insert into tabcatagory
+BEGIN TRANSACTION;
+
+
+insert into TABCatagory ( "name", "sortChar", "logo") values ( '餐饮', 'C', NULL);
+insert into TABCatagory ( "name", "sortChar", "logo") values ( '娱乐', 'Y', NULL);
+insert into TABCatagory ( "name", "sortChar", "logo") values ( '购物', 'S', NULL);
+insert into TABCatagory ( "name", "sortChar", "logo") values ( '儿童', 'C', NULL);
+
+insert into TABCatagory ( "name", "sortChar", "logo") values ( 'KTV', 'K', NULL);
+insert into TABCatagory ( "name", "sortChar", "logo") values ( '健身', 'J', NULL);
+insert into TABCatagory ( "name", "sortChar", "logo") values ( '影城', 'Y', NULL); 
+insert into TABCatagory ( "name", "sortChar", "logo") values ( '苏宁易购', 'S', NULL);
+insert into TABCatagory ( "name", "sortChar", "logo") values ( '大润发超市', 'D', NULL);
+insert into TABCatagory ( "name", "sortChar", "logo") values ( '大白鲸世界儿童乐园', 'D', NULL);
+COMMIT;
+
+
+
 
 -- Describe TABCLIENT
 CREATE TABLE tabclient (
