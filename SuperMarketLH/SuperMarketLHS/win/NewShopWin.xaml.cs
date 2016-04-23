@@ -28,7 +28,7 @@ namespace SuperMarketLHS.win
         private UserControlMapGrid parent;
         private Shop currentEditShop;
 
-        public NewShopWin( UserControlMapGrid parent)
+        public NewShopWin(UserControlMapGrid parent)
         {
             InitializeComponent();
             this.relativeObstacle = parent.CurrentEditObstacle;
@@ -127,6 +127,34 @@ namespace SuperMarketLHS.win
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             init();
+        }
+
+        private void radio_Special_Checked(object sender, RoutedEventArgs e)
+        {
+            if (this.userControl_brandImgs != null)
+            {
+                this.userControl_brandImgs.Visibility = Visibility.Collapsed;
+            }
+            if (this.userControl_facilities != null)
+            {
+                this.userControl_facilities.Visibility = Visibility.Visible;
+            }
+            
+            
+        }
+
+        private void radio_normal_Checked(object sender, RoutedEventArgs e)
+        {
+            if (this.userControl_brandImgs != null)
+            {
+                this.userControl_brandImgs.Visibility = Visibility.Visible;
+            }
+            if (this.userControl_facilities != null)
+            {
+                this.userControl_facilities.Visibility = Visibility.Collapsed;
+            }
+           
+            
         }
     }
 }

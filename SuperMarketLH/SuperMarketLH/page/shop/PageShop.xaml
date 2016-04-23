@@ -32,8 +32,8 @@
             <!--商铺导航-->
             <Grid Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="75*"></RowDefinition>
-                    <RowDefinition Height="35*"></RowDefinition>
+                    <RowDefinition Height="65*"></RowDefinition>
+                    <RowDefinition Height="45*"></RowDefinition>
                     <RowDefinition Height="20*"></RowDefinition>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
@@ -45,7 +45,7 @@
                 <StackPanel Orientation="Horizontal" Grid.RowSpan="3" Grid.Row="0" Grid.Column="0" Margin="70,-20,0,0" >
                     <Button x:Name="btn_all" Style="{DynamicResource navBtnShopTypeStyle}"  Margin="0,0,40,0" Click="btn_all_Click"  >
                         <Button.Background>
-                            <ImageBrush ImageSource="/SuperMarketLH;component/images/navBtn/btn22.png"/>
+                            <ImageBrush ImageSource="/SuperMarketLH;component/images/navBtn/btn30.png"/>
                         </Button.Background>
                     </Button>
                     <Button x:Name="btn_food" Style="{DynamicResource navBtnShopTypeStyle}"  Margin="0,0,40,0" Click="btn_food_Click" >

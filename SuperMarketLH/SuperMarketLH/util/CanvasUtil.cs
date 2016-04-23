@@ -177,9 +177,10 @@ namespace SuperMarketLH.util
             if (o.Type == ObstacleType.SHOP && o.Shop!=null && o.Shop.Id > 0 && SqlHelper.getShopById(o.Shop.Id) !=null)
             {
                 Shop s = SqlHelper.getShopById(o.Shop.Id);
+                o.Shop = s;
                 if (s.Door.Equals(getPointOfGrid(o.Door)))
                 {
-                    drawShopTips(g, getMiddlePointOfArea(o), o.Shop, nav, showDetailInfo);
+                    drawShopTips(g, getMiddlePointOfArea(o), s, nav, showDetailInfo);
                 }
             }
         }

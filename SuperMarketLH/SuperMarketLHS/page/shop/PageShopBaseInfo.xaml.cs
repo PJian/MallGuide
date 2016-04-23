@@ -35,7 +35,7 @@ namespace SuperMarketLHS.page.shop
         }
         private void init() { 
             //列表显示
-            allShops = new ObservableCollection<Shop>(SqlHelper.getAllShop());
+            allShops = new ObservableCollection<Shop>(SqlHelper.getAllShopOrderedByName());
             this.list_allshop.ItemsSource = allShops;
             currentEditShop = new Shop();
             this.grid_allInfo.DataContext = currentEditShop;
@@ -188,7 +188,7 @@ namespace SuperMarketLHS.page.shop
             //init();
             MessageBox.Show("添加成功");
 
-            allShops = new ObservableCollection<Shop>(SqlHelper.getAllShop());
+            allShops = new ObservableCollection<Shop>(SqlHelper.getAllShopOrderedByName());
             this.list_allshop.ItemsSource = allShops;
             this.list_allshop.SelectedItem = this.currentEditShop;
             this.currentEditShop = this.list_allshop.SelectedItem as Shop;
@@ -222,7 +222,7 @@ namespace SuperMarketLHS.page.shop
                 MessageBox.Show("更新成功");
             }
 
-            allShops = new ObservableCollection<Shop>(SqlHelper.getAllShop());
+            allShops = new ObservableCollection<Shop>(SqlHelper.getAllShopOrderedByName());
             this.list_allshop.ItemsSource = allShops;
             this.list_allshop.SelectedItem = this.currentEditShop;
             this.currentEditShop = this.list_allshop.SelectedItem as Shop;

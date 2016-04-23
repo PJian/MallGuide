@@ -30,44 +30,45 @@
             <RowDefinition Height="50*"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <Grid Grid.RowSpan="13">
+        <Grid Grid.RowSpan="12">
             <GroupBox Header="店铺列表">
                 <ListBox x:Name="list_allshop" DisplayMemberPath="Name" SelectionChanged="list_allshop_SelectionChanged">
                 </ListBox>
             </GroupBox>
         </Grid>
+        <ScrollViewer Grid.Column="1" Grid.RowSpan="12" Grid.ColumnSpan="3">
 
-            <Grid Grid.Column="1" Grid.RowSpan="13" Grid.ColumnSpan="3">
+            <Grid >
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="100*"></ColumnDefinition>
-                    <ColumnDefinition Width="334*"></ColumnDefinition>
-                    <ColumnDefinition Width="150*"></ColumnDefinition>
+                    <ColumnDefinition Width="100"></ColumnDefinition>
+                    <ColumnDefinition Width="334"></ColumnDefinition>
+                    <ColumnDefinition Width="150"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="25*"></RowDefinition>
-                    <RowDefinition Height="25*"></RowDefinition>
-                    <RowDefinition Height="25*"></RowDefinition>
-                    <RowDefinition Height="25*"></RowDefinition>
-                    <RowDefinition Height="25*"></RowDefinition>
-                    <RowDefinition Height="25*"></RowDefinition>
-                    <RowDefinition Height="25*"></RowDefinition>
-                    <RowDefinition Height="25*"></RowDefinition>
-                    <RowDefinition Height="25*"></RowDefinition>
-                    <RowDefinition Height="25*"></RowDefinition>
-                    <RowDefinition Height="25*"></RowDefinition>
-                    <RowDefinition Height="25*"></RowDefinition>
-                    
-                    <RowDefinition Height="25*"></RowDefinition>
-                    <RowDefinition Height="25*"></RowDefinition>
-                    <RowDefinition Height="258*"></RowDefinition>
+                    <RowDefinition Height="25"></RowDefinition>
+                    <RowDefinition Height="25"></RowDefinition>
+                    <RowDefinition Height="25"></RowDefinition>
+                    <RowDefinition Height="25"></RowDefinition>
+                    <RowDefinition Height="25"></RowDefinition>
+                    <RowDefinition Height="25"></RowDefinition>
+                    <RowDefinition Height="25"></RowDefinition>
+                    <RowDefinition Height="25"></RowDefinition>
+                    <RowDefinition Height="25"></RowDefinition>
+                    <RowDefinition Height="25"></RowDefinition>
+                    <RowDefinition Height="25"></RowDefinition>
+                    <RowDefinition Height="25"></RowDefinition>
+
+                    <RowDefinition Height="25"></RowDefinition>
+                    <RowDefinition Height="25"></RowDefinition>
+                    <RowDefinition Height="258"></RowDefinition>
                 </Grid.RowDefinitions>
-                
+
                 <Label Content="名字：" HorizontalAlignment="Right" VerticalContentAlignment="Center"></Label>
                 <TextBox Text="{Binding Name}" Grid.Column="1" x:Name="txb_name" HorizontalAlignment="Left" VerticalAlignment="Center" Width="300"></TextBox>
-                
+
                 <GroupBox FontSize="10" Header="建议图片像素：150*150" Grid.Column="2" Grid.RowSpan="8">
                     <userControl:UserControlLogo  x:Name="userControl_logo" />
-                </GroupBox>                  
+                </GroupBox>
 
                 <Label Grid.Row="1" Content="店铺类型：" HorizontalAlignment="Right" VerticalContentAlignment="Center"></Label>
                 <StackPanel  Grid.Column="1" Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Center">
@@ -120,6 +121,8 @@
                 <userControl:UserControlShowImgWithToolBar  LabelImgSize="大小:700*490,数量:4" Grid.ColumnSpan="3" Grid.Row="14" x:Name="userControl_brandImgs" LabelChooseImgContent="品牌图片" VerticalAlignment="Center" HorizontalAlignment="Center"/>
 
             </Grid>
+        </ScrollViewer>
+          
       
      
         <Grid Grid.ColumnSpan="4" Grid.Row="13" Background="White">

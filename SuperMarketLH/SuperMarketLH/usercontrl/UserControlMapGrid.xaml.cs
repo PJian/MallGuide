@@ -296,7 +296,7 @@ namespace SuperMarketLH.usercontrl
                     return;
                 }
 
-            }
+            }   
             else
             {
                 if (this.CurrentEditMap == null) return;

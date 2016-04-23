@@ -785,7 +785,7 @@ namespace EntityManageService.sqlUtil
         {
             if (id > 0)
             {
-                string sql = "select facilities,name,floor,positionNum,logo,label,firstNameChar,catagoryColor,startTime,endTime,introduction,tel,address,zipCode,type,catagoryId,x,y from tabshop where id=" + id;
+                string sql = "select facilities,name,floor,positionNum,logo,label,firstNameChar,catagoryColor,startTime,endTime,introduction,tel,address,zipCode,type,catagoryId,x,y,brandImg from tabshop where id=" + id;
                 DataTable dt = executeQueryDataTable(sql);
                 if (dt.Rows.Count > 0)
                 {
@@ -810,6 +810,7 @@ namespace EntityManageService.sqlUtil
                         CatagoryName = getCatagoryById(dt.Rows[0]["catagoryId"].ToString()),
                         SalePromotion = getSalePromotionRelatiedWithShop(id),
                         Facilities = dt.Rows[0]["facilities"].ToString().Split(','),
+                        BrandImgs = dt.Rows[0]["brandImg"].ToString().Split(','),
                         Door = new System.Windows.Point(int.Parse(dt.Rows[0]["x"].ToString()), int.Parse(dt.Rows[0]["y"].ToString()))
                     };
                 }
@@ -842,7 +843,7 @@ namespace EntityManageService.sqlUtil
             
             List<Shop> shops = new List<Shop>();
             if (catagory == null) return shops;
-            string sql = "select id,name,floor,positionNum,logo,label,firstNameChar,catagoryColor,startTime,endTime,introduction,tel,address,zipCode,type,catagoryId,facilities,x,y from tabshop where catagoryId=" + catagory.Id;
+            string sql = "select id,name,floor,positionNum,logo,label,firstNameChar,catagoryColor,startTime,endTime,introduction,tel,address,zipCode,type,catagoryId,facilities,x,y,brandImg from tabshop where catagoryId=" + catagory.Id;
             DataTable dt = executeQueryDataTable(sql);
             foreach (DataRow dr in dt.Rows)
             {
@@ -867,6 +868,7 @@ namespace EntityManageService.sqlUtil
                     Brand = getBrandRelatiedWithShop(int.Parse(dr["id"].ToString())),
                     SalePromotion = getSalePromotionRelatiedWithShop(int.Parse(dr["id"].ToString())),
                     Facilities = dr["facilities"].ToString().Split(','),
+                    BrandImgs = dr["brandImg"].ToString().Split(','),
                     Door = new System.Windows.Point(int.Parse(dt.Rows[0]["x"].ToString()), int.Parse(dt.Rows[0]["y"].ToString()))
                 });
             }
@@ -878,7 +880,7 @@ namespace EntityManageService.sqlUtil
 
             List<Shop> shops = new List<Shop>();
             if (catagory == null) return shops;
-            string sql = "select id,name,floor,positionNum,logo,label,firstNameChar,catagoryColor,startTime,endTime,introduction,tel,address,zipCode,type,catagoryId,facilities,x,y from tabshop where catagoryId=" + catagory.Id + " limit " + sp.PageSize + " offset " + (sp.PageCurrent - 1) * sp.PageSize;
+            string sql = "select id,name,floor,positionNum,logo,label,firstNameChar,catagoryColor,startTime,endTime,introduction,tel,address,zipCode,type,catagoryId,facilities,x,y,brandImg from tabshop where catagoryId=" + catagory.Id + " limit " + sp.PageSize + " offset " + (sp.PageCurrent - 1) * sp.PageSize;
             DataTable dt = executeQueryDataTable(sql);
             foreach (DataRow dr in dt.Rows)
             {
@@ -903,6 +905,7 @@ namespace EntityManageService.sqlUtil
                     Brand = getBrandRelatiedWithShop(int.Parse(dr["id"].ToString())),
                     SalePromotion = getSalePromotionRelatiedWithShop(int.Parse(dr["id"].ToString())),
                     Facilities = dr["facilities"].ToString().Split(','),
+                    BrandImgs = dr["brandImg"].ToString().Split(','),
                     Door = new System.Windows.Point(int.Parse(dt.Rows[0]["x"].ToString()), int.Parse(dt.Rows[0]["y"].ToString()))
                 });
             }
@@ -913,7 +916,7 @@ namespace EntityManageService.sqlUtil
         {
 
             List<Shop> shops = new List<Shop>();
-            string sql = "select id,name,floor,positionNum,logo,label,firstNameChar,catagoryColor,startTime,endTime,introduction,tel,address,zipCode,type,catagoryId,facilities,x,y from tabshop where floor = " + floor.Id;
+            string sql = "select id,name,floor,positionNum,logo,label,firstNameChar,catagoryColor,startTime,endTime,introduction,tel,address,zipCode,type,catagoryId,facilities,x,y,brandImg  from tabshop where floor = " + floor.Id;
             DataTable dt = executeQueryDataTable(sql);
             foreach (DataRow dr in dt.Rows)
             {
@@ -938,6 +941,7 @@ namespace EntityManageService.sqlUtil
                     Brand = getBrandRelatiedWithShop(int.Parse(dr["id"].ToString())),
                     SalePromotion = getSalePromotionRelatiedWithShop(int.Parse(dr["id"].ToString())),
                     Facilities = dr["facilities"].ToString().Split(','),
+                    BrandImgs = dr["brandImg"].ToString().Split(','),
                     Door = new System.Windows.Point(int.Parse(dr["x"].ToString()), int.Parse(dr["y"].ToString()))
                 });
             }
@@ -954,6 +958,42 @@ namespace EntityManageService.sqlUtil
         {
             List<Shop> shops = new List<Shop>();
             string sql = "select id,name,floor,positionNum,logo,label,firstNameChar,catagoryColor,startTime,endTime,introduction,tel,address,zipCode,type,catagoryId,facilities,x,y,brandImg from tabshop";
+            DataTable dt = executeQueryDataTable(sql);
+            foreach (DataRow dr in dt.Rows)
+            {
+                shops.Add(new Shop()
+                {
+                    Id = int.Parse(dr["id"].ToString()),
+                    Name = dr["name"].ToString(),
+                    Floor = getFloorById(dr["floor"].ToString()),
+                    Index = dr["positionNum"].ToString(),
+                    Logo = dr["logo"].ToString(),
+                    Label = dr["label"].ToString(),
+                    SortChar = dr["firstNameChar"].ToString(),
+                    CatagoryColor = dr["catagoryColor"].ToString(),
+                    StartTime = dr["startTime"].ToString(),
+                    EndTime = dr["endTime"].ToString(),
+                    Introduction = dr["introduction"].ToString(),
+                    Tel = dr["tel"].ToString(),
+                    Address = dr["address"].ToString(),
+                    ZipCode = dr["zipCode"].ToString(),
+                    Type = int.Parse(dr["type"].ToString()),
+                    CatagoryName = getCatagoryById(dr["catagoryId"].ToString()),
+                    Brand = getBrandRelatiedWithShop(int.Parse(dr["id"].ToString())),
+                    SalePromotion = getSalePromotionRelatiedWithShop(int.Parse(dr["id"].ToString())),
+                    Facilities = dr["facilities"].ToString().Split(','),
+                    BrandImgs = dr["brandImg"].ToString().Split(','),
+                    Door = new System.Windows.Point(int.Parse(dr["x"].ToString()), int.Parse(dr["y"].ToString()))
+                });
+            }
+            return shops;
+        }
+
+
+        public static List<Shop> getAllShopOrderedByName()
+        {
+            List<Shop> shops = new List<Shop>();
+            string sql = "select id,name,floor,positionNum,logo,label,firstNameChar,catagoryColor,startTime,endTime,introduction,tel,address,zipCode,type,catagoryId,facilities,x,y,brandImg from tabshop order by firstNameChar";
             DataTable dt = executeQueryDataTable(sql);
             foreach (DataRow dr in dt.Rows)
             {

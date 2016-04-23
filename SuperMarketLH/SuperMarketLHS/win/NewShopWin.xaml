@@ -36,8 +36,8 @@
 
         <Label Grid.Column="3" Content="店铺类型：" HorizontalAlignment="Right" VerticalContentAlignment="Center"></Label>
         <StackPanel  Grid.Column="4" Grid.ColumnSpan="2" Orientation="Horizontal" VerticalAlignment="Center">
-            <RadioButton x:Name="radio_Special" Content="主打店铺" Margin="0,0,5,0"></RadioButton>
-            <RadioButton x:Name="radio_normal" Content="普通店铺" IsChecked="True"></RadioButton>
+            <RadioButton x:Name="radio_Special" Content="主打店铺" Margin="0,0,5,0" Checked="radio_Special_Checked"></RadioButton>
+            <RadioButton x:Name="radio_normal" Content="普通店铺" IsChecked="True" Checked="radio_normal_Checked"></RadioButton>
         </StackPanel>
 
         <Label Grid.Row="1" Content="排序字母：" HorizontalAlignment="Right" VerticalContentAlignment="Center"></Label>
@@ -71,9 +71,9 @@
         <Label Content="店铺简介：" Grid.Row="5" HorizontalAlignment="Right" VerticalAlignment="Center"></Label>
         <TextBox Text="{Binding Introduction}" Grid.Column="1"  Grid.Row="5" Grid.RowSpan="3" ScrollViewer.VerticalScrollBarVisibility="Auto" AcceptsReturn="True" TextWrapping="Wrap" Grid.ColumnSpan="4"></TextBox>
 
-        <userControl:UserControlShowImgWithToolBar  LabelImgSize="(360*220)" Grid.ColumnSpan="4"   Grid.Row="8" x:Name="userControl_facilities" LabelChooseImgContent="设施介绍" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <userControl:UserControlShowImgWithToolBar  LabelImgSize="(360*220)" Grid.ColumnSpan="4"   Grid.Row="8" x:Name="userControl_facilities" LabelChooseImgContent="设施介绍" Visibility="Collapsed" VerticalAlignment="Center" HorizontalAlignment="Center"/>
 
-        <userControl:UserControlShowImgWithToolBar LabelImgSize="(700*490)" Grid.Column="4"  Grid.ColumnSpan="3" Grid.Row="8" x:Name="userControl_brandImgs" LabelChooseImgContent="品牌图片" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <userControl:UserControlShowImgWithToolBar LabelImgSize="(700*490)" Grid.ColumnSpan="4" Grid.Row="8" x:Name="userControl_brandImgs" LabelChooseImgContent="品牌图片" VerticalAlignment="Center" HorizontalAlignment="Center"/>
 
         <Grid  Grid.ColumnSpan="9" Grid.Row="9" Background="White">
             <StackPanel  VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal" >

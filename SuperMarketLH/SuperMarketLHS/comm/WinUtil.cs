@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -149,6 +150,7 @@ namespace SuperMarketLHS.comm
         /// <returns></returns>
         private static string getNewFileName(string oldFileName) {
             string fileExtension = Path.GetExtension(oldFileName);
+            Thread.Sleep(TimeSpan.FromMilliseconds(10));
             string fileName = DateTime.Now.ToFileTime().ToString();
             return fileName + fileExtension;
         }

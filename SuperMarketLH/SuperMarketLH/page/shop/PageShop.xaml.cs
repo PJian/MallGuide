@@ -41,12 +41,10 @@ namespace SuperMarketLH.page.shop
         {
             navigateTo(WinUtil.FRAME_SHOP_MOVIE);
             ClosedUtil.isAnyBodyTouched = true;
-
         }
         private void init() {
             transitioniItem = new TransitionItem() { ItemTransition = TransitioinUtil.getFadeTransition() };
             navigateTo(WinUtil.FRAME_SHOP_ALL);
-           
         }
 
         private void Page_Loaded_1(object sender, RoutedEventArgs e)
