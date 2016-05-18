@@ -278,7 +278,7 @@
                 <Setter Property="SnapsToDevicePixels" Value="True"/>
                 <Setter Property="Template">
                     <Setter.Value>
-                        <DataTemplate>
+                        <ControlTemplate>
                             <Border Height="30" Width="230" BorderBrush="Transparent" BorderThickness="0" Margin="1">
                                 <Grid>
                                     <Grid.RowDefinitions>
@@ -301,7 +301,9 @@
                                     </StackPanel>
                                 </Grid>
                             </Border>
-                        </DataTemplate>
+
+                        </ControlTemplate>
+                        
                     </Setter.Value>
                 </Setter>
             </Style.Setters>

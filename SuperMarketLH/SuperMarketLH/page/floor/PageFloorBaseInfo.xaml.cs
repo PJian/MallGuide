@@ -31,7 +31,7 @@ namespace SuperMarketLH.page.floor
         private PageFloorDetailInfo currentFrameContentPage;
         private List<Shop> allShops;
         public Floor currentFloor { get; set; }
-       
+
 
         public PageFloorBaseInfo()
         {
@@ -48,7 +48,8 @@ namespace SuperMarketLH.page.floor
             this.allFloors = SqlHelper.getAllFloor();
             this.listbox_allFloors.ItemsSource = this.allFloors;
             this.listbox_allFloors1.ItemsSource = this.allFloors;
-            if (this.allFloors != null && this.allFloors.Count > 0) {
+            if (this.allFloors != null && this.allFloors.Count > 0)
+            {
                 this.listbox_allFloors1.SelectedIndex = 0;
             }
         }
@@ -56,7 +57,7 @@ namespace SuperMarketLH.page.floor
         private void Page_Loaded_1(object sender, RoutedEventArgs e)
         {
             loadFloor();
-           // init();
+            // init();
         }
         //加载店铺列表表头
         //private void init() {
@@ -65,35 +66,46 @@ namespace SuperMarketLH.page.floor
         //        Name = "品牌名称",
         //        Index = "店铺号"
         //    });
-            
+
         //  //  dataGrid_shops_header.ItemsSource = headers;
         //}
-      
 
-       
+
+
 
         /// <summary>
         /// 双层楼面导航
         /// </summary>
-        public void navigateTo(Page page) { 
-                transitioniItem = new TransitionItem();
-                transitioniItem.ItemTransition = TransitioinUtil.getFadeTransition();
-                transitioniItem.FrameNavigatePage = new FrameNavigate()
-                {
-                    Source = page
-                };
-                this.transitionFloor.DataContext = transitioniItem;
+        public void navigateTo(Page page)
+        {
+            transitioniItem = new TransitionItem();
+            transitioniItem.ItemTransition = TransitioinUtil.getFadeTransition();
+            transitioniItem.FrameNavigatePage = new FrameNavigate()
+            {
+                Source = page
+            };
+            this.transitionFloor.DataContext = transitioniItem;
         }
 
-        public void showShopDetailInfo(Shop shop) {
+        public void showShopDetailInfo(Shop shop)
+        {
+            if (shop.Type == ConstantData.SHOP_TYPE_NORMAL)
+            {
+                parent.frame.Navigate(new PageShopDetail(shop, this.parent));
+            }
+            else if(shop.Type == ConstantData.SHOP_TYPE_SPECIAL)
+            {
+                parent.frame.Navigate(new PageShop(shop, this.parent));
+            }
 
-            parent.frame.Navigate(new PageShopDetail(shop,this.parent));
         }
 
-        public void busy() {
+        public void busy()
+        {
             this.parent.loadBusy("努力导航中...");
         }
-        public void busyDone() {
+        public void busyDone()
+        {
             this.parent.loadNotBusy();
         }
         /// <summary>
@@ -104,10 +116,11 @@ namespace SuperMarketLH.page.floor
         /// <param name="e"></param>
         private void Grid_PreviewKeyDown_1(object sender, KeyEventArgs e)
         {
-            if ((Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control && e.Key==Key.M)
+            if ((Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control && e.Key == Key.M)
             {
                 //MessageBox.Show("draw machine");
-                if (this.currentFrameContentPage != null) {
+                if (this.currentFrameContentPage != null)
+                {
                     this.currentFrameContentPage.drawMachine();
                 }
                 this.btn_saveMachine.Visibility = Visibility.Visible;
@@ -116,7 +129,8 @@ namespace SuperMarketLH.page.floor
 
         private void btn_saveMachine_Click(object sender, RoutedEventArgs e)
         {
-            if (this.currentFrameContentPage != null) {
+            if (this.currentFrameContentPage != null)
+            {
                 this.currentFrameContentPage.drawMachineDone();
                 this.btn_saveMachine.Visibility = Visibility.Collapsed;
             }
@@ -140,17 +154,17 @@ namespace SuperMarketLH.page.floor
                 if (CanvasUtil.isShowTwoFloors)
                 {
                     //先到商铺所在楼层
-                   this.listbox_allFloors1.SelectedItem = shop.Floor;
+                    this.listbox_allFloors1.SelectedItem = shop.Floor;
                 }
                 else
                 {
                     this.currentFrameContentPage.userCtrlMapGrid.drawShopTips(currentSelectShop);
                     currentSelectShop = null;
                 }
-               // this.currentFrameContentPage.userCtrlMapGrid.drawShopTips(currentSelectShop);
+                // this.currentFrameContentPage.userCtrlMapGrid.drawShopTips(currentSelectShop);
             }
             this.dataGrid_shops.SelectedIndex = -1;
-            
+
         }
 
         /// <summary>
@@ -317,10 +331,11 @@ namespace SuperMarketLH.page.floor
 
         private void btn_elevator_handle_Click(object sender, RoutedEventArgs e)
         {
-            if (this.currentFrameContentPage != null) {
+            if (this.currentFrameContentPage != null)
+            {
                 this.currentFrameContentPage.userCtrlMapGrid.showCommonBuildingTips(ObstacleType.ESCALATOR);
             }
-            
+
         }
 
         private void btn_elevator_Click(object sender, RoutedEventArgs e)
@@ -329,7 +344,7 @@ namespace SuperMarketLH.page.floor
             {
                 this.currentFrameContentPage.userCtrlMapGrid.showCommonBuildingTips(ObstacleType.ELEVATOR);
             }
-            
+
         }
 
         private void btn_service_Click(object sender, RoutedEventArgs e)
@@ -338,7 +353,7 @@ namespace SuperMarketLH.page.floor
             {
                 this.currentFrameContentPage.userCtrlMapGrid.showCommonBuildingTips(ObstacleType.SERVICE);
             }
-            
+
         }
 
         private void btn_vip_Click(object sender, RoutedEventArgs e)
@@ -347,7 +362,7 @@ namespace SuperMarketLH.page.floor
             {
                 this.currentFrameContentPage.userCtrlMapGrid.showCommonBuildingTips(ObstacleType.VIP);
             }
-           
+
         }
 
         private void btn_smoke_Click(object sender, RoutedEventArgs e)
@@ -356,7 +371,7 @@ namespace SuperMarketLH.page.floor
             {
                 this.currentFrameContentPage.userCtrlMapGrid.showCommonBuildingTips(ObstacleType.SMOKING_ROOM);
             }
-           
+
         }
 
         private void btn_baby_Click(object sender, RoutedEventArgs e)
@@ -365,7 +380,7 @@ namespace SuperMarketLH.page.floor
             {
                 this.currentFrameContentPage.userCtrlMapGrid.showCommonBuildingTips(ObstacleType.BABY_ROOM);
             }
-            
+
         }
 
         private void btn_bathroom_Click(object sender, RoutedEventArgs e)
@@ -374,7 +389,7 @@ namespace SuperMarketLH.page.floor
             {
                 this.currentFrameContentPage.userCtrlMapGrid.showCommonBuildingTips(ObstacleType.TOLITE);
             }
-           
+
         }
 
         /// <summary>
@@ -397,14 +412,14 @@ namespace SuperMarketLH.page.floor
                 };
                 this.transitionFloor.DataContext = transitioniItem;
                 this.allShops = SqlHelper.getAllShopByFloor(this.currentFloor);
-               
+
                 this.dataGrid_shops.ItemsSource = this.allShops;
                 this.listbox_allFloors.SelectedItem = this.listbox_allFloors1.SelectedItem;
             }
             this.listbox_allFloors1.SelectedItem = null;
         }
 
-       
+
         private void Frame_ContentRendered(object sender, EventArgs e)
         {
             if (currentSelectShop != null)
@@ -412,11 +427,11 @@ namespace SuperMarketLH.page.floor
                 this.currentFrameContentPage.userCtrlMapGrid.drawShopTips(currentSelectShop);
                 currentSelectShop = null;
             }
-            
+
 
         }
 
-        
+
 
     }
 }

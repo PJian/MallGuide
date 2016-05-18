@@ -250,13 +250,45 @@ namespace EntityManagementService.nav
         /// <returns></returns>
         public static Obstacle getNearestElevator(Point p, Map map)
         {
+            return getNearestTransportation(p, map, ObstacleType.ELEVATOR);
+        }
+        /// <summary>
+        /// 找到最近的扶梯
+        /// </summary>
+        /// <param name="p"></param>
+        /// <param name="map"></param>
+        /// <returns></returns>
+        public static Obstacle getNearestEscalator(Point p, Map map)
+        {
+            return getNearestTransportation(p, map, ObstacleType.ESCALATOR);
+        }
+        /// <summary>
+        /// 找到最近的楼梯
+        /// </summary>
+        /// <param name="p"></param>
+        /// <param name="map"></param>
+        /// <returns></returns>
+        public static Obstacle getNearestStair(Point p, Map map)
+        {
+            return getNearestTransportation(p, map, ObstacleType.STAIRS);
+        }
+
+        /// <summary>
+        /// 找到最近的交通工具
+        /// </summary>
+        /// <param name="p"></param>
+        /// <param name="map"></param>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        public static Obstacle getNearestTransportation(Point p, Map map, string type)
+        {
             int index = 1;
             double minDistance = 0;
             Obstacle temp = null;
             Point pp = new Point(0, 0);
             foreach (Obstacle o in map.Areas)
             {
-                if (o.Type == ObstacleType.ELEVATOR)
+                if (o.Type == type)
                 {
                     double dis = getDistanceOfTwoPoint(p, o.Door);
                     if (index == 1)
@@ -276,6 +308,9 @@ namespace EntityManagementService.nav
             }
             return temp;
         }
+
+
+
         /// <summary>
         /// 根据电梯编号找到电梯
         /// </summary>
@@ -284,11 +319,56 @@ namespace EntityManagementService.nav
         /// <returns></returns>
         public static Obstacle getElevatorByNum(Map map, string num)
         {
+            return getTransportationByNumAndType(map,num,ObstacleType.ELEVATOR);
+        }
+
+        public static Obstacle getEscalatorByNum(Map map, string num)
+        {
+            return getTransportationByNumAndType(map, num, ObstacleType.ESCALATOR);
+        }
+
+        /// <summary>
+        /// 任选一个扶梯
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="num"></param>
+        /// <returns></returns>
+        public static Obstacle getEscalator(Map map)
+        {
+            return getTransportationByType(map, ObstacleType.ESCALATOR);
+        }
+
+        public static Obstacle getStairByNum(Map map, string num)
+        {
+            return getTransportationByNumAndType(map, num, ObstacleType.STAIRS);
+        }
+
+        public static Obstacle getStair(Map map) {
+            return getTransportationByType(map, ObstacleType.STAIRS);
+        }
+
+        public static Obstacle getTransportationByNumAndType(Map map, String num, String type)
+        {
             if (map != null)
             {
                 foreach (Obstacle o in map.Areas)
                 {
-                    if (o.Type.Equals(ObstacleType.ELEVATOR) && o.Index.Equals( num)) {
+                    if (o.Type.Equals(type) && o.Index.Equals(num))
+                    {
+                        return o;
+                    }
+                }
+            }
+            return null;
+        }
+        public static Obstacle getTransportationByType(Map map ,String type)
+        {
+            if (map != null)
+            {
+                foreach (Obstacle o in map.Areas)
+                {
+                    if (o.Type.Equals(type) )
+                    {
                         return o;
                     }
                 }

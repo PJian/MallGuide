@@ -152,7 +152,7 @@ namespace EntityManagementService.entity
             set { _zipCode = value; }
         }
         /// <summary>
-        /// 是否点击店铺的时候显示巨幅广告
+        /// 是否是主力店铺
         /// </summary>
         private int _type;
 

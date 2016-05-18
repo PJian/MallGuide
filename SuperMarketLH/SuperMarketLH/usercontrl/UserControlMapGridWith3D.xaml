@@ -13,7 +13,7 @@
     <Viewbox Height="312" Width="724">
 
         <my:ScatterView Height="312" Width="724" >
-            <my:ScatterViewItem Height="312" Width="724" Orientation="0" Center="362,156" Style="{DynamicResource ScatterViewItemStyle1}">
+            <my:ScatterViewItem Height="312" Width="724" Orientation="0" Center="362,156" Style="{DynamicResource ScatterViewItemStyle1}" CanRotate="False" CanScale="False">
                 <Grid Height="312" Width="724" x:Name="grid_mapContioner" >
                     <Inter3D:TrackballDecorator x:Name="viewport3D">
                         <Inter3D:Interactive3DDecorator>

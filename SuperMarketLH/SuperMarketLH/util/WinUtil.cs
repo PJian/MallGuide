@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 
 namespace SuperMarketLH.util
 {
@@ -135,7 +137,8 @@ namespace SuperMarketLH.util
             }
             else
             {
-                try {
+                try
+                {
                     //Process process = new Process();
                     //process.StartInfo.FileName = "cmd.exe";   //调用系统的CMD
                     //process.StartInfo.UseShellExecute = false;
@@ -149,12 +152,13 @@ namespace SuperMarketLH.util
                     //process.StandardInput.WriteLine("exit");
                     //process.WaitForExit();
                     Process.Start(@"C:\Program Files\Common Files\microsoft shared\ink\TabTip.exe");
-                   //
+                    //
                 }
-                catch (Exception e) {
+                catch (Exception e)
+                {
                     Console.WriteLine(e.ToString());
                 }
-              
+
             }
             Process.Start(@"C:\Program Files\Common Files\microsoft shared\ink\TabTip.exe");
         }
@@ -172,5 +176,60 @@ namespace SuperMarketLH.util
                 }
             }
         }
+
+        //依据连接串名字connectionName返回数据连接字符串  
+        public static string GetConnectionStringsConfig(string configFileName, string connectionName)
+        {
+            //指定config文件读取
+            System.Configuration.Configuration config = ConfigurationManager.OpenExeConfiguration(configFileName);
+            string connectionString =
+                config.ConnectionStrings.ConnectionStrings[connectionName].ConnectionString.ToString();
+            return connectionString;
+        }
+
+
+        /// <summary>
+        /// 将当前程序添加到守护进程的监视中
+        /// </summary>
+        public static void addApplicationToDemonWatch()
+        {
+            string fullNameOfApplication = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "SuperMarketLH.exe");
+            string configFileName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "demon", "CocoWatcher.exe");
+            Configuration config = ConfigurationManager.OpenExeConfiguration(configFileName);
+            bool exist = false;
+            foreach (string key in config.AppSettings.Settings.AllKeys)
+            {
+                if (key == "ProcessAddress")
+                {
+                    exist = true;
+                }
+            }
+            if (exist)
+            {
+                config.AppSettings.Settings.Remove("ProcessAddress");
+            }
+            config.AppSettings.Settings.Add("ProcessAddress", fullNameOfApplication);
+            config.Save(ConfigurationSaveMode.Modified);
+            ConfigurationManager.RefreshSection("appSettings");
+        }
+        /// <summary>
+        /// 安装守护进程
+        /// </summary>
+        public static void startDemonWatch()
+        {
+            // string exeFileDir = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "demon");
+            //判断服务是否存在
+            //  WindowServiceUtil.InstallService(exeFileDir, "CocoWatcher");
+            // WindowServiceUtil.StartService("CocoWatcher");
+           
+            
+            
+
+
+        }
+
+        
+
+
     }
 }

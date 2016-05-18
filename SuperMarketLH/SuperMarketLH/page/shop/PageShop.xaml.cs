@@ -29,22 +29,44 @@ namespace SuperMarketLH.page.shop
         public PageShop()
         {
             InitializeComponent();
-            
+
         }
         public PageShop(MainWindow parent)
         {
             InitializeComponent();
             this.parent = parent;
-
         }
+
+        private Shop initialShowShop = null;
+        public PageShop(Shop shop, MainWindow parent)
+        {
+            InitializeComponent();
+            this.parent = parent;
+            initialShowShop = shop;
+        }
+
         private void btn_movieCity_Click(object sender, RoutedEventArgs e)
         {
             navigateTo(WinUtil.FRAME_SHOP_MOVIE);
             ClosedUtil.isAnyBodyTouched = true;
         }
-        private void init() {
+        private void init()
+        {
+            int navtoIndex = WinUtil.FRAME_SHOP_ALL;
             transitioniItem = new TransitionItem() { ItemTransition = TransitioinUtil.getFadeTransition() };
-            navigateTo(WinUtil.FRAME_SHOP_ALL);
+            if (this.initialShowShop != null)
+            {
+                //显示指定店铺信息
+                switch (initialShowShop.CatagoryName.Name) {
+                    case "大润发超市": navtoIndex = WinUtil.FRAME_SHOP_SUPER_MARKET_DARUNFA; break;
+                    case "KTV": navtoIndex = WinUtil.FRAME_SHOP_KTV; break;
+                    case "苏宁易购": navtoIndex = WinUtil.FRAME_SHOP_SUNINGYIGOU; break;
+                    case "健身": navtoIndex = WinUtil.FRAME_SHOP_JIANSHENG; break;
+                    case "大白鲸世界儿童乐园": navtoIndex = WinUtil.FRAME_SHOP_DABAIJINGSHIJIEERTONGLEYUAN; break;
+                    case "影城": navtoIndex = WinUtil.FRAME_SHOP_MOVIE; break;
+                }
+            }
+            navigateTo(navtoIndex);
         }
 
         private void Page_Loaded_1(object sender, RoutedEventArgs e)
@@ -56,7 +78,8 @@ namespace SuperMarketLH.page.shop
         /// 进行页面导航
         /// </summary>
         /// <param name="catagory"></param>
-        private void navigateTo(int index) {
+        private void navigateTo(int index)
+        {
             try
             {
                 transitioniItem = new TransitionItem() { ItemTransition = TransitioinUtil.getFadeTransition() };
@@ -73,7 +96,7 @@ namespace SuperMarketLH.page.shop
                     case WinUtil.FRAME_SHOP_SUNINGYIGOU: page = new PageShopList(SqlHelper.getCatagoryByName("苏宁易购"), this); break;
                     case WinUtil.FRAME_SHOP_JIANSHENG: page = new PageShopList(SqlHelper.getCatagoryByName("健身"), this); break;
                     case WinUtil.FRAME_SHOP_DABAIJINGSHIJIEERTONGLEYUAN: page = new PageShopList(SqlHelper.getCatagoryByName("大白鲸世界儿童乐园"), this); break;
-                    case WinUtil.FRAME_SHOP_FUN:page = new PageShopList(SqlHelper.getCatagoryByName("娱乐"),this);break;
+                    case WinUtil.FRAME_SHOP_FUN: page = new PageShopList(SqlHelper.getCatagoryByName("娱乐"), this); break;
                 }
                 transitioniItem.FrameNavigatePage = new FrameNavigate()
                 {
@@ -81,17 +104,18 @@ namespace SuperMarketLH.page.shop
                 };
                 this.transitionShop.DataContext = transitioniItem;
 
-               
+
             }
-            catch(Exception e)
+            catch (Exception e)
             {
-                MessageBox.Show("系统错误！"+e.Message);
+                MessageBox.Show("系统错误！" + e.Message);
             }
-            finally {
+            finally
+            {
                 ClosedUtil.isAnyBodyTouched = true;
             }
 
-           
+
         }
 
         private void btn_canyin_Click(object sender, RoutedEventArgs e)
@@ -134,7 +158,8 @@ namespace SuperMarketLH.page.shop
             navigateTo(WinUtil.FRAME_SHOP_JIANSHENG);
         }
 
-        public void navigateToShop(Shop shop) {
+        public void navigateToShop(Shop shop)
+        {
             //transitioniItem = new TransitionItem();
             //transitioniItem.ItemTransition = TransitioinUtil.getFlipTransition();
             //transitioniItem.FrameNavigatePage = new FrameNavigate()
@@ -142,7 +167,7 @@ namespace SuperMarketLH.page.shop
             //    Source = new PageShopDetail(shop)
             //};
             //this.transitionShop.DataContext = transitioniItem;
-            parent.frame.Navigate(new PageShopDetail(shop,this.parent));
+            parent.frame.Navigate(new PageShopDetail(shop, this.parent));
         }
 
         /// <summary>

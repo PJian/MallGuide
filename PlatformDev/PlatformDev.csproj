@@ -56,7 +56,12 @@
     <Compile Include="ssh\SshConnectionInfo.cs" />
     <Compile Include="Util.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\SuperMarketLH\EntityManagementService\EntityManagementService.csproj">
+      <Project>{3B606CD9-7EEE-4955-9A29-F19D8494867E}</Project>
+      <Name>EntityManagementService</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

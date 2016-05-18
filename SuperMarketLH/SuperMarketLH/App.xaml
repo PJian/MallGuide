@@ -203,7 +203,7 @@
                             <Grid Background="Transparent" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" VerticalAlignment="Center" HorizontalAlignment="Center">
                                 <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center">
                                     <Grid Background="{TemplateBinding Background}" Height="35" Width="35"></Grid>
-                                    <Label Content="{TemplateBinding Content}" Foreground="White" FontSize="30"></Label>
+                                    <Label Content="{TemplateBinding Content}" Foreground="#9F815F" FontSize="30"></Label>
                                 </StackPanel>
                             </Grid>
                         </Border>
@@ -230,7 +230,7 @@
                             <Grid Background="Transparent" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" VerticalAlignment="Center" HorizontalAlignment="Center">
                                 <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center">
                                     <Grid Background="{TemplateBinding Background}" Height="35" Width="50"></Grid>
-                                    <Label Content="{TemplateBinding Content}" Foreground="White" FontSize="30"></Label>
+                                    <Label Content="{TemplateBinding Content}" Foreground="#9F815F" FontSize="30"></Label>
                                 </StackPanel>
                             </Grid>
                         </Border>

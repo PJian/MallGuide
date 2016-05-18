@@ -35,12 +35,25 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <TargetZone>LocalIntranet</TargetZone>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup />
+  <PropertyGroup>
+    <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="3DTools">
       <HintPath>..\..\..\dll\3DTools.dll</HintPath>
     </Reference>
     <Reference Include="ConTcp">
       <HintPath>..\..\..\dll\ConTcp.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\..\..\文件传输\SuperSocket(1.6.6).Binaries\Net40\Release\log4net.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Surface, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.Surface.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
@@ -52,11 +65,29 @@
     <Reference Include="SerialNum">
       <HintPath>..\..\..\dll\SerialNum.dll</HintPath>
     </Reference>
+    <Reference Include="SuperSocket.Common, Version=1.6.4.0, Culture=neutral, PublicKeyToken=6c80000676988ebb, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\文件传输\TransferSolution\TransferServerLib\bin\Debug\SuperSocket.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="SuperSocket.Facility, Version=1.6.4.0, Culture=neutral, PublicKeyToken=6c80000676988ebb, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\文件传输\TransferSolution\TransferServerLib\bin\Debug\SuperSocket.Facility.dll</HintPath>
+    </Reference>
+    <Reference Include="SuperSocket.SocketBase, Version=1.6.4.0, Culture=neutral, PublicKeyToken=6c80000676988ebb, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\文件传输\TransferSolution\TransferServerLib\bin\Debug\SuperSocket.SocketBase.dll</HintPath>
+    </Reference>
+    <Reference Include="SuperSocket.SocketEngine, Version=1.6.4.0, Culture=neutral, PublicKeyToken=6c80000676988ebb, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\文件传输\TransferSolution\TransferServerLib\bin\Debug\SuperSocket.SocketEngine.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
+    <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Management" />
+    <Reference Include="System.ServiceProcess" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -69,6 +100,13 @@
     <Reference Include="Telerik.Windows.Controls, Version=2016.1.217.40, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
       <HintPath>..\lib\RCWPF\2016.1.217.40\Telerik.Windows.Controls.dll</HintPath>
       <Private>True</Private>
+    </Reference>
+    <Reference Include="TransferCommon">
+      <HintPath>..\..\..\文件传输\TransferSolution\TransferCommon\bin\Debug\TransferCommon.dll</HintPath>
+    </Reference>
+    <Reference Include="TransferServerLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\文件传输\TransferSolution\TransferServerLib\bin\Debug\TransferServerLib.dll</HintPath>
     </Reference>
     <Reference Include="UIAutomationProvider" />
     <Reference Include="UIAutomationTypes" />
@@ -153,6 +191,7 @@
     <Compile Include="reg\WinRegist.xaml.cs">
       <DependentUpon>WinRegist.xaml</DependentUpon>
     </Compile>
+    <Compile Include="socketserver\Server.cs" />
     <Compile Include="uiEntity\FrameNavigate.cs" />
     <Compile Include="uiEntity\ImageObject.cs" />
     <Compile Include="uiEntity\TransitioinUtil.cs" />
@@ -216,6 +255,7 @@
     </Compile>
     <Compile Include="util\CanvasUtil.cs" />
     <Compile Include="util\ClosedUtil.cs" />
+    <Compile Include="util\WindowServiceUtil.cs" />
     <Compile Include="util\WinUtil.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -421,6 +461,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <Resource Include="font\04b03.TTF" />
+    <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -688,6 +729,9 @@
   <ItemGroup>
     <Resource Include="images\navBtn\btn30.png" />
     <Resource Include="images\navBtn\btn30_press.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Config\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

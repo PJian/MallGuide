@@ -135,6 +135,9 @@
     <Compile Include="page\other\PageUpdate.xaml.cs">
       <DependentUpon>PageUpdate.xaml</DependentUpon>
     </Compile>
+    <Compile Include="page\other\PageUpdateSocket.xaml.cs">
+      <DependentUpon>PageUpdateSocket.xaml</DependentUpon>
+    </Compile>
     <Compile Include="page\other\PageUpdateSSH.xaml.cs">
       <DependentUpon>PageUpdateSSH.xaml</DependentUpon>
     </Compile>
@@ -277,6 +280,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="page\other\PageUpdate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="page\other\PageUpdateSocket.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

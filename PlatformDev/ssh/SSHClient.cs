@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EntityManagementService.entity;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -9,7 +10,7 @@ using Tamir.SharpSsh.jsch.examples;
 
 namespace PlatformDev.ssh
 {
-    public delegate void SSHClientTransferEvent(int curIndex, int totalNum);
+    public delegate void SSHClientTransferEvent(int curIndex, int totalNum,ClientComputer cc);
     /// <summary>
     /// SSH 协议客户端
     /// </summary>
@@ -30,7 +31,7 @@ namespace PlatformDev.ssh
         public bool isConnected(string host, string user, string identifyFile)
         {
             bool isConnected = false;
-            SshConnectionInfo input = new SshConnectionInfo(host, user, "", identifyFile);
+            SshConnectionInfo input = new SshConnectionInfo(host, "admin", "admin", identifyFile);
             //使用scp协议
             SshTransferProtocolBase sshCp = new Scp(input.Host, input.User);
             try
@@ -61,7 +62,13 @@ namespace PlatformDev.ssh
         /// <param name="destDir">要保存的文件目录</param>
         public Boolean ScpTo(string host, string user, string identifyFile, string sourceDir, string destDir)
         {
-            SshConnectionInfo input = new SshConnectionInfo(host, user, "", identifyFile);
+            ClientComputer cc = new ClientComputer()
+            {
+                IP = host,
+                UserName = "admin",
+                AppDir = destDir
+            };
+            SshConnectionInfo input = new SshConnectionInfo(host, "admin", "admin", identifyFile);
             //使用scp协议
             SshTransferProtocolBase sshCp = new Scp(input.Host, input.User);
             try
@@ -79,7 +86,7 @@ namespace PlatformDev.ssh
 
                 int transferFileNum = Util.countFileNum(sourceDir);
 
-                if (OnTransferStart != null) OnTransferStart(1, transferFileNum);
+                if (OnTransferStart != null) OnTransferStart(1, transferFileNum, cc);
 
                 int currentTransferFileIndex = 1;
                 //递归遍历目录
@@ -105,7 +112,7 @@ namespace PlatformDev.ssh
                             {
                                 sshCp.Mkdir(destDirName);
                             }
-                            if (OnTransferProgress != null) OnTransferProgress(currentTransferFileIndex, transferFileNum);
+                            if (OnTransferProgress != null) OnTransferProgress(currentTransferFileIndex, transferFileNum, cc);
                             sshCp.Put(fileNames[i], destName);
                             currentTransferFileIndex++;
                         }
@@ -113,7 +120,7 @@ namespace PlatformDev.ssh
                 }
                 Console.Write("Disconnecting...");
                 sshCp.Close();
-                if (OnTransferEnd != null) OnTransferEnd(transferFileNum, transferFileNum);
+                if (OnTransferEnd != null) OnTransferEnd(transferFileNum, transferFileNum, cc);
                 Console.WriteLine("OK");
             }
             catch (Exception e)
@@ -122,6 +129,28 @@ namespace PlatformDev.ssh
             }
             finally {
                 sshCp.Close();
+            }
+            return true;
+        }
+
+
+
+
+        public Boolean execCmd(string host, string user, string identifyFile, string command) {
+            SshConnectionInfo input = new SshConnectionInfo(host, "admin", "admin", identifyFile);
+            SshExec exec = new SshExec(input.Host, input.User);
+            try {
+                if (input.Pass != null) exec.Password = input.Pass;
+                if (input.IdentityFile != null) exec.AddIdentityFile(input.IdentityFile);
+                exec.Connect();
+                if (command == "") return false; 
+                string output = exec.RunCommand(command);
+            } catch(Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }finally
+            {
+                exec.Close();
             }
             return true;
         }

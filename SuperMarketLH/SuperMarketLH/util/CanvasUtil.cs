@@ -488,30 +488,34 @@ namespace SuperMarketLH.util
                 Node startNode = null;
                 PathGeometry myPathGeometry = new PathGeometry();
                 PathFigure pathFigure1 = new PathFigure();
-              
-                foreach (Node item in nodes[i])
-                {
-                    if (startNode == null)
+
+                if (nodes[i] != null) {
+                    foreach (Node item in nodes[i])
                     {
-                        startNode = item;
-                        startP = item.P;
-                        pathFigure1.StartPoint = new Point(startP.X * MAP_CANVAS_GRID_PIX_DIF + lINE_ADJUST_PIX, startP.Y * MAP_CANVAS_GRID_PIX_DIF + lINE_ADJUST_PIX);
-                        continue;
+                        if (startNode == null)
+                        {
+                            startNode = item;
+                            startP = item.P;
+                            pathFigure1.StartPoint = new Point(startP.X * MAP_CANVAS_GRID_PIX_DIF + lINE_ADJUST_PIX, startP.Y * MAP_CANVAS_GRID_PIX_DIF + lINE_ADJUST_PIX);
+                            continue;
+                        }
+                        endP = item.P;
+                        LineSegment ls = new LineSegment(
+                       new Point(endP.X * MAP_CANVAS_GRID_PIX_DIF + lINE_ADJUST_PIX, endP.Y * MAP_CANVAS_GRID_PIX_DIF + lINE_ADJUST_PIX),
+                       true /* IsStroked */ );
+                        ls.IsSmoothJoin = true;
+                        pathFigure1.Segments.Add(ls);
                     }
-                    endP = item.P;
-                    LineSegment ls = new LineSegment(
-                   new Point(endP.X * MAP_CANVAS_GRID_PIX_DIF + lINE_ADJUST_PIX, endP.Y * MAP_CANVAS_GRID_PIX_DIF + lINE_ADJUST_PIX),
-                   true /* IsStroked */ );
-                    ls.IsSmoothJoin = true;
-                    pathFigure1.Segments.Add(ls);
+
+                    myPathGeometry.Figures.Add(pathFigure1);
+                    Path myPath = new Path();
+                    myPath.Stroke = LINE_BRUSH;
+                    myPath.StrokeThickness = LINE_STROKE;
+                    myPath.Data = myPathGeometry;
+                    currentMapCanvas.Children.Add(myPath);
                 }
 
-                myPathGeometry.Figures.Add(pathFigure1);
-                Path myPath = new Path();
-                myPath.Stroke = LINE_BRUSH;
-                myPath.StrokeThickness = LINE_STROKE;
-                myPath.Data = myPathGeometry;
-                currentMapCanvas.Children.Add(myPath);
+
             }
            
         }

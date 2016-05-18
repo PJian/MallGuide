@@ -628,7 +628,7 @@ namespace SuperMarketLHS.userControl
         /// <returns></returns>
         private bool setAndValidateObstacleIndex(string str)
         {
-            if ((this.CurrentEditObstacle.Index == null || "".Equals(this.CurrentEditObstacle.Index)) && (this.CurrentEditObstacle.Type.Equals(ObstacleType.ELEVATOR) ||
+            if ( (this.CurrentEditObstacle.Type.Equals(ObstacleType.ELEVATOR) ||
                 this.CurrentEditObstacle.Type.Equals(ObstacleType.ESCALATOR) ||
                 this.CurrentEditObstacle.Type.Equals(ObstacleType.STAIRS)))
             {
@@ -1050,7 +1050,7 @@ namespace SuperMarketLHS.userControl
             }
             saveMap();
             //更新商铺
-            if (this.CurrentEditObstacle.Shop != null) {
+            if (this.currentEditObstacle.Type.Equals(ObstacleType.SHOP)&&this.CurrentEditObstacle.Shop != null) {
                 this.CurrentEditObstacle.Shop.Index = this.CurrentEditObstacle.Index;
                 SqlHelper.updateShop(this.CurrentEditObstacle.Shop);
             }

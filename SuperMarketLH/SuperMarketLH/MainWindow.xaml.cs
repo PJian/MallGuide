@@ -11,6 +11,7 @@ using SuperMarketLH.page.mall;
 using SuperMarketLH.page.other;
 using SuperMarketLH.page.shop;
 using SuperMarketLH.reg;
+using SuperMarketLH.socketserver;
 using SuperMarketLH.util;
 using System;
 using System.Collections.Generic;
@@ -49,6 +50,9 @@ namespace SuperMarketLH
             //初始化,如果软件信息在注册表中没有，则写入信息
             CodeUtil.iniSoft();
         }
+
+       
+
         private Soft SuperMarketLH { get; set; }
         private DispatcherTimer regTimer = null;
         private WinRegist regWin { get; set; }
@@ -59,12 +63,21 @@ namespace SuperMarketLH
         private int pageIndex;
         //private int currentGridVisibleIndex = 0;
 
+        private Server dataTransferServer;
+
+        private DispatcherTimer restartTimer = null;
+
         private void init()
         {
             goToIndexTimer = new DispatcherTimer();
             goToIndexTimer.Interval = TimeSpan.FromMinutes(5);
             goToIndexTimer.Tick += goToIndexTimer_Tick;
             goToIndexTimer.IsEnabled = true;
+
+            restartTimer = new DispatcherTimer();
+            restartTimer.Interval = TimeSpan.FromSeconds(5);
+            restartTimer.Tick += RestartTimer_Tick;
+            restartTimer.IsEnabled = true;
 
             //回到首页
             //frameForIndex.Navigate(new PageIndex(this));
@@ -73,7 +86,44 @@ namespace SuperMarketLH
             t1.IsBackground = true;
             t1.Start();
             //startUpdateServer();
+
+            //  dataTransferServer = new Server();
+            // dataTransferServer.startServer();
+            //dataTransferServer.isRestart = true;
+            //WinUtil.startDemonWatch();
+           // startAssert();
         }
+
+        private void startAssert() {
+            Process process = new Process();
+            process.StartInfo.FileName = @"E:\项目\MallGuide\SuperMarketLH\Assert\bin\Debug\Assert.exe";
+            process.StartInfo.CreateNoWindow = false;
+            process.Start();
+        }
+
+        /// <summary>
+        /// 结束当前进程，
+        /// 由守护进程重新启动应用程序
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void RestartTimer_Tick(object sender, EventArgs e)
+        {
+            //throw new NotImplementedException();
+            //检查当前目录下是否有指定文件，有，则表示需要重启
+            string path = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory,"data", "updateComplete");
+
+            if (File.Exists(path))
+            {
+                File.Delete(path);
+                Application.Current.Shutdown();
+            }
+
+           
+        }
+
+
+
         /// <summary>
         /// 开启更新服务器
         /// </summary>
@@ -82,8 +132,10 @@ namespace SuperMarketLH
             //string dataFileName = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"data\data.zip");
             //string testFileName = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"data\1.zip");
             //string unzipDir = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"data");
-            //  SocketHelper.recvData(SocketHelper.createServer(), @"data\data.zip", @"data\1.zip", @"data");
+            //SocketHelper.recvData(SocketHelper.createServer(), @"data\data.zip", @"data\1.zip", @"data");
             SocketHelper.receMsg(SocketHelper.createServer());
+
+
         }
 
         /// <summary>
@@ -110,6 +162,7 @@ namespace SuperMarketLH
         {
             //注册检查
             CodeUtil.checkRegisterSuc(showRegWin, expired, inTrial, regErr);
+
         }
         private Soft createSoft()
         {
@@ -202,6 +255,12 @@ namespace SuperMarketLH
                 this.regTimer.IsEnabled = false;
                 this.regTimer = null;
             }
+            if (this.restartTimer != null)
+            {
+                this.restartTimer.IsEnabled = false;
+                this.restartTimer = null;
+            }
+            // dataTransferServer.stopServer();
         }
 
         //private void btn_introducePage_Click(object sender, RoutedEventArgs e)
@@ -287,12 +346,17 @@ namespace SuperMarketLH
                 //case WinUtil.PAGE_FLOOR: page = new PageFloorBaseInfo(); break;
                 case WinUtil.PAGE_QUESTION: page = new PageQuestionnaire(); break;
             }
-           
-            if (this.pageIndex != index)
+          //  MessageBox.Show(page.GetType().ToString()+"");
+            if (frame.Content == null || !page.GetType().Equals(frame.Content.GetType()))
             {
                 this.frame.Navigate(page);
-                this.pageIndex = index;
             }
+           // MessageBox.Show(frame.Content.GetType().ToString());
+            //if (this.pageIndex != index)
+            //{
+               
+            //    this.pageIndex = index;
+            //}
             ClosedUtil.isAnyBodyTouched = true;
             if (isDefaultBG)
             {
