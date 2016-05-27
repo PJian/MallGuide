@@ -1,4 +1,4 @@
-﻿using PJ.ConTcp;
+﻿using Socket;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -31,6 +31,17 @@ namespace ResourceManagementService.helper
             client.directoryPath = new string[1] { directory }.ToList();
             client.send(sendComplete,  sendFailed);
         }
+
+        /// <summary>
+        /// 发送指定目录下的数据
+        /// </summary>
+        /// <param name="directory"></param>
+        public static void sendData(Client client, string directory, SendComplete sendComplete, SendOneComplete sendOneComplete, SendFailed sendFailed)
+        {
+            client.directoryPath = new string[1] { directory }.ToList();
+            client.send(sendComplete, sendOneComplete, sendFailed);
+        }
+
         /// <summary>
         /// 发送指定目录下的数据
         /// </summary>
@@ -117,8 +128,9 @@ namespace ResourceManagementService.helper
         /// 接受客户端消息
         /// </summary>
         /// <param name="server"></param>
-        public static void receMsg(Server server) {
-            server.acceptAlways();
+        public static  void receMsg(Server server) {
+            //server.acceptAlwaysByDefault();
+            server.acceptAlwaysByDefault();
         }
 
         /// <summary>

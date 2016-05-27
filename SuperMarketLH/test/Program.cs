@@ -12,10 +12,8 @@ namespace test
         static void Main(string[] args)
         {
             SSHClient client = new SSHClient();
-            client.OnTransferStart += client_OnTransferStart;
-            client.OnTransferEnd += client_OnTransferEnd;
-            client.OnTransferProgress += client_OnTransferProgress;
-            client.ScpTo("127.0.0.1","peijian",@"C:\Users\peijian\.ssh\id_rsa",@"E:\Rspace",@"D:\testSSh");
+            
+            client.ScpTo("127.0.0.1","peijian",@"C:\Users\peijian\.ssh\id_rsa",@"E:\json",@"D:\testSSh");
             while (true) ;
         }
 

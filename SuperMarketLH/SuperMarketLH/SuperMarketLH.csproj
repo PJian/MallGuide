@@ -49,9 +49,6 @@
     <Reference Include="3DTools">
       <HintPath>..\..\..\dll\3DTools.dll</HintPath>
     </Reference>
-    <Reference Include="ConTcp">
-      <HintPath>..\..\..\dll\ConTcp.dll</HintPath>
-    </Reference>
     <Reference Include="log4net">
       <HintPath>..\..\..\文件传输\SuperSocket(1.6.6).Binaries\Net40\Release\log4net.dll</HintPath>
     </Reference>
@@ -64,22 +61,6 @@
     </Reference>
     <Reference Include="SerialNum">
       <HintPath>..\..\..\dll\SerialNum.dll</HintPath>
-    </Reference>
-    <Reference Include="SuperSocket.Common, Version=1.6.4.0, Culture=neutral, PublicKeyToken=6c80000676988ebb, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\文件传输\TransferSolution\TransferServerLib\bin\Debug\SuperSocket.Common.dll</HintPath>
-    </Reference>
-    <Reference Include="SuperSocket.Facility, Version=1.6.4.0, Culture=neutral, PublicKeyToken=6c80000676988ebb, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\文件传输\TransferSolution\TransferServerLib\bin\Debug\SuperSocket.Facility.dll</HintPath>
-    </Reference>
-    <Reference Include="SuperSocket.SocketBase, Version=1.6.4.0, Culture=neutral, PublicKeyToken=6c80000676988ebb, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\文件传输\TransferSolution\TransferServerLib\bin\Debug\SuperSocket.SocketBase.dll</HintPath>
-    </Reference>
-    <Reference Include="SuperSocket.SocketEngine, Version=1.6.4.0, Culture=neutral, PublicKeyToken=6c80000676988ebb, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\文件传输\TransferSolution\TransferServerLib\bin\Debug\SuperSocket.SocketEngine.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
@@ -191,7 +172,6 @@
     <Compile Include="reg\WinRegist.xaml.cs">
       <DependentUpon>WinRegist.xaml</DependentUpon>
     </Compile>
-    <Compile Include="socketserver\Server.cs" />
     <Compile Include="uiEntity\FrameNavigate.cs" />
     <Compile Include="uiEntity\ImageObject.cs" />
     <Compile Include="uiEntity\TransitioinUtil.cs" />
@@ -481,6 +461,10 @@
     <ProjectReference Include="..\ResourceManagementService\ResourceManagementService.csproj">
       <Project>{1043b60f-1725-45f6-8fe7-b7a046800eeb}</Project>
       <Name>ResourceManagementService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Socket\Socket.csproj">
+      <Project>{5e13eb40-975a-45b6-8727-bcfaf1ef44b0}</Project>
+      <Name>Socket</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -1,8 +1,8 @@
 ﻿using EntityManagementService.entity;
 using EntityManageService.sqlUtil;
-using PJ.ConTcp;
 using PlatformDev.ssh;
 using ResourceManagementService.helper;
+using Socket;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -121,8 +121,12 @@ namespace SuperMarketLHS.page.other
            // throw new NotImplementedException();
         }
 
+
+
         void bw_DoWork(object sender, DoWorkEventArgs e)
         {
+
+
             client = new SSHClient();
             for (int i = 0; i < allClients.Count; i++)
             {

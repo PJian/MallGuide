@@ -4,6 +4,7 @@ using EntityManagementService.entity;
 using EntityManageService.sqlUtil;
 using ResourceManagementService.helper;
 using SerialNum;
+using Socket;
 using SuperMarketLH.page;
 using SuperMarketLH.page.activity;
 using SuperMarketLH.page.floor;
@@ -11,7 +12,6 @@ using SuperMarketLH.page.mall;
 using SuperMarketLH.page.other;
 using SuperMarketLH.page.shop;
 using SuperMarketLH.reg;
-using SuperMarketLH.socketserver;
 using SuperMarketLH.util;
 using System;
 using System.Collections.Generic;
@@ -75,16 +75,14 @@ namespace SuperMarketLH
             goToIndexTimer.IsEnabled = true;
 
             restartTimer = new DispatcherTimer();
-            restartTimer.Interval = TimeSpan.FromSeconds(5);
+            restartTimer.Interval = TimeSpan.FromMilliseconds(500);
             restartTimer.Tick += RestartTimer_Tick;
             restartTimer.IsEnabled = true;
 
             //回到首页
             //frameForIndex.Navigate(new PageIndex(this));
             goToEnter();
-            Thread t1 = new Thread(new ThreadStart(startUpdateServer));
-            t1.IsBackground = true;
-            t1.Start();
+            
             //startUpdateServer();
 
             //  dataTransferServer = new Server();
@@ -93,14 +91,7 @@ namespace SuperMarketLH
             //WinUtil.startDemonWatch();
            // startAssert();
         }
-
-        private void startAssert() {
-            Process process = new Process();
-            process.StartInfo.FileName = @"E:\项目\MallGuide\SuperMarketLH\Assert\bin\Debug\Assert.exe";
-            process.StartInfo.CreateNoWindow = false;
-            process.Start();
-        }
-
+        
         /// <summary>
         /// 结束当前进程，
         /// 由守护进程重新启动应用程序
@@ -111,7 +102,7 @@ namespace SuperMarketLH
         {
             //throw new NotImplementedException();
             //检查当前目录下是否有指定文件，有，则表示需要重启
-            string path = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory,"data", "updateComplete");
+            string path = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory,"sConfig","updateStart");
 
             if (File.Exists(path))
             {
@@ -127,16 +118,16 @@ namespace SuperMarketLH
         /// <summary>
         /// 开启更新服务器
         /// </summary>
-        private void startUpdateServer()
-        {
-            //string dataFileName = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"data\data.zip");
-            //string testFileName = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"data\1.zip");
-            //string unzipDir = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"data");
-            //SocketHelper.recvData(SocketHelper.createServer(), @"data\data.zip", @"data\1.zip", @"data");
-            SocketHelper.receMsg(SocketHelper.createServer());
+        //private void startUpdateServer()
+        //{
+        //    //string dataFileName = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"data\data.zip");
+        //    //string testFileName = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"data\1.zip");
+        //    //string unzipDir = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"data");
+        //    //SocketHelper.recvData(SocketHelper.createServer(), @"data\data.zip", @"data\1.zip", @"data");
+        //   // SocketHelper.receMsg(SocketHelper.createServer());
 
 
-        }
+        //}
 
         /// <summary>
         /// 跳转到首页

@@ -37,9 +37,6 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ConTcp">
-      <HintPath>..\..\..\dll\ConTcp.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
@@ -436,6 +433,10 @@
       <Project>{1043b60f-1725-45f6-8fe7-b7a046800eeb}</Project>
       <Name>ResourceManagementService</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Socket\Socket.csproj">
+      <Project>{5e13eb40-975a-45b6-8727-bcfaf1ef44b0}</Project>
+      <Name>Socket</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="img\brand\brand.png" />
@@ -516,6 +517,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="img\shop\link.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

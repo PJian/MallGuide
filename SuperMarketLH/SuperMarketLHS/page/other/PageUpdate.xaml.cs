@@ -1,7 +1,7 @@
 ﻿using EntityManagementService.entity;
 using EntityManageService.sqlUtil;
-using PJ.ConTcp;
 using ResourceManagementService.helper;
+using Socket;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

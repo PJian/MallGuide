@@ -1,12 +1,14 @@
 ﻿using EntityManagementService.entity;
 using EntityManageService.sqlUtil;
-using PJ.ConTcp;
+using PlatformDev;
 using ResourceManagementService.helper;
+using Socket;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -24,13 +26,11 @@ namespace SuperMarketLHS.page.other
     /// </summary>
     public partial class PageUpdateSocket : Page
     {
-
-
-        private string identifyFileName = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "sshKey", "id_rsa");
         private ClientComputer currentEditClient;
         private List<ClientComputer> allClients;
         private MainWindow rootWin;
         // SshTransferProtocolBase sshCp;
+        private int transferFileNum = 0;
         public PageUpdateSocket()
         {
             InitializeComponent();
@@ -129,25 +129,58 @@ namespace SuperMarketLHS.page.other
 
         void bw_DoWork(object sender, DoWorkEventArgs e)
         {
-            //client = new SSHClient();
-            //for (int i = 0; i < allClients.Count; i++)
-            //{
-            //    cc = null;
-            //    cc = allClients.ElementAt(i);
-            //    if (cc.IsConnected)
-            //    {
-            //        //目标程序的目录
-            //        client.OnTransferStart += client_OnTransferStart;
-            //        client.OnTransferProgress += client_OnTransferProgress;
-            //        client.OnTransferEnd += client_OnTransferEnd;
-            //        client.ScpTo(cc.IP, cc.UserName, identifyFileName, System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "data"), System.IO.Path.Combine(cc.AppDir, "data"));
-            //    }
-            //}
+            transferFileNum = Util.countFileNum(System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"data"));
+            for (int i = 0; i < allClients.Count; i++)
+            {
+                ClientComputer cc = allClients.ElementAt(i);
+                updateData(cc);
+                //Thread t = new Thread(()=> {
+                    
+                //});
+                //t.Start();
+            }
+
         }
 
-     
+        public void updateData(ClientComputer clientComputer) {
+            clientComputer.UpdateFileNum = 0;
+            clientComputer.TotalFileNum = transferFileNum;
+            SocketHelper.sendData(SocketHelper.connectToServer(clientComputer.IP), System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"sConfig"), delegate ()
+            {
+                Thread.Sleep(1000);//休息5秒钟，让客户端程序关闭
+                SocketHelper.sendData(SocketHelper.connectToServer(clientComputer.IP), System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"data"), delegate ()
+                {
+                    clientComputer.UpdateFileNum = transferFileNum;
+                    clientComputer.TotalFileNum = transferFileNum;
+                    SocketHelper.sendData(SocketHelper.connectToServer(clientComputer.IP), System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"updateConfig"), delegate ()
+                    {
+
+                    }, delegate (string filename1) {
+                        Console.WriteLine(filename1 + "send success");
+                    }, delegate ()
+                    {
+
+                    });
+
+                }, delegate (string filename1) {
+                    clientComputer.UpdateFileNum += 1;
+                    clientComputer.TotalFileNum = transferFileNum;
+                }, delegate ()
+                {
+                    MessageBox.Show("客户端: " + clientComputer.IP + "更新失败！");
+                });
+            }, delegate (string filename) {
+                Console.WriteLine(filename + "send success");
+               
+            }, delegate ()
+            {
+               
+            });
 
 
+         
+        }
+        
         private void listBox_allServer_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (this.listBox_allServer.SelectedItem != null)
@@ -156,18 +189,47 @@ namespace SuperMarketLHS.page.other
             }
         }
 
+        /// <summary>
+        /// 联通行测试完毕
+        /// </summary>
+        /// <param name="i"></param>
+        private void sendHeardComplete(int i)
+        {
+            this.allClients.ElementAt(i).IsConnected = true; 
+           // this.allClients.ElementAt(i).NodeStateImg = getNodeStateImg(ConstantData.SERVER_NODE_CONNNECT);
+        }
+        private void sendHeardFailed(int i)
+        {
+            this.allClients.ElementAt(i).IsConnected = false;
+        }
+
+        /// <summary>
+        /// 测试连通性
+        /// </summary>
+        private void testConnect()
+        {
+            for (int i = 0; i < allClients.Count; i++)
+            {
+                SocketHelper.sendHeartData(SocketHelper.connectToServer(allClients.ElementAt(i).IP), System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"data\test"), delegate ()
+                {
+                    sendHeardComplete(i);
+                }, delegate ()
+                {
+                    sendHeardFailed(i);
+                });
+            }
+        }
+
+
+
         private void loadClients()
         {
             allClients = SqlHelper.getAllClients();
             //测试联通性
             if (allClients != null)
             {
-               // SSHClient client = new SSHClient();
-                for (int i = 0; i < allClients.Count; i++)
-                {
-                 
-                    //  allClients.ElementAt(i).IsConnected = client.isConnected(allClients.ElementAt(i).IP, allClients.ElementAt(i).UserName, identifyFileName);
-                }
+                // SSHClient client = new SSHClient();
+                testConnect();
             }
 
             this.listBox_allServer.ItemsSource = allClients;

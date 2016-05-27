@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "test", "test\test.csproj", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assert", "Assert\Assert.csproj", "{1DA2D49B-5EA8-41F4-A5C6-D5B555D25B6C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Socket", "Socket\Socket.csproj", "{5E13EB40-975A-45B6-8727-BCFAF1EF44B0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +65,10 @@ Global
 		{1DA2D49B-5EA8-41F4-A5C6-D5B555D25B6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1DA2D49B-5EA8-41F4-A5C6-D5B555D25B6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1DA2D49B-5EA8-41F4-A5C6-D5B555D25B6C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5E13EB40-975A-45B6-8727-BCFAF1EF44B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E13EB40-975A-45B6-8727-BCFAF1EF44B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E13EB40-975A-45B6-8727-BCFAF1EF44B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E13EB40-975A-45B6-8727-BCFAF1EF44B0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

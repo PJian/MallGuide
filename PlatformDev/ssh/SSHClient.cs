@@ -31,7 +31,7 @@ namespace PlatformDev.ssh
         public bool isConnected(string host, string user, string identifyFile)
         {
             bool isConnected = false;
-            SshConnectionInfo input = new SshConnectionInfo(host, "admin", "admin", identifyFile);
+            SshConnectionInfo input = new SshConnectionInfo(host, "SuperMarketLH", "admin", identifyFile);
             //使用scp协议
             SshTransferProtocolBase sshCp = new Scp(input.Host, input.User);
             try
@@ -65,10 +65,10 @@ namespace PlatformDev.ssh
             ClientComputer cc = new ClientComputer()
             {
                 IP = host,
-                UserName = "admin",
+                UserName = "SuperMarketLH",
                 AppDir = destDir
             };
-            SshConnectionInfo input = new SshConnectionInfo(host, "admin", "admin", identifyFile);
+            SshConnectionInfo input = new SshConnectionInfo(host, "SuperMarketLH", "admin", identifyFile);
             //使用scp协议
             SshTransferProtocolBase sshCp = new Scp(input.Host, input.User);
             try
