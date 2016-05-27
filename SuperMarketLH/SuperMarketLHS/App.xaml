@@ -244,7 +244,7 @@
             <Setter Property="ItemTemplate">
                 <Setter.Value>
                     <DataTemplate>
-                        <Border Height="30" Width="230" BorderBrush="Transparent" BorderThickness="0" Margin="1">
+                        <Border Height="30" Width="430" BorderBrush="Transparent" BorderThickness="0" Margin="1">
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="0*"></RowDefinition>
@@ -252,17 +252,17 @@
                                     <RowDefinition Height="0*"></RowDefinition>
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="80" />
-                                    <ColumnDefinition Width="50"></ColumnDefinition>
-                                    <ColumnDefinition Width="90"></ColumnDefinition>
+                                    <ColumnDefinition Width="130" />
+                                    <ColumnDefinition Width="70"></ColumnDefinition>
+                                    <ColumnDefinition Width="210"></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
                                 <Label Content="{Binding IP}" Grid.Column="0" Grid.Row="1"></Label>
                                 <!--<Image Source="{Binding NodeStateImg,Converter={StaticResource ImgConverter}}" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" Width="30"> </Image>
                                 <Image Source="{Binding StateImg,Converter={StaticResource ImgConverter}}" Grid.Column="2" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" Width="30"></Image>-->
                                 <CheckBox IsChecked="{Binding IsConnected}" Grid.Column="1" Grid.Row="1" IsEnabled="False" VerticalAlignment="Center" HorizontalAlignment="Center"></CheckBox>
                                 <StackPanel Orientation="Horizontal"  Grid.Column="2" Grid.Row="1" HorizontalAlignment="Center">
-                                    <ProgressBar Maximum="{Binding TotalFileNum}" Minimum="1" Value="{Binding UpdateFileNum}" Height="15" Width="50"></ProgressBar>
-                                    <Label Content="{Binding Percentage}" Width="50" FontSize="9" VerticalAlignment="Center"></Label>
+                                    <ProgressBar Maximum="{Binding TotalFileNum}" Minimum="1" Value="{Binding UpdateFileNum}" Height="15" Width="100"></ProgressBar>
+                                    <Label Content="{Binding Percentage}" Width="100" FontSize="9" VerticalAlignment="Center"></Label>
                                 </StackPanel>
                             </Grid>
                         </Border>
