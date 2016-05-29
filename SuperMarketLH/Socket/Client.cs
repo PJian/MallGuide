@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Sockets;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Socket
@@ -110,7 +111,7 @@ namespace Socket
                             //sendFailed();
                             break;
                         }
-                        // Thread.Sleep(5000);
+                        //Thread.Sleep(5000);
                         tcpClient.Connect(toIp, toPort);
                     }
                     //发送指定目录下的全部文件
@@ -119,6 +120,7 @@ namespace Socket
                         for (int i = 0; i < directoryPath.Count - 1; i++)
                         {
                             FileUtil.sendFiles(ns, sendOneComplete, directoryPath.ElementAt(i), false);
+                            
                             //   sendOneComplete(directoryPath.ElementAt(i));
                         }
                         FileUtil.sendFiles(ns, sendOneComplete, directoryPath.ElementAt(directoryPath.Count - 1), true);//最后一个关闭流 

@@ -415,7 +415,7 @@ namespace Socket
             {
                 //发送文件名
                 //  Console.WriteLine("开始发送文件" + fileName);
-                sendFile(stream, @fileName);//发送文件
+                sendFileAndSaveRelative(stream, @fileName);//发送文件
                 //  Console.WriteLine("文件发送完毕");
                 //sendFlag(stream, 3);//发送流结束标志
             }
@@ -571,6 +571,54 @@ namespace Socket
             //2，发送文件结束标志
             //   sendFlag(stream, 2);
         }
+
+
+        /// <summary>
+        /// 读取并发送文件内容
+        ///     消息长度 + 消息内容的格式
+        ///     文件开始标志（2）+文件名长度(8)+文件名+文件长度（8）+文件
+        /// </summary>
+        /// <param name="stream"></param>
+        /// <param name="fileName"></param>
+        private static void sendFileAndSaveRelative(NetworkStream stream, String fileName)
+        {
+            //1,发送文件开始标志
+            sendFlag(stream, 1);
+            // 发送文件名
+            byte[] fileNameBuffer = UTF8Encoding.UTF8.GetBytes(getNewFilePath(fileName));
+            sendMsgLength(stream, fileNameBuffer.Length);
+            stream.Write(fileNameBuffer, 0, fileNameBuffer.Length);
+            // sendMsg(stream, fileNameBuffer);
+            // 发送文件长度
+            FileInfo fileInfo = new FileInfo(fileName);
+            long fileLength = fileInfo.Length;
+            sendMsgLength(stream, fileLength);
+            // 发送文件内容
+            using (FileStream fStream = new FileStream(fileName, FileMode.Open))
+            {
+                if (fStream.Length > 200000)
+                {
+                    byte[] fileData = new byte[1024 * 100];
+                    int count = 0;
+                    while ((count = fStream.Read(fileData, 0, fileData.Length)) != 0)
+                    {
+                        //  Console.WriteLine("count-->"+count);
+                        stream.Write(fileData, 0, count);
+                    }
+                    Console.WriteLine("count-->" + count);
+                }
+                else
+                {
+                    byte[] fileData = new byte[fStream.Length];
+                    fStream.Read(fileData, 0, fileData.Length);
+                    stream.Write(fileData, 0, fileData.Length);
+                }
+
+            }
+            //2，发送文件结束标志
+            //   sendFlag(stream, 2);
+        }
+
         /// <summary>
         /// 读取并发送文件内容
         ///     消息长度 + 消息内容的格式
@@ -653,7 +701,7 @@ namespace Socket
                 sendFlag(stream, 3);//发送流结束标志
         }
         /// <summary>
-        /// 把prefix之前的都删掉
+        /// 取得相对于当前应用程序的路径
         /// </summary>
         /// <param name="initialFileName"></param>
         /// <param name="prefix"></param>
@@ -730,10 +778,10 @@ namespace Socket
             foreach (string filePath in files)
             {
                
-                send(stream, getNewFilePath(filePath));
+                send(stream, filePath);
                 Console.WriteLine("发送文件："+filePath);
                 //发送完一个文件休息5秒钟，好让服务器端进行接收
-                //Thread.Sleep(5000);
+                Thread.Sleep(100);
                 //接收服务器端的信息，即文件接收完毕的信息
                 while (true)
                 {
