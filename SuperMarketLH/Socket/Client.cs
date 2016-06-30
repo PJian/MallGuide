@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net.Sockets;
 using System.Text;
@@ -117,10 +118,11 @@ namespace Socket
                     //发送指定目录下的全部文件
                     using (NetworkStream ns = tcpClient.GetStream())
                     {
+                       
                         for (int i = 0; i < directoryPath.Count - 1; i++)
                         {
+                           
                             FileUtil.sendFiles(ns, sendOneComplete, directoryPath.ElementAt(i), false);
-                            
                             //   sendOneComplete(directoryPath.ElementAt(i));
                         }
                         FileUtil.sendFiles(ns, sendOneComplete, directoryPath.ElementAt(directoryPath.Count - 1), true);//最后一个关闭流 
@@ -163,6 +165,7 @@ namespace Socket
                     {
                         for (int i = 0; i < directoryPath.Count - 1; i++)
                         {
+                            if (Path.GetExtension(directoryPath.ElementAt(i)).Equals("mp4")) continue;
                             FileUtil.sendFiles(ns, directoryPath.ElementAt(i), false);
                             // sendDirComplete(directoryPath.ElementAt(i));
                         }

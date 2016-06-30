@@ -72,7 +72,7 @@ namespace SuperMarketLHS.page.other
             this.currentEditClient.UserName = userName;
             this.currentEditClient.AppDir = appDirPath;
             if (this.currentEditClient != null) {
-                SqlHelper.saveCientHost(this.currentEditClient);
+               // SqlHelper.saveCientHost(this.currentEditClient);
             }
             this.currentEditClient = new ClientComputer();
             this.grid_client.DataContext = this.currentEditClient;
@@ -82,7 +82,7 @@ namespace SuperMarketLHS.page.other
         private void btn_del_Click(object sender, RoutedEventArgs e)
         {
             if (this.currentEditClient != null) {
-                SqlHelper.delClientHost(this.currentEditClient.IP);
+               // SqlHelper.delClientHost(this.currentEditClient.IP);
             }
             this.currentEditClient = new ClientComputer();
             this.grid_client.DataContext = this.currentEditClient;
@@ -185,7 +185,7 @@ namespace SuperMarketLHS.page.other
         }
 
         private void loadClients() {
-            allClients = SqlHelper.getAllClients();
+           // allClients = SqlHelper.getAllClients();
             //测试联通性
             if (allClients != null)
             {

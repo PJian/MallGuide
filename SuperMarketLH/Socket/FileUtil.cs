@@ -90,41 +90,49 @@ namespace Socket
             NetworkStream rStream = receiveStream as NetworkStream;
             if (rStream != null)
             {
-                string flag = "";
-                //若流上没有数据，则等待1秒钟
-                //  using (rStream)
-                //  {
-                while (!rStream.DataAvailable)
+                try
                 {
-                    Thread.Sleep(100);
-                }
-                while (!SEND_END.Equals(flag))
-                {
-                    flag = getFlag(rStream);
-                    //  Console.WriteLine(flag);
-                    if (FILE_START.Equals(flag))
+                    string flag = "";
+                    //若流上没有数据，则等待1秒钟
+                    //  using (rStream)
+                    //  {
+                    while (!rStream.DataAvailable)
                     {
-                        receiveFileAndSaveByFileName(rStream);
+                        Thread.Sleep(100);
                     }
-                    //如果是请求应用程序路径，则发送路径
-                    //if (APP_DIR.Equals(flag))
-                    //{
-                    //    string appDir = AppDomain.CurrentDomain.BaseDirectory;
-                    //    sendMsgLength(rStream, Encoding.UTF8.GetBytes(appDir).Length);//是字节长度，中应为不同的
-                    //    sendMsg(rStream, appDir);
-                    //    Console.WriteLine("应用程序路径:{0},长度{1}", appDir, appDir.Length);
-                    //    break;
-                    //}
-                    ////如果是请求主机用户名，则发送用户名
-                    //if (USER_NAME.Equals(flag))
-                    //{
-                    //    string userName = Environment.UserName;
-                    //    sendMsgLength(rStream, Encoding.UTF8.GetBytes(userName).Length);
-                    //    sendMsg(rStream, userName);
-                    //    Console.WriteLine("用户名:{0},长度{1}", userName, userName.Length);
-                    //    break;
-                    //}
+                    while (!SEND_END.Equals(flag))
+                    {
+                        flag = getFlag(rStream);
+                        //  Console.WriteLine(flag);
+                        if (FILE_START.Equals(flag))
+                        {
+                            receiveFileAndSaveByFileName(rStream);
+                        }
+                        //如果是请求应用程序路径，则发送路径
+                        //if (APP_DIR.Equals(flag))
+                        //{
+                        //    string appDir = AppDomain.CurrentDomain.BaseDirectory;
+                        //    sendMsgLength(rStream, Encoding.UTF8.GetBytes(appDir).Length);//是字节长度，中应为不同的
+                        //    sendMsg(rStream, appDir);
+                        //    Console.WriteLine("应用程序路径:{0},长度{1}", appDir, appDir.Length);
+                        //    break;
+                        //}
+                        ////如果是请求主机用户名，则发送用户名
+                        //if (USER_NAME.Equals(flag))
+                        //{
+                        //    string userName = Environment.UserName;
+                        //    sendMsgLength(rStream, Encoding.UTF8.GetBytes(userName).Length);
+                        //    sendMsg(rStream, userName);
+                        //    Console.WriteLine("用户名:{0},长度{1}", userName, userName.Length);
+                        //    break;
+                        //}
+                    }
                 }
+                catch (Exception e) {
+                    Console.WriteLine(e);
+                  //  writeLogMsg(e.Message);
+                }
+               
 
                 //  }
             }
@@ -294,7 +302,7 @@ namespace Socket
             //接收文件名和文件内容
             int msgLength = getMsgLength(stream);
             // Console.WriteLine("****msgLength***" + msgLength);
-            byte[] buffer = new byte[1024 * 5];
+            byte[] buffer = new byte[1024 * 50];
             int r = stream.Read(buffer, 0, msgLength);
 
             String fileName = Encoding.UTF8.GetString(buffer, 0, r);
@@ -334,12 +342,10 @@ namespace Socket
                     }
                     fs.Write(buffer, 0, r);
                     fs.Flush();
-                    fs.Flush();
-                    fs.Flush();
                 }
             }
             //发送标志，文件接收完毕
-            Console.WriteLine("服务器端发送数据");
+           // Console.WriteLine("服务器端发送数据");
             sendFlag(stream, 6);
         }
         /// <summary>
@@ -390,8 +396,8 @@ namespace Socket
         /// <returns></returns>
         public static int getMsgLength(NetworkStream stream)
         {
-            byte[] buffer = new byte[16];
-            stream.Read(buffer, 0, 16);
+            byte[] buffer = new byte[1024];
+            stream.Read(buffer, 0, 1024);
             String msg = Encoding.UTF8.GetString(buffer, 0, buffer.Length);
             return int.Parse(msg);
         }
@@ -514,16 +520,16 @@ namespace Socket
         /// <param name="length"></param>
         private static void sendMsgLength(NetworkStream stream, long length)
         {
-            byte[] buffer = new byte[16];
+            byte[] buffer = new byte[1024];
             string strLength = length.ToString();
             int i = strLength.Length;
-            while (i < 16)
+            while (i < 1024)
             {
                 i++;
                 strLength += " ";
             }
             buffer = Encoding.UTF8.GetBytes(strLength);
-            stream.Write(buffer, 0, 16);
+            stream.Write(buffer, 0, 1024);
         }
 
         /// <summary>
@@ -582,6 +588,7 @@ namespace Socket
         /// <param name="fileName"></param>
         private static void sendFileAndSaveRelative(NetworkStream stream, String fileName)
         {
+
             //1,发送文件开始标志
             sendFlag(stream, 1);
             // 发送文件名
@@ -593,10 +600,11 @@ namespace Socket
             FileInfo fileInfo = new FileInfo(fileName);
             long fileLength = fileInfo.Length;
             sendMsgLength(stream, fileLength);
+            
             // 发送文件内容
             using (FileStream fStream = new FileStream(fileName, FileMode.Open))
             {
-                if (fStream.Length > 200000)
+                if (fStream.Length > 2000000)
                 {
                     byte[] fileData = new byte[1024 * 100];
                     int count = 0;
@@ -605,13 +613,15 @@ namespace Socket
                         //  Console.WriteLine("count-->"+count);
                         stream.Write(fileData, 0, count);
                     }
-                    Console.WriteLine("count-->" + count);
+                   // Console.WriteLine("count-->" + count);
+                   // writeLogMsg("count-->" + count);
                 }
                 else
                 {
                     byte[] fileData = new byte[fStream.Length];
                     fStream.Read(fileData, 0, fileData.Length);
                     stream.Write(fileData, 0, fileData.Length);
+                    stream.Flush();
                 }
 
             }
@@ -684,6 +694,7 @@ namespace Socket
             sendManyFile(stream, sendOneComplete, directoryName);
             if (isLast)
                 sendFlag(stream, 3);//发送流结束标志
+           
         }
 
         /// <summary>
@@ -766,12 +777,13 @@ namespace Socket
         public static void sendManyFile(NetworkStream stream, SendOneComplete sendOneComplete, string directoryName)
         {
             // Console.WriteLine(directoryName+"的存在性："+Directory.Exists(directoryName));
-            if (!Directory.Exists(directoryName)) return;
+            if (!Directory.Exists(directoryName)) return ;
             string[] subdirectoryEntries = Directory.GetDirectories(directoryName);
             //遍历子目录
             foreach (string subDir in subdirectoryEntries)
             {
                 sendManyFile(stream, sendOneComplete, subDir);
+                
             }
             string[] files = Directory.GetFiles(directoryName);
             Console.WriteLine(files.Length);
@@ -779,20 +791,24 @@ namespace Socket
             {
                
                 send(stream, filePath);
-                Console.WriteLine("发送文件："+filePath);
+                //  writeLogMsg("发送文件：" + filePath);
+                // Console.WriteLine("发送文件："+filePath);
                 //发送完一个文件休息5秒钟，好让服务器端进行接收
-                Thread.Sleep(100);
+                //Thread.Sleep(100);
                 //接收服务器端的信息，即文件接收完毕的信息
+               // int errorCount = 0; 
                 while (true)
                 {
                     if (!stream.DataAvailable)
                     {
-                        Thread.Sleep(100);
+                        Thread.Sleep(500);
+                       
                     }
                     else
                     {
                         string recv_flag = getFlag(stream);
-                        Console.WriteLine("客户端接收数据" + recv_flag);
+                       // writeLogMsg("客户端接收数据" + recv_flag);
+                        //Console.WriteLine("客户端接收数据" + recv_flag);
                         if (FILE_RECV.Equals(recv_flag))
                         {
                             break;//服务器接收完毕，则继续发送下一个文件
@@ -801,6 +817,7 @@ namespace Socket
                 }
                 sendOneComplete(filePath);
             }
+           
         }
 
         /// <summary>
@@ -819,14 +836,17 @@ namespace Socket
                 sendManyFile(stream, subDir);
             }
             string[] files = Directory.GetFiles(directoryName);
-            Console.WriteLine(files.Length);
+            //Console.WriteLine(files.Length);
+           // writeLogMsg(files.Length.ToString());
             foreach (string filePath in files)
             {
                 send(stream, filePath);
                 //发送完一个文件休息5秒钟，好让服务器端进行接收
-                Thread.Sleep(5000);
+                //Thread.Sleep(10000);
             }
         }
+       
 
+        
     }
 }

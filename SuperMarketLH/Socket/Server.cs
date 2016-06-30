@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
@@ -101,6 +102,24 @@ namespace Socket
                 acceptOnce(recvComplete);
             }
         }
+        private void writeLogMsg(String content)
+        {
+            StreamWriter sWriter = null;
+            try
+            {
+                FileStream fileStream = new FileStream(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"log.txt"), FileMode.Append, FileAccess.Write);
+                sWriter = new StreamWriter(fileStream);
+                sWriter.WriteLine(DateTime.Now + "：" + content);
+            }
+            finally
+            {
+                if (sWriter != null)
+                {
+                    sWriter.Close();
+                }
+            }
+
+        }
 
         /// <summary>
         /// 接收一个客户端
@@ -111,6 +130,7 @@ namespace Socket
             {
                 TcpClient client = listener.AcceptTcpClient();
                 Console.WriteLine("有人链接" + client.ToString());
+                writeLogMsg("有人链接" + client.ToString());
                 //启动一个线程与client进行通信
                 Thread clientT = new Thread(FileUtil.receiveAndSaveByFileName);
                 clientT.IsBackground = true;
@@ -118,6 +138,7 @@ namespace Socket
             }
             catch (Exception e)
             {
+                writeLogMsg(e.Message);
                 throw e;
             }
         }

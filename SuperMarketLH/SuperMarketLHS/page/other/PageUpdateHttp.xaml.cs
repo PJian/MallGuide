@@ -1,17 +1,13 @@
 ﻿using EntityManagementService.entity;
 using EntityManagementService.sqlUtil;
 using EntityManagementService.util;
-using EntityManageService.sqlUtil;
 using PlatformDev;
 using ResourceManagementService.helper;
-using Socket;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -26,10 +22,11 @@ using System.Windows.Threading;
 namespace SuperMarketLHS.page.other
 {
     /// <summary>
-    /// PageUpdateSocket.xaml 的交互逻辑
+    /// PageUpdateHttp.xaml 的交互逻辑
     /// </summary>
-    public partial class PageUpdateSocket : Page
+    public partial class PageUpdateHttp : Page
     {
+        
         private ClientComputer currentEditClient;
         private List<ClientComputer> allClients;
         private MainWindow rootWin;
@@ -38,21 +35,25 @@ namespace SuperMarketLHS.page.other
         private int transferFileNum = 0;
 
         BackgroundWorker bw;
-        public PageUpdateSocket()
+        private List<String> filePathNeedToSend;
+
+        public PageUpdateHttp()
         {
             InitializeComponent();
             this.currentEditClient = new ClientComputer();
             this.grid_client.DataContext = this.currentEditClient;
             transferFileNum = Util.countFileNum(System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"data"));
+            filePathNeedToSend = Util.getAllFiles(System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"data"));
         }
 
-        public PageUpdateSocket(MainWindow rootWin)
+        public PageUpdateHttp(MainWindow rootWin)
         {
             InitializeComponent();
             this.currentEditClient = new ClientComputer();
             this.grid_client.DataContext = this.currentEditClient;
             this.rootWin = rootWin;
             transferFileNum = Util.countFileNum(System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"data"));
+            filePathNeedToSend = Util.getAllFiles(System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"data"));
 
         }
 
@@ -69,21 +70,11 @@ namespace SuperMarketLHS.page.other
                 MessageBox.Show("请填写IP地址！");
                 return;
             }
-            //if (this.currentEditClient.UserName == null || this.currentEditClient.UserName.Equals("")) {
-            //    MessageBox.Show("请填写客户机用户名（主机登陆名）！");
-            //    return;
-            //}
-            Client client = SocketHelper.connectToServer(this.currentEditClient.IP);
-            //string appDirPath = SocketHelper.getAppDir(client, null, null);
-            //string userName = SocketHelper.getUserNameOfComputer(client, null, null);
-            //if (appDirPath == null || appDirPath.Equals("") || userName == null || userName.Equals(""))
-            //{
-            //    MessageBox.Show("指定主机无法连接，请查看对应主机是否已经正确配置！");
-            //    return;
-            //}
-            //this.currentEditClient.UserName = userName;
-            //this.currentEditClient.AppDir = appDirPath;
-
+            
+            if (!HttpHelper.heart(this.currentEditClient.IP)) {
+                MessageBox.Show("指定主机无法连接，请查看对应主机是否已经正确配置！");
+                return;
+            }
             if (this.currentEditClient != null)
             {
                 transferFileNum = Util.countFileNum(System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"data"));
@@ -117,11 +108,10 @@ namespace SuperMarketLHS.page.other
         /// </summary>
         private void updateData()
         {
-            
+
             bw = new BackgroundWorker();
             if (this.allClients != null)
             {
-                
                 rootWin.loadIn();
                 bw.DoWork += bw_DoWork;
                 bw.WorkerReportsProgress = false;
@@ -129,10 +119,10 @@ namespace SuperMarketLHS.page.other
                 bw.ProgressChanged += Bw_ProgressChanged; ;
                 bw.RunWorkerAsync(this);
             }
-            progressTimer = new DispatcherTimer();
-            progressTimer.Tick += ProgressTimer_Tick;
-            progressTimer.Interval = TimeSpan.FromMilliseconds(500);
-            progressTimer.IsEnabled = true;
+          //  progressTimer = new DispatcherTimer();
+          //  progressTimer.Tick += ProgressTimer_Tick;
+          //  progressTimer.Interval = TimeSpan.FromMilliseconds(500);
+          //  progressTimer.IsEnabled = true;
         }
 
         private void Bw_ProgressChanged(object sender, ProgressChangedEventArgs e)
@@ -140,15 +130,15 @@ namespace SuperMarketLHS.page.other
             //throw new NotImplementedException();
             this.allClients.ElementAt(0).UpdateFileNum = e.ProgressPercentage;
         }
-        
+
         private void ProgressTimer_Tick(object sender, EventArgs e)
         {
             List<ClientComputer> clients = XmlUtil.getAllClientComputer();
             if (this.allClients != null)
             {
-                foreach(ClientComputer client in this.allClients)
+                foreach (ClientComputer client in this.allClients)
                 {
-                    foreach(ClientComputer cc in clients)
+                    foreach (ClientComputer cc in clients)
                     {
                         if (cc.IP.Equals(client.IP))
                         {
@@ -162,14 +152,15 @@ namespace SuperMarketLHS.page.other
                 Boolean complete = true;
                 foreach (ClientComputer client in this.allClients)
                 {
-                    if (!client.State.Equals("更新失败") && client.UpdateFileNum < client.TotalFileNum) {
+                    if (!client.State.Equals("更新失败") && client.UpdateFileNum < client.TotalFileNum)
+                    {
                         complete = false;
                     }
                 }
                 if (complete)
                 {
                     XmlUtil.clearClient();
-                 //   progressTimer.Stop();
+                    //   progressTimer.Stop();
                 }
             }
         }
@@ -177,7 +168,7 @@ namespace SuperMarketLHS.page.other
         void bw_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             rootWin.loadHide();
-           
+
         }
 
         void bw_DoWork(object sender, DoWorkEventArgs e)
@@ -188,63 +179,40 @@ namespace SuperMarketLHS.page.other
                 ClientComputer cc = allClients.ElementAt(i);
                 cc.TotalFileNum = transferFileNum;
                 cc.UpdateFileNum = 0;
-                SqlHelperForDataTransfer.updateClientHost(cc);
-                updateData(cc.IP, transferFileNum);
+                updateData(cc, transferFileNum);
             }
 
         }
 
-        public void updateData(String IP,int totalFileNum) {
+        public void updateData(ClientComputer cc, int totalFileNum)
+        {
             // clientComputer.UpdateFileNum = 0;
             //clientComputer.TotalFileNum = transferFileNum;
-            ClientComputer cc = SqlHelperForDataTransfer.getClient(IP);
+            
             cc.UpdateFileNum = 0;
             cc.TotalFileNum = totalFileNum;
-            SocketHelper.sendData(SocketHelper.connectToServer(IP), System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"sConfig"), delegate ()
+            int count = 0;
+            while (!HttpHelper.stop(cc.IP)) ;
+            foreach (String file in filePathNeedToSend)
             {
-                Thread.Sleep(1000);//休息5秒钟，让客户端程序关闭
-                SocketHelper.sendData(SocketHelper.connectToServer(IP), System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"data"), delegate ()
-                {
-                    // clientComputer.UpdateFileNum = transferFileNum;
-                    //  clientComputer.TotalFileNum = transferFileNum;
-                    cc.State = "更新成功";
-                    Console.WriteLine("更新成功");
-                    cc.TotalFileNum = transferFileNum;
-                    cc.UpdateFileNum = cc.TotalFileNum;
-                    XmlUtil.writeClientComputer(cc);
-                    SocketHelper.sendData(SocketHelper.connectToServer(IP), System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"updateConfig"), delegate ()
-                    {
-                    }, delegate (string filename1) {
-                      //  Console.WriteLine(filename1 + "send success");
-                    }, delegate ()
-                    {
 
-                    });
-
-                }, delegate (string filename1) {
-                    cc.UpdateFileNum += 1;
-                    cc.TotalFileNum = transferFileNum;
-                    XmlUtil.writeClientComputer(cc);
-                }, delegate ()
+                string saveFileName = file.Replace(AppDomain.CurrentDomain.BaseDirectory, "");
+                while (count++ <= 10 && !HttpHelper.sendFileShap(cc.IP, file, saveFileName)) ;//发送失败的就一直发送
+                if (count > 10)
                 {
                     cc.State = "更新失败";
-                    cc.UpdateFileNum = 0;
-                    cc.TotalFileNum = 0;
-                    XmlUtil.writeClientComputer(cc);
-                    //SqlHelperForDataTransfer.updateClientHost(cc);
-                    //MessageBox.Show("客户端: " + IP + "更新失败！");
-                });
-            }, delegate (string filename) {
-              //  cc.State = "更新成功";
-                //SqlHelperForDataTransfer.updateClientHost(cc);
-                //Console.WriteLine(filename + "send success");
-                //  MessageBox.Show("客户端: " + clientComputer.IP + "更新完成！");
-            }, delegate ()
-            {
-               
-            });
+                    cc.TotalFileNum = transferFileNum;
+                   // XmlUtil.writeClientComputer(cc);
+                    break;
+                }
+                cc.UpdateFileNum += 1;
+                cc.TotalFileNum = transferFileNum;
+               // XmlUtil.writeClientComputer(cc);
+                count = 0;
+            }
+            while(!HttpHelper.start(cc.IP));
         }
-        
+
         private void listBox_allServer_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (this.listBox_allServer.SelectedItem != null)
@@ -253,19 +221,8 @@ namespace SuperMarketLHS.page.other
             }
         }
 
-        /// <summary>
-        /// 联通行测试完毕
-        /// </summary>
-        /// <param name="i"></param>
-        private void sendHeardComplete(int i)
-        {
-            this.allClients.ElementAt(i).IsConnected = true; 
-           // this.allClients.ElementAt(i).NodeStateImg = getNodeStateImg(ConstantData.SERVER_NODE_CONNNECT);
-        }
-        private void sendHeardFailed(int i)
-        {
-            this.allClients.ElementAt(i).IsConnected = false;
-        }
+      
+       
 
         /// <summary>
         /// 测试连通性
@@ -274,13 +231,7 @@ namespace SuperMarketLHS.page.other
         {
             for (int i = 0; i < allClients.Count; i++)
             {
-                SocketHelper.sendHeartData(SocketHelper.connectToServer(allClients.ElementAt(i).IP), System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"data\test"), delegate ()
-                {
-                    sendHeardComplete(i);
-                }, delegate ()
-                {
-                    sendHeardFailed(i);
-                });
+                allClients.ElementAt(i).IsConnected = HttpHelper.heart(allClients.ElementAt(i).IP);
             }
         }
 
@@ -309,7 +260,6 @@ namespace SuperMarketLHS.page.other
         {
 
         }
-
 
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Socket;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -73,6 +74,26 @@ namespace ResourceManagementService.helper
         public static string getUserNameOfComputer(Client client, SendComplete sendComplete, SendFailed sendFailed) {
             return client.getUserNameOfServerComputer();
         }
+
+        private static void writeLogMsg(String content)
+        {
+            StreamWriter sWriter = null;
+            try
+            {
+                FileStream fileStream = new FileStream(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"log.txt"), FileMode.Append, FileAccess.Write);
+                sWriter = new StreamWriter(fileStream);
+                sWriter.WriteLine(DateTime.Now+"：" + content);
+            }
+            finally
+            {
+                if (sWriter != null)
+                {
+                    sWriter.Close();
+                }
+            }
+
+        }
+
         /// <summary>
         /// 监听本机的端口号
         /// </summary>
@@ -80,10 +101,35 @@ namespace ResourceManagementService.helper
         public static Server createServer()
         {
             Server.isAlive = true;
-            Server server = new Server(GetLocalIp(), 9999);
+            String ip = getConfigIp();
+            StreamWriter sWriter = null;
+            try
+            {
+                FileStream fileStream = new FileStream(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"log.txt"), FileMode.Append, FileAccess.Write);
+                sWriter = new StreamWriter(fileStream);
+                sWriter.WriteLine(DateTime.Now+"：监听地址-->"+ ip);
+            }
+            finally
+            {
+                if (sWriter != null)
+                {
+                    sWriter.Close();
+                }
+            }
+
+            Server server = new Server(ip, 9999);
             return server;
         }
 
+
+        static string getConfigIp() {
+     
+          
+           return ConfigurationManager.ConnectionStrings["ip"].ConnectionString;
+
+
+
+        }
 
         static string GetLocalIp()
         {
@@ -105,7 +151,22 @@ namespace ResourceManagementService.helper
             }
             catch (Exception e)
             {
-               // MessageBox.Show("获取本机IP出错:" + ex.Message);
+                StreamWriter sWriter = null;
+                try
+                {
+                    FileStream fileStream = new FileStream(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"log.txt"), FileMode.Append, FileAccess.Write);
+                    sWriter = new StreamWriter(fileStream);
+                    sWriter.WriteLine(DateTime.Now +":"+e.Message);
+                }
+                finally
+                {
+                    if (sWriter != null)
+                    {
+                        sWriter.Close();
+                    }
+                }
+
+                // MessageBox.Show("获取本机IP出错:" + ex.Message);
                 return "127.0.0.1";
             }
 

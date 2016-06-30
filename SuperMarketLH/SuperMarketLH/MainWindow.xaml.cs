@@ -82,14 +82,17 @@ namespace SuperMarketLH
             //回到首页
             //frameForIndex.Navigate(new PageIndex(this));
             goToEnter();
-            
+
             //startUpdateServer();
 
             //  dataTransferServer = new Server();
             // dataTransferServer.startServer();
             //dataTransferServer.isRestart = true;
             //WinUtil.startDemonWatch();
-           // startAssert();
+            // startAssert();
+            //设置环境变量
+            Environment.SetEnvironmentVariable("SUPERMARKETLH_HOME", AppDomain.CurrentDomain.BaseDirectory, EnvironmentVariableTarget.User);
+
         }
         
         /// <summary>
@@ -106,7 +109,7 @@ namespace SuperMarketLH
 
             if (File.Exists(path))
             {
-                File.Delete(path);
+               
                 Application.Current.Shutdown();
             }
 

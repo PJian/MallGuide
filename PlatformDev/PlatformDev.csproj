@@ -49,6 +49,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EnvUtil.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="server\HttpProcessor.cs" />
     <Compile Include="server\HttpServer.cs" />

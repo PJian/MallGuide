@@ -22,6 +22,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <PlatformTarget>x86</PlatformTarget>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -30,6 +31,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="ftplib">
@@ -38,11 +40,20 @@
     <Reference Include="ICSharpCode.SharpZipLib">
       <HintPath>..\..\..\dll\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
+    <Reference Include="log4net">
+      <HintPath>C:\Users\peijian\Desktop\新联华资源\log4net-1.2.15-bin-newkey\log4net-1.2.15\bin\net\4.0\release\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="RestSharp, Version=105.2.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\RestSharp.105.2.3\lib\net4\RestSharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Net" />
     <Reference Include="System.Windows.Controls.Ribbon" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
@@ -56,6 +67,7 @@
     <Compile Include="converter\ImgConverter.cs" />
     <Compile Include="converter\VisibilityConverter.cs" />
     <Compile Include="helper\FtpHelper.cs" />
+    <Compile Include="helper\HttpHelper.cs" />
     <Compile Include="helper\SocketHelper.cs" />
     <Compile Include="helper\ViedoUtil.cs" />
     <Compile Include="helper\ZipHelper.cs" />
@@ -71,6 +83,9 @@
       <Project>{5e13eb40-975a-45b6-8727-bcfaf1ef44b0}</Project>
       <Name>Socket</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

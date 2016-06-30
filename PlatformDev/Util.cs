@@ -29,5 +29,24 @@ namespace PlatformDev
             }
             return count;
         }
+        /// <summary>
+        /// 取得data下面所有的文件
+        /// </summary>
+        /// <returns></returns>
+        public static List<String> getAllFiles(string dir)
+        {
+            List<String> files = new List<string>();
+            List<string> dirFullPathLocal = new List<string>();
+            dirFullPathLocal.Add(dir);
+            string currentLocalDir = "";
+            while (dirFullPathLocal.Count > 0)
+            {
+                currentLocalDir = dirFullPathLocal.ElementAt(0);
+                dirFullPathLocal.RemoveAt(0);
+                dirFullPathLocal.AddRange(Directory.GetDirectories(currentLocalDir));
+                files.AddRange(Directory.GetFiles(currentLocalDir));
+            }
+            return files;
+        }
     }
 }

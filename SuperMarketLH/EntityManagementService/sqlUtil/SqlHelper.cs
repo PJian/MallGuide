@@ -1852,22 +1852,7 @@ namespace EntityManageService.sqlUtil
             return rtn;
         }
 
-        /// <summary>
-        /// 添加更新客户端
-        /// </summary>
-        public static void saveCientHost(ClientComputer client) {
-            string sql = "insert into tabclient(ip,username,updateTime,appdir) values('" + client.IP + "','"+client.UserName+"','"+client.UpdateDate+"','"+client.AppDir+"')";
-            executeSql(sql);
-        }
-        public static void delClientHost(String ip) {
-            string sql = "delete from tabclient where ip='" + ip+"'";
-            executeSql(sql);
-        }
-
-        public static void updateClientHost(ClientComputer client) {
-            string sql = "update tabclient set updateTime='" + client.UpdateDate + "' and username='" + client.UserName + "' and appdir='"+client.AppDir+"'  where ip='" + client.IP + "'";
-            executeSql(sql);
-        }
+       
 
         public static void saveServer(DBServer server) {
             string sql = "insert into tabDBserver(ip,username,password,used) values('"+server.Ip+"','"+server.UserName+"','"+server.Password+"','"+server.Used+"')";
@@ -1894,21 +1879,6 @@ namespace EntityManageService.sqlUtil
             return null;
         }
 
-        public static List<ClientComputer> getAllClients() {
-            DataTable dt = executeQueryDataTable("select ip,username,updateTime,appdir from tabclient");
-            List<ClientComputer> rtn = new List<ClientComputer>();
-            foreach (DataRow row in dt.Rows)
-            {
-                rtn.Add(new ClientComputer()
-                {
-                    IP = row[0].ToString(),
-                    UpdateDate = row[2].ToString(),
-                    UserName = row[1].ToString(),
-                    AppDir = row[3].ToString(),
-                    IsConnected = false//默认不联通
-                });
-            }
-            return rtn;
-        }
+        
     }
 }

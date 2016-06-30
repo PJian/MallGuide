@@ -37,6 +37,10 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="RestSharp, Version=105.2.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\RestSharp.105.2.3\lib\net4\RestSharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
@@ -131,6 +135,9 @@
     </Compile>
     <Compile Include="page\other\PageUpdate.xaml.cs">
       <DependentUpon>PageUpdate.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="page\other\PageUpdateHttp.xaml.cs">
+      <DependentUpon>PageUpdateHttp.xaml</DependentUpon>
     </Compile>
     <Compile Include="page\other\PageUpdateSocket.xaml.cs">
       <DependentUpon>PageUpdateSocket.xaml</DependentUpon>
@@ -280,6 +287,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="page\other\PageUpdateHttp.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="page\other\PageUpdateSocket.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -389,6 +400,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="sshKey\id_rsa">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

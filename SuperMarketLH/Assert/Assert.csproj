@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{1DA2D49B-5EA8-41F4-A5C6-D5B555D25B6C}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Assert</RootNamespace>
     <AssemblyName>Assert</AssemblyName>
@@ -68,6 +68,10 @@
     <NoWin32Manifest>true</NoWin32Manifest>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="RestSharp, Version=105.2.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\RestSharp.105.2.3\lib\net4\RestSharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -85,6 +89,7 @@
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="packages.config" />
     <None Include="Properties\app.manifest">
       <SubType>Designer</SubType>
     </None>
@@ -110,6 +115,10 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\PlatformDev\PlatformDev.csproj">
+      <Project>{4F6C889B-9BC9-45DA-8AA2-AF24F9148A36}</Project>
+      <Name>PlatformDev</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ResourceManagementService\ResourceManagementService.csproj">
       <Project>{1043b60f-1725-45f6-8fe7-b7a046800eeb}</Project>
       <Name>ResourceManagementService</Name>

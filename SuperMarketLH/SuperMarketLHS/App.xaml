@@ -263,6 +263,7 @@
                                 <StackPanel Orientation="Horizontal"  Grid.Column="2" Grid.Row="1" HorizontalAlignment="Center">
                                     <ProgressBar Maximum="{Binding TotalFileNum}" Minimum="1" Value="{Binding UpdateFileNum}" Height="15" Width="100"></ProgressBar>
                                     <Label Content="{Binding Percentage}" Width="100" FontSize="9" VerticalAlignment="Center"></Label>
+                                    <!--<Label Content="{Binding State}" Width="100" FontSize="9" VerticalAlignment="Center"></Label>-->
                                 </StackPanel>
                             </Grid>
                         </Border>

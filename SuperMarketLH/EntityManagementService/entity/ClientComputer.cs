@@ -85,6 +85,22 @@ namespace EntityManagementService.entity
             }
             }
         }
+
+        private string _state;
+
+        public string State
+        {
+            get { return _state; }
+            set
+            {
+                _state = value;
+                if (this.PropertyChanged != null)
+                {
+                    PropertyChanged(this, new PropertyChangedEventArgs("State"));
+
+                }
+            }
+        }
         public event PropertyChangedEventHandler PropertyChanged;
     }
 }

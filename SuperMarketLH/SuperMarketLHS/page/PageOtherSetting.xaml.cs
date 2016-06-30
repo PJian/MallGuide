@@ -104,7 +104,7 @@ namespace SuperMarketLHS.page
         {
             WinUtil.chengToSelectBtn(this.btn_updateInfo, FindResource("leftNavBtnSelectStyle") as Style, new Button[] { btn_questionnaireInfo, btn_defaultAD, btn_surroundInfo, btn_employee, btn_JoinUs, btn_magazine, btn_fireEscape, btn_remoteDBSet }.ToList(), FindResource("leftNavBtnStyle") as Style);
             this.label_location.Content = "其他 > 数据更新";
-            this.frame.Navigate(new PageUpdateSocket(this.parent));
+            this.frame.Navigate(new PageUpdateHttp(this.parent));
         }
 
         private void btn_remoteDBSet_Click(object sender, RoutedEventArgs e)
