@@ -74,11 +74,11 @@ namespace SuperMarketLHS.page.shop
             //时间
             if (this.time_start.SelectedValue != null)
             {
-                this.currentEditSalePromotion.StartTime = this.time_start.SelectedValue.ToString();
+                this.currentEditSalePromotion.StartTime = this.time_start.SelectedValue.Value.ToString("yyyy/MM/dd HH:mm:ss");
             }
             if (this.time_end.SelectedValue != null)
             {
-                this.currentEditSalePromotion.EndTime = this.time_end.SelectedValue.ToString();
+                this.currentEditSalePromotion.EndTime = this.time_end.SelectedValue.Value.ToString("yyyy/MM/dd HH:mm:ss");
             }
             //活动图片
 
@@ -103,7 +103,7 @@ namespace SuperMarketLHS.page.shop
                 //时间
                 if (this.currentEditSalePromotion.StartTime != null && !"".Equals(this.currentEditSalePromotion.StartTime.Trim()))
                 {
-                    this.time_start.SelectedValue = DateTime.Parse(this.currentEditSalePromotion.StartTime);
+                    this.time_start.SelectedValue = DateTime.ParseExact(this.currentEditSalePromotion.StartTime, "yyyy/MM/dd",null);
                 }
                 else
                 {
@@ -111,7 +111,7 @@ namespace SuperMarketLHS.page.shop
                 }
                 if (this.currentEditSalePromotion.EndTime != null && !"".Equals(this.currentEditSalePromotion.EndTime.Trim()))
                 {
-                    this.time_end.SelectedValue = DateTime.Parse(this.currentEditSalePromotion.EndTime);
+                    this.time_end.SelectedValue = DateTime.ParseExact(this.currentEditSalePromotion.EndTime, "yyyy/MM/dd", null);
                 }
                 else
                 {

@@ -187,7 +187,7 @@ namespace SuperMarketLH.page.activity
             DateTime now = DateTime.Now;
             for (int i = 0; i < salePromotion.Count; i++)
             {
-                DateTime salPromotionEndDate = DateTime.Parse(salePromotion.ElementAt(i).EndTime);
+                DateTime salPromotionEndDate = DateTime.ParseExact(salePromotion.ElementAt(i).EndTime, "yyyy/MM/dd", null);
                 //在有效期内，则显示活动列表
                 if (now < salPromotionEndDate)
                 {

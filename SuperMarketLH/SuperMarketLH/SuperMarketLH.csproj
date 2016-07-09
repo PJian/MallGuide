@@ -118,12 +118,6 @@
     <Compile Include="page\activity\PageMemberShopActivities.xaml.cs">
       <DependentUpon>PageMemberShopActivities.xaml</DependentUpon>
     </Compile>
-    <Compile Include="page\activity\PageNormalAcitvities.xaml.cs">
-      <DependentUpon>PageNormalAcitvities.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="page\activity\WindowJoinSalePromotion.xaml.cs">
-      <DependentUpon>WindowJoinSalePromotion.xaml</DependentUpon>
-    </Compile>
     <Compile Include="page\floor\PageFloorBaseInfo.xaml.cs">
       <DependentUpon>PageFloorBaseInfo.xaml</DependentUpon>
     </Compile>
@@ -265,14 +259,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="page\activity\PageMemberShopActivities.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="page\activity\PageNormalAcitvities.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="page\activity\WindowJoinSalePromotion.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
