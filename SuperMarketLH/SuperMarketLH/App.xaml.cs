@@ -23,8 +23,16 @@ namespace SuperMarketLH
         /// <param name="e"></param>
         void App_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
         {
-            MessageBox.Show(string.Format("系统出错!请联系管理员.{0}{1}", Environment.NewLine, e.Exception.Message));
+            String exceptionMsg = e.Exception.Message;
+            MessageBox.Show(string.Format("系统出错!请联系管理员.{0}{1}", Environment.NewLine, exceptionMsg));
             //Shutdown(1);
+            if (exceptionMsg.Equals("没有足够的内存继续执行程序。") || e.Exception is OutOfMemoryException)
+            {
+                System.Reflection.Assembly.GetEntryAssembly();
+                string startpath = System.IO.Directory.GetCurrentDirectory();
+                System.Diagnostics.Process.Start(startpath + "\\SuperMarketLH.exe");
+                Application.Current.Shutdown();
+            }
             e.Handled = true;
         }
     }

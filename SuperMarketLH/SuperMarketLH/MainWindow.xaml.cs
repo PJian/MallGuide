@@ -59,12 +59,6 @@ namespace SuperMarketLH
         private DispatcherTimer goToIndexTimer = null;
 
         private bool isDefaultBG = true;
-
-        private int pageIndex;
-        //private int currentGridVisibleIndex = 0;
-
-        private Server dataTransferServer;
-
         private DispatcherTimer restartTimer = null;
 
         private void init()
@@ -74,63 +68,15 @@ namespace SuperMarketLH
             goToIndexTimer.Tick += goToIndexTimer_Tick;
             goToIndexTimer.IsEnabled = true;
 
-            restartTimer = new DispatcherTimer();
-            restartTimer.Interval = TimeSpan.FromMilliseconds(500);
-            restartTimer.Tick += RestartTimer_Tick;
-            restartTimer.IsEnabled = true;
-
             //回到首页
             //frameForIndex.Navigate(new PageIndex(this));
             goToEnter();
 
-            //startUpdateServer();
-
-            //  dataTransferServer = new Server();
-            // dataTransferServer.startServer();
-            //dataTransferServer.isRestart = true;
-            //WinUtil.startDemonWatch();
-            // startAssert();
-            //设置环境变量
+           
             Environment.SetEnvironmentVariable("SUPERMARKETLH_HOME", AppDomain.CurrentDomain.BaseDirectory, EnvironmentVariableTarget.User);
 
         }
         
-        /// <summary>
-        /// 结束当前进程，
-        /// 由守护进程重新启动应用程序
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void RestartTimer_Tick(object sender, EventArgs e)
-        {
-            //throw new NotImplementedException();
-            //检查当前目录下是否有指定文件，有，则表示需要重启
-            string path = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory,"sConfig","updateStart");
-
-            if (File.Exists(path))
-            {
-               
-                Application.Current.Shutdown();
-            }
-
-           
-        }
-
-
-
-        /// <summary>
-        /// 开启更新服务器
-        /// </summary>
-        //private void startUpdateServer()
-        //{
-        //    //string dataFileName = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"data\data.zip");
-        //    //string testFileName = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"data\1.zip");
-        //    //string unzipDir = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"data");
-        //    //SocketHelper.recvData(SocketHelper.createServer(), @"data\data.zip", @"data\1.zip", @"data");
-        //   // SocketHelper.receMsg(SocketHelper.createServer());
-
-
-        //}
 
         /// <summary>
         /// 跳转到首页

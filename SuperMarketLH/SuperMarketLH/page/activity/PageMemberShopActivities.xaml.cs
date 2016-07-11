@@ -201,7 +201,6 @@ namespace SuperMarketLH.page.activity
         {
             salePromotion = SqlHelper.getMemberShipSalePromotion();
             showActivityImgs();
-
             ClosedUtil.isAnyBodyTouched = true;
         }
 
