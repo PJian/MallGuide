@@ -46,18 +46,30 @@ namespace SuperMarketLH.page.mall
                     this.userContrl_imgs.Visibility = Visibility.Visible;
                     this.mediaElement.Visibility = Visibility.Collapsed;
                     this.userContrl_imgs.Imgs = this.currentMall.ImgPath.ToArray();
-
                 }
                 else if (this.currentMall.ResourceType == ConstantData.RESOURCE_TYPE_MOVIE)
                 {
                     this.userContrl_imgs.Visibility = Visibility.Collapsed;
                     this.mediaElement.Visibility = Visibility.Visible;
+                    this.mediaElement.MediaEnded += MediaElement_MediaEnded;
+                    this.mediaElement.LoadedBehavior = MediaState.Manual;
                     this.mediaElement.Source = new Uri(WinUtil.getMoviePathFull(this.currentMall.MoviePath));
+                    this.mediaElement.Play();
                 }
             }
 
 
         }
+
+        private void MediaElement_MediaEnded(object sender, RoutedEventArgs e)
+        {
+            if (this.mediaElement.Visibility == Visibility.Visible)
+            {
+                this.mediaElement.Position = TimeSpan.FromMilliseconds(0);
+                this.mediaElement.Play();
+            }
+        }
+
         private void Page_Loaded_1(object sender, RoutedEventArgs e)
         {
             init();

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 
@@ -31,6 +32,7 @@ namespace SuperMarketLH
                 System.Reflection.Assembly.GetEntryAssembly();
                 string startpath = System.IO.Directory.GetCurrentDirectory();
                 System.Diagnostics.Process.Start(startpath + "\\SuperMarketLH.exe");
+                Thread.Sleep(TimeSpan.FromMinutes(1));
                 Application.Current.Shutdown();
             }
             e.Handled = true;

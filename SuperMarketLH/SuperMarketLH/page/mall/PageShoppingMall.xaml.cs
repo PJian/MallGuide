@@ -54,12 +54,18 @@ namespace SuperMarketLH.page.mall
                 {
                     this.userContrl_imgs.Visibility = Visibility.Collapsed;
                     this.mediaElement.Visibility = Visibility.Visible;
+                    this.mediaElement.LoadedBehavior = MediaState.Manual;
+                    this.mediaElement.MediaEnded += MediaElement_MediaEnded;
                     this.mediaElement.Source = new Uri(WinUtil.getMoviePathFull(this.currentMall.MoviePath));
+                    this.mediaElement.Play();
                 }
             }
-
-
         }
 
+        private void MediaElement_MediaEnded(object sender, RoutedEventArgs e)
+        {
+            this.mediaElement.Position = TimeSpan.FromMilliseconds(0);
+            this.mediaElement.Play();
+        }
     }
 }

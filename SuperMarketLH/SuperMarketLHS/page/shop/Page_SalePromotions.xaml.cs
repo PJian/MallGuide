@@ -74,11 +74,11 @@ namespace SuperMarketLHS.page.shop
             //时间
             if (this.time_start.SelectedValue != null)
             {
-                this.currentEditSalePromotion.StartTime = this.time_start.SelectedValue.Value.ToString("yyyy/MM/dd HH:mm:ss");
+                this.currentEditSalePromotion.StartTime = this.time_start.SelectedValue.Value.ToString("yyyy/MM/dd");
             }
             if (this.time_end.SelectedValue != null)
             {
-                this.currentEditSalePromotion.EndTime = this.time_end.SelectedValue.Value.ToString("yyyy/MM/dd HH:mm:ss");
+                this.currentEditSalePromotion.EndTime = this.time_end.SelectedValue.Value.ToString("yyyy/MM/dd");
             }
             //活动图片
 
